@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,8 +31,38 @@ namespace ContactManager.Services
             }
             return true;
         }
+        /// <summary>
+        /// To check whether contactList is empty or not
+        /// </summary>
+        /// <param name="contactList"> Entire List of contacts in contactList </param>
+        /// <returns>True if empty else False</returns>
+        public static bool IsEmpty(List<ContactInfo> contactList)
         {
-            //new ContactInfo(name);
+            if (contactList.Count != 0)
+            {
+                Console.WriteLine("Contact List is Empty\n");
+            }
+            return contactList.Count == 0;
+        }
+
+        /// <summary>
+        /// to Return Index of contact searching for
+        /// </summary>
+        /// <param name="name">Name to be found</param>
+        /// <param name="contactList">Entire list of contacts stored</param>
+        /// <returns>Index of name in contactList else -1</returns>
+        public static int FindIndex(string name, List<ContactInfo> contactList)
+        {
+            int count = 0;
+            foreach(var contact in contactList)
+            {
+                if(contact.Name == name)
+                {
+                    return count;
+                }
+                count++;
+            }
+            return -1;
         }
     }
 }

@@ -11,37 +11,50 @@ namespace ContactManager.Models
     /// </summary>
     internal class ContactInfo
     {
-        /// <summary>
-        /// refers to unique GUID value
-        /// </summary>
-        public Guid Id { get;  set; }
-        /// <summary>
-        /// refers to Name entered by the user
-        /// </summary>
-        public string? Name { get; set; }
 
         /// <summary>
-        /// refers to Phone number entered by the user
+        /// Initializes a new instance of the <see cref="ContactInfo"/> struct.
         /// </summary>
-        public string? Phone { get; set; }
-
-        /// <summary>
-        /// refers to Email entered by the user
-        /// </summary>
-        public string? Email { get; set; }
-
-        /// <summary>
-        /// refers to the Notes entered by the user
-        /// </summary>
-        public string? Notes { get; set; }
-
-        public ContactInfo(string name, string email, string phone, string notes)
+        /// <param name="name">Name of the Contact</param>
+        /// <param name="phone">Phone number of the Contact</param>
+        /// <param name="email">Email ID of the Contact</param>
+        /// <param name="notes">Notes of the Contact</param>
+        public ContactInfo(string name, string phone, string email, string notes)
         {
             Name = name;
-            Email = email;
             Phone = phone;
+            Email = email;
             Notes = notes;
             Id = Guid.Parse("phone");
         }
+
+        /// <summary>
+        /// Gets or Sets GUID
+        /// </summary>
+        /// <value>Unique ID given to Contact</value>
+        public Guid Id { get; set; }
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        /// <value>The name of the Contact.</value>
+        public string? Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Phone Number
+        /// </summary>
+        /// <value>The Phone Number of the Contact.</value>
+        public string? Phone { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Email
+        /// </summary>
+        /// <value>The Email ID of the Contact.</value>
+        public string? Email { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Notes
+        /// </summary>
+        /// <value>The Notes for the Contact.</value>
+        public string? Notes { get; set; }
     }
 }

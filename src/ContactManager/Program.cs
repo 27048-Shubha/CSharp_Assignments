@@ -2,13 +2,16 @@
 
 namespace Assignments
 {
+    /// <summary>
+    /// Program class
+    /// </summary>
     internal class Program
     {
         /// <summary>
-        /// 
+        /// Main method where execution begins
         /// </summary>
-        /// <param name="args"></param>
-        static void Main(string[] args)
+        /// <param name="args">CommandLine Args</param>
+        public static void Main(string[] args)
         {
             int ch;
             do

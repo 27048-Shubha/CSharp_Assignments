@@ -54,7 +54,7 @@ namespace ContactManager.Persistance
 
             //I/P Validations
             ContactInfo contact = new ContactInfo(name, phone, email, notes);
-            if (ValidateContact.CheckDuplicates(contact, contactList))
+            if (ValidateContact.CheckDuplicates(contact, contactList) &&  Helpers.ValidatePhone(phone))
             {
                 contactList.Add(contact);
             }
@@ -66,7 +66,52 @@ namespace ContactManager.Persistance
         static public void EditContact()
         {
             // GUID Based Implementation
+            if (!ValidateContact.IsEmpty(contactList))
+            {
+                Console.WriteLine("ENTER NAME: ");
+                string searchPh = Console.ReadLine();
 
+                int searchIndex = ValidateContact.FindIndex(searchPh, contactList);
+
+
+                if (searchIndex != -1)
+                {
+                    Console.WriteLine("Enter 1 to edit Name\n2 to edit Phone\n3 to edit Email\n4 to edit Notes\n");
+                    int editCh = int.Parse(Console.ReadLine());
+
+
+                    switch (editCh)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter new Name:");
+                            contactList[searchIndex].Name = Console.ReadLine();
+                            break;
+
+                        case 2:
+                            Console.WriteLine("Enter new Phone:");
+                            contactList[searchIndex].Phone = Console.ReadLine();
+                            break;
+
+                        case 3:
+                            Console.WriteLine("Enter new Email:");
+                            contactList[searchIndex].Email = Console.ReadLine();
+                            break;
+
+                        case 4:
+                            Console.WriteLine("Enter new Note:");
+                            contactList[searchIndex].Notes = Console.ReadLine();
+                            break;
+
+                        default:
+                            Console.WriteLine("Kinly Enter only from 1 to 4\n");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("PHONE NUMBER Doesn't Exist");
+                }
+            }
         }
 
         /// <summary>
@@ -111,6 +156,7 @@ namespace ContactManager.Persistance
         static public void SortContact()
         {
             //Sort Contact Feature
+
         }
     }
 }
