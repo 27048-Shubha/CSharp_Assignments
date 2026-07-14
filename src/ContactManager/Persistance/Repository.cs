@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+using ContactManager.Services;
+
 namespace ContactManager.Persistance
 {
     /// <summary>
@@ -16,6 +18,9 @@ namespace ContactManager.Persistance
     {
         static private List<ContactInfo> contactList = new List<ContactInfo>();
         
+        /// <summary>
+        /// to View List of all contacts
+        /// </summary>
         static public void ViewContact()
         {
             if(contactList.Count == 0)
@@ -30,6 +35,9 @@ namespace ContactManager.Persistance
                 }
             }
         }
+        /// <summary>
+        /// to Add new contact into contactList
+        /// </summary>
         static public void AddContact()
         {
             Console.WriteLine("ENTER NAME: ");
@@ -46,14 +54,24 @@ namespace ContactManager.Persistance
 
             //I/P Validations
             ContactInfo contact = new ContactInfo(name, phone, email, notes);
-            contactList.Add(contact);
+            if (ValidateContact.CheckDuplicates(contact, contactList))
+            {
+                contactList.Add(contact);
+            }
         }
 
+        /// <summary>
+        /// to Edit existing Contact
+        /// </summary>
         static public void EditContact()
         {
-            //GUID Based Implementation
+            // GUID Based Implementation
 
         }
+
+        /// <summary>
+        /// to Delete existing Contact
+        /// </summary>
         static public void DeleteContact()
         {
             Console.WriteLine("Enter Phone Number to be deleted: ");
@@ -69,6 +87,9 @@ namespace ContactManager.Persistance
             Console.WriteLine("Phone Number doesn't exist");
         }
         
+        /// <summary>
+        /// to Search Contacts from Contact List
+        /// </summary>
         static public void SearchContact()
         {
             Console.WriteLine("Enter Name to search");
@@ -84,6 +105,9 @@ namespace ContactManager.Persistance
             Console.WriteLine("Searched Contact doesn't exist");
         }
 
+        /// <summary>
+        /// to Sort Contact 
+        /// </summary>
         static public void SortContact()
         {
             //Sort Contact Feature

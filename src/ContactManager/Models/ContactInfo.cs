@@ -11,11 +11,28 @@ namespace ContactManager.Models
     /// </summary>
     internal class ContactInfo
     {
+        /// <summary>
+        /// refers to unique GUID value
+        /// </summary>
         public Guid Id { get;  set; }
+        /// <summary>
+        /// refers to Name entered by the user
+        /// </summary>
         public string? Name { get; set; }
 
+        /// <summary>
+        /// refers to Phone number entered by the user
+        /// </summary>
         public string? Phone { get; set; }
+
+        /// <summary>
+        /// refers to Email entered by the user
+        /// </summary>
         public string? Email { get; set; }
+
+        /// <summary>
+        /// refers to the Notes entered by the user
+        /// </summary>
         public string? Notes { get; set; }
 
         public ContactInfo(string name, string email, string phone, string notes)
