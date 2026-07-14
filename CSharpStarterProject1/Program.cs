@@ -3,14 +3,14 @@
 namespace Assignments
 {
     /// <summary>
-    /// Contact Manager 
+    /// Contact Manager Console Application
     /// </summary>
     internal class Program
     {
         private static List<List<string>> contacts = new List<List<string>>();
 
         /// <summary>
-        /// To return index of str1 stored inside contacts
+        /// Returns index of str1 stored inside contacts
         /// </summary>
         /// <param name="str1">String whose index to be found</param>
         /// <param name="atr_type">Type - Name, Phone, Email, Notes</param>
@@ -30,7 +30,7 @@ namespace Assignments
         }
 
         /// <summary>
-        /// To return index of str1 stored inside contacts
+        /// Returns index of str1 stored inside contacts
         /// </summary>
         /// <param name="str1">String whose index to be found</param>
         /// <param name="atr_type">Type - Name, Phone, Email, Notes</param>
@@ -87,7 +87,7 @@ namespace Assignments
             int ch;
             do
             {
-                Console.WriteLine("Welcome to the Contact Manager! \nENTER 0 to VIEW ALL CONTACT, \n1 TO ADD NEW CONTACT, \n2 TO EDIT EXSISTING CONTACT, \n3 TO DELETE ANY CONTACT, \n4 TO SEARCH ANY CONTACT, \n5 TO VIEW SORTED LIST\n6 TO EXIT");
+                Console.WriteLine("Welcome to the Contact Manager! \nENTER 0 to VIEW ALL CONTACT, \n1 TO ADD NEW CONTACT, \n2 TO EDIT EXSISTING CONTACT, \n3 TO DELETE ANY CONTACT, \n4 TO SEARCH ANY CONTACT, \n5 TO VIEW SORTED LIST\n6 TO EXIT\n");
                 ch = int.Parse(Console.ReadLine());
 
                 string name;
@@ -231,7 +231,7 @@ namespace Assignments
                         break;
                 }
             }
-            while (ch != 5);
+            while (ch != 6);
         }    
     }
 }
