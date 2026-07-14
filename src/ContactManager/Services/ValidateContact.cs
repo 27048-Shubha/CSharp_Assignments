@@ -64,5 +64,20 @@ namespace ContactManager.Services
             }
             return -1;
         }
+
+        /// <summary>
+        /// returns Sorted List
+        /// </summary>
+        /// <param name="contactList">List to be Sorted</param>
+        public static void ViewSorted(List<ContactInfo> contactList)
+        {
+            contactList.Sort((a, b) => a.Name.CompareTo(b.Name));
+            Console.WriteLine("NAME - PHONE NUMBER - EMAIL - NOTES");
+
+            foreach (var contact in contactList)
+            {
+                Console.WriteLine($"{contact.Name} - {contact.Phone} - {contact.Email} - {contact.Phone}");
+            }
+        }
     }
 }

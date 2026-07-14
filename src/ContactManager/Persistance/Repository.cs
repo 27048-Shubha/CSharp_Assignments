@@ -21,7 +21,7 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to View List of all contacts
         /// </summary>
-        static public void ViewContact()
+        public static void ViewContact()
         {
             if(contactList.Count == 0)
             {
@@ -38,7 +38,7 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to Add new contact into contactList
         /// </summary>
-        static public void AddContact()
+        public static void AddContact()
         {
             Console.WriteLine("ENTER NAME: ");
             string name = Console.ReadLine();
@@ -63,7 +63,7 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to Edit existing Contact
         /// </summary>
-        static public void EditContact()
+        public static void EditContact()
         {
             // GUID Based Implementation
             if (!ValidateContact.IsEmpty(contactList))
@@ -117,7 +117,7 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to Delete existing Contact
         /// </summary>
-        static public void DeleteContact()
+        public static void DeleteContact()
         {
             Console.WriteLine("Enter Phone Number to be deleted: ");
             string deletePh = Console.ReadLine();
@@ -135,7 +135,7 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to Search Contacts from Contact List
         /// </summary>
-        static public void SearchContact()
+        public static void SearchContact()
         {
             Console.WriteLine("Enter Name to search");
             string searchName = Console.ReadLine();
@@ -153,10 +153,13 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to Sort Contact 
         /// </summary>
-        static public void SortContact()
+        public static void SortContact()
         {
             //Sort Contact Feature
-
+            if (!ValidateContact.IsEmpty(contactList))
+            {
+                ValidateContact.ViewSorted(contactList);
+            }
         }
     }
 }
