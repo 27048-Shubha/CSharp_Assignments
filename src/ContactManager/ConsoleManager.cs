@@ -28,7 +28,7 @@ namespace ContactManager
         /// <summary>
         /// 
         /// </summary>
-        public void DisplaySuccess() 
+        public void DisplaySuccess()
         {
             System.Console.WriteLine("Operation Success!\n"); 
         }
@@ -54,6 +54,11 @@ namespace ContactManager
                 System.Console.WriteLine($"NAME: {item.Name}\nPHONE NUMBER: {item.Phone}\nEMAIL: {item.Email}\nNOTES: {item.Notes}\n\n");
             }
         }
+        public void DisplayContact(ContactInfo contact)
+        {
+            System.Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
+        }
+
 
         /// <summary>
         /// Displays about Duplicate Existance

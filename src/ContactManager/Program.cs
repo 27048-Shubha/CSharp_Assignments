@@ -29,7 +29,7 @@ namespace Assignments
                 switch (ch)
                 {
                     case 0: // VIEW
-                        List<ContactInfo> contact = handler.GetContactInfo();
+                        List<ContactInfo> contact = handler.GetAllContactInfo();
                         if (contact != null)
                         {
                             console.DisplayContactList(contact);
@@ -45,8 +45,8 @@ namespace Assignments
                         string phone = console.GetPhone();
                         string email = console.GetEmail();
                         string notes = console.GetNotes();
-                        ContactInfo contact = new ContactInfo(name, phone, email, notes);
-                        int addStatus = handler.AddContact(contact);
+                        ContactInfo newContact = new ContactInfo(name, phone, email, notes);
+                        int addStatus = handler.AddContact(newContact);
                         if(addStatus == -1)
                         {
                             console.DisplayDuplicateMessage();
@@ -79,7 +79,16 @@ namespace Assignments
                         break;
 
                     case 4: // SEARCH
-                        Repository.SearchContact();
+                        name = console.GetName();
+                        contact = handler.SearchContact(name);
+                        if(contact == null)
+                        {
+                            console.DisplayNotFoundMessage();
+                        }
+                        else
+                        {
+                            console.DisplayContact(contact);
+                        }
                         break;
 
                     case 5: //SORT

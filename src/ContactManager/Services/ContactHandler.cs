@@ -19,6 +19,12 @@ namespace ContactManager.Services
     {
         private ConsoleManager _console = new ConsoleManager();
         private Repository _repo = new Repository();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns></returns>
         public int AddContact(ContactInfo contact)
         {
             if (ContactHandler.CheckDuplicates(contact))
@@ -33,7 +39,11 @@ namespace ContactManager.Services
             return 1;
         }
 
-        public List<ContactInfo> GetContactInfo()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<ContactInfo> GetAllContactInfo()
         {
             if (_repo.Empty())
             {
@@ -45,6 +55,11 @@ namespace ContactManager.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
         public int DeleteContact(string phone)
         {
             ContactInfo contact = _repo.ExistPhone(phone);
@@ -59,23 +74,29 @@ namespace ContactManager.Services
             }
         }
 
-        string deletePh = ConsoleManager.GetPhone();
-foreach (var contact in contactList)
-{
-    if (contact.Phone == deletePh)
-    {
-        contactList.Remove(contact);
-        return;
-    }
-}
-ConsoleManager.DisplayNotFoundMessage();
-
-/// <summary>
-/// to check for existance of new contact number to avoid duplication
-/// </summary>
-/// <param name="contact"> New Object </param>
-/// <returns> true if new attribute else False </returns>
-public static bool CheckDuplicates(ContactInfo contact)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ContactInfo SearchContact(string name)
+        {
+            if (_repo.Exist(name))
+            {
+                return _repo.SearchContact(name);
+            }
+            else
+            {
+                return null;
+            }
+        }
+       
+        /// <summary>
+        /// to check for existance of new contact number to avoid duplication
+        /// </summary>
+        /// <param name="contact"> New Object </param>
+        /// <returns> true if new attribute else False </returns>
+        public static bool CheckDuplicates(ContactInfo contact)
         {
             if (Repository.Exists(contact.Phone))
             {
@@ -84,6 +105,7 @@ public static bool CheckDuplicates(ContactInfo contact)
             }
             return true;
         }
+
         /// <summary>
         /// To check whether contactList is empty or not
         /// </summary>

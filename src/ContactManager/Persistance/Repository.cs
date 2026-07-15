@@ -35,7 +35,7 @@ namespace ContactManager.Persistance
         {
             return contactList;
         }
-        
+
         /// <summary>
         /// to Edit existing Contact
         /// </summary>
@@ -83,28 +83,29 @@ namespace ContactManager.Persistance
         }
 
         /// <summary>
-        /// to Delete existing Contact
+        /// 
         /// </summary>
+        /// <param name="contact"></param>
         public void DeleteContact(ContactInfo contact)
         {
             contactList.Remove(contact);
         }
 
         /// <summary>
-        /// to Search Contacts from Contact List
+        /// 
         /// </summary>
-        public static void SearchContact()
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ContactInfo SearchContact(string name)
         {
-            string searchName = ConsoleManager.GetName();
             foreach (var contact in contactList)
             {
                 if (contact.Name == searchName)
                 {
-                    contactList.Remove(contact);
-                    return;
+                    return contact;
                 }
             }
-            ConsoleManager.DisplayNotFoundMessage();
+            return null;
         }
 
         /// <summary>
@@ -119,6 +120,11 @@ namespace ContactManager.Persistance
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contactName"></param>
+        /// <returns></returns>
         public bool Exist(string contactName)
         {
             foreach(var contact in contactList)
@@ -130,6 +136,11 @@ namespace ContactManager.Persistance
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
         public ContactInfo ExistPhone(string phone)
         {
             foreach (var contact in contactList)
@@ -142,6 +153,10 @@ namespace ContactManager.Persistance
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool Empty()
         {
             if (contactList.Count == 0)
