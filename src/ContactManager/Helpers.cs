@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Helpers.cs
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace ContactManager
     /// </summary>
     internal class Helpers
     {
-        //Helpers 
+        //Helpers
 
         /// <summary>
         /// Validate Phone number based on number of digists
@@ -20,9 +21,9 @@ namespace ContactManager
         /// <returns>True if length == 10 else False </returns>
         public static bool ValidatePhone(string phone)
         {
-            if(phone.Length != 10)
+            if (phone.Length != 10)
             {
-                Console.WriteLine("Invalid Phone Number Entered! Please enter in this format: 9876543210");
+                DisplayInvalidPhoneMessage();
                 return false;
             }
             return true;

@@ -1,4 +1,7 @@
-﻿using ContactManager.Persistance;
+﻿//Program.cs
+using ContactManager.Persistance;
+//using ContactManager.Helpers;
+using ContactManager;
 
 namespace Assignments
 {
@@ -16,7 +19,7 @@ namespace Assignments
             int ch;
             do
             {
-                Console.WriteLine("Welcome to the Contact Manager! \nENTER 0 to VIEW ALL CONTACT, \n1 TO ADD NEW CONTACT, \n2 TO EDIT EXSISTING CONTACT, \n3 TO DELETE ANY CONTACT, \n4 TO SEARCH ANY CONTACT, \n5 TO VIEW SORTED LIST\n6 TO EXIT\n");
+                DisplayMenu();
                 ch = int.Parse(Console.ReadLine());
 
                 switch (ch)
@@ -46,11 +49,10 @@ namespace Assignments
                         break;
 
                     default:
-                        Console.WriteLine("Enter only from 0 to 4\n");
+                        DisplayDefaultMessage();
                         break;
                 }
-            }
-            while (ch != 6);
+            } while (ch != 6);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ContactManager.Models;
+﻿// Services/ValidateContact.cs
+using ContactManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,13 @@ namespace ContactManager.Services
         /// <param name="contact"> New Object </param>
         /// <param name="contactList"> List of all existing contacts </param>
         /// <returns> true if new attribute else False </returns>
-        public static bool CheckDuplicates( ContactInfo contact, List<ContactInfo> contactList )
+        public static bool CheckDuplicates(ContactInfo contact, List<ContactInfo> contactList)
         {
-            foreach(var attribute in contactList)
+            foreach (var attribute in contactList)
             {
-                if(attribute.Phone == contact.Phone)
+                if (attribute.Phone == contact.Phone)
                 {
-                    Console.WriteLine("Phone Number Already Exists!");
+                    DisplayDuplicateMessage();
                     return false;
                 }
             }
@@ -40,7 +41,7 @@ namespace ContactManager.Services
         {
             if (contactList.Count != 0)
             {
-                Console.WriteLine("Contact List is Empty\n");
+                DisplayEmptyListMessage();
             }
             return contactList.Count == 0;
         }
@@ -54,9 +55,9 @@ namespace ContactManager.Services
         public static int FindIndex(string name, List<ContactInfo> contactList)
         {
             int count = 0;
-            foreach(var contact in contactList)
+            foreach (var contact in contactList)
             {
-                if(contact.Name == name)
+                if (contact.Name == name)
                 {
                     return count;
                 }
@@ -72,11 +73,10 @@ namespace ContactManager.Services
         public static void ViewSorted(List<ContactInfo> contactList)
         {
             contactList.Sort((a, b) => a.Name.CompareTo(b.Name));
-            Console.WriteLine("NAME - PHONE NUMBER - EMAIL - NOTES");
 
             foreach (var contact in contactList)
             {
-                Console.WriteLine($"{contact.Name} - {contact.Phone} - {contact.Email} - {contact.Phone}");
+                DisplayContactList(contact);
             }
         }
     }

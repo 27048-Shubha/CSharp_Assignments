@@ -1,4 +1,5 @@
-﻿using ContactManager.Models;
+﻿// Persistance/Repository.cs
+using ContactManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,44 +18,34 @@ namespace ContactManager.Persistance
     internal class Repository
     {
         static private List<ContactInfo> contactList = new List<ContactInfo>();
-        
+
         /// <summary>
         /// to View List of all contacts
         /// </summary>
         public static void ViewContact()
         {
-            if(contactList.Count == 0)
+            if (contactList.Count == 0)
             {
-                Console.WriteLine("No Contacts to display\n");
+                DisplayEmptyListMessage();
             }
             else
             {
-                foreach(var contact in contactList)
+                foreach (var contact in contactList)
                 {
-                    Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
+                    DisplayContactList(contact);
                 }
             }
         }
+
         /// <summary>
         /// to Add new contact into contactList
         /// </summary>
         public static void AddContact()
         {
-            Console.WriteLine("ENTER NAME: ");
-            string name = Console.ReadLine();
-
-            Console.WriteLine("ENTER PHONE NUMBER: ");
-            string phone = Console.ReadLine();
-
-            Console.WriteLine("ENTER EMAIL ADDRESS: ");
-            string email = Console.ReadLine();
-
-            Console.WriteLine("ENTER NOTES: ");
-            string notes = Console.ReadLine();
 
             //I/P Validations
-            ContactInfo contact = new ContactInfo(name, phone, email, notes);
-            if (ValidateContact.CheckDuplicates(contact, contactList) &&  Helpers.ValidatePhone(phone))
+            ContactInfo contact = new ContactInfo(getName(), getPhone(), getEmail(), getNotes());
+            if (ValidateContact.CheckDuplicates(contact, contactList) && Helpers.ValidatePhone(phone))
             {
                 contactList.Add(contact);
             }
@@ -68,48 +59,41 @@ namespace ContactManager.Persistance
             // GUID Based Implementation
             if (!ValidateContact.IsEmpty(contactList))
             {
-                Console.WriteLine("ENTER NAME: ");
-                string searchPh = Console.ReadLine();
+                string searchPh = getName();
 
                 int searchIndex = ValidateContact.FindIndex(searchPh, contactList);
 
-
                 if (searchIndex != -1)
                 {
-                    Console.WriteLine("Enter 1 to edit Name\n2 to edit Phone\n3 to edit Email\n4 to edit Notes\n");
-                    int editCh = int.Parse(Console.ReadLine());
-
+                    DisplayEditMenu();
+                    int editCh = int.Parse(ConsoleManager.ReadLine());
 
                     switch (editCh)
                     {
                         case 1:
-                            Console.WriteLine("Enter new Name:");
-                            contactList[searchIndex].Name = Console.ReadLine();
+                            contactList[searchIndex].Name = getName();
                             break;
 
                         case 2:
-                            Console.WriteLine("Enter new Phone:");
-                            contactList[searchIndex].Phone = Console.ReadLine();
+                            contactList[searchIndex].Phone = getPhone();
                             break;
 
                         case 3:
-                            Console.WriteLine("Enter new Email:");
-                            contactList[searchIndex].Email = Console.ReadLine();
+                            contactList[searchIndex].Email = getEmail();
                             break;
 
                         case 4:
-                            Console.WriteLine("Enter new Note:");
-                            contactList[searchIndex].Notes = Console.ReadLine();
+                            contactList[searchIndex].Notes = getNotes();
                             break;
 
                         default:
-                            Console.WriteLine("Kinly Enter only from 1 to 4\n");
+                            DisplayDefaultMessage();
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("PHONE NUMBER Doesn't Exist");
+                    DisplayNotFoundMessage();
                 }
             }
         }
@@ -119,26 +103,24 @@ namespace ContactManager.Persistance
         /// </summary>
         public static void DeleteContact()
         {
-            Console.WriteLine("Enter Phone Number to be deleted: ");
-            string deletePh = Console.ReadLine();
-            foreach(var contact in contactList)
+            string deletePh = getPhone();
+            foreach (var contact in contactList)
             {
-                if(contact.Phone == deletePh)
+                if (contact.Phone == deletePh)
                 {
                     contactList.Remove(contact);
                     return;
                 }
             }
-            Console.WriteLine("Phone Number doesn't exist");
+            DisplayNotFoundMessage();
         }
-        
+
         /// <summary>
         /// to Search Contacts from Contact List
         /// </summary>
         public static void SearchContact()
         {
-            Console.WriteLine("Enter Name to search");
-            string searchName = Console.ReadLine();
+            string searchName = getName();
             foreach (var contact in contactList)
             {
                 if (contact.Name == searchName)
@@ -147,7 +129,7 @@ namespace ContactManager.Persistance
                     return;
                 }
             }
-            Console.WriteLine("Searched Contact doesn't exist");
+            DisplayNotFoundMessage();
         }
 
         /// <summary>

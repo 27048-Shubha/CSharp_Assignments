@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Models/ContactInfo.cs
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,7 @@ namespace ContactManager.Models
         /// </summary>
         /// <value>Unique ID given to Contact</value>
         public Guid Id { get; set; }
+
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
