@@ -1,18 +1,18 @@
-﻿//Helpers.cs
+﻿//Helpers / Helpers.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactManager
+namespace ContactManager.Helpers
 {
     /// <summary>
     /// Helper class - Contains all the Validation
     /// </summary>
     internal class Helpers
     {
-        //Helpers
+        private ConsoleManager _console = new ConsoleManager();
 
         /// <summary>
         /// Validate Phone number based on number of digists
@@ -23,7 +23,7 @@ namespace ContactManager
         {
             if (phone.Length != 10)
             {
-                DisplayInvalidPhoneMessage();
+                _console.DisplayInvalidPhoneMessage();
                 return false;
             }
             return true;

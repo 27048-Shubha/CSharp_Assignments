@@ -1,5 +1,8 @@
 ﻿// Services/ValidateContact.cs
+using ContactManager;
 using ContactManager.Models;
+using ContactManager.Persistance;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +15,72 @@ namespace ContactManager.Services
     /// <summary>
     /// Handles all I/P Validations
     /// </summary>
-    internal class ValidateContact
+    internal class ContactHandler
     {
-        /// <summary>
-        /// to check for existance of new contact number to avoid duplication
-        /// </summary>
-        /// <param name="contact"> New Object </param>
-        /// <param name="contactList"> List of all existing contacts </param>
-        /// <returns> true if new attribute else False </returns>
-        public static bool CheckDuplicates(ContactInfo contact, List<ContactInfo> contactList)
+        private ConsoleManager _console = new ConsoleManager();
+        private Repository _repo = new Repository();
+        public int AddContact(ContactInfo contact)
         {
-            foreach (var attribute in contactList)
+            if (ContactHandler.CheckDuplicates(contact))
             {
-                if (attribute.Phone == contact.Phone)
-                {
-                    DisplayDuplicateMessage();
+                return -1;
+            }
+            else if (Helpers.ValidatePhone(contact.Phone))
+            {
+                return -2;
+            }
+            _repo.AddContact(contact);
+            return 1;
+        }
+
+        public List<ContactInfo> GetContactInfo()
+        {
+            if (_repo.Empty())
+            {
+                return null;
+            }
+            else
+            {
+                return _repo.ViewContact();
+            }
+        }
+
+        public int DeleteContact(string phone)
+        {
+            ContactInfo contact = _repo.ExistPhone(phone);
+            if(contact != null)
+            {
+                _repo.DeleteContact(contact);
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        string deletePh = ConsoleManager.GetPhone();
+foreach (var contact in contactList)
+{
+    if (contact.Phone == deletePh)
+    {
+        contactList.Remove(contact);
+        return;
+    }
+}
+ConsoleManager.DisplayNotFoundMessage();
+
+/// <summary>
+/// to check for existance of new contact number to avoid duplication
+/// </summary>
+/// <param name="contact"> New Object </param>
+/// <returns> true if new attribute else False </returns>
+public static bool CheckDuplicates(ContactInfo contact)
+        {
+            if (Repository.Exists(contact.Phone))
+            {
+                    ConsoleManager.DisplayDuplicateMessage();
                     return false;
-                }
             }
             return true;
         }
@@ -41,7 +93,7 @@ namespace ContactManager.Services
         {
             if (contactList.Count != 0)
             {
-                DisplayEmptyListMessage();
+                ConsoleManager.DisplayEmptyListMessage();
             }
             return contactList.Count == 0;
         }
@@ -76,7 +128,7 @@ namespace ContactManager.Services
 
             foreach (var contact in contactList)
             {
-                DisplayContactList(contact);
+                ConsoleManager.DisplayContactList(contact.Name, contact.Phone, contact.Email, contact.Notes);
             }
         }
     }

@@ -20,80 +20,64 @@ namespace ContactManager.Persistance
         static private List<ContactInfo> contactList = new List<ContactInfo>();
 
         /// <summary>
-        /// to View List of all contacts
+        /// 
         /// </summary>
-        public static void ViewContact()
+        /// <param name="contact"></param>
+        public void AddContact(ContactInfo contact)
         {
-            if (contactList.Count == 0)
-            {
-                DisplayEmptyListMessage();
-            }
-            else
-            {
-                foreach (var contact in contactList)
-                {
-                    DisplayContactList(contact);
-                }
-            }
+            contactList.Add(contact);
         }
 
         /// <summary>
-        /// to Add new contact into contactList
+        /// to View List of all contacts
         /// </summary>
-        public static void AddContact()
+        public List<ContactInfo> ViewContact()
         {
-
-            //I/P Validations
-            ContactInfo contact = new ContactInfo(getName(), getPhone(), getEmail(), getNotes());
-            if (ValidateContact.CheckDuplicates(contact, contactList) && Helpers.ValidatePhone(phone))
-            {
-                contactList.Add(contact);
-            }
+            return contactList;
         }
-
+        
         /// <summary>
         /// to Edit existing Contact
         /// </summary>
         public static void EditContact()
         {
             // GUID Based Implementation
-            if (!ValidateContact.IsEmpty(contactList))
+            if (!ContactHandler.IsEmpty(contactList))
             {
-                string searchPh = getName();
+                string searchPh = ConsoleManager.GetName();
 
-                int searchIndex = ValidateContact.FindIndex(searchPh, contactList);
+                int searchIndex = ContactHandler.FindIndex(searchPh, contactList);
 
                 if (searchIndex != -1)
                 {
-                    DisplayEditMenu();
-                    int editCh = int.Parse(ConsoleManager.ReadLine());
-
+                    int editCh = ConsoleManager.DisplayEditMenu(); 
+                    
                     switch (editCh)
                     {
                         case 1:
-                            contactList[searchIndex].Name = getName();
+                            contactList[searchIndex].Name = ConsoleManager.GetName();
                             break;
 
                         case 2:
-                            contactList[searchIndex].Phone = getPhone();
+                            contactList[searchIndex].Phone = ConsoleManager.GetPhone();
                             break;
 
                         case 3:
-                            contactList[searchIndex].Email = getEmail();
+                            contactList[searchIndex].Email = ConsoleManager.GetEmail();
                             break;
 
                         case 4:
-                            contactList[searchIndex].Notes = getNotes();
+                            contactList[searchIndex].Notes = ConsoleManager.GetNotes();
                             break;
 
                         default:
-                            DisplayDefaultMessage();
+                            ConsoleManager.DisplayDefaultMessage();
                             break;
                     }
                 }
                 else
                 {
-                    DisplayNotFoundMessage();
+                    ConsoleManager.DisplayNotFoundMessage();
                 }
             }
         }
@@ -101,18 +85,9 @@ namespace ContactManager.Persistance
         /// <summary>
         /// to Delete existing Contact
         /// </summary>
-        public static void DeleteContact()
+        public void DeleteContact(ContactInfo contact)
         {
-            string deletePh = getPhone();
-            foreach (var contact in contactList)
-            {
-                if (contact.Phone == deletePh)
-                {
-                    contactList.Remove(contact);
-                    return;
-                }
-            }
-            DisplayNotFoundMessage();
+            contactList.Remove(contact);
         }
 
         /// <summary>
@@ -120,7 +95,7 @@ namespace ContactManager.Persistance
         /// </summary>
         public static void SearchContact()
         {
-            string searchName = getName();
+            string searchName = ConsoleManager.GetName();
             foreach (var contact in contactList)
             {
                 if (contact.Name == searchName)
@@ -129,7 +104,7 @@ namespace ContactManager.Persistance
                     return;
                 }
             }
-            DisplayNotFoundMessage();
+            ConsoleManager.DisplayNotFoundMessage();
         }
 
         /// <summary>
@@ -138,10 +113,41 @@ namespace ContactManager.Persistance
         public static void SortContact()
         {
             //Sort Contact Feature
-            if (!ValidateContact.IsEmpty(contactList))
+            if (!ContactHandler.IsEmpty(contactList))
             {
-                ValidateContact.ViewSorted(contactList);
+                ContactHandler.ViewSorted(contactList);
             }
         }
+
+        public bool Exist(string contactName)
+        {
+            foreach(var contact in contactList)
+            {
+                if(contact.Name == contactName)
+                {
+                    return true;
+                }
+            }
+        }
+
+        public ContactInfo ExistPhone(string phone)
+        {
+            foreach (var contact in contactList)
+            {
+                if (contact.Phone == phone)
+                {
+                    return contact;
+                }
+            }
+            return null;
+        }
+
+        public bool Empty()
+        {
+            if (contactList.Count == 0)
+            {
+                    return true;
+            }
+            return false;
     }
 }
