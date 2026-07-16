@@ -110,6 +110,16 @@ namespace ContactManager
         }
 
         /// <summary>
+        /// to receive Choice inputs for Menu
+        /// </summary>
+        /// <returns>Input integer received from user</returns>
+        public int GetChoice()
+        {
+            System.Console.WriteLine("Enter Choice: ");
+            return int.Parse(Console.ReadLine());
+        }
+
+        /// <summary>
         /// Displays Warning on Invalid Phone number
         /// </summary>
         public void DisplayInvalidPhoneMessage()

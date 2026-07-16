@@ -25,7 +25,7 @@ namespace Assignments
             do
             {
                 console.DisplayMenu();
-                ch = int.Parse(Console.ReadLine());
+                ch = console.GetChoice();
 
                 switch (ch)
                 {

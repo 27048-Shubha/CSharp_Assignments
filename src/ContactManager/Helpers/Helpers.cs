@@ -1,9 +1,6 @@
 ﻿//Helpers / Helpers.cs
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactManager.Helpers
 {
@@ -21,7 +18,16 @@ namespace ContactManager.Helpers
         /// <returns>True if length == 10 else False </returns>
         public static bool ValidatePhone(string phone)
         {
-            return phone == null || phone.Length != 10;
+            bool isValid = phone == null || phone.Length != 10 ;
+
+            foreach(char c in phone)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return isValid;
         }
     }
 }
