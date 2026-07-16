@@ -7,7 +7,7 @@ namespace ContactManager
     /// <summary>
     /// Manages all Console I/O Operations
     /// </summary>
-    public class ConsoleManager
+    internal class ConsoleManager
     {
         /// <summary>
         /// Displays Open Menu
@@ -26,11 +26,11 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// 
+        /// To display success message after any operation
         /// </summary>
         public void DisplaySuccess()
         {
-            System.Console.WriteLine("Operation Success!\n"); 
+            System.Console.WriteLine("Operation Success!\n");
         }
         /// <summary>
         /// Display Empty ContactList
@@ -43,10 +43,7 @@ namespace ContactManager
         /// <summary>
         /// Display list of contacts
         /// </summary>
-        /// <param name="name">Name of the contact</param>
-        /// <param name="phone">Phone of the contact</param>
-        /// <param name="email">Email of the contact</param>
-        /// <param name="notes">Notes for the contact</param>
+        /// <param name="contact">List of contacts to be displayed</param>
         public void DisplayContactList(List<ContactInfo> contact)
         {
             foreach (var item in contact)
@@ -54,11 +51,15 @@ namespace ContactManager
                 System.Console.WriteLine($"NAME: {item.Name}\nPHONE NUMBER: {item.Phone}\nEMAIL: {item.Email}\nNOTES: {item.Notes}\n\n");
             }
         }
+
+        /// <summary>
+        /// Displays a single contact's details
+        /// </summary>
+        /// <param name="contact">Contact object whose details are to be displayed</param>
         public void DisplayContact(ContactInfo contact)
         {
             System.Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
         }
-
 
         /// <summary>
         /// Displays about Duplicate Existance
@@ -67,6 +68,7 @@ namespace ContactManager
         {
             System.Console.WriteLine("Contact Already Exists!");
         }
+
         /// <summary>
         /// Gets Name of the Contact as Input
         /// </summary>
@@ -76,6 +78,7 @@ namespace ContactManager
             System.Console.WriteLine("Enter Name: ");
             return System.Console.ReadLine();
         }
+
         /// <summary>
         /// Gets Phone Number of the Contact as Input
         /// </summary>
@@ -95,6 +98,7 @@ namespace ContactManager
             System.Console.WriteLine("Enter Email Address: ");
             return System.Console.ReadLine();
         }
+
         /// <summary>
         /// Gets Notes of the Contact as Input
         /// </summary>
@@ -104,6 +108,7 @@ namespace ContactManager
             System.Console.WriteLine("Enter Notes: ");
             return Console.ReadLine();
         }
+
         /// <summary>
         /// Displays Warning on Invalid Phone number
         /// </summary>
@@ -113,19 +118,32 @@ namespace ContactManager
         }
 
         /// <summary>
+        /// Displays Warning on Invalid Message
+        /// </summary>
+        public void DisplayInvalidInputMessage()
+        {
+            System.Console.WriteLine("Invalid Input! Please enter a valid input");
+        }
+
+        /// <summary>
         /// Displays Menu to Edit Contact Attributes
         /// </summary>
         /// <returns>User input receiveed</returns>
         public int DisplayEditMenu()
         {
-            System.Console.WriteLine("Enter 1 to edit Name\n2 to edit Phone\n3 to edit Email\n4 to edit Notes\n");
+            Console.WriteLine("Enter 1 to edit Name");
+            Console.WriteLine("2 to edit Phone");
+            Console.WriteLine("3 to edit Email");
+            Console.WriteLine("4 to edit Notes");
+
             return int.Parse(Console.ReadLine());
         }
+
         /// <summary>
         /// Displays Message if contact is not Found
         /// </summary>
         public void DisplayNotFoundMessage()
-        {   
+        {
             System.Console.WriteLine("Contact Not Found!");
         }
     }

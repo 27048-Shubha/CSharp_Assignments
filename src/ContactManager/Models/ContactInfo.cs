@@ -21,11 +21,12 @@ namespace ContactManager.Models
         /// <param name="notes">Notes of the Contact</param>
         public ContactInfo(string name, string phone, string email = "No mail found", string notes = "No notes found")
         {
+            Id = Guid.NewGuid();
+
             Name = name;
             Phone = phone;
             Email = email;
             Notes = notes;
-            //Id = Guid.Parse("phone");
         }
 
         /// <summary>
@@ -38,13 +39,13 @@ namespace ContactManager.Models
         /// Gets or Sets Name
         /// </summary>
         /// <value>The name of the Contact.</value>
-        public string? Name { get; set; } = "";
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Phone Number
         /// </summary>
         /// <value>The Phone Number of the Contact.</value>
-        public string? Phone { get; set; } = "";
+        public string? Phone { get; set; }
 
         /// <summary>
         /// Gets or Sets Email

@@ -20,87 +20,82 @@ namespace ContactManager.Persistance
         static private List<ContactInfo> contactList = new List<ContactInfo>();
 
         /// <summary>
-        /// 
+        /// To add contact to the list
         /// </summary>
-        /// <param name="contact"></param>
+        /// <param name="contact"> Object that holds new Contact Details</param>
         public void AddContact(ContactInfo contact)
         {
             contactList.Add(contact);
         }
 
         /// <summary>
-        /// to View List of all contacts
+        /// to View all contacts in the list
         /// </summary>
+        /// <returns> List of all contacts</returns>
         public List<ContactInfo> ViewContact()
         {
             return contactList;
         }
 
         /// <summary>
-        /// to Edit existing Contact
+        /// to Edit Name of a Contact
         /// </summary>
-        public static void EditContact()
+        /// <param name="contact"> Object that holds Contact Details</param>
+        /// <param name="newName"> New Name to be updated</param>
+        public void EditName(ContactInfo contact, string newName)
         {
-            // GUID Based Implementation
-            if (!ContactHandler.IsEmpty(contactList))
-            {
-                string searchPh = ConsoleManager.GetName();
-
-                int searchIndex = ContactHandler.FindIndex(searchPh, contactList);
-
-                if (searchIndex != -1)
-                {
-                    int editCh = ConsoleManager.DisplayEditMenu(); 
-                    
-                    switch (editCh)
-                    {
-                        case 1:
-                            contactList[searchIndex].Name = ConsoleManager.GetName();
-                            break;
-
-                        case 2:
-                            contactList[searchIndex].Phone = ConsoleManager.GetPhone();
-                            break;
-
-                        case 3:
-                            contactList[searchIndex].Email = ConsoleManager.GetEmail();
-                            break;
-
-                        case 4:
-                            contactList[searchIndex].Notes = ConsoleManager.GetNotes();
-                            break;
-
-                        default:
-                            ConsoleManager.DisplayDefaultMessage();
-                            break;
-                    }
-                }
-                else
-                {
-                    ConsoleManager.DisplayNotFoundMessage();
-                }
-            }
+            contact.Name = newName;
         }
 
         /// <summary>
-        /// 
+        /// to Edit Phone number of a Contact
         /// </summary>
-        /// <param name="contact"></param>
+        /// <param name="contact"> Object that holds Contact Details</param>
+        /// <param name="newPhoneNo"> New Phone number to be updated</param>
+        public void EditPhone(ContactInfo contact, string newPhoneNo)
+        {
+            contact.Phone = newPhoneNo;
+        }
+
+        /// <summary>
+        /// to Edit Email of a Contact
+        /// </summary>
+        /// <param name="contact"> Object that holds Contact Details</param>
+        /// <param name="newEmail"> New Email to be updated</param>
+        public void EditEmail(ContactInfo contact, string newEmail)
+        {
+            contact.Email = newEmail;
+        }
+
+        /// <summary>
+        /// to Edit Notes of a Contact
+        /// </summary>
+        /// <param name="contact"> Object that holds Contact Details</param>
+        /// <param name="newNotes"> New Notes to be updated</param>
+        public void EditNotes(ContactInfo contact, string newNotes)
+        {
+            contact.Notes = newNotes;
+        }
+
+        /// <summary>
+        /// to Delete a Contact from the List
+        /// </summary>
+        /// <param name="contact"> Object that holds Contact Details</param>
         public void DeleteContact(ContactInfo contact)
         {
             contactList.Remove(contact);
         }
 
         /// <summary>
-        /// 
+        /// to Search for a Contact
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name"> Name of the Contact to be searched</param>
+        /// <returns> ContactInfo object if found, otherwise null</returns>
         public ContactInfo SearchContact(string name)
         {
             foreach (var contact in contactList)
             {
-                if (contact.Name == searchName)
+                if (contact.Name == name)
                 {
                     return contact;
                 }
@@ -109,38 +104,37 @@ namespace ContactManager.Persistance
         }
 
         /// <summary>
-        /// to Sort Contact 
+        /// to Sort Contact
         /// </summary>
-        public static void SortContact()
+        /// <returns> Sorted List of ContactInfo objects</returns>
+        public List<ContactInfo> SortContact()
         {
-            //Sort Contact Feature
-            if (!ContactHandler.IsEmpty(contactList))
-            {
-                ContactHandler.ViewSorted(contactList);
-            }
+            contactList.Sort((x, y) => x.Name.CompareTo(y.Name));
+            return contactList;
         }
 
         /// <summary>
-        /// 
+        /// to Check if a Contact exists
         /// </summary>
-        /// <param name="contactName"></param>
-        /// <returns></returns>
+        /// <param name="contactName"> Name of the Contact to be checked</param>
+        /// <returns> True if found, otherwise false</returns>
         public bool Exist(string contactName)
         {
-            foreach(var contact in contactList)
+            foreach (var contact in contactList)
             {
-                if(contact.Name == contactName)
+                if (contact.Name == contactName)
                 {
                     return true;
                 }
             }
+            return false;
         }
 
         /// <summary>
-        /// 
+        /// to Check if a Phone number exists
         /// </summary>
-        /// <param name="phone"></param>
-        /// <returns></returns>
+        /// <param name="phone"> Phone number to be checked</param>
+        /// <returns> ContactInfo object if found, otherwise null</returns>
         public ContactInfo ExistPhone(string phone)
         {
             foreach (var contact in contactList)
@@ -154,15 +148,16 @@ namespace ContactManager.Persistance
         }
 
         /// <summary>
-        /// 
+        /// to Check if the Contact List is empty
         /// </summary>
-        /// <returns></returns>
+        /// <returns> True if empty, otherwise false</returns>
         public bool Empty()
         {
             if (contactList.Count == 0)
             {
-                    return true;
+                return true;
             }
             return false;
+        }
     }
 }

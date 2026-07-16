@@ -21,12 +21,7 @@ namespace ContactManager.Helpers
         /// <returns>True if length == 10 else False </returns>
         public static bool ValidatePhone(string phone)
         {
-            if (phone.Length != 10)
-            {
-                _console.DisplayInvalidPhoneMessage();
-                return false;
-            }
-            return true;
+            return phone == null || phone.Length != 10;
         }
     }
 }
