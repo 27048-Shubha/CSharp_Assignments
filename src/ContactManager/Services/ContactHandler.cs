@@ -27,7 +27,7 @@ namespace ContactManager.Services
             {
                 return -1;
             }
-            else if (!ContactManager.Helpers.Helpers.ValidatePhone(contact.Phone ?? ""))
+            else if (!ContactManager.Helpers.ValidationHelper.ValidatePhone(contact.Phone ?? ""))
             {
                 return -2;
             }
@@ -134,7 +134,7 @@ namespace ContactManager.Services
         {
             return _repo.ExistPhone(contact.Phone) != null;
         }
-
+         
         /// <summary>
         /// To check whether contactList is empty or not
         /// </summary>
