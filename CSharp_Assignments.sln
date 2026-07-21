@@ -11,9 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{C778E127-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "acceptance", "acceptance", "{93EBAE55-A8BA-40FF-93AA-7D9E4359B6B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager", "src\ContactManager\ContactManager.csproj", "{664844D5-E77A-4B1C-9D55-7EC4DCDBF6BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1", "CSharpStarterProject2\Assignment1.csproj", "{197B36E4-611F-42E4-8D53-8FF15E981A54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{664844D5-E77A-4B1C-9D55-7EC4DCDBF6BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{664844D5-E77A-4B1C-9D55-7EC4DCDBF6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{664844D5-E77A-4B1C-9D55-7EC4DCDBF6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{664844D5-E77A-4B1C-9D55-7EC4DCDBF6BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{197B36E4-611F-42E4-8D53-8FF15E981A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{197B36E4-611F-42E4-8D53-8FF15E981A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{197B36E4-611F-42E4-8D53-8FF15E981A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{197B36E4-611F-42E4-8D53-8FF15E981A54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,7 +31,6 @@ Global
 		{C778E127-C02C-4A37-8E85-3D86DCC063DC} = {06861454-9561-492A-9F93-A33B6F7AE3AB}
 		{93EBAE55-A8BA-40FF-93AA-7D9E4359B6B9} = {06861454-9561-492A-9F93-A33B6F7AE3AB}
 		{664844D5-E77A-4B1C-9D55-7EC4DCDBF6BD} = {DCAA095E-2796-41FA-A1D0-1134E29309E7}
-		{197B36E4-611F-42E4-8D53-8FF15E981A54} = {DCAA095E-2796-41FA-A1D0-1134E29309E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4CECB66-8E11-49D9-AA1E-464EE0231450}
