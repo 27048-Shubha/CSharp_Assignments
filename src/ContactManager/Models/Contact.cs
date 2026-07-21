@@ -1,21 +1,20 @@
-﻿//Models/ContactInfo.cs
-using System;
-using System.Collections.Generic;
-
-namespace ContactManager.Models
+﻿namespace ContactManager.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
-    /// Holds Getter & Setter Property of ContactInfo Attributes
+    /// Holds Getter & Setter Property of ContactInfo Attributes.
     /// </summary>
     internal class Contact
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Contact"/> class.
         /// </summary>
-        /// <param name="name">Name of the Contact</param>
-        /// <param name="phone">Phone number of the Contact</param>
-        /// <param name="email">Email ID of the Contact</param>
-        /// <param name="notes">Notes of the Contact</param>
+        /// <param name="name">Name of the Contact.</param>
+        /// <param name="phone">Phone number of the Contact.</param>
+        /// <param name="email">Email ID of the Contact.</param>
+        /// <param name="notes">Notes of the Contact.</param>
         public Contact(string name, string phone, string email = "No mail found", string notes = "No notes found")
         {
             Id = Guid.NewGuid();
@@ -27,31 +26,31 @@ namespace ContactManager.Models
         }
 
         /// <summary>
-        /// Gets or Sets GUID
+        /// Gets or Sets GUID.
         /// </summary>
-        /// <value>Unique ID given to Contact</value>
+        /// <value>Unique ID given to Contact.</value>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets Name.
         /// </summary>
         /// <value>The name of the Contact.</value>
         public string? Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Phone Number
+        /// Gets or Sets Phone Number.
         /// </summary>
         /// <value>The Phone Number of the Contact.</value>
         public string? Phone { get; set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// Gets or Sets Email.
         /// </summary>
         /// <value>The Email ID of the Contact.</value>
         public string? Email { get; set; }
 
         /// <summary>
-        /// Gets or Sets Notes
+        /// Gets or Sets Notes.
         /// </summary>
         /// <value>The Notes for the Contact.</value>
         public string? Notes { get; set; }

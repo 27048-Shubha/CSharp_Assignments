@@ -1,16 +1,13 @@
-﻿// Console.cs
-using ContactManager.Models;
-using System;
-
-namespace ContactManager
+﻿namespace ContactManager
 {
+    using ContactManager.Models;
     /// <summary>
-    /// Manages all Console I/O Operations
+    /// Manages all Console I/O Operations.
     /// </summary>
     internal class ConsoleView
     {
         /// <summary>
-        /// Displays Open Menu
+        /// Displays Open Menu.
         /// </summary>
         public void DisplayMenu()
         {
@@ -18,7 +15,7 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Displays default message for menu
+        /// Displays default message for menu.
         /// </summary>
         public void DisplayDefaultMessage()
         {
@@ -26,14 +23,15 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// To display success message after any operation
+        /// To display success message after any operation.
         /// </summary>
         public void DisplaySuccess()
         {
             System.Console.WriteLine("Operation Success!\n");
         }
+
         /// <summary>
-        /// Display Empty ContactList
+        /// Display Empty ContactList.
         /// </summary>
         public void DisplayEmptyListMessage()
         {
@@ -41,9 +39,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Display list of contacts
+        /// Display list of contacts.
         /// </summary>
-        /// <param name="contact">List of contacts to be displayed</param>
+        /// <param name="contact">List of contacts to be displayed.</param>
         public void DisplayContactList(List<Contact> contact)
         {
             foreach (var item in contact)
@@ -53,16 +51,16 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Displays a single contact's details
+        /// Displays a single contact's details.
         /// </summary>
-        /// <param name="contact">Contact object whose details are to be displayed</param>
+        /// <param name="contact">Contact object whose details are to be displayed.</param>
         public void DisplayContact(Contact contact)
         {
             System.Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
         }
 
         /// <summary>
-        /// Displays about Duplicate Existance
+        /// Displays about Duplicate Existance.
         /// </summary>
         public void DisplayDuplicateMessage()
         {
@@ -70,9 +68,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Gets Name of the Contact as Input
+        /// Gets Name of the Contact as Input.
         /// </summary>
-        /// <returns>User input receiveed</returns>
+        /// <returns>User input receiveed.</returns>
         public string GetName()
         {
             System.Console.WriteLine("Enter Name: ");
@@ -80,9 +78,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Gets Phone Number of the Contact as Input
+        /// Gets Phone Number of the Contact as Input.
         /// </summary>
-        /// <returns>User input receiveed</returns>
+        /// <returns>User input receiveed.</returns>
         public string GetPhone()
         {
             System.Console.WriteLine("Enter Phone Number: ");
@@ -90,9 +88,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Gets Email Address of the Contact as Input
+        /// Gets Email Address of the Contact as Input.
         /// </summary>
-        /// <returns>User input receiveed</returns>
+        /// <returns>User input receiveed.</returns>
         public string GetEmail()
         {
             System.Console.WriteLine("Enter Email Address: ");
@@ -100,9 +98,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Gets Notes of the Contact as Input
+        /// Gets Notes of the Contact as Input.
         /// </summary>
-        /// <returns>User input receiveed</returns>
+        /// <returns>User input receiveed.</returns>
         public string GetNotes()
         {
             System.Console.WriteLine("Enter Notes: ");
@@ -110,9 +108,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// to receive Choice inputs for Menu
+        /// to receive Choice inputs for Menu.
         /// </summary>
-        /// <returns>Input integer received from user</returns>
+        /// <returns>Input integer received from user.</returns>
         public int GetChoice()
         {
             System.Console.WriteLine("Enter Choice: ");
@@ -120,7 +118,7 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Displays Warning on Invalid Phone number
+        /// Displays Warning on Invalid Phone number.
         /// </summary>
         public void DisplayInvalidPhoneMessage()
         {
@@ -128,7 +126,7 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Displays Warning on Invalid Message
+        /// Displays Warning on Invalid Message.
         /// </summary>
         public void DisplayInvalidInputMessage()
         {
@@ -136,9 +134,9 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Displays Menu to Edit Contact Attributes
+        /// Displays Menu to Edit Contact Attributes.
         /// </summary>
-        /// <returns>User input receiveed</returns>
+        /// <returns>User input receiveed.</returns>
         public int DisplayEditMenu()
         {
             Console.WriteLine("Enter 1 to edit Name");
@@ -150,7 +148,7 @@ namespace ContactManager
         }
 
         /// <summary>
-        /// Displays Message if contact is not Found
+        /// Displays Message if contact is not Found.
         /// </summary>
         public void DisplayNotFoundMessage()
         {
