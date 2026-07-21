@@ -22,9 +22,16 @@
             {
                 return -1;
             }
-            else if (!ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone ?? string.Empty))
+            else if (ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone ?? string.Empty))
             {
                 return -2;
+            }
+            else if (contact.Email != string.Empty)
+            {
+                if (!ContactManager.Helpers.ContactValidator.ValidateEmail(contact.Email))
+                {
+                    return -2;
+                }
             }
 
             repo.AddContact(contact);
@@ -37,14 +44,7 @@
         /// <returns>List of all contacts or null if empty.</returns>
         public List<Contact> GetAllContactInfo()
         {
-            if (repo.Empty())
-            {
-                return null;
-            }
-            else
-            {
-                return repo.ViewContact();
-            }
+            return repo.ViewContact();
         }
 
         /// <summary>

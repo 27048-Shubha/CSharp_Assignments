@@ -1,7 +1,6 @@
 ﻿namespace ContactManager.Models
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Holds Getter & Setter Property of ContactInfo Attributes.

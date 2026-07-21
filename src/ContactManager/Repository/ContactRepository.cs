@@ -1,8 +1,6 @@
 ﻿// Persistance/Repository.cs
 using ContactManager.Models;
 
-using ContactManager.Services;
-
 namespace ContactManager.Persistance
 {
     /// <summary>

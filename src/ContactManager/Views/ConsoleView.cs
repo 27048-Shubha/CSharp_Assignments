@@ -118,6 +118,14 @@
         }
 
         /// <summary>
+        /// Displays Warning on Invalid Email.
+        /// </summary>
+        public void DisplayInvalidEmailMessage()
+        {
+            System.Console.WriteLine("Invalid Email Id! Please enter a valid Email Id");
+        }
+
+        /// <summary>
         /// Displays Warning on Invalid Phone number.
         /// </summary>
         public void DisplayInvalidPhoneMessage()

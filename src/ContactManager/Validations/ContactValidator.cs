@@ -1,0 +1,43 @@
+﻿// Helpers / Validator.cs
+using System.Text.RegularExpressions;
+
+namespace ContactManager.Helpers
+{
+    /// <summary>
+    /// Helper class - Contains all the Validation
+    /// </summary>
+    internal class ContactValidator
+    {
+        private ConsoleView _console = new ConsoleView();
+
+        /// <summary>
+        /// Validate Phone number based on number of digits.
+        /// </summary>
+        /// <param name="phone">Input Phone number to be validated.</param>
+        /// <returns>True if length == 10 else False.</returns>
+        public static bool ValidatePhone(string phone)
+        {
+            bool isValid = (phone == null) || phone.Length != 10;
+
+            foreach (char c in phone)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+
+            return isValid;
+        }
+
+        /// <summary>
+        /// Validates email id entered by the user.
+        /// </summary>
+        /// <param name="email">Input email to be validated.</param>
+        /// <returns>True if matches regex patter or without whitespace else False.</returns>
+        public static bool ValidateEmail(string email)
+        {
+            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") && string.IsNullOrWhiteSpace(email);
+        }
+    }
+}

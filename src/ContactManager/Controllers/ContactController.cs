@@ -51,7 +51,11 @@
                     {
                         console.DisplayInvalidPhoneMessage();
                     }
-                    else
+                    else if (addStatus == -3)
+                    {
+                        console.DisplayInvalidEmailMessage();
+                    }
+                        else
                     {
                         console.DisplaySuccess();
                     }
