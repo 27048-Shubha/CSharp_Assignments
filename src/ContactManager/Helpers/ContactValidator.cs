@@ -7,9 +7,9 @@ namespace ContactManager.Helpers
     /// <summary>
     /// Helper class - Contains all the Validation
     /// </summary>
-    internal class ValidationHelper
+    internal class ContactValidator
     {
-        private ConsoleManager _console = new ConsoleManager();
+        private ConsoleView _console = new ConsoleView();
 
         /// <summary>
         /// Validate Phone number based on number of digists

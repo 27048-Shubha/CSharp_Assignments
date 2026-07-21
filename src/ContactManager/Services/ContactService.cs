@@ -12,22 +12,22 @@ namespace ContactManager.Services
     /// <summary>
     /// Handles all I/P Validations
     /// </summary>
-    internal class ContactHandler
+    internal class ContactService
     {
-        private Repository _repo = new Repository();
+        private ContactRepository _repo = new ContactRepository();
 
         /// <summary>
         /// to Add new contact to the list
         /// </summary>
         /// <param name="contact">Contact information to add</param>
         /// <returns>Status of the operation</returns>
-        public int AddContact(ContactInfo contact)
+        public int AddContact(Contact contact)
         {
             if (CheckDuplicates(contact))
             {
                 return -1;
             }
-            else if (!ContactManager.Helpers.ValidationHelper.ValidatePhone(contact.Phone ?? ""))
+            else if (!ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone ?? ""))
             {
                 return -2;
             }
@@ -39,7 +39,7 @@ namespace ContactManager.Services
         /// to Get all contact information
         /// </summary>
         /// <returns>List of all contacts or null if empty</returns>
-        public List<ContactInfo> GetAllContactInfo()
+        public List<Contact> GetAllContactInfo()
         {
             if (_repo.Empty())
             {
@@ -58,7 +58,7 @@ namespace ContactManager.Services
         /// <returns>Status of the operation</returns>
         public int DeleteContact(string phone)
         {
-            ContactInfo contact = _repo.ExistPhone(phone);
+            Contact contact = _repo.ExistPhone(phone);
             if (contact != null)
             {
                 _repo.DeleteContact(contact);
@@ -79,7 +79,7 @@ namespace ContactManager.Services
         /// <returns>Status of the operation</returns>
         public int EditContact(string name, int editChoice, string newValue)
         {
-            ContactInfo contact = _repo.SearchContact(name);
+            Contact contact = _repo.SearchContact(name);
             if (contact == null)
             {
                 return -1;
@@ -113,7 +113,7 @@ namespace ContactManager.Services
         /// </summary>
         /// <param name="name">Name of the contact to search for</param>
         /// <returns>ContactInfo object if found, otherwise null</returns>
-        public ContactInfo SearchContact(string name)
+        public Contact SearchContact(string name)
         {
             if (_repo.Exist(name))
             {
@@ -130,7 +130,7 @@ namespace ContactManager.Services
         /// </summary>
         /// <param name="contact"> New Object </param>
         /// <returns> true if new attribute else False </returns>
-        public bool CheckDuplicates(ContactInfo contact)
+        public bool CheckDuplicates(Contact contact)
         {
             return _repo.ExistPhone(contact.Phone) != null;
         }
@@ -140,7 +140,7 @@ namespace ContactManager.Services
         /// </summary>
         /// <param name="contactList"> Entire List of contacts in contactList </param>
         /// <returns>True if empty else False</returns>
-        public bool IsEmpty(List<ContactInfo> contactList)
+        public bool IsEmpty(List<Contact> contactList)
         {
             return contactList.Count == 0;
         }
@@ -149,7 +149,7 @@ namespace ContactManager.Services
         /// to Sort Contact
         /// </summary>
         /// <returns>Sorted list of contacts or null if empty</returns>
-        public List<ContactInfo> SortContact()
+        public List<Contact> SortContact()
         {
             if (_repo.Empty())
             {

@@ -8,15 +8,15 @@ namespace ContactManager.Persistance
     /// <summary>
     /// Holds Original List & related CRUD Operations
     /// </summary>
-    internal class Repository
+    internal class ContactRepository
     {
-        static private List<ContactInfo> contactList = new List<ContactInfo>();
+        static private List<Contact> contactList = new List<Contact>();
 
         /// <summary>
         /// To add contact to the list
         /// </summary>
         /// <param name="contact"> Object that holds new Contact Details</param>
-        public void AddContact(ContactInfo contact)
+        public void AddContact(Contact contact)
         {
             contactList.Add(contact);
         }
@@ -25,7 +25,7 @@ namespace ContactManager.Persistance
         /// to View all contacts in the list
         /// </summary>
         /// <returns> List of all contacts</returns>
-        public List<ContactInfo> ViewContact()
+        public List<Contact> ViewContact()
         {
             return contactList;
         }
@@ -35,7 +35,7 @@ namespace ContactManager.Persistance
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details</param>
         /// <param name="newName"> New Name to be updated</param>
-        public void EditName(ContactInfo contact, string newName)
+        public void EditName(Contact contact, string newName)
         {
             contact.Name = newName;
         }
@@ -45,7 +45,7 @@ namespace ContactManager.Persistance
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details</param>
         /// <param name="newPhoneNo"> New Phone number to be updated</param>
-        public void EditPhone(ContactInfo contact, string newPhoneNo)
+        public void EditPhone(Contact contact, string newPhoneNo)
         {
             contact.Phone = newPhoneNo;
         }
@@ -55,7 +55,7 @@ namespace ContactManager.Persistance
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details</param>
         /// <param name="newEmail"> New Email to be updated</param>
-        public void EditEmail(ContactInfo contact, string newEmail)
+        public void EditEmail(Contact contact, string newEmail)
         {
             contact.Email = newEmail;
         }
@@ -65,7 +65,7 @@ namespace ContactManager.Persistance
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details</param>
         /// <param name="newNotes"> New Notes to be updated</param>
-        public void EditNotes(ContactInfo contact, string newNotes)
+        public void EditNotes(Contact contact, string newNotes)
         {
             contact.Notes = newNotes;
         }
@@ -74,7 +74,7 @@ namespace ContactManager.Persistance
         /// to Delete a Contact from the List
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details</param>
-        public void DeleteContact(ContactInfo contact)
+        public void DeleteContact(Contact contact)
         {
             contactList.Remove(contact);
         }
@@ -84,7 +84,7 @@ namespace ContactManager.Persistance
         /// </summary>
         /// <param name="name"> Name of the Contact to be searched</param>
         /// <returns> ContactInfo object if found, otherwise null</returns>
-        public ContactInfo SearchContact(string name)
+        public Contact SearchContact(string name)
         {
             foreach (var contact in contactList)
             {
@@ -100,7 +100,7 @@ namespace ContactManager.Persistance
         /// to Sort Contact
         /// </summary>
         /// <returns> Sorted List of ContactInfo objects</returns>
-        public List<ContactInfo> SortContact()
+        public List<Contact> SortContact()
         {
             contactList.Sort((x, y) => x.Name.CompareTo(y.Name));
             return contactList;
@@ -128,7 +128,7 @@ namespace ContactManager.Persistance
         /// </summary>
         /// <param name="phone"> Phone number to be checked</param>
         /// <returns> ContactInfo object if found, otherwise null</returns>
-        public ContactInfo ExistPhone(string phone)
+        public Contact ExistPhone(string phone)
         {
             foreach (var contact in contactList)
             {

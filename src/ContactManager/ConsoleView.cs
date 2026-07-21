@@ -7,7 +7,7 @@ namespace ContactManager
     /// <summary>
     /// Manages all Console I/O Operations
     /// </summary>
-    internal class ConsoleManager
+    internal class ConsoleView
     {
         /// <summary>
         /// Displays Open Menu
@@ -44,7 +44,7 @@ namespace ContactManager
         /// Display list of contacts
         /// </summary>
         /// <param name="contact">List of contacts to be displayed</param>
-        public void DisplayContactList(List<ContactInfo> contact)
+        public void DisplayContactList(List<Contact> contact)
         {
             foreach (var item in contact)
             {
@@ -56,7 +56,7 @@ namespace ContactManager
         /// Displays a single contact's details
         /// </summary>
         /// <param name="contact">Contact object whose details are to be displayed</param>
-        public void DisplayContact(ContactInfo contact)
+        public void DisplayContact(Contact contact)
         {
             System.Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
         }

@@ -19,8 +19,8 @@ namespace Assignments
         /// <param name="args">CommandLine Args</param>
         public static void Main(string[] args)
         {
-            ConsoleManager console = new ConsoleManager();
-            ContactHandler handler = new ContactHandler();
+            ConsoleView console = new ConsoleView();
+            ContactService handler = new ContactService();
             int ch;
             do
             {
@@ -30,7 +30,7 @@ namespace Assignments
                 switch (ch)
                 {
                     case 0: // VIEW
-                        List<ContactInfo> contact = handler.GetAllContactInfo();
+                        List<Contact> contact = handler.GetAllContactInfo();
                         if (contact != null)
                         {
                             console.DisplayContactList(contact);
@@ -46,7 +46,7 @@ namespace Assignments
                         string phone = console.GetPhone();
                         string email = console.GetEmail();
                         string notes = console.GetNotes();
-                        ContactInfo newContact = new ContactInfo(name, phone, email, notes);
+                        Contact newContact = new Contact(name, phone, email, notes);
                         int addStatus = handler.AddContact(newContact);
                         if (addStatus == -1)
                         {
@@ -115,7 +115,7 @@ namespace Assignments
 
                     case 4: // SEARCH
                         name = console.GetName();
-                        ContactInfo foundContact = handler.SearchContact(name);
+                        Contact foundContact = handler.SearchContact(name);
                         if (foundContact != null)
                         {
                             console.DisplayContact(foundContact);
@@ -127,7 +127,7 @@ namespace Assignments
                         break;
 
                     case 5:
-                        List<ContactInfo> contacts = handler.SortContact();
+                        List<Contact> contacts = handler.SortContact();
 
                         if (contacts == null)
                         {
