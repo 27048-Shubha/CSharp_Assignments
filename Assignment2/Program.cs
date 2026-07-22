@@ -2,9 +2,18 @@
 
 namespace Assignment2
 {
+    /// <summary>
+    /// Start of CS Project.
+    /// </summary>
     public class Program
     {
-        EmployeeController emp = new EmployeeController();
-        emp.Initialize();
+        /// <summary>
+        /// Beginning Execution of the Program
+        /// </summary>
+        public static void Main()
+        {
+            EmployeeController employeeController = new EmployeeController();
+            employeeController.Initialize();
+        }
     }
 }

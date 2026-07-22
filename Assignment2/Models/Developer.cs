@@ -6,9 +6,11 @@
     public class Developer : Employee
     {
         private decimal _bonus;
+
         /// <summary>
         /// Gets or Sets Bonus of the Developer.
         /// </summary>
+        /// <value>Bonus salary of the Developer.</value>
         public decimal Bonus
         {
             get;
@@ -17,13 +19,14 @@
                 _bonus = value;
             }
         }
+
         /// <summary>
         /// Calculates Bonus of the Developer.
         /// </summary>
-        /// <returns> Calculted Bonus. </returns>
+        /// <returns> Calculated Bonus. </returns>
         public override decimal CalculateBonus()
         {
-            this.Bonus = base.Salary * 10;
+            this.Bonus = base.Salary * 0.10m;
             return this.Bonus;
         }
 
@@ -33,8 +36,7 @@
         /// <returns> Details of the Developer. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}\nBonus: {this.CalculateBonus()}";
-
+            return $"{base.PrintDetails()}Bonus: {this.CalculateBonus()}";
         }
     }
 }
