@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assignment2.Repository;
 
 namespace Assignment2.Services
 {
     public class EmployeeService
     {
         private EmployeeRepository _repo = new EmployeeRepository();
-        public int AddEmployee(string name, int salary)
+        public string AddManager(string name, decimal salary)
         {
-            if(_repo.ValidateName(salary))
+            //if(_repo.ValidateSalary(salary))
             {
-                _repo.AddEmployee(name, salary);
+                return _repo.AddManager(name, salary);
             }
+            return "Invalid Input";
+        }
+        public string AddDeveloper(string name, decimal salary)
+        {
+            //if(_repo.ValidateSalary(salary))
+            {
+                return _repo.AddDeveloper(name, salary);
+            }
+            return "Invalid Input";
         }
     }
 }

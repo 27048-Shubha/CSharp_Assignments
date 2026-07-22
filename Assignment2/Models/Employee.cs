@@ -1,9 +1,12 @@
 ﻿namespace Assignment2.Models
 {
-    abstract class Employee
+    /// <summary>
+    /// Abstract class of Employee containing Name, Salary and calculates Bonus
+    /// </summary>
+    public abstract class Employee
     {
         private string _name;
-        private string _salary;
+        private decimal _salary;
 
         public string Name
         {
@@ -11,11 +14,17 @@
             set { _name = value; }
         }
 
-        public string Salary
+        public decimal Salary
         {
             get { return _salary; }
+            set { _salary = value; }
         }
-        public abstract int CalculateBonus();
+        public abstract decimal CalculateBonus();
+
+        public string PrintDetails()
+        {
+            return $"Name: {Name}\nSalary: {Salary}";
+        }
 
     }
 }

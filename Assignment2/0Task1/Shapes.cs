@@ -42,6 +42,5 @@ namespace Assignment2.Task1
         {
             Console.WriteLine($"Shape Type: {this.GetType().Name} \nColor: {Color} \nArea: {Math.Round(Area, 2)}\n");
         }
-
     }
 }

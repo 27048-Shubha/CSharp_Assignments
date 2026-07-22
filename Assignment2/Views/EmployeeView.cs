@@ -22,16 +22,22 @@ namespace Assignment2.Views
 
         public string GetEmployeeName()
         {
+            Console.WriteLine("Enter Name\n");
             return Console.ReadLine();
         }
         public decimal GetEmployeeSalary ()
         {
+            Console.WriteLine("Enter Salary\n");
             return decimal.Parse(Console.ReadLine());
         }
 
         public void DisplayDefault()
         {
             Console.WriteLine("Kindly Enter valid inputs only");
+        }
+        public void DisplayMessage(string message)
+        {
+            Console.WriteLine($"{message}");
         }
     }
 }

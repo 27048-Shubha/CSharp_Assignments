@@ -7,15 +7,23 @@ using System.Threading.Tasks;
 
 namespace Assignment2.Repository
 {
-    class EmployeeRepository
+    public class EmployeeRepository
     {
-        public void AddDeveloper(string name, decimal salary)
+        public string AddManager(string name, decimal salary)
+        {
+            Manager manager = new Manager();
+            manager.Name = name;
+            manager.Salary = salary;
+            manager.CalculateBonus();
+            return manager.PrintDetails();
+        }
+        public string AddDeveloper(string name, decimal salary)
         {
             Developer dev = new Developer();
             dev.Name = name;
             dev.Salary = salary;
             dev.CalculateBonus();
-            dev.PrintDetails();
+            return dev.PrintDetails();
         }
     }
 }
