@@ -1,4 +1,4 @@
-﻿using Assignment2.Models;
+﻿using Assignment2.Models.Task2;
 using System;
 using System.Collections.Generic;
 using System.Linq;

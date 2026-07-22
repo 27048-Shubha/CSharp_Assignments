@@ -1,6 +1,4 @@
-﻿using Assignment2;
-
-namespace Assignment2.Task1
+﻿namespace Assignment2.Models.Task1
 {
     /// <summary>
     /// Holds Attributes and Methods of Circle Inherited from Shapes

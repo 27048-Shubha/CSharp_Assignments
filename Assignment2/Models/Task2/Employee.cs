@@ -1,4 +1,4 @@
-﻿namespace Assignment2.Models
+﻿namespace Assignment2.Models.Task2
 {
     /// <summary>
     /// Abstract class of Employee containing Name, Salary and calculates Bonus.

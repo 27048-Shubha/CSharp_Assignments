@@ -1,4 +1,4 @@
-﻿namespace Assignment2.Models
+﻿namespace Assignment2.Task2.Models
 {
     /// <summary>
     /// Handles Bonus Calculation of the Manager inherited from the Employee.

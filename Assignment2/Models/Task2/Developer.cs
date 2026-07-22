@@ -1,4 +1,4 @@
-﻿namespace Assignment2.Models
+﻿namespace Assignment2.Models.Task2
 {
     /// <summary>
     /// Handles Bonus Calculation of Developer interited from Employee.
@@ -26,8 +26,8 @@
         /// <returns> Calculated Bonus. </returns>
         public override decimal CalculateBonus()
         {
-            this.Bonus = base.Salary * 0.10m;
-            return this.Bonus;
+            Bonus = Salary * 0.10m;
+            return Bonus;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@
         /// <returns> Details of the Developer. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}Bonus: {this.CalculateBonus()}";
+            return $"{base.PrintDetails()}Bonus: {CalculateBonus()}";
         }
     }
 }

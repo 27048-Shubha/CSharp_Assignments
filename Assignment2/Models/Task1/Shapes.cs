@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assignment2.Task1
+namespace Assignment2.Models.Task1
 {
     /// <summary>
     /// Abstract Class that holds 
@@ -40,7 +40,7 @@ namespace Assignment2.Task1
         /// </summary>
         public void PrintDetails()
         {
-            Console.WriteLine($"Shape Type: {this.GetType().Name} \nColor: {Color} \nArea: {Math.Round(Area, 2)}\n");
+            Console.WriteLine($"Shape Type: {GetType().Name} \nColor: {Color} \nArea: {Math.Round(Area, 2)}\n");
         }
     }
 }

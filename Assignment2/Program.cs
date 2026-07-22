@@ -12,8 +12,11 @@ namespace Assignment2
         /// </summary>
         public static void Main()
         {
-            EmployeeController employeeController = new EmployeeController();
-            employeeController.Initialize();
+            //EmployeeController employeeController = new EmployeeController();
+            //employeeController.Initialize();
+
+            ShapeController shapeController = new ShapeController();
+            shapeController.Initialize();
         }
     }
 }
