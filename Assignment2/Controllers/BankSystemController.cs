@@ -5,12 +5,19 @@ using System;
 
 namespace Assignment2.Controllers
 {
+    /// <summary>
+    /// Manages Banking System's Operation Between Views and Service.
+    /// </summary>
     public class BankSystemController
     {
         private BankSystemView _console = new BankSystemView();
         private BankSystemService _service = new BankSystemService();
 
         private bool _isSavings = false;
+
+        /// <summary>
+        /// Handles Inputs for Account Creation.
+        /// </summary>
         public void Initialize()
         {
             BankAccount account = null;
@@ -43,11 +50,16 @@ namespace Assignment2.Controllers
 
                     default:
                         // Display invalid option message
+                        _console.InvalidInput();
                         break;
                 }
             }
         }
 
+        /// <summary>
+        /// Handles Deposit & Withdrawal Functionalities.
+        /// </summary>
+        /// <param name="account">BankAccount object holding either Savings or Checking Account.</param>
         public void CallService(BankAccount account)
         {
             char choice;
@@ -77,6 +89,7 @@ namespace Assignment2.Controllers
                         {
                             _console.WithdrawFailureMessage();
                         }
+
                         amount = _service.CheckBalance(account);
                         _console.DisplayBalance(amount);
 
@@ -95,10 +108,12 @@ namespace Assignment2.Controllers
 
                     case 'Q':
                     case 'q':
+
                         return;
 
                     default:
                         // Display invalid option message
+                        _console.InvalidInput();
                         break;
                 }
             }

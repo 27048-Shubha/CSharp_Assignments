@@ -12,14 +12,32 @@ namespace Assignment2
         /// </summary>
         public static void Main()
         {
-            //EmployeeController employeeController = new EmployeeController();
-            //employeeController.Initialize();
+            Console.WriteLine("Welcome to Hierarchy System!\nKindly choose 'S' to enter Shape Hierarchy System\n'E' to enter Employee System\n'B' to enter Banking System\n");
+            char ch = Char.Parse(Console.ReadLine());
+            switch (ch)
+            {
+                case 'S':
+                case 's':
+                    ShapeController shapeController = new ShapeController();
+                    shapeController.Initialize();
+                    break;
 
-            //ShapeController shapeController = new ShapeController();
-            //shapeController.Initialize();
+                case 'E':
+                case 'e':
+                    EmployeeController employeeController = new EmployeeController();
+                    employeeController.Initialize();
+                    break;
 
-            BankSystemController bankController = new BankSystemController();
-            bankController.Initialize();
+                case 'B':
+                case 'b':
+                    BankSystemController bankController = new BankSystemController();
+                    bankController.Initialize();
+                    break;
+
+                default:
+                    Console.WriteLine("Thank You! Quitting now!");
+                    break;
+            }   
         }
     }
 }
