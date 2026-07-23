@@ -44,7 +44,7 @@ namespace Assignment2.Views
         /// Gets Salary of the Employee
         /// </summary>
         /// <returns> Name as Input from user </returns>
-        public decimal GetEmployeeSalary ()
+        public decimal GetEmployeeSalary()
         {
             Console.WriteLine("Enter Salary\n");
             return decimal.Parse(Console.ReadLine());

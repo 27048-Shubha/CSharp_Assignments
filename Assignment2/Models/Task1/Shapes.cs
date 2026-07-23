@@ -3,7 +3,7 @@
 namespace Assignment2.Models.Task1
 {
     /// <summary>
-    /// Abstract Class that holds 
+    /// Abstract Class that holds
     /// </summary>
     public abstract class Shapes
     {
@@ -38,9 +38,10 @@ namespace Assignment2.Models.Task1
         /// <summary>
         /// Displays Details of the Shape
         /// </summary>
-        public void PrintDetails()
+        /// <returns> Details of the Shape </returns>
+        public string PrintDetails()
         {
-            Console.WriteLine($"Shape Type: {GetType().Name} \nColor: {Color} \nArea: {Math.Round(Area, 2)}\n");
+            return $"Shape Type: {GetType().Name} \nColor: {Color} \nArea: {Math.Round(Area, 2)}\n";
         }
     }
 }

@@ -18,24 +18,25 @@ namespace Assignment2.Controllers
         {
             _console.DisplayShapesMenu();
             char choice = _console.GetShapeMenuInput();
-            string name;
             decimal salary;
+            string color;
             string message;
-
-            switch(choice)
+            switch (choice)
             {
                 case 'R':
                 case 'r':
-                    name = _console.GetShapeColor();
-                    message = _service.AddRectangle(name);
+                    color = _console.GetShapeColor();
+                    int length = _console.GetLength();
+                    int breadth = _console.GetBreadth();
+                    message = _service.AddRectangle(color, length, breadth);
                     _console.DisplayMessage(message);
-
                     break;
 
                 case 'C':
                 case 'c':
-                    name = _console.GetShapeColor();
-                    message = _service.AddCircle(name);
+                    color = _console.GetShapeColor();
+                    int radius = _console.GetRadius();
+                    message = _service.AddCircle(color, radius);
                     _console.DisplayMessage(message);
                     break;
 
@@ -43,6 +44,6 @@ namespace Assignment2.Controllers
                     _console.DisplayDefault();
                     break;
             }
-        } 
+        }
     }
 }

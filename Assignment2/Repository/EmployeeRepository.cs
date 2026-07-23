@@ -23,7 +23,7 @@ namespace Assignment2.Repository
             Manager manager = new Manager();
             manager.Name = name;
             manager.Salary = salary;
-            manager.CalculateBonus();
+            manager.Bonus = manager.CalculateBonus();
             return manager.PrintDetails();
         }
 
@@ -38,7 +38,7 @@ namespace Assignment2.Repository
             Developer dev = new Developer();
             dev.Name = name;
             dev.Salary = salary;
-            dev.CalculateBonus();
+            dev.Bonus = dev.CalculateBonus();
             return dev.PrintDetails();
         }
     }

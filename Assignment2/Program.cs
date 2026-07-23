@@ -15,8 +15,11 @@ namespace Assignment2
             //EmployeeController employeeController = new EmployeeController();
             //employeeController.Initialize();
 
-            ShapeController shapeController = new ShapeController();
-            shapeController.Initialize();
+            //ShapeController shapeController = new ShapeController();
+            //shapeController.Initialize();
+
+            BankSystemController bankController = new BankSystemController();
+            bankController.Initialize();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Assignment2.Controllers
             decimal salary;
             string message;
 
-            switch(choice)
+            switch (choice)
             {
                 case 'D':
                 case 'd':
@@ -45,6 +45,6 @@ namespace Assignment2.Controllers
                     _console.DisplayDefault();
                     break;
             }
-        } 
+        }
     }
 }

@@ -13,12 +13,14 @@ namespace Assignment2.Services
         /// Checks and passes the color, salary to the Shape Repository
         /// </summary>
         /// <param name="color"> color of the Rectangle entered by the user </param>
+        /// <param name="length"> length of the Rectangle entered by the user </param>
+        /// <param name="breadth"> breadth of the Rectangle entered by the user </param
         /// <returns> Details of the Shape If True, else Invalid Error Message </returns>
-        public string AddRectangle(string color)
+        public string AddRectangle(string color, int length, int breadth)
         {
             //if(_repo.ValidateColor(color))
             {
-                return _repo.AddRectangle(color);
+                return _repo.AddRectangle(color, length, breadth);
             }
             return "Invalid Input";
         }
@@ -27,12 +29,13 @@ namespace Assignment2.Services
         /// Checks and passes the color, salary to the Shape Repository
         /// </summary>
         /// <param name="color"> color of the Circle entered by the user </param>
+        /// <param name="radius"> radius of the Circle entered by the user </param>
         /// <returns> Details of the Shape If True, else Invalid Error Message </returns>
-        public string AddCircle(string color)
+        public string AddCircle(string color, int radius)
         {
             //if(_repo.ValidateColor(color))
             {
-                return _repo.AddCircle(color);
+                return _repo.AddCircle(color, radius);
             }
             return "Invalid Input";
         }

@@ -35,15 +35,16 @@ namespace Assignment2.Models.Task1
         /// <returns> Area of the Rectangle </returns>
         public override double CalculateArea()
         {
-            return Length * Breadth;
+            return this.Length * this.Breadth;
         }
 
         /// <summary>
         /// Displays details of Rectangle
         /// </summary>
-        protected void PrintDetails()
+        /// <returns> Details of the Rectangle </returns>
+        public new string PrintDetails()
         {
-            base.PrintDetails();
+            return base.PrintDetails();
         }
     }
 }

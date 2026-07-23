@@ -16,12 +16,16 @@ namespace Assignment2.Repository
         /// Creates object for Rectangle
         /// </summary>
         /// <param name="color"> color of the Rectangle </param>
+        /// <param name="length"> length of the Rectangle </param>
+        /// <param name="breadth"> breadth of the Rectangle </param>
         /// <returns> Details of Rectangle </returns>
-        public string AddRectangle(string color)
+        public string AddRectangle(string color, int length, int breadth)
         {
             Rectangle rectangle = new Rectangle();
-            rectangle.color = color;
-            rectangle.CalculateArea();
+            rectangle.Color = color;
+            rectangle.Length = length;
+            rectangle.Breadth = breadth;
+            rectangle.Area = rectangle.CalculateArea();
             return rectangle.PrintDetails();
         }
 
@@ -29,12 +33,14 @@ namespace Assignment2.Repository
         /// Creates object for Circle
         /// </summary>
         /// <param name="color"> color of the Circle </param>
+        /// <param name="radius"> radius of the Circle </param>
         /// <returns> Details of Circle </returns>
-        public string AddCircle(string color)
+        public string AddCircle(string color, int radius)
         {
             Circle circle = new Circle();
-            circle.color = color;
-            circle.CalculateArea();
+            circle.Color = color;
+            circle.Radius = radius;
+            circle.Area = circle.CalculateArea();
             return circle.PrintDetails();
         }
     }

@@ -29,9 +29,10 @@
         /// <summary>
         /// Displays details of Circle
         /// </summary>
-        protected void PrintDetails()
+        /// <returns> Details of the Circle </returns>
+        public new string PrintDetails()
         {
-            base.PrintDetails();
+            return base.PrintDetails();
         }
     }
 }
