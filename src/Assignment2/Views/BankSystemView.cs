@@ -49,20 +49,21 @@
         /// Gets Amount to be deposited.
         /// </summary>
         /// <returns>User's Input Amount.</returns>
-        public decimal GetDepositAmount()
+        public string GetDepositAmount()
         {
             Console.WriteLine("Enter Amount to Deposit");
-            return decimal.Parse(Console.ReadLine());
+            return Console.ReadLine()
+                ;
         }
 
         /// <summary>
         /// Gets Amount to be Withdraw.
         /// </summary>
         /// <returns>User's Input Amount.</returns>
-        public decimal GetWithdrawAmount()
+        public string GetWithdrawAmount()
         {
             Console.WriteLine("Enter Amount to WithDraw");
-            return decimal.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
         
         /// <summary>
@@ -78,7 +79,16 @@
         /// Displays Withdrawal success message.
         /// </summary>
         /// <param name="amount">Amount withdrawn.</param>
-        public void WithdrawSuccessMessage(decimal amount)
+        public void DepositSuccessMessage(string amount)
+        {
+            Console.WriteLine($"Deposit of amount {amount} is Success!");
+        }
+
+        /// <summary>
+        /// Displays Withdrawal success message.
+        /// </summary>
+        /// <param name="amount">Amount withdrawn.</param>
+        public void WithdrawSuccessMessage(string amount)
         {
             Console.WriteLine($"WithDraw of amount {amount} is Success!");
         }
@@ -106,5 +116,7 @@
         {
             Console.WriteLine("Quitting Application...Thank You!");
         }
+
+
     }
 }

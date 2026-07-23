@@ -1,4 +1,5 @@
 ﻿using Assignment2.Repository;
+using Assignment2.Validations;
 
 namespace Assignment2.Services
 {
@@ -7,6 +8,7 @@ namespace Assignment2.Services
     /// </summary>
     public class EmployeeService
     {
+        private ValidateInput _validate = new ValidateInput();
         private EmployeeRepository _repo = new EmployeeRepository();
 
         /// <summary>
@@ -17,7 +19,7 @@ namespace Assignment2.Services
         /// <returns> Details of the Employee If True, else Invalid Error Message </returns>
         public string AddManager(string name, decimal salary)
         {
-            //if(_repo.ValidateSalary(salary))
+            //if(_validate.IsNumber(salary))
             {
                 return _repo.AddManager(name, salary);
             }

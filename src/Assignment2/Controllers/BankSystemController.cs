@@ -63,11 +63,12 @@ namespace Assignment2.Controllers
         public void CallService(BankAccount account)
         {
             char choice;
-            decimal amount;
+            string? amount;
 
             while (true)
             {
                 _console.DisplayAccountMenu();
+                
                 choice = _console.GetMenuInput();
 
                 switch (choice)
@@ -75,13 +76,22 @@ namespace Assignment2.Controllers
                     case 'D':
                     case 'd':
                         amount = _console.GetDepositAmount();
-                        account.Deposit(amount);
+                        if (_service.DepositAmount(account, amount))
+                        {
+                            _console.DepositSuccessMessage(amount);
+                        }
+                        else
+                        {
+                            _console.InvalidInput();
+                        }
+                        //account.Deposit(amount);
                         break;
 
                     case 'W':
                     case 'w':
                         amount = _console.GetWithdrawAmount();
-                        if (account.Withdraw(amount))
+                        //if (account.Withdraw(amount))
+                        if(_service.WithdrawAmount(account, amount))
                         {
                             _console.WithdrawSuccessMessage(amount);
                         }
@@ -90,8 +100,8 @@ namespace Assignment2.Controllers
                             _console.WithdrawFailureMessage();
                         }
 
-                        amount = _service.CheckBalance(account);
-                        _console.DisplayBalance(amount);
+                        decimal amountDecimal = _service.CheckBalance(account);
+                        _console.DisplayBalance(amountDecimal);
 
                         if(_isSavings)
                         {
@@ -102,13 +112,13 @@ namespace Assignment2.Controllers
 
                     case 'B':
                     case 'b':
-                        amount = _service.CheckBalance(account);
-                        _console.DisplayBalance(amount);
+                        amountDecimal = _service.CheckBalance(account);
+                        _console.DisplayBalance(amountDecimal);
                         break;
 
                     case 'Q':
                     case 'q':
-
+                        _console.DisplayExitMessage();
                         return;
 
                     default:
