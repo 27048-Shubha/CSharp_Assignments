@@ -15,7 +15,10 @@ namespace Assignment2.Models.Task2
         /// <value> Bonus salary of the Manager </value>
         public decimal Bonus
         {
-            get;
+            get
+            {
+                return _bonus;
+            }
             set
             {
                 _bonus = value;
@@ -28,7 +31,7 @@ namespace Assignment2.Models.Task2
         /// <returns> Calculted Bonus. </returns>
         public override decimal CalculateBonus()
         {
-            this.Bonus = base.Salary * 0.10m;
+            this.Bonus = base.Salary * 0.20m;
             return this.Bonus;
         }
 

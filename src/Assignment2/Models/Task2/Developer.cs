@@ -13,7 +13,10 @@
         /// <value>Bonus salary of the Developer.</value>
         public decimal Bonus
         {
-            get;
+            get
+            {
+                return _bonus;
+            }
             set
             {
                 _bonus = value;
