@@ -23,7 +23,7 @@
         /// <returns> Area of the Circle </returns>
         public override double CalculateArea()
         {
-            return 3.17 * Radius * Radius;
+            return Math.PI * Radius * Radius;
         }
 
         /// <summary>
