@@ -10,11 +10,13 @@
         /// </summary>
         public void DisplayMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             base.DisplayLineBreaker();
             Console.WriteLine("Welcome to the Bank System");
             Console.WriteLine("[C] Create Checking Account:");
             Console.WriteLine("[S] Create Savings Account:");
             base.DisplayLineBreaker();
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -31,12 +33,14 @@
         /// </summary>
         public void DisplayAccountMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             base.DisplayLineBreaker();
             Console.WriteLine("[D] Deposit");
             Console.WriteLine("[W] Withdraw");
             Console.WriteLine("[B] Check Balance");
             Console.WriteLine("[Q] Quit");
             base.DisplayLineBreaker();
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -45,7 +49,9 @@
         /// <returns>User's Choice Input.</returns>
         public char InvalidInput()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Kindly Enter valid inputs only");
+            Console.ResetColor();
             return Char.Parse(Console.ReadLine());
         }
 
@@ -55,7 +61,9 @@
         /// <returns>User's Choice Input.</returns>
         public void InvalidDepositInput()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Kindly Enter valid inputs only");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -84,7 +92,9 @@
         /// <param name="balance">Current balance of the object</param>
         public void DisplayBalance(decimal balance)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Your current balance: {balance}");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -93,7 +103,9 @@
         /// <param name="amount">Amount withdrawn.</param>
         public void DepositSuccessMessage(string amount)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Deposit of amount {amount} is Success!");
+            Console.ResetColor();
         }
 
 
@@ -103,7 +115,9 @@
         /// <param name="amount">Amount withdrawn.</param>
         public void WithdrawSuccessMessage(string amount)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"WithDraw of amount {amount} is Success!");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -111,7 +125,9 @@
         /// </summary>
         public void WithdrawFailureMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Invalid Amount Entered! Kindly Check Balance before WithDrawing");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -119,7 +135,9 @@
         /// </summary>
         public void DisplayMinBalanceWarning()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Minimum Balance Should be 100");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -127,7 +145,9 @@
         /// </summary>
         public void DisplayMinBalanceInfo()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Thanks for creating account! Your initial balance is set to 100 by default as per policies!");
+            Console.ResetColor();
         }
     }
 }

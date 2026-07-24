@@ -10,12 +10,14 @@
         /// </summary>
         public void DisplayShapesMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             base.DisplayLineBreaker();
             Console.WriteLine("Welcome to Shape SYSTEM\n");
             Console.WriteLine("[R] to enter details of Rectangle: ");
             Console.WriteLine("[C] to enter details of Circle: ");
             Console.WriteLine("[Q] to Quit: ");
             base.DisplayLineBreaker();
+            Console.ResetColor();
         }
 
         /// <summary>

@@ -10,11 +10,13 @@
         /// </summary>
         public void DisplayEmployeeMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             base.DisplayLineBreaker();
             Console.WriteLine("Welcome to EMPLOYEE SYSTEM\n");
             Console.WriteLine("[D] to enter details of Developer:");
             Console.WriteLine("[M] to enter details of Manager:");
             base.DisplayLineBreaker();
+            Console.ResetColor();
         }
 
         /// <summary>
