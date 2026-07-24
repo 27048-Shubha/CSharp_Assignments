@@ -25,7 +25,7 @@ namespace ContactManager.Persistance
         /// <returns> List of all contacts</returns>
         public List<Contact> ViewContact()
         {
-            return contactList;
+            return new List<Contact>(contactList);
         }
 
         /// <summary>
