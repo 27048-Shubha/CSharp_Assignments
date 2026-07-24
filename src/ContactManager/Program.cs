@@ -3,12 +3,12 @@
     using ContactManager.Controllers;
 
     /// <summary>
-    /// Program class.
+    /// Manages Initialization of Contact Management System.
     /// </summary>
     internal class Program
     {
         /// <summary>
-        /// Main method where execution begins.
+        /// Execution of flow begins from here.
         /// </summary>
         /// <param name="args">CommandLine Args.</param>
         public static void Main(string[] args)

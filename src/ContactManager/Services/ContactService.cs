@@ -9,7 +9,7 @@
     /// </summary>
     internal class ContactService
     {
-        private ContactRepository repo = new ContactRepository();
+        private ContactRepository _repo = new ContactRepository();
 
         /// <summary>
         /// to Add new contact to the list.
@@ -34,7 +34,7 @@
                 }
             }
 
-            repo.AddContact(contact);
+            _repo.AddContact(contact);
             return 1;
         }
 
@@ -44,7 +44,7 @@
         /// <returns>List of all contacts or null if empty.</returns>
         public List<Contact> GetAllContactInfo()
         {
-            return repo.ViewContact();
+            return _repo.ViewContact();
         }
 
         /// <summary>
@@ -54,10 +54,10 @@
         /// <returns>Status of the operation.</returns>
         public int DeleteContact(string phone)
         {
-            Contact contact = repo.ExistPhone(phone);
+            Contact contact = _repo.ExistPhone(phone);
             if (contact != null)
             {
-                repo.DeleteContact(contact);
+                _repo.DeleteContact(contact);
                 return 1;
             }
             else
@@ -75,7 +75,7 @@
         /// <returns>Status of the operation.</returns>
         public int EditContact(string name, int editChoice, string newValue)
         {
-            Contact contact = repo.SearchContact(name);
+            Contact contact = _repo.SearchContact(name);
             if (contact == null)
             {
                 return -1;
@@ -84,19 +84,19 @@
             switch (editChoice)
             {
                 case 1:
-                    repo.EditName(contact, newValue);
+                    _repo.EditName(contact, newValue);
                     break;
 
                 case 2:
-                    repo.EditPhone(contact, newValue);
+                    _repo.EditPhone(contact, newValue);
                     break;
 
                 case 3:
-                    repo.EditEmail(contact, newValue);
+                    _repo.EditEmail(contact, newValue);
                     break;
 
                 case 4:
-                    repo.EditNotes(contact, newValue);
+                    _repo.EditNotes(contact, newValue);
                     break;
 
                 default:
@@ -113,9 +113,9 @@
         /// <returns>ContactInfo object if found, otherwise null.</returns>
         public Contact SearchContact(string name)
         {
-            if (repo.Exist(name))
+            if (_repo.Exist(name))
             {
-                return repo.SearchContact(name);
+                return _repo.SearchContact(name);
             }
             else
             {
@@ -130,7 +130,7 @@
         /// <returns> true if new attribute else False. </returns>
         public bool CheckDuplicates(Contact contact)
         {
-            return repo.ExistPhone(contact.Phone) != null;
+            return _repo.ExistPhone(contact.Phone) != null;
         }
 
         /// <summary>
@@ -149,12 +149,12 @@
         /// <returns>Sorted list of contacts or null if empty.</returns>
         public List<Contact> SortContact()
         {
-            if (repo.Empty())
+            if (_repo.Empty())
             {
                 return null;
             }
 
-            return repo.SortContact();
+            return _repo.SortContact();
         }
     }
 }

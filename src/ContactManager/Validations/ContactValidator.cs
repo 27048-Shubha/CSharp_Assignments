@@ -1,8 +1,6 @@
-﻿// Helpers / Validator.cs
-using System.Text.RegularExpressions;
-
-namespace ContactManager.Helpers
+﻿namespace ContactManager.Helpers
 {
+    using System.Text.RegularExpressions;
     /// <summary>
     /// Helper class - Contains all the Validation
     /// </summary>
@@ -11,7 +9,7 @@ namespace ContactManager.Helpers
         private ConsoleView _console = new ConsoleView();
 
         /// <summary>
-        /// Validate Phone number based on number of digits.
+        /// Validates Phone number based on number of digits.
         /// </summary>
         /// <param name="phone">Input Phone number to be validated.</param>
         /// <returns>True if length == 10 else False.</returns>
