@@ -29,7 +29,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayDefaultMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Enter Valid Inputs Only!");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -37,7 +39,9 @@ namespace ContactManager
         /// </summary>
         public void DisplaySuccess()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Operation Success!\n");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -45,7 +49,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayEmptyListMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("No Contacts to display\n");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace ContactManager
         {
             foreach (var item in contact)
             {
-                Console.WriteLine($"NAME: {item.Name}\nPHONE NUMBER: {item.Phone}\nEMAIL: {item.Email}\nNOTES: {item.Notes}\n\n");
+                Console.WriteLine($"NAME: {item.Name}\nPHONE NUMBER: {item.Phone}\nEMAIL: {item.Email}\nNOTES: {item.Notes}\n");
             }
         }
 
@@ -66,7 +72,7 @@ namespace ContactManager
         /// <param name="contact">Contact object whose details are to be displayed.</param>
         public void DisplayContact(Contact contact)
         {
-            Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
+            Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n");
         }
 
         /// <summary>
@@ -74,7 +80,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayDuplicateMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Contact Already Exists!");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -132,7 +140,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayInvalidEmailMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid Email Id! Please enter a valid Email Id");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -140,7 +150,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayInvalidPhoneMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid Phone Number! Please enter a valid 10-digit phone number (Format:9876543210)");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -148,7 +160,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayInvalidInputMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid Input! Please enter a valid input");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -170,7 +184,9 @@ namespace ContactManager
         /// </summary>
         public void DisplayNotFoundMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Contact Not Found!");
+            Console.ResetColor();
         }
     }
 }
