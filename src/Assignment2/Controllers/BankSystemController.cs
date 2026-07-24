@@ -87,13 +87,11 @@ namespace Assignment2.Controllers
                         {
                             _console.InvalidDepositInput();
                         }
-                        //account.Deposit(amount);
                         break;
 
                     case 'W':
                     case 'w':
                         amount = _console.GetWithdrawAmount();
-                        //if (account.Withdraw(amount))
                         if(_service.WithdrawAmount(account, amount))
                         {
                             _console.WithdrawSuccessMessage(amount);
