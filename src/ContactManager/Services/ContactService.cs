@@ -22,7 +22,7 @@
             {
                 return -1;
             }
-            else if (ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone ?? string.Empty))
+            else if (!ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone))
             {
                 return -2;
             }
@@ -30,7 +30,7 @@
             {
                 if (!ContactManager.Helpers.ContactValidator.ValidateEmail(contact.Email))
                 {
-                    return -2;
+                    return -3;
                 }
             }
 

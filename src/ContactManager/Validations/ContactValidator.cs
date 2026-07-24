@@ -17,7 +17,11 @@ namespace ContactManager.Helpers
         /// <returns>True if length == 10 else False.</returns>
         public static bool ValidatePhone(string phone)
         {
-            bool isValid = (phone == null) || phone.Length != 10;
+            phone = phone.Trim();
+            if( string.IsNullOrEmpty(phone) || phone.Length == 0)
+            {
+                return false;
+            }
 
             foreach (char c in phone)
             {
@@ -26,8 +30,7 @@ namespace ContactManager.Helpers
                     return false;
                 }
             }
-
-            return isValid;
+            return true;
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace ContactManager.Helpers
         /// <returns>True if matches regex patter or without whitespace else False.</returns>
         public static bool ValidateEmail(string email)
         {
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") && string.IsNullOrWhiteSpace(email);
+            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") && !string.IsNullOrWhiteSpace(email);
         }
     }
 }

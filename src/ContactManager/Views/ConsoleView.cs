@@ -1,4 +1,5 @@
-﻿namespace ContactManager
+﻿using System;
+namespace ContactManager
 {
     using ContactManager.Models;
     /// <summary>
@@ -11,7 +12,16 @@
         /// </summary>
         public void DisplayMenu()
         {
-            System.Console.WriteLine("Welcome to the Contact Manager! \nENTER 0 to VIEW ALL CONTACT, \n1 TO ADD NEW CONTACT, \n2 TO EDIT EXSISTING CONTACT, \n3 TO DELETE ANY CONTACT, \n4 TO SEARCH ANY CONTACT, \n5 TO VIEW SORTED LIST\n6 TO EXIT\n");
+            this.DisplayLineBreak();
+            Console.WriteLine("Welcome to the Contact Manager! \nENTER 0 to VIEW ALL CONTACT, \n1 TO ADD NEW CONTACT, \n2 TO EDIT EXSISTING CONTACT, \n3 TO DELETE ANY CONTACT, \n4 TO SEARCH ANY CONTACT, \n5 TO VIEW SORTED LIST\n6 TO EXIT\n");
+        }
+
+        /// <summary>
+        /// Displays Line Break.
+        /// </summary>
+        public void DisplayLineBreak()
+        {
+            Console.WriteLine("------------------------------------------\n");
         }
 
         /// <summary>
@@ -19,7 +29,7 @@
         /// </summary>
         public void DisplayDefaultMessage()
         {
-            System.Console.WriteLine("Enter Valid Inputs Only!");
+            Console.WriteLine("Enter Valid Inputs Only!");
         }
 
         /// <summary>
@@ -27,7 +37,7 @@
         /// </summary>
         public void DisplaySuccess()
         {
-            System.Console.WriteLine("Operation Success!\n");
+            Console.WriteLine("Operation Success!\n");
         }
 
         /// <summary>
@@ -35,7 +45,7 @@
         /// </summary>
         public void DisplayEmptyListMessage()
         {
-            System.Console.WriteLine("No Contacts to display\n");
+            Console.WriteLine("No Contacts to display\n");
         }
 
         /// <summary>
@@ -46,7 +56,7 @@
         {
             foreach (var item in contact)
             {
-                System.Console.WriteLine($"NAME: {item.Name}\nPHONE NUMBER: {item.Phone}\nEMAIL: {item.Email}\nNOTES: {item.Notes}\n\n");
+                Console.WriteLine($"NAME: {item.Name}\nPHONE NUMBER: {item.Phone}\nEMAIL: {item.Email}\nNOTES: {item.Notes}\n\n");
             }
         }
 
@@ -56,7 +66,7 @@
         /// <param name="contact">Contact object whose details are to be displayed.</param>
         public void DisplayContact(Contact contact)
         {
-            System.Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
+            Console.WriteLine($"NAME: {contact.Name}\nPHONE NUMBER: {contact.Phone}\nEMAIL: {contact.Email}\nNOTES: {contact.Notes}\n\n");
         }
 
         /// <summary>
@@ -64,7 +74,7 @@
         /// </summary>
         public void DisplayDuplicateMessage()
         {
-            System.Console.WriteLine("Contact Already Exists!");
+            Console.WriteLine("Contact Already Exists!");
         }
 
         /// <summary>
@@ -73,8 +83,8 @@
         /// <returns>User input receiveed.</returns>
         public string GetName()
         {
-            System.Console.WriteLine("Enter Name: ");
-            return System.Console.ReadLine();
+            Console.WriteLine("Enter Name: ");
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -83,8 +93,8 @@
         /// <returns>User input receiveed.</returns>
         public string GetPhone()
         {
-            System.Console.WriteLine("Enter Phone Number: ");
-            return System.Console.ReadLine();
+            Console.WriteLine("Enter Phone Number: ");
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -93,8 +103,8 @@
         /// <returns>User input receiveed.</returns>
         public string GetEmail()
         {
-            System.Console.WriteLine("Enter Email Address: ");
-            return System.Console.ReadLine();
+            Console.WriteLine("Enter Email Address: ");
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -103,7 +113,7 @@
         /// <returns>User input receiveed.</returns>
         public string GetNotes()
         {
-            System.Console.WriteLine("Enter Notes: ");
+            Console.WriteLine("Enter Notes: ");
             return Console.ReadLine();
         }
 
@@ -113,7 +123,7 @@
         /// <returns>Input integer received from user.</returns>
         public int GetChoice()
         {
-            System.Console.WriteLine("Enter Choice: ");
+            Console.WriteLine("Enter Choice: ");
             return int.Parse(Console.ReadLine());
         }
 
@@ -122,7 +132,7 @@
         /// </summary>
         public void DisplayInvalidEmailMessage()
         {
-            System.Console.WriteLine("Invalid Email Id! Please enter a valid Email Id");
+            Console.WriteLine("Invalid Email Id! Please enter a valid Email Id");
         }
 
         /// <summary>
@@ -130,7 +140,7 @@
         /// </summary>
         public void DisplayInvalidPhoneMessage()
         {
-            System.Console.WriteLine("Invalid Phone Number! Please enter a valid 10-digit phone number (Format:9876543210)");
+            Console.WriteLine("Invalid Phone Number! Please enter a valid 10-digit phone number (Format:9876543210)");
         }
 
         /// <summary>
@@ -138,7 +148,7 @@
         /// </summary>
         public void DisplayInvalidInputMessage()
         {
-            System.Console.WriteLine("Invalid Input! Please enter a valid input");
+            Console.WriteLine("Invalid Input! Please enter a valid input");
         }
 
         /// <summary>
@@ -160,7 +170,7 @@
         /// </summary>
         public void DisplayNotFoundMessage()
         {
-            System.Console.WriteLine("Contact Not Found!");
+            Console.WriteLine("Contact Not Found!");
         }
     }
 }

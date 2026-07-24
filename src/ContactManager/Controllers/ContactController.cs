@@ -55,7 +55,7 @@
                     {
                         console.DisplayInvalidEmailMessage();
                     }
-                        else
+                    else
                     {
                         console.DisplaySuccess();
                     }
