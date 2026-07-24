@@ -28,5 +28,13 @@
             Console.WriteLine("Quitting Application...Thank You!");
             Console.Clear();
         }
+
+        /// <summary>
+        /// Displays Lined Dashes.
+        /// </summary>
+        public void DisplayLineBreaker()
+        {
+            Console.WriteLine("-------------------------");
+        }
     }
 }

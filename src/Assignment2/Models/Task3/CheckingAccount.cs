@@ -12,8 +12,12 @@
         /// <returns>True on </returns>
         public override bool Withdraw(decimal amount)
         {
-            base.Balance -= amount;
-            return true;
+            if (base.Balance - amount >= 0)
+            {
+                base.Balance -= amount;
+                return true;
+            }
+            return false;
         }
     }
 }

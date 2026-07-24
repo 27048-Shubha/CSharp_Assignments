@@ -10,9 +10,11 @@
         /// </summary>
         public void DisplayEmployeeMenu()
         {
+            base.DisplayLineBreaker();
             Console.WriteLine("Welcome to EMPLOYEE SYSTEM\n");
-            Console.WriteLine("[D] to enter details of Developer\n");
-            Console.WriteLine("[M] to enter details of Manager\n");
+            Console.WriteLine("[D] to enter details of Developer:");
+            Console.WriteLine("[M] to enter details of Manager:");
+            base.DisplayLineBreaker();
         }
 
         /// <summary>
@@ -30,7 +32,7 @@
         /// <returns> Name as Input from user </returns>
         public string GetEmployeeName()
         {
-            Console.WriteLine("Enter Name\n");
+            Console.WriteLine("Enter Name: ");
             return Console.ReadLine();
         }
 
@@ -40,7 +42,7 @@
         /// <returns> Name as Input from user </returns>
         public string GetEmployeeSalary()
         {
-            Console.WriteLine("Enter Salary\n");
+            Console.WriteLine("Enter Salary: ");
             return Console.ReadLine();
         }
 
@@ -50,7 +52,7 @@
         /// <param name="message"> User Details or Error Message as string </param>
         public void DisplayMessage(string message)
         {
-            Console.WriteLine($"{message}");
+            Console.WriteLine($"{message}\n");
         }
 
         

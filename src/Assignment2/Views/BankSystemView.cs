@@ -10,9 +10,11 @@
         /// </summary>
         public void DisplayMenu()
         {
+            base.DisplayLineBreaker();
             Console.WriteLine("Welcome to the Bank System");
-            Console.WriteLine("[S] Create Checking Account");
-            Console.WriteLine("[C] Create Savings Account");
+            Console.WriteLine("[C] Create Checking Account:");
+            Console.WriteLine("[S] Create Savings Account:");
+            base.DisplayLineBreaker();
         }
 
         /// <summary>
@@ -29,11 +31,12 @@
         /// </summary>
         public void DisplayAccountMenu()
         {
-            Console.Clear();
+            base.DisplayLineBreaker();
             Console.WriteLine("[D] Deposit");
             Console.WriteLine("[W] Withdraw");
             Console.WriteLine("[B] Check Balance");
             Console.WriteLine("[Q] Quit");
+            base.DisplayLineBreaker();
         }
 
         /// <summary>
@@ -47,14 +50,22 @@
         }
 
         /// <summary>
+        /// Displays Invalid Input & Prompts to enter Input again.
+        /// </summary>
+        /// <returns>User's Choice Input.</returns>
+        public void InvalidDepositInput()
+        {
+            Console.WriteLine("Kindly Enter valid inputs only");
+        }
+
+        /// <summary>
         /// Gets Amount to be deposited.
         /// </summary>
         /// <returns>User's Input Amount.</returns>
         public string GetDepositAmount()
         {
             Console.WriteLine("Enter Amount to Deposit");
-            return Console.ReadLine()
-                ;
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -84,6 +95,7 @@
         {
             Console.WriteLine($"Deposit of amount {amount} is Success!");
         }
+
 
         /// <summary>
         /// Displays Withdrawal success message.

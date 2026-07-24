@@ -24,12 +24,22 @@ namespace Assignment2.Services
                 return "Invalid Input! No numbers or special characters allowed";
             }
 
-            double length = int.Parse(lengthStr);
-            double bredth = int.Parse(breadthStr);
-            if (_validate.IsZero(length) && _validate.IsZero(bredth))
+            double length, bredth;
+            if ( (!double.TryParse(lengthStr, out length) || (!double.TryParse(breadthStr,out bredth)) ) )
             {
-                return "Invalid Input! Enter Non-zero numbers only!";
+                return "Invalid Input! Length and breadth must be valid numbers!";
             }
+
+            if ((_validate.IsZero(length) || (_validate.IsZero(bredth)))) 
+            {
+                return "Invalid Input! Length and breadth must be Non Zero";
+            }
+
+            if ((_validate.IsNegative(length) || (_validate.IsNegative(bredth))))
+            {
+                return "Invalid Input! Length and breadth must be Non Negative";
+            }
+
             return _repo.AddRectangle(color, length, bredth);
         }
 
@@ -46,14 +56,23 @@ namespace Assignment2.Services
                 return "Invalid Input! No numbers or special characters allowed";
             }
 
-            double radius = int.Parse(radiusStr);
-            if (_validate.IsZero(radius) && _validate.IsZero(radius))
+            double radius;
+            if (!double.TryParse(radiusStr, out radius) )
             {
-                return "Invalid Input! Enter Non-zero numbers only!";
+                return "Invalid Input! Radius must be valid number!";
             }
-            return _repo.AddCircle(color, radius);
 
-            return "Invalid Input! No numbers or special characters allowed";
+            if ((_validate.IsZero(radius) ))
+            {
+                return "Invalid Input! Radius must be a Non Zero value";
+            }
+
+            if ((_validate.IsNegative(radius)) )
+            {
+                return "Invalid Input! Radius must be Non Negative";
+            }
+
+            return _repo.AddCircle(color, radius);
         }
     }
 }

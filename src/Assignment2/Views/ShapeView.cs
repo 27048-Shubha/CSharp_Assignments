@@ -10,9 +10,12 @@
         /// </summary>
         public void DisplayShapesMenu()
         {
+            base.DisplayLineBreaker();
             Console.WriteLine("Welcome to Shape SYSTEM\n");
             Console.WriteLine("[R] to enter details of Rectangle: ");
             Console.WriteLine("[C] to enter details of Circle: ");
+            Console.WriteLine("[Q] to Quit: ");
+            base.DisplayLineBreaker();
         }
 
         /// <summary>

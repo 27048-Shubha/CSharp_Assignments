@@ -53,7 +53,7 @@ namespace Assignment2.Controllers
                         _console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'Q' || choice != 'q');
+            } while (choice != 'Q' && choice != 'q');
         }
     }
 }

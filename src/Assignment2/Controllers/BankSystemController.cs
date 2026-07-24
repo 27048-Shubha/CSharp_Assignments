@@ -24,7 +24,7 @@ namespace Assignment2.Controllers
             char choice;
             int amount;
 
-            while (true)
+            do
             {
                 _console.DisplayMenu();
                 choice = _console.GetMenuInput();
@@ -55,7 +55,7 @@ namespace Assignment2.Controllers
                         _console.InvalidInput();
                         break;
                 }
-            }
+            } while (choice != 'Q' && choice != 'q');
         }
 
         /// <summary>
@@ -66,10 +66,10 @@ namespace Assignment2.Controllers
         {
             char choice;
             string? amount;
+            _console.DisplayMinBalanceInfo();
 
-            while (true)
+            do
             {
-                _console.DisplayMinBalanceInfo();
                 _console.DisplayAccountMenu();
                 
                 choice = _console.GetMenuInput();
@@ -85,7 +85,7 @@ namespace Assignment2.Controllers
                         }
                         else
                         {
-                            _console.InvalidInput();
+                            _console.InvalidDepositInput();
                         }
                         //account.Deposit(amount);
                         break;
@@ -101,6 +101,7 @@ namespace Assignment2.Controllers
                         else
                         {
                             _console.WithdrawFailureMessage();
+                            _console.DisplayMinBalanceWarning();
                         }
 
                         decimal amountDecimal = _service.CheckBalance(account);
@@ -129,7 +130,7 @@ namespace Assignment2.Controllers
                         _console.InvalidInput();
                         break;
                 }
-            }
+            } while (choice != 'Q' && choice != 'q');
         }
     }
 }

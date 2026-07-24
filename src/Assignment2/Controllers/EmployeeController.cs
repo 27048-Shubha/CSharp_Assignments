@@ -22,26 +22,19 @@ namespace Assignment2.Controllers
             {
                 _console.DisplayEmployeeMenu();
                 choice = _console.GetEmployeeMenuInput();
-                string name;
-                string salary;
                 string message;
 
                 switch (choice)
                 {
                     case 'D':
                     case 'd':
-                        name = _console.GetEmployeeName();
-                        salary = _console.GetEmployeeSalary();
-                        message = _service.AddDeveloper(name, salary);
+                        message = _service.AddDeveloper(_console.GetEmployeeName(), _console.GetEmployeeSalary());
                         _console.DisplayMessage(message);
-
                         break;
 
                     case 'M':
                     case 'm':
-                        name = _console.GetEmployeeName();
-                        salary = _console.GetEmployeeSalary();
-                        message = _service.AddManager(name, salary);
+                        message = _service.AddManager(_console.GetEmployeeName(), _console.GetEmployeeSalary());
                         _console.DisplayMessage(message);
                         break;
 
@@ -55,7 +48,7 @@ namespace Assignment2.Controllers
                         _console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'Q' || choice != 'q');
+            } while (choice != 'Q' && choice != 'q');
         }
     }
 }
