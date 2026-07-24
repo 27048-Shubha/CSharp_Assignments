@@ -16,34 +16,44 @@ namespace Assignment2.Controllers
         /// </summary>
         public void Initialize()
         {
-            _console.DisplayShapesMenu();
-            char choice = _console.GetShapeMenuInput();
-            decimal salary;
-            string color;
-            string message;
-            switch (choice)
+            char choice;
+            do
             {
-                case 'R':
-                case 'r':
-                    color = _console.GetShapeColor();
-                    int length = _console.GetLength();
-                    int breadth = _console.GetBreadth();
-                    message = _service.AddRectangle(color, length, breadth);
-                    _console.DisplayMessage(message);
-                    break;
+                _console.DisplayShapesMenu();
+                choice = _console.GetShapeMenuInput();
+                decimal salary;
+                string color;
+                string message;
+                switch (choice)
+                {
+                    case 'R':
+                    case 'r':
+                        color = _console.GetShapeColor();
+                        string length = _console.GetLength();
+                        string breadth = _console.GetBreadth();
+                        message = _service.AddRectangle(color, length, breadth);
+                        _console.DisplayMessage(message);
+                        break;
 
-                case 'C':
-                case 'c':
-                    color = _console.GetShapeColor();
-                    int radius = _console.GetRadius();
-                    message = _service.AddCircle(color, radius);
-                    _console.DisplayMessage(message);
-                    break;
+                    case 'C':
+                    case 'c':
+                        color = _console.GetShapeColor();
+                        string radius = _console.GetRadius();
+                        message = _service.AddCircle(color, radius);
+                        _console.DisplayMessage(message);
+                        break;
 
-                default:
-                    _console.DisplayDefault();
-                    break;
-            }
+
+                    case 'Q':
+                    case 'q':
+                        _console.DisplayExitMessage();
+                        break;
+
+                    default:
+                        _console.DisplayDefault();
+                        break;
+                }
+            } while (choice != 'Q' || choice != 'q');
         }
     }
 }

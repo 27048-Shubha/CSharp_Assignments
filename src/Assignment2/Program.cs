@@ -1,4 +1,5 @@
 ﻿using Assignment2.Controllers;
+using Assignment2.Views;
 
 namespace Assignment2
 {
@@ -12,32 +13,42 @@ namespace Assignment2
         /// </summary>
         public static void Main()
         {
-            Console.WriteLine("Welcome to Hierarchy System!\nKindly choose 'S' to enter Shape Hierarchy System\n'E' to enter Employee System\n'B' to enter Banking System\n");
-            char ch = Char.Parse(Console.ReadLine());
-            switch (ch)
+            MainView _console = new MainView();
+            char choice;
+            do
             {
-                case 'S':
-                case 's':
-                    ShapeController shapeController = new ShapeController();
-                    shapeController.Initialize();
-                    break;
+                _console.DisplayMenu();
+                choice = Char.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 'S':
+                    case 's':
+                        ShapeController shapeController = new ShapeController();
+                        shapeController.Initialize();
+                        break;
 
-                case 'E':
-                case 'e':
-                    EmployeeController employeeController = new EmployeeController();
-                    employeeController.Initialize();
-                    break;
+                    case 'E':
+                    case 'e':
+                        EmployeeController employeeController = new EmployeeController();
+                        employeeController.Initialize();
+                        break;
 
-                case 'B':
-                case 'b':
-                    BankSystemController bankController = new BankSystemController();
-                    bankController.Initialize();
-                    break;
+                    case 'B':
+                    case 'b':
+                        BankSystemController bankController = new BankSystemController();
+                        bankController.Initialize();
+                        break;
 
-                default:
-                    Console.WriteLine("Thank You! Quitting now!");
-                    break;
-            }   
+                    case 'Q':
+                    case 'q':
+                        _console.DisplayExitMessage();
+                        break;
+
+                    default:
+                        _console.DisplayDefault();
+                        break;
+                }
+            } while (choice != 'q' || choice != 'Q');
         }
     }
 }

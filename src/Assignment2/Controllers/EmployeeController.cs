@@ -16,35 +16,46 @@ namespace Assignment2.Controllers
         /// </summary>
         public void Initialize()
         {
-            _console.DisplayEmployeeMenu();
-            char choice = _console.GetEmployeeMenuInput();
-            string name;
-            decimal salary;
-            string message;
+            char choice;
 
-            switch (choice)
+            do
             {
-                case 'D':
-                case 'd':
-                    name = _console.GetEmployeeName();
-                    salary = _console.GetEmployeeSalary();
-                    message = _service.AddDeveloper(name, salary);
-                    _console.DisplayMessage(message);
+                _console.DisplayEmployeeMenu();
+                choice = _console.GetEmployeeMenuInput();
+                string name;
+                string salary;
+                string message;
 
-                    break;
+                switch (choice)
+                {
+                    case 'D':
+                    case 'd':
+                        name = _console.GetEmployeeName();
+                        salary = _console.GetEmployeeSalary();
+                        message = _service.AddDeveloper(name, salary);
+                        _console.DisplayMessage(message);
 
-                case 'M':
-                case 'm':
-                    name = _console.GetEmployeeName();
-                    salary = _console.GetEmployeeSalary();
-                    message = _service.AddManager(name, salary);
-                    _console.DisplayMessage(message);
-                    break;
+                        break;
 
-                default:
-                    _console.DisplayDefault();
-                    break;
-            }
+                    case 'M':
+                    case 'm':
+                        name = _console.GetEmployeeName();
+                        salary = _console.GetEmployeeSalary();
+                        message = _service.AddManager(name, salary);
+                        _console.DisplayMessage(message);
+                        break;
+
+
+                    case 'Q':
+                    case 'q':
+                        _console.DisplayExitMessage();
+                        break;
+
+                    default:
+                        _console.DisplayDefault();
+                        break;
+                }
+            } while (choice != 'Q' || choice != 'q');
         }
     }
 }

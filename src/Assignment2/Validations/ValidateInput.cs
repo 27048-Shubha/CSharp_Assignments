@@ -12,10 +12,21 @@ namespace Assignment2.Validations
         {
             return (n == 0);
         }
+
+        public bool IsZero(double n)
+        {
+            return (n == 0);
+        }
+
         public bool IsNegative(decimal n)
         {
             return (n < 0);
         }
+        public bool IsNegative(double n)
+        {
+            return (n < 0);
+        }
+
         public bool IsString(string input)
         {
             return input.All(Char.IsLetter);
@@ -25,7 +36,9 @@ namespace Assignment2.Validations
             foreach (char c in input)
             {
                 if (!char.IsDigit(c))
+                {
                     return false;
+                }
             }
             return true;
         }

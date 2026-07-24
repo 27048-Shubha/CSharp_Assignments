@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment2.Views
+﻿namespace Assignment2.Views
 {
     /// <summary>
     /// Hanldes Console Operations of Employee System
     /// </summary>
-    internal class EmployeeView
+    internal class EmployeeView: MainView
     {
         /// <summary>
         /// Displays StartUp Menu for Employee System
@@ -44,18 +38,10 @@ namespace Assignment2.Views
         /// Gets Salary of the Employee
         /// </summary>
         /// <returns> Name as Input from user </returns>
-        public decimal GetEmployeeSalary()
+        public string GetEmployeeSalary()
         {
             Console.WriteLine("Enter Salary\n");
-            return decimal.Parse(Console.ReadLine());
-        }
-
-        /// <summary>
-        /// Displays Invalid Input Message
-        /// </summary>
-        public void DisplayDefault()
-        {
-            Console.WriteLine("Kindly Enter valid inputs only");
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -66,5 +52,7 @@ namespace Assignment2.Views
         {
             Console.WriteLine($"{message}");
         }
+
+        
     }
 }

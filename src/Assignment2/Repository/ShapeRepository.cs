@@ -19,7 +19,7 @@ namespace Assignment2.Repository
         /// <param name="length"> length of the Rectangle </param>
         /// <param name="breadth"> breadth of the Rectangle </param>
         /// <returns> Details of Rectangle </returns>
-        public string AddRectangle(string color, int length, int breadth)
+        public string AddRectangle(string color, double length, double breadth)
         {
             Rectangle rectangle = new Rectangle();
             rectangle.Color = color;
@@ -35,7 +35,7 @@ namespace Assignment2.Repository
         /// <param name="color"> color of the Circle </param>
         /// <param name="radius"> radius of the Circle </param>
         /// <returns> Details of Circle </returns>
-        public string AddCircle(string color, int radius)
+        public string AddCircle(string color, double radius)
         {
             Circle circle = new Circle();
             circle.Color = color;

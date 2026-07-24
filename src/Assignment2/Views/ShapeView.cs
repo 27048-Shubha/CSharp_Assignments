@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment2.Views
+﻿namespace Assignment2.Views
 {
     /// <summary>
     /// Hanldes Console Operations of Shape System
     /// </summary>
-    internal class ShapeView
+    internal class ShapeView: MainView
     {
         /// <summary>
         /// Displays StartUp Menu for Shape System
@@ -44,38 +38,30 @@ namespace Assignment2.Views
         /// Gets Radius of the Circle
         /// </summary>
         /// <returns> Radius as Input from user </returns>
-        public int GetRadius()
+        public string GetRadius()
         {
             Console.WriteLine("Enter Radius: ");
-            return int.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
 
         /// <summary>
         /// Gets Length of the Rectangle
         /// </summary>
         /// <returns> Length as Input from user </returns>
-        public int GetLength()
+        public string GetLength()
         {
             Console.WriteLine("Enter Length: ");
-            return int.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
 
         /// <summary>
         /// Gets Breadth of the Rectangle
         /// </summary>
         /// <returns> Breadth as Input from user </returns>
-        public int GetBreadth()
+        public string GetBreadth()
         {
             Console.WriteLine("Enter Breadth: ");
-            return int.Parse(Console.ReadLine());
-        }
-
-        /// <summary>
-        /// Displays Invalid Input Message
-        /// </summary>
-        public void DisplayDefault()
-        {
-            Console.WriteLine("Kindly Enter valid inputs only");
+            return Console.ReadLine();
         }
 
         /// <summary>

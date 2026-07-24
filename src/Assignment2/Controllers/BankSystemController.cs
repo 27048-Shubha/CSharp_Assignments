@@ -44,9 +44,11 @@ namespace Assignment2.Controllers
                         this.CallService(account);
                         break;
 
+
                     case 'Q':
                     case 'q':
-                        return;
+                        _console.DisplayExitMessage();
+                        break;
 
                     default:
                         // Display invalid option message
@@ -67,6 +69,7 @@ namespace Assignment2.Controllers
 
             while (true)
             {
+                _console.DisplayMinBalanceInfo();
                 _console.DisplayAccountMenu();
                 
                 choice = _console.GetMenuInput();

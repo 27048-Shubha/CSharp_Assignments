@@ -3,7 +3,7 @@
     /// <summary>
     /// Manages Console Operations of Bank Hierarchy System.
     /// </summary>
-    public class BankSystemView
+    public class BankSystemView: MainView
     {
         /// <summary>
         /// Displays Home Menu Options of Bank System.
@@ -29,6 +29,7 @@
         /// </summary>
         public void DisplayAccountMenu()
         {
+            Console.Clear();
             Console.WriteLine("[D] Deposit");
             Console.WriteLine("[W] Withdraw");
             Console.WriteLine("[B] Check Balance");
@@ -110,13 +111,11 @@
         }
 
         /// <summary>
-        /// Displays Exit Message.
+        /// Displays Info about Inital Minimum Balance
         /// </summary>
-        public void DisplayExitMessage()
+        public void DisplayMinBalanceInfo()
         {
-            Console.WriteLine("Quitting Application...Thank You!");
+            Console.WriteLine("Thanks for creating account! Your initial balance is set to 100 by default as per policies!");
         }
-
-
     }
 }

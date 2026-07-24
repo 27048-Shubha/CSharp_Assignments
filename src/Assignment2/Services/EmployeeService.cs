@@ -17,13 +17,17 @@ namespace Assignment2.Services
         /// <param name="name"> Name of the Manager entered by the user </param>
         /// <param name="salary"> Salary of the Manager entered by the user </param>
         /// <returns> Details of the Employee If True, else Invalid Error Message </returns>
-        public string AddManager(string name, decimal salary)
+        public string AddManager(string name, string salary)
         {
-            //if(_validate.IsNumber(salary))
+            if(_validate.IsNumber(salary))
             {
-                return _repo.AddManager(name, salary);
+                decimal amount = Convert.ToDecimal(salary);
+                if (!_validate.IsZero(amount) && !_validate.IsNegative(amount))
+                {
+                    return _repo.AddManager(name, amount);
+                }
             }
-            return "Invalid Input";
+            return "Invalid Input, Enter Only +ve Numbers";
         }
 
         /// <summary>
@@ -32,13 +36,17 @@ namespace Assignment2.Services
         /// <param name="name"> Name of the Developer entered by the user </param>
         /// <param name="salary"> Salary of the Developer entered by the user </param>
         /// <returns> Details of the Employee If True, else Invalid Error Message </returns>
-        public string AddDeveloper(string name, decimal salary)
+        public string AddDeveloper(string name, string salary)
         {
-            //if(_repo.ValidateSalary(salary))
+            if (_validate.IsNumber(salary))
             {
-                return _repo.AddDeveloper(name, salary);
+                decimal amount = Convert.ToDecimal(salary);
+                if (!_validate.IsZero(amount) && !_validate.IsNegative(amount))
+                {
+                    return _repo.AddDeveloper(name, amount);
+                }
             }
-            return "Invalid Input";
+            return "Invalid Input, Enter Only +ve Numbers";
         }
     }
 }
