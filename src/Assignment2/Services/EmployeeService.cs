@@ -1,5 +1,6 @@
 ﻿using Assignment2.Repository;
 using Assignment2.Validations;
+using Assignment2.Views;
 
 namespace Assignment2.Services
 {
@@ -8,8 +9,14 @@ namespace Assignment2.Services
     /// </summary>
     public class EmployeeService
     {
-        private ValidateInput _validate = new ValidateInput();
-        private EmployeeRepository _repo = new EmployeeRepository();
+        private ValidateInput _validate;
+        private EmployeeRepository _repo;
+
+        public EmployeeService(EmployeeRepository _repo,ValidateInput _validate)
+        {
+            this._repo = _repo;
+            this._validate = _validate;
+        }
 
         /// <summary>
         /// Checks and passes the name, salary to the Employee Repository

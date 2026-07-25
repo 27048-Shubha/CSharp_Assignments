@@ -8,8 +8,15 @@ namespace Assignment2.Controllers
     /// </summary>
     public class ShapeController
     {
-        private ShapeView _console = new ShapeView();
-        private ShapeService _service = new ShapeService();
+        private ShapeView _console;
+        private ShapeService _service;
+
+        public ShapeController(ShapeView _console, ShapeService _service)
+        {
+            this._console = _console;
+            this._service = _service;
+        }
+
 
         /// <summary>
         /// Execution of Shape starts here

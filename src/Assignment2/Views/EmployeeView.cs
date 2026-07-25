@@ -3,7 +3,7 @@
     /// <summary>
     /// Hanldes Console Operations of Employee System
     /// </summary>
-    internal class EmployeeView: MainView
+    public class EmployeeView: MainView
     {
         /// <summary>
         /// Displays StartUp Menu for Employee System

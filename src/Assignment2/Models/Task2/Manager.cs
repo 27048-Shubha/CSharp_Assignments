@@ -41,7 +41,7 @@ namespace Assignment2.Models.Task2
         /// <returns> Details of the Developer. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}\nBonus: {this.CalculateBonus()}";
+            return $"{base.PrintDetails()} \nBonus: {this.CalculateBonus()}";
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assignment2.Repository;
 using Assignment2.Validations;
+using Assignment2.Views;
 
 namespace Assignment2.Services
 {
@@ -10,6 +11,12 @@ namespace Assignment2.Services
     {
         private ShapeRepository _repo = new ShapeRepository();
         private ValidateInput _validate = new ValidateInput();
+        public ShapeService(ShapeRepository _repo, ValidateInput _validate)
+        {
+            this._repo = _repo;
+            this._validate = _validate;
+        }
+
         /// <summary>
         /// Checks and passes the color, salary to the Shape Repository
         /// </summary>

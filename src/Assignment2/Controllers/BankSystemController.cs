@@ -10,8 +10,14 @@ namespace Assignment2.Controllers
     /// </summary>
     public class BankSystemController
     {
-        private BankSystemView _console = new BankSystemView();
-        private BankSystemService _service = new BankSystemService();
+        private BankSystemView _console;
+        private BankSystemService _service;
+
+        public BankSystemController( BankSystemView _console, BankSystemService _service) 
+        { 
+            this._console = _console;
+            this._service = _service;
+        }
 
         private bool _isSavings = false;
 

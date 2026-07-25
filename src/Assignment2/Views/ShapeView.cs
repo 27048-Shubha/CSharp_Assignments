@@ -3,7 +3,7 @@
     /// <summary>
     /// Hanldes Console Operations of Shape System
     /// </summary>
-    internal class ShapeView: MainView
+    public class ShapeView: MainView
     {
         /// <summary>
         /// Displays StartUp Menu for Shape System

@@ -8,8 +8,15 @@ namespace Assignment2.Controllers
     /// </summary>
     public class EmployeeController
     {
-        private EmployeeView _console = new EmployeeView();
-        private EmployeeService _service = new EmployeeService();
+        private EmployeeView _console;
+        private EmployeeService _service;
+
+        public EmployeeController(EmployeeView _console, EmployeeService _service)
+        {
+            this._console = _console;
+            this._service = _service;
+        }
+
 
         /// <summary>
         /// Execution of Employee starts here
