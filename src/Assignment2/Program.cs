@@ -65,7 +65,7 @@ namespace Assignment2
                         _console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'q' || choice != 'Q');
+            } while (choice != 'q' && choice != 'Q');
         }
     }
 }

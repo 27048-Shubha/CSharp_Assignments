@@ -15,6 +15,7 @@
             Console.WriteLine("Welcome to the Bank System");
             Console.WriteLine("[C] Create Checking Account:");
             Console.WriteLine("[S] Create Savings Account:");
+            Console.WriteLine("[Q] to Quit");
             base.DisplayLineBreaker();
             Console.ResetColor();
         }
