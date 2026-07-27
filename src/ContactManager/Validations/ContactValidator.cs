@@ -1,12 +1,13 @@
 ﻿namespace ContactManager.Helpers
 {
     using System.Text.RegularExpressions;
+
     /// <summary>
-    /// Helper class - Contains all the Validation
+    /// Helper class - Contains all the Validation.
     /// </summary>
     internal class ContactValidator
     {
-        private ConsoleView _console = new ConsoleView();
+        private ConsoleView console = new ConsoleView();
 
         /// <summary>
         /// Validates Phone number based on number of digits.
@@ -28,6 +29,7 @@
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -36,14 +38,19 @@
         /// </summary>
         /// <param name="email">Input email to be validated.</param>
         /// <returns>True if matches regex patter or without whitespace else False.</returns>
-        public static bool ValidateEmail(string email)
+        public static bool ValidateEmail(string? email)
         {
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") && !string.IsNullOrWhiteSpace(email);
+            return string.IsNullOrWhiteSpace(email) || Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }
 
+        /// <summary>
+        /// CHecks whether given input string is empty.
+        /// </summary>
+        /// <param name="input">Input string to be determined whether empty or not.</param>
+        /// <returns>True if empty, else false.</returns>
         public static bool IsEmpty(string input)
         {
-            return (input == string.Empty);
+            return input == string.Empty;
         }
     }
 }

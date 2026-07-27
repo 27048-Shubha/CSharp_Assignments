@@ -9,7 +9,7 @@
     /// </summary>
     internal class ContactService
     {
-        private ContactRepository _repo = new ContactRepository();
+        private readonly ContactRepository repo = new ContactRepository();
 
         /// <summary>
         /// to Add new contact to the list.
@@ -18,11 +18,11 @@
         /// <returns>Status of the operation.</returns>
         public int AddContact(Contact contact)
         {
-            if (CheckDuplicates(contact))
+            if (this.CheckDuplicates(contact))
             {
                 return -1;
             }
-            else if(ContactManager.Helpers.ContactValidator.IsEmpty(contact.Name))
+            else if (ContactManager.Helpers.ContactValidator.IsEmpty(contact.Name))
             {
                 return -2;
             }
@@ -38,7 +38,7 @@
                 }
             }
 
-            _repo.AddContact(contact);
+            this.repo.AddContact(contact);
             return 1;
         }
 
@@ -48,7 +48,7 @@
         /// <returns>List of all contacts or null if empty.</returns>
         public List<Contact> GetAllContactInfo()
         {
-            return _repo.ViewContact();
+            return this.repo.ViewContact();
         }
 
         /// <summary>
@@ -58,10 +58,10 @@
         /// <returns>Status of the operation.</returns>
         public int DeleteContact(string phone)
         {
-            Contact contact = _repo.ExistPhone(phone);
+            Contact contact = this.repo.ExistPhone(phone);
             if (contact != null)
             {
-                _repo.DeleteContact(contact);
+                this.repo.DeleteContact(contact);
                 return 1;
             }
             else
@@ -79,7 +79,7 @@
         /// <returns>Status of the operation.</returns>
         public int EditContact(string name, string editChoice, string newValue)
         {
-            Contact contact = _repo.SearchContact(name);
+            Contact? contact = this.repo.GetContact(name);
             if (contact == null)
             {
                 return -1;
@@ -88,19 +88,19 @@
             switch (editChoice)
             {
                 case "1":
-                    _repo.EditName(contact, newValue);
+                    this.repo.EditName(contact, newValue);
                     break;
 
                 case "2":
-                    _repo.EditPhone(contact, newValue);
+                    this.repo.EditPhone(contact, newValue);
                     break;
 
                 case "3":
-                    _repo.EditEmail(contact, newValue);
+                    this.repo.EditEmail(contact, newValue);
                     break;
 
                 case "4":
-                    _repo.EditNotes(contact, newValue);
+                    this.repo.EditNotes(contact, newValue);
                     break;
 
                 default:
@@ -115,11 +115,11 @@
         /// </summary>
         /// <param name="name">Name of the contact to search for.</param>
         /// <returns>ContactInfo object if found, otherwise null.</returns>
-        public Contact SearchContact(string name)
+        public List<Contact>? SearchContact(string name)
         {
-            if (_repo.Exist(name))
+            if (this.repo.Exist(name))
             {
-                return _repo.SearchContact(name);
+                return this.repo.FetchContacts(name);
             }
             else
             {
@@ -134,7 +134,7 @@
         /// <returns> true if new attribute else False. </returns>
         public bool CheckDuplicates(Contact contact)
         {
-            return _repo.ExistPhone(contact.Phone) != null;
+            return this.repo.ExistPhone(contact.Phone) != null;
         }
 
         /// <summary>
@@ -151,14 +151,14 @@
         /// to Sort Contact.
         /// </summary>
         /// <returns>Sorted list of contacts or null if empty.</returns>
-        public List<Contact> SortContact()
+        public List<Contact>? SortContact()
         {
-            if (_repo.Empty())
+            if (this.repo.Empty())
             {
                 return null;
             }
 
-            return _repo.SortContact();
+            return this.repo.SortContact();
         }
     }
 }

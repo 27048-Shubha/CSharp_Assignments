@@ -2,6 +2,7 @@
 {
     using System;
     using ContactManager.Models;
+
     /// <summary>
     /// Manages all console I/O operations.
     /// </summary>
@@ -19,19 +20,18 @@
             this.DisplayLineBreak();
         }
 
-
         /// <summary>
         /// Displays menu to edit contact attributes.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string DisplayEditMenu()
+        public string? DisplayEditMenu()
         {
             Console.WriteLine("Enter 1 to edit name");
             Console.WriteLine("2 to edit phone number");
             Console.WriteLine("3 to edit email");
             Console.WriteLine("4 to edit notes");
 
-            return Console.ReadLine().Trim();
+            return Console.ReadLine()?.Trim();
         }
 
         /// <summary>
@@ -48,50 +48,50 @@
         /// Gets name of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string GetName()
+        public string? GetName()
         {
             Console.WriteLine("Enter name: ");
-            return Console.ReadLine().Trim();
+            return Console.ReadLine()?.Trim();
         }
 
         /// <summary>
         /// Gets phone number of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string GetPhone()
+        public string? GetPhone()
         {
             Console.WriteLine("Enter phone number: ");
-            return Console.ReadLine().Trim();
+            return Console.ReadLine()?.Trim();
         }
 
         /// <summary>
         /// Gets email id of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string GetEmail()
+        public string? GetEmail()
         {
             Console.WriteLine("Enter email id: ");
-            return Console.ReadLine().Trim();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
         /// Gets notes of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string GetNotes()
+        public string? GetNotes()
         {
             Console.WriteLine("Enter notes: ");
-            return Console.ReadLine().Trim();
+            return Console.ReadLine()?.Trim();
         }
 
         /// <summary>
         /// To receive choice inputs for menu.
         /// </summary>
         /// <returns>Input integer received from user.</returns>
-        public string GetChoice()
+        public string? GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
-            return Console.ReadLine().Trim().Trim();
+            return Console.ReadLine()?.Trim();
         }
 
         /// <summary>
@@ -102,17 +102,10 @@
         {
             foreach (var item in contact)
             {
-                Console.WriteLine($"Name: {item.Name}\nPhone Number: {item.Phone}\nEmail Id: {item.Email}\nNotes: {item.Notes}\n");
+                Console.WriteLine($"Name: {item.Name}\nPhone Number: {item.Phone}");
+                Console.WriteLine($"Email Id: {(string.IsNullOrWhiteSpace(item.Email) ? "No email id exists" : item.Email)}");
+                Console.WriteLine($"Notes: {(string.IsNullOrWhiteSpace(item.Notes) ? "No notes Exists" : item.Notes)}");
             }
-        }
-
-        /// <summary>
-        /// Displays a single contact's details.
-        /// </summary>
-        /// <param name="contact">Contact object whose details are to be displayed.</param>
-        public void DisplayContact(Contact contact)
-        {
-            Console.WriteLine($"Name: {contact.Name}\nPhone Number: {contact.Phone}\nEmail Id: {contact.Email}\nNotes: {contact.Notes}\n");
         }
 
         /// <summary>
@@ -128,6 +121,7 @@
         /// <summary>
         /// To display success message after any operation.
         /// </summary>
+        /// <param name="message">Success message to be displayed.</param>
         public void DisplaySuccess(string message)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -144,7 +138,6 @@
             Console.WriteLine("No Contacts to display\n");
             Console.ResetColor();
         }
-
 
         /// <summary>
         /// Displays about duplicate existance.
@@ -169,15 +162,14 @@
         /// <summary>
         /// Confirms exit before closing the console.
         /// </summary>
-        /// <returns></returns>
-
-        public string ExitConfirmation()
+        /// <returns>Trimmed Input entered by the user.</returns>
+        public string? ExitConfirmation()
         {
-            return Console.ReadLine().Trim();
+            return Console.ReadLine()?.Trim();
         }
 
         /// <summary>
-        /// Displays thank you message for using contact manager
+        /// Displays thank you message for using contact manager.
         /// </summary>
         public void DisplayExitConfirmation()
         {

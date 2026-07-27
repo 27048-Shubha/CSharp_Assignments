@@ -15,7 +15,7 @@
         {
         ConsoleView console = new ConsoleView();
         ContactService handler = new ContactService();
-        string ch;
+        string? ch;
         do
         {
             Thread.Sleep(1000);
@@ -41,8 +41,8 @@
                 case "1": // ADD
                     string name = console.GetName();
                     string phone = console.GetPhone();
-                    string email = console.GetEmail();
-                    string notes = console.GetNotes();
+                    string? email = console.GetEmail();
+                    string? notes = console.GetNotes();
                     Contact newContact = new Contact(name, phone, email, notes);
                     int addStatus = handler.AddContact(newContact);
                     if (addStatus == -1)
@@ -123,10 +123,10 @@
 
                 case "4": // SEARCH
                     name = console.GetName();
-                    Contact foundContact = handler.SearchContact(name);
+                    List<Contact>? foundContact = handler.SearchContact(name);
                     if (foundContact != null)
                     {
-                        console.DisplayContact(foundContact);
+                        console.DisplayContactList(foundContact);
                     }
                     else
                     {
@@ -135,8 +135,8 @@
 
                     break;
 
-                case "5": //SORT
-                    List<Contact> contacts = handler.SortContact();
+                case "5": // SORT
+                    List<Contact>? contacts = handler.SortContact();
 
                     if (contacts == null)
                     {
@@ -149,15 +149,20 @@
 
                     break;
 
-                case "6": //EXIT
+                case "6": // EXIT
                     console.DisplayExitWarning();
                     string exitCh = console.ExitConfirmation();
                     if (exitCh == "Y" || exitCh == "y")
                     {
                         console.DisplayExitConfirmation();
                     }
-                    break;
+                    else
+                    {
+                        ch = "7"; // To prevent while loop termination
+                        console.DisplayDefaultMessage();
+                    }
 
+                    break;
 
                 default:
                     console.DisplayDefaultMessage();

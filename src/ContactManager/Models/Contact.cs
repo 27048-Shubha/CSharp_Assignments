@@ -14,14 +14,13 @@
         /// <param name="phone">Phone number of the Contact.</param>
         /// <param name="email">Email ID of the Contact.</param>
         /// <param name="notes">Notes of the Contact.</param>
-        public Contact(string name, string phone, string email = "", string notes = "No notes found")
+        public Contact(string name, string phone, string? email = null, string? notes = null)
         {
-            Id = Guid.NewGuid();
-
-            Name = name;
-            Phone = phone;
-            Email = email;
-            Notes = notes;
+            this.Id = Guid.NewGuid();
+            this.Name = name;
+            this.Phone = phone;
+            this.Email = email;
+            this.Notes = notes;
         }
 
         /// <summary>
@@ -34,24 +33,24 @@
         /// Gets or Sets Name.
         /// </summary>
         /// <value>The name of the Contact.</value>
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Phone Number.
         /// </summary>
         /// <value>The Phone Number of the Contact.</value>
-        public string? Phone { get; set; }
+        public string Phone { get; set; }
 
         /// <summary>
         /// Gets or Sets Email.
         /// </summary>
-        /// <value>The Email ID of the Contact.</value>
+        /// <value>The Email ID of the Contact, By default, holds 'No email found'.</value>
         public string? Email { get; set; }
 
         /// <summary>
         /// Gets or Sets Notes.
         /// </summary>
-        /// <value>The Notes for the Contact.</value>
+        /// <value>The Notes for the Contact. By default, holds 'No notes found'.</value>
         public string? Notes { get; set; }
     }
 }
