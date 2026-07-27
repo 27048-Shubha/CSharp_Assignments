@@ -14,7 +14,7 @@
         /// <param name="phone">Phone number of the Contact.</param>
         /// <param name="email">Email ID of the Contact.</param>
         /// <param name="notes">Notes of the Contact.</param>
-        public Contact(string name, string phone, string email = "No mail found", string notes = "No notes found")
+        public Contact(string name, string phone, string email = "", string notes = "No notes found")
         {
             Id = Guid.NewGuid();
 

@@ -20,7 +20,6 @@
         {
             Thread.Sleep(1000);
             console.ClearConsole();
-
             console.DisplayMenu();
             ch = console.GetChoice();
 
@@ -52,9 +51,13 @@
                     }
                     else if (addStatus == -2)
                     {
-                        console.DisplayInvalidPhoneMessage();
+                            console.DisplayInvalidInput();
                     }
                     else if (addStatus == -3)
+                    {
+                        console.DisplayInvalidPhoneMessage();
+                    }
+                    else if (addStatus == -4)
                     {
                         console.DisplayInvalidEmailMessage();
                     }
@@ -113,7 +116,7 @@
                     }
                     else
                     {
-                        console.DisplaySuccess("Phone number added successfully");
+                        console.DisplaySuccess("Contact deleted successfully");
                     }
 
                     break;
@@ -162,6 +165,6 @@
             }
         }
         while (ch != "6");
-    }
+        }
     }
 }

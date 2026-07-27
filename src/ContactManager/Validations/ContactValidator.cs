@@ -16,7 +16,7 @@
         public static bool ValidatePhone(string phone)
         {
             phone = phone.Trim();
-            if( string.IsNullOrEmpty(phone) || phone.Length == 0)
+            if (string.IsNullOrEmpty(phone) || phone.Length != 10)
             {
                 return false;
             }
@@ -39,6 +39,11 @@
         public static bool ValidateEmail(string email)
         {
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") && !string.IsNullOrWhiteSpace(email);
+        }
+
+        public static bool IsEmpty(string input)
+        {
+            return (input == string.Empty);
         }
     }
 }

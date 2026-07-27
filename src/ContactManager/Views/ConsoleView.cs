@@ -31,7 +31,7 @@
             Console.WriteLine("3 to edit email");
             Console.WriteLine("4 to edit notes");
 
-            return Console.ReadLine();
+            return Console.ReadLine().Trim();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@
         public void DisplayLineBreak()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("------------------------------------------\n");
+            Console.WriteLine("------------------------------------------");
             Console.ResetColor();
         }
 
@@ -51,7 +51,7 @@
         public string GetName()
         {
             Console.WriteLine("Enter name: ");
-            return Console.ReadLine();
+            return Console.ReadLine().Trim();
         }
 
         /// <summary>
@@ -61,7 +61,7 @@
         public string GetPhone()
         {
             Console.WriteLine("Enter phone number: ");
-            return Console.ReadLine();
+            return Console.ReadLine().Trim();
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
         public string GetEmail()
         {
             Console.WriteLine("Enter email id: ");
-            return Console.ReadLine();
+            return Console.ReadLine().Trim();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@
         public string GetNotes()
         {
             Console.WriteLine("Enter notes: ");
-            return Console.ReadLine();
+            return Console.ReadLine().Trim();
         }
 
         /// <summary>
@@ -91,7 +91,7 @@
         public string GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
-            return Console.ReadLine();
+            return Console.ReadLine().Trim().Trim();
         }
 
         /// <summary>
@@ -173,7 +173,7 @@
 
         public string ExitConfirmation()
         {
-            return Console.ReadLine();
+            return Console.ReadLine().Trim();
         }
 
         /// <summary>
@@ -183,6 +183,16 @@
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Thank you for using Contact Manager!");
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Displays warning on invalid email.
+        /// </summary>
+        public void DisplayInvalidInput()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Blank spaces aren't allowed for name! Please enter a valid input!");
             Console.ResetColor();
         }
 
@@ -202,7 +212,7 @@
         public void DisplayInvalidPhoneMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid phone number! Please enter a valid 10-digit phone number (Format:9876543210)");
+            Console.WriteLine("Invalid phone number!\nPlease enter a valid 10-digit phone number containing only 0-9 digits\n(Format:9876543210)");
             Console.ResetColor();
         }
 

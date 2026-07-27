@@ -22,15 +22,19 @@
             {
                 return -1;
             }
-            else if (!ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone))
+            else if(ContactManager.Helpers.ContactValidator.IsEmpty(contact.Name))
             {
                 return -2;
             }
-            else if (contact.Email != string.Empty)
+            else if (!ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone))
+            {
+                return -3;
+            }
+            else if (ContactManager.Helpers.ContactValidator.IsEmpty(contact.Email))
             {
                 if (!ContactManager.Helpers.ContactValidator.ValidateEmail(contact.Email))
                 {
-                    return -3;
+                    return -4;
                 }
             }
 
