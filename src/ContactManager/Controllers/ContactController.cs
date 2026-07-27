@@ -18,6 +18,9 @@
         int ch;
         do
         {
+            Thread.Sleep(1000);
+            console.ClearConsole();
+
             console.DisplayMenu();
             ch = console.GetChoice();
 
@@ -25,7 +28,7 @@
             {
                 case 0: // VIEW
                     List<Contact> contact = handler.GetAllContactInfo();
-                    if (contact != null)
+                    if (contact.Count() != 0)
                     {
                         console.DisplayContactList(contact);
                     }
@@ -57,7 +60,7 @@
                     }
                     else
                     {
-                        console.DisplaySuccess();
+                        console.DisplaySuccess("Contact added successfully");
                     }
 
                     break;
@@ -96,7 +99,7 @@
                     }
                     else
                     {
-                        console.DisplaySuccess();
+                        console.DisplaySuccess("Contact edited sucessfully");
                     }
 
                     break;
@@ -110,7 +113,7 @@
                     }
                     else
                     {
-                        console.DisplaySuccess();
+                        console.DisplaySuccess("Phone number added successfully");
                     }
 
                     break;
@@ -129,7 +132,7 @@
 
                     break;
 
-                case 5:
+                case 5: //SORT
                     List<Contact> contacts = handler.SortContact();
 
                     if (contacts == null)
@@ -142,6 +145,16 @@
                     }
 
                     break;
+
+                case 6: //EXIT
+                    console.DisplayExitWarning();
+                    char exitCh = console.ExitConfirmation();
+                    if (exitCh == 'Y' || exitCh == 'y')
+                    {
+                        console.DisplayExitConfirmation();
+                    }
+                    break;
+
 
                 default:
                     console.DisplayDefaultMessage();
