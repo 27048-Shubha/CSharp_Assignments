@@ -24,14 +24,14 @@
         /// Displays menu to edit contact attributes.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public int DisplayEditMenu()
+        public string DisplayEditMenu()
         {
             Console.WriteLine("Enter 1 to edit name");
             Console.WriteLine("2 to edit phone number");
             Console.WriteLine("3 to edit email");
             Console.WriteLine("4 to edit notes");
 
-            return int.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -88,10 +88,10 @@
         /// To receive choice inputs for menu.
         /// </summary>
         /// <returns>Input integer received from user.</returns>
-        public int GetChoice()
+        public string GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
-            return int.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -171,9 +171,9 @@
         /// </summary>
         /// <returns></returns>
 
-        public char ExitConfirmation()
+        public string ExitConfirmation()
         {
-            return char.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
 
         /// <summary>

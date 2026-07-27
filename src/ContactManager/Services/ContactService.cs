@@ -73,7 +73,7 @@
         /// <param name="editChoice">Choice of attribute to edit.</param>
         /// <param name="newValue">New value for the attribute.</param>
         /// <returns>Status of the operation.</returns>
-        public int EditContact(string name, int editChoice, string newValue)
+        public int EditContact(string name, string editChoice, string newValue)
         {
             Contact contact = _repo.SearchContact(name);
             if (contact == null)
@@ -83,19 +83,19 @@
 
             switch (editChoice)
             {
-                case 1:
+                case "1":
                     _repo.EditName(contact, newValue);
                     break;
 
-                case 2:
+                case "2":
                     _repo.EditPhone(contact, newValue);
                     break;
 
-                case 3:
+                case "3":
                     _repo.EditEmail(contact, newValue);
                     break;
 
-                case 4:
+                case "4":
                     _repo.EditNotes(contact, newValue);
                     break;
 

@@ -15,7 +15,7 @@
         {
         ConsoleView console = new ConsoleView();
         ContactService handler = new ContactService();
-        int ch;
+        string ch;
         do
         {
             Thread.Sleep(1000);
@@ -26,7 +26,7 @@
 
             switch (ch)
             {
-                case 0: // VIEW
+                case "0": // VIEW
                     List<Contact> contact = handler.GetAllContactInfo();
                     if (contact.Count() != 0)
                     {
@@ -39,7 +39,7 @@
 
                     break;
 
-                case 1: // ADD
+                case "1": // ADD
                     string name = console.GetName();
                     string phone = console.GetPhone();
                     string email = console.GetEmail();
@@ -65,22 +65,22 @@
 
                     break;
 
-                case 2: // EDIT
+                case "2": // EDIT
                     name = console.GetName();
-                    int editChoice = console.DisplayEditMenu();
+                    string editChoice = console.DisplayEditMenu();
                     string newValue = string.Empty;
                     switch (editChoice)
                     {
-                        case 1:
+                        case "1":
                             newValue = console.GetName();
                             break;
-                        case 2:
+                        case "2":
                             newValue = console.GetPhone();
                             break;
-                        case 3:
+                        case "3":
                             newValue = console.GetEmail();
                             break;
-                        case 4:
+                        case "4":
                             newValue = console.GetNotes();
                             break;
                         default:
@@ -104,7 +104,7 @@
 
                     break;
 
-                case 3: // DELETE
+                case "3": // DELETE
                     phone = console.GetPhone();
                     int deleteStatus = handler.DeleteContact(phone);
                     if (deleteStatus == -1)
@@ -118,7 +118,7 @@
 
                     break;
 
-                case 4: // SEARCH
+                case "4": // SEARCH
                     name = console.GetName();
                     Contact foundContact = handler.SearchContact(name);
                     if (foundContact != null)
@@ -132,7 +132,7 @@
 
                     break;
 
-                case 5: //SORT
+                case "5": //SORT
                     List<Contact> contacts = handler.SortContact();
 
                     if (contacts == null)
@@ -146,10 +146,10 @@
 
                     break;
 
-                case 6: //EXIT
+                case "6": //EXIT
                     console.DisplayExitWarning();
-                    char exitCh = console.ExitConfirmation();
-                    if (exitCh == 'Y' || exitCh == 'y')
+                    string exitCh = console.ExitConfirmation();
+                    if (exitCh == "Y" || exitCh == "y")
                     {
                         console.DisplayExitConfirmation();
                     }
@@ -161,7 +161,7 @@
                     break;
             }
         }
-        while (ch != 6);
+        while (ch != "6");
     }
     }
 }
