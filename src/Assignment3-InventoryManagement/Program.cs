@@ -1,9 +1,8 @@
-﻿using System;
-using Assignment3_InventoryManagement.Controllers;
-using Assignment3_InventoryManagement.Models;
+﻿using Assignment3_InventoryManagement.Controllers;
 using Assignment3_InventoryManagement.Repository;
 using Assignment3_InventoryManagement.Services;
 using Assignment3_InventoryManagement.Views;
+
 namespace Assignments
 {
     /// <summary>
@@ -21,8 +20,8 @@ namespace Assignments
         /// </summary>
         /// <param name="args">Command Line arguments.</param>
         public static void Main(string[] args)
-        { 
+        {
             _controller.Initialize();
-         }
+        }
 }
 }

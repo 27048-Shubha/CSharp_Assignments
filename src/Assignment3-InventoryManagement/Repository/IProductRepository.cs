@@ -1,12 +1,7 @@
-﻿using Assignment3_InventoryManagement.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment3_InventoryManagement.Repository
+﻿namespace Assignment3_InventoryManagement.Repository
 {
+    using Assignment3_InventoryManagement.Models;
+
     /// <summary>
     /// Interface that holds product operations.
     /// </summary>
@@ -18,7 +13,19 @@ namespace Assignment3_InventoryManagement.Repository
         /// <param name="product">Product object holding user input</param>
         public void AddProduct(Product product);
 
-        //UpdateProduct
+        /// <summary>
+        /// Updates price of the product
+        /// </summary>
+        /// <param name="pId">Guid of the product to be updated.</param>
+        /// <param name="price">New Price to be updated.</param>
+        public void UpdatePrice(Guid pId, decimal price);
+
+        /// <summary>
+        /// Updates stock quantity of the product
+        /// </summary>
+        /// <param name="pId">Guid of the product to be updated.</param>
+        /// <param name="stock">New stock value to be updated.</param>
+        public void UpdateStock(Guid pId, int stock);
 
         /// <summary>
         /// Deletes existing product
@@ -37,7 +44,7 @@ namespace Assignment3_InventoryManagement.Repository
         /// </summary>
         /// <param name="name">Details of the product</param>
         /// <returns>Returns product details in the cloned copy</returns>
-        public Product SearchProduct(string name);
+        public List<Product> SearchProduct(string name);
 
         /// <summary>
         /// Finds prodcut id based on the name

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assignment3_InventoryManagement.Models;
-
-namespace Assignment3_InventoryManagement.Repository
+﻿namespace Assignment3_InventoryManagement.Repository
 {
     using Assignment3_InventoryManagement.Models;
 
@@ -25,7 +18,27 @@ namespace Assignment3_InventoryManagement.Repository
             _product.Add(product);
         }
 
-        //UpdateProduct
+        /// <summary>
+        /// Updates price of the product
+        /// </summary>
+        /// <param name="pId">Guid of the product to be updated.</param>
+        /// <param name="price">New Price to be updated.</param>
+        public void UpdatePrice(Guid pId, decimal price)
+        {
+            Product? product = _product.FirstOrDefault(p => p.Id == pId);
+            product.Price = price;
+        }
+
+        /// <summary>
+        /// Updates stock quantity of the product
+        /// </summary>
+        /// <param name="pId">Guid of the product to be updated.</param>
+        /// <param name="stock">New stock value to be updated.</param>
+        public void UpdateStock(Guid pId, int stock)
+        {
+            Product? product = _product.FirstOrDefault(p => p.Id == pId);
+            product.StockQuantity = stock;
+        }
 
         /// <summary>
         /// Deletes existing product
@@ -48,10 +61,17 @@ namespace Assignment3_InventoryManagement.Repository
         /// <returns>Returns clone copy of products</returns>
         public List<Product> ViewProducts()
         {
-            List<Product> clone = new List<Product>();
-            foreach(Product item in _product)
+            List<Product> clone = null;
+            foreach (Product item in _product)
             {
-                clone.Add(new Product(item.Name, item.Price, item.StockQuantity));
+                if (clone == null)
+                {
+                    clone = new List<Product>();
+                }
+                else
+                {
+                    clone.Add(new Product(item.Name, item.Price, item.StockQuantity));
+                }
             }
             return clone;
         }
@@ -61,17 +81,17 @@ namespace Assignment3_InventoryManagement.Repository
         /// </summary>
         /// <param name="name">Details of the product</param>
         /// <returns>Returns product details in the cloned copy</returns>
-        public Product SearchProduct(string name)
+        public List<Product> SearchProduct(string name)
         {
-            for (int i = 0; i < _product.Count; i++)
+            List<Product> products = new List<Product>();
+            foreach (Product product in _product)
             {
-                if (_product[i].Name == name)
+                if (product.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    Product clone = new Product(_product[i].Name, _product[i].Price, _product[i].StockQuantity);
-                    return clone;
+                    products.Add(product);
                 }
             }
-            return null;
+            return products;
         }
 
         /// <summary>

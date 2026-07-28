@@ -1,9 +1,9 @@
-﻿using Assignment3_InventoryManagement.Models;
-using Assignment3_InventoryManagement.Repository;
-using System.Collections.Generic;
-
-namespace Assignment3_InventoryManagement.Services
+﻿namespace Assignment3_InventoryManagement.Services
 {
+    using Assignment3_InventoryManagement.Exceptions;
+    using Assignment3_InventoryManagement.Models;
+    using Assignment3_InventoryManagement.Repository;
+
     /// <summary>
     /// Manages CRUD calls to Repository.
     /// </summary>
@@ -34,16 +34,58 @@ namespace Assignment3_InventoryManagement.Services
         }
 
         /// <summary>
+        /// Checks and Edits object to be stored in Product list.
+        /// </summary>
+        /// <param name="name">Name of the product</param>
+        /// <param name="price">Price of the product</param>
+        /// <param name="stock">Stock Quantity of the product</param>
+        public void EditProduct(string name, decimal price, int stock)
+        {
+            if (!this.IsExists(name))
+            {
+                throw new Exception("Name Not Exists");
+            }
+
+            Guid pId = _repository.GetProductId(name);
+            this.EditProductPrice(pId, price);
+            this.EditStockQuantity(pId, stock);
+        }
+
+        /// <summary>
+        /// Edits price of the product
+        /// </summary>
+        /// <param name="pId">Product Id whose price to be edited</param>
+        /// <param name="price">New price value </param>
+        public void EditProductPrice(Guid pId, decimal price)
+        {
+            _repository.UpdatePrice(pId, price);
+        }
+
+        /// <summary>
+        /// Edits stock of the product
+        /// </summary>
+        /// <param name="pId">Product Id whose price to be edited</param>
+        /// <param name="stock">New stock value </param>
+        public void EditStockQuantity(Guid pId, int stock)
+        {
+            _repository.UpdateStock(pId, stock);
+        }
+        /// <summary>
         /// Gets Guid of the product and calls repo for deletion
         /// </summary>
         /// <param name="name">Name of the product to be deleted.</param>
         public void RemoveProduct(string name)
         {
             Guid productId = _repository.GetProductId(name);
-            _repository.DeleteProduct(productId);
+            if (productId == Guid.Empty)
+            {
+                throw new NameNotFound("Product Name doesn't Exists");
+            }
+            else
+            {
+                _repository.DeleteProduct(productId);
+            }
         }
-
-        //UpdateProduct
 
         /// <summary>
         /// Returns list of Products in Product list.
@@ -59,9 +101,24 @@ namespace Assignment3_InventoryManagement.Services
         /// </summary>
         /// <param name="name">Name of the product.</param>
         /// <returns>Product object holding details on product to be searched.</returns>
-        public Product FindProduct(string name)
+        public List<Product> FindProduct(string name)
         {
             return _repository.SearchProduct(name);
+        }
+
+        /// <summary>
+        /// Checks if the product exists in the repo already
+        /// </summary>
+        /// <param name="name">Name to be checked for existence</param>
+        /// <returns>True if exists else False</returns>
+        public bool IsExists(string name)
+        {
+            if (_repository.GetProductId(name) == Guid.Empty)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

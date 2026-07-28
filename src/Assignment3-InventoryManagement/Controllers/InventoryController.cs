@@ -1,9 +1,9 @@
-﻿using Assignment3_InventoryManagement.Models;
-using Assignment3_InventoryManagement.Services;
-using Assignment3_InventoryManagement.Views;
-
-namespace Assignment3_InventoryManagement.Controllers
+﻿namespace Assignment3_InventoryManagement.Controllers
 {
+    using Assignment3_InventoryManagement.Models;
+    using Assignment3_InventoryManagement.Services;
+    using Assignment3_InventoryManagement.Views;
+
     /// <summary>
     /// Manages Initializaiton and Menu for Inventory System.
     /// </summary>
@@ -28,37 +28,70 @@ namespace Assignment3_InventoryManagement.Controllers
         /// </summary>
         public void Initialize()
         {
-            _view.DisplayMenu();
-
-            int choice = _view.GetUserChoice();
+            int choice;
             string name;
+            decimal price;
+            int stockQuantity = 0;
+            List<Product> products;
+
             do
             {
+                _view.DisplayMenu();
+                _view.GetUserChoice(out choice);
                 switch (choice)
                 {
-                    case '1':
-                        name = _view.GetProductName();
-                        decimal price = _view.GetProductPrice();
-                        int stock = _view.GetProductStock();
-                        _service.AddProduct(name, price, stock);
+                    case 1:
+                        _view.GetProductName(out name);
+                        if (_view.GetProductPrice(out price) && _view.GetProductStock(out stockQuantity))
+                        {
+                            _service.AddProduct(name, price, stockQuantity);
+                        }
+
                         break;
-                    case '2':
-                        //Edit
+                    case 2:
+                        _view.GetProductName(out name);
+                        if (_view.GetProductPrice(out price) && _view.GetProductStock(out stockQuantity))
+                        {
+                            try
+                            {
+                                _service.EditProduct(name, price, stockQuantity);
+                                _view.DisplaySuccess("Updation");
+                            }
+                            catch
+                            {
+                                _view.DisplayNameNotFound(name);
+                            }
+                        }
+
                         break;
-                    case '3':
-                        //Delete
-                        name = _view.GetProductName();
-                        _service.RemoveProduct(name);
+
+                    case 3:
+                        // Delete
+                        _view.GetProductName(out name);
+                        try
+                        {
+                            _service.RemoveProduct(name);
+                            _view.DisplaySuccess("Deletion");
+                        }
+                        catch (Exception e)
+                        {
+                            _view.DisplayMessage(e.Message);
+                        }
+
                         break;
-                    case '4':
-                        //View
-                        List<Product> products = _service.ListProducts();
+                    case 4:
+                        // View
+                        products = _service.ListProducts();
                         _view.DisplayProducts(products);
                         break;
-                    case '5':
-                        //Search By Name
-                        name = _view.GetProductName();
-                        Product product = _service.FindProduct(name);
+                    case 5:
+                        // Search By Name
+                        _view.GetProductName(out name);
+                        products = _service.FindProduct(name);
+                        _view.DisplayProducts(products);
+                        break;
+
+                    case 6:
                         break;
 
                     default:
