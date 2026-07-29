@@ -1,5 +1,6 @@
 ﻿namespace ContactManager.Persistance
 {
+    using System.Collections.Generic;
     using ContactManager.Models;
 
     /// <summary>
@@ -15,16 +16,16 @@
         /// <param name="contact"> The contact to add.</param>
         public void Add(Contact contact)
         {
-            contacts.Add(contact);
+            this.contacts.Add(contact);
         }
 
         /// <summary>
-        /// to View all contacts in the list.
+        /// to View all this.contacts in the list.
         /// </summary>
-        /// <returns> List of all contacts.</returns>
-        public List<Contact> View()
+        /// <returns> List of all this.contacts.</returns>
+        public IReadOnlyList<Contact> GetAll()
         {
-            return new List<Contact>(contacts);
+            return this.contacts.ToList();
         }
 
         /// <summary>
@@ -42,7 +43,7 @@
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details.</param>
         /// <param name="newPhoneNo"> New Phone number to be updated.</param>
-        public void EditPhone(Contact contact, string newPhoneNo)
+        public void EditPhoneNumber(Contact contact, string newPhoneNo)
         {
             contact.PhoneNumber = newPhoneNo;
         }
@@ -73,7 +74,7 @@
         /// <param name="contact"> Object that holds Contact Details.</param>
         public void Delete(Contact contact)
         {
-            contacts.Remove(contact);
+            this.contacts.Remove(contact);
         }
 
         /// <summary>
@@ -83,7 +84,7 @@
         /// <returns> ContactInfo object if found, otherwise null.</returns>
         public Contact? Get(string name)
         {
-            foreach (var contact in contacts)
+            foreach (var contact in this.contacts)
             {
                 if (contact.Name == name)
                 {
@@ -106,11 +107,11 @@
             {
                 if (contact.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    contacts.Add(contact);
+                    this.contacts.Add(contact);
                 }
             }
 
-            return contacts;
+            return this.contacts;
         }
 
         /// <summary>
@@ -119,8 +120,8 @@
         /// <returns> Sorted List of ContactInfo objects.</returns>
         public List<Contact> GetAllSortedByName()
         {
-            contacts.Sort((x, y) => x.Name.CompareTo(y.Name));
-            return contacts;
+            this.contacts.Sort((x, y) => x.Name.CompareTo(y.Name));
+            return this.contacts;
         }
 
         /// <summary>
@@ -130,7 +131,7 @@
         /// <returns> True if found, otherwise false.</returns>
         public bool ExistsByName(string name)
         {
-            foreach (var contact in contacts)
+            foreach (var contact in this.contacts)
             {
                 if (contact.Name.Contains(name))
                 {
@@ -148,7 +149,7 @@
         /// <returns> ContactInfo object if found, otherwise null.</returns>
         public Contact? GetByPhoneNumber(string phone)
         {
-            foreach (var contact in contacts)
+            foreach (var contact in this.contacts)
             {
                 if (contact.PhoneNumber == phone)
                 {
@@ -165,7 +166,7 @@
         /// <returns> True if empty, otherwise false.</returns>
         public bool Empty()
         {
-            if (contacts.Count == 0)
+            if (this.contacts.Count == 0)
             {
                 return true;
             }

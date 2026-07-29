@@ -17,15 +17,15 @@
         /// <param name="args">CommandLine Args.</param>
         public static void Main(string[] args)
         {
-            ContactValidator _validate = new ContactValidator();
+            ContactValidator validate = new ContactValidator();
 
-            ConsoleView _console = new ConsoleView();
+            ConsoleView console = new ConsoleView();
 
-            ContactRepository _repository = new ContactRepository();
+            ContactRepository repository = new ContactRepository();
 
-            ContactService _service = new ContactService(_repository, _validate);
+            ContactService service = new ContactService(repository, validate);
 
-            ContactController controller = new ContactController(_console, _service);
+            ContactController controller = new ContactController(console, service);
 
             controller.Initialize();
         }

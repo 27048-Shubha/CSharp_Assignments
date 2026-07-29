@@ -10,12 +10,18 @@
     /// </summary>
     internal class ContactService
     {
-        private readonly ContactRepository _repo;
-        private readonly ContactValidator _validate;
+        private readonly ContactRepository repo;
+        private readonly ContactValidator validate;
 
-        public ContactService(ContactRepository repo, ContactValidator validate) {
-            _repo = repo;
-            _validate = validate;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContactService"/> class.
+        /// </summary>
+        /// <param name="repo">Handles operations of Repository.</param>
+        /// <param name="validate">Handles operations of ContactValidator.</param>
+        public ContactService(ContactRepository repo, ContactValidator validate)
+        {
+            this.repo = repo;
+            this.validate = validate;
         }
 
         /// <summary>
@@ -23,7 +29,7 @@
         /// </summary>
         /// <param name="contact">Contact information to add.</param>
         /// <returns>Status of the operation.</returns>
-        public int AddContact(Contact contact)
+        public int Add(Contact contact)
         {
             if (this.CheckDuplicates(contact))
             {
@@ -45,7 +51,7 @@
                 }
             }
 
-            this._repo.Add(contact);
+            this.repo.Add(contact);
             return 1;
         }
 
@@ -53,9 +59,9 @@
         /// to Get all contact information.
         /// </summary>
         /// <returns>List of all contacts or null if empty.</returns>
-        public List<Contact> GetAllContactInfo()
+        public IReadOnlyList<Contact> GetAll()
         {
-            return this._repo.View();
+            return this.repo.GetAll();
         }
 
         /// <summary>
@@ -63,12 +69,12 @@
         /// </summary>
         /// <param name="phone">Phone number of the contact to search for.</param>
         /// <returns>Status of the operation.</returns>
-        public int DeleteContact(string phone)
+        public int Delete(string phone)
         {
-            Contact contact = this._repo.GetByPhoneNumber(phone);
+            Contact? contact = this.repo.GetByPhoneNumber(phone);
             if (contact != null)
             {
-                this._repo.Delete(contact);
+                this.repo.Delete(contact);
                 return 1;
             }
             else
@@ -84,9 +90,9 @@
         /// <param name="editChoice">Choice of attribute to edit.</param>
         /// <param name="newValue">New value for the attribute.</param>
         /// <returns>Status of the operation.</returns>
-        public int EditContact(string name, string editChoice, string newValue)
+        public int Edit(string name, string editChoice, string newValue)
         {
-            Contact? contact = this._repo.Get(name);
+            Contact? contact = this.repo.Get(name);
             if (contact == null)
             {
                 return -1;
@@ -95,19 +101,19 @@
             switch (editChoice)
             {
                 case "1":
-                    this._repo.EditName(contact, newValue);
+                    this.repo.EditName(contact, newValue);
                     break;
 
                 case "2":
-                    this._repo.EditPhone(contact, newValue);
+                    this.repo.EditPhoneNumber(contact, newValue);
                     break;
 
                 case "3":
-                    this._repo.EditEmail(contact, newValue);
+                    this.repo.EditEmail(contact, newValue);
                     break;
 
                 case "4":
-                    this._repo.EditNotes(contact, newValue);
+                    this.repo.EditNotes(contact, newValue);
                     break;
 
                 default:
@@ -122,11 +128,11 @@
         /// </summary>
         /// <param name="name">Name of the contact to search for.</param>
         /// <returns>ContactInfo object if found, otherwise null.</returns>
-        public List<Contact>? SearchContact(string name)
+        public List<Contact>? Search(string name)
         {
-            if (this._repo.ExistsByName(name))
+            if (this.repo.ExistsByName(name))
             {
-                return this._repo.FetchByNameContaining(name);
+                return this.repo.FetchByNameContaining(name);
             }
             else
             {
@@ -141,7 +147,7 @@
         /// <returns> true if new attribute else False. </returns>
         public bool CheckDuplicates(Contact contact)
         {
-            return this._repo.GetByPhoneNumber(contact.PhoneNumber) != null;
+            return this.repo.GetByPhoneNumber(contact.PhoneNumber) != null;
         }
 
         /// <summary>
@@ -158,14 +164,14 @@
         /// to Sort Contact.
         /// </summary>
         /// <returns>Sorted list of contacts or null if empty.</returns>
-        public List<Contact>? SortContact()
+        public List<Contact>? Sort()
         {
-            if (this._repo.Empty())
+            if (this.repo.Empty())
             {
                 return null;
             }
 
-            return this._repo.GetAllSortedByName();
+            return this.repo.GetAllSortedByName();
         }
     }
 }

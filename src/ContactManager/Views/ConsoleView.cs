@@ -24,51 +24,41 @@
         /// Displays menu to edit contact attributes.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string? DisplayEditMenu()
+        public string DisplayEditMenu()
         {
             Console.WriteLine("Enter 1 to edit name");
             Console.WriteLine("2 to edit phone number");
             Console.WriteLine("3 to edit email");
             Console.WriteLine("4 to edit notes");
 
-            return Console.ReadLine()?.Trim();
-        }
-
-        /// <summary>
-        /// Displays line break.
-        /// </summary>
-        private void DisplayLineBreak()
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("------------------------------------------");
-            Console.ResetColor();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
         /// Gets name of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string? GetName()
+        public string GetName()
         {
             Console.WriteLine("Enter name: ");
-            return Console.ReadLine()?.Trim();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
         /// Gets phone number of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string? GetPhoneNumber()
+        public string GetPhoneNumber()
         {
             Console.WriteLine("Enter phone number: ");
-            return Console.ReadLine()?.Trim();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
         /// Gets email id of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string? GetEmail()
+        public string GetEmail()
         {
             Console.WriteLine("Enter email id: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
@@ -78,27 +68,27 @@
         /// Gets notes of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string? GetNotes()
+        public string GetNotes()
         {
             Console.WriteLine("Enter notes: ");
-            return Console.ReadLine()?.Trim();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
         /// To receive choice inputs for menu.
         /// </summary>
         /// <returns>Input integer received from user.</returns>
-        public string? GetChoice()
+        public string GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
-            return Console.ReadLine()?.Trim();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
         /// Display list of contacts.
         /// </summary>
-        /// <param name="contact">List of contacts to be displayed.</param>
-        public void DisplayContactList(List<Contact> contacts)
+        /// <param name="contacts">List of contacts to be displayed.</param>
+        public void DisplayContact(IReadOnlyList<Contact> contacts)
         {
             foreach (var item in contacts)
             {
@@ -163,9 +153,9 @@
         /// Confirms exit before closing the console.
         /// </summary>
         /// <returns>Trimmed Input entered by the user.</returns>
-        public string? ExitConfirmation()
+        public string ExitConfirmation()
         {
-            return Console.ReadLine()?.Trim();
+            return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
         /// <summary>
@@ -179,42 +169,13 @@
         }
 
         /// <summary>
-        /// Displays warning on invalid email.
-        /// </summary>
-        public void DisplayInvalidInput()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Blank spaces aren't allowed for name! Please enter a valid input!");
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays warning on invalid email.
-        /// </summary>
-        public void DisplayInvalidEmailMessage()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid email id! Please enter a valid email id  (Format:yourname@example.com)");
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays warning on invalid phone number.
-        /// </summary>
-        public void DisplayInvalidPhoneMessage()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid phone number!\nPlease enter a valid 10-digit phone number containing only 0-9 digits\n(Format:9876543210)");
-            Console.ResetColor();
-        }
-
-        /// <summary>
         /// Displays warning on invalid message.
         /// </summary>
-        public void DisplayInvalidInputMessage()
+        /// <param name="message">Message to be printed.</param>
+        public void DisplayInvalidInputMessage(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid Input! Please enter a valid input");
+            Console.WriteLine(message);
             Console.ResetColor();
         }
 
@@ -234,6 +195,16 @@
         public void ClearConsole()
         {
             Console.Clear();
+        }
+
+        /// <summary>
+        /// Displays line break.
+        /// </summary>
+        private void DisplayLineBreak()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("------------------------------------------");
+            Console.ResetColor();
         }
     }
 }

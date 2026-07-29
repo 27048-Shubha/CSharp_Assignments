@@ -48,7 +48,7 @@
         /// </summary>
         /// <param name="input">Input string to be determined whether empty or not.</param>
         /// <returns>True if empty, else false.</returns>
-        public static bool IsEmpty(string input)
+        public static bool IsEmpty(string? input)
         {
             return input == string.Empty;
         }

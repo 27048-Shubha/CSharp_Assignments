@@ -1,5 +1,6 @@
 ﻿namespace ContactManager.Controllers
 {
+    using System.Collections.Generic;
     using ContactManager.Models;
     using ContactManager.Services;
 
@@ -11,175 +12,177 @@
         /// <summary>
         /// Marks Starting Point of Contact Manager.
         /// </summary>
-        /// 
-        private readonly ConsoleView _console;
-        private readonly ContactService _handler;
+        ///
+        private readonly ConsoleView console;
+        private readonly ContactService handler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContactController"/> class.
         /// </summary>
-        /// <param name="console">Handles console operations</param>
-        /// <param name="handler">Handles service layer operations</param>
+        /// <param name="console">Handles console operations.</param>
+        /// <param name="handler">Handles service layer operations.</param>
         internal ContactController(ConsoleView console, ContactService handler)
         {
-            _console = console;
-            _handler = handler;
+            this.console = console;
+            this.handler = handler;
         }
+
+        /// <summary>
+        /// Start of execution of Contact Manager Application.
+        /// </summary>
         public void Initialize()
         {
-        
-
         string? ch;
         do
         {
             Thread.Sleep(1000);
-            _console.ClearConsole();
-            _console.DisplayMenu();
-            ch = _console.GetChoice();
+            this.console.ClearConsole();
+            this.console.DisplayMenu();
+            ch = this.console.GetChoice();
 
             switch (ch)
             {
                 case "0": // VIEW
-                    List<Contact> contact = _handler.GetAllContactInfo();
+                    IReadOnlyList<Contact> contact = this.handler.GetAll();
                     if (contact.Count() != 0)
                     {
-                        _console.DisplayContactList(contact);
+                        this.console.DisplayContact(contact);
                     }
                     else
                     {
-                        _console.DisplayEmptyListMessage();
+                        this.console.DisplayEmptyListMessage();
                     }
 
                     break;
 
                 case "1": // ADD
-                    string name = _console.GetName();
-                    string phone = _console.GetPhoneNumber();
-                    string? email = _console.GetEmail();
-                    string? notes = _console.GetNotes();
+                    string name = this.console.GetName();
+                    string phone = this.console.GetPhoneNumber();
+                    string? email = this.console.GetEmail();
+                    string? notes = this.console.GetNotes();
                     Contact newContact = new Contact(name, phone, email, notes);
-                    int addStatus = _handler.AddContact(newContact);
+                    int addStatus = this.handler.Add(newContact);
                     if (addStatus == -1)
                     {
-                        _console.DisplayDuplicateMessage();
+                        this.console.DisplayDuplicateMessage();
                     }
                     else if (addStatus == -2)
                     {
-                            _console.DisplayInvalidInput();
+                        this.console.DisplayInvalidInputMessage("Blank spaces aren't allowed for name! Please enter a valid input!");
                     }
                     else if (addStatus == -3)
                     {
-                        _console.DisplayInvalidPhoneMessage();
+                        this.console.DisplayInvalidInputMessage("Invalid phone number!\nPlease enter a valid 10-digit phone number containing only 0-9 digits\n(Format:9876543210)");
                     }
                     else if (addStatus == -4)
                     {
-                        _console.DisplayInvalidEmailMessage();
+                        this.console.DisplayInvalidInputMessage("Invalid email id! Please enter a valid email id  (Format:yourname@example.com)");
                     }
                     else
                     {
-                        _console.DisplaySuccess("Contact added successfully");
+                        this.console.DisplaySuccess("Contact added successfully");
                     }
 
                     break;
 
                 case "2": // EDIT
-                    name = _console.GetName();
-                    string editChoice = _console.DisplayEditMenu();
+                    name = this.console.GetName();
+                    string editChoice = this.console.DisplayEditMenu();
                     string newValue = string.Empty;
                     switch (editChoice)
                     {
                         case "1":
-                            newValue = _console.GetName();
+                            newValue = this.console.GetName();
                             break;
                         case "2":
-                            newValue = _console.GetPhoneNumber();
+                            newValue = this.console.GetPhoneNumber();
                             break;
                         case "3":
-                            newValue = _console.GetEmail();
+                            newValue = this.console.GetEmail();
                             break;
                         case "4":
-                            newValue = _console.GetNotes();
+                            newValue = this.console.GetNotes();
                             break;
                         default:
-                            _console.DisplayDefaultMessage();
+                            this.console.DisplayDefaultMessage();
                             break;
                     }
 
-                    int editStatus = _handler.EditContact(name, editChoice, newValue);
+                    int editStatus = this.handler.Edit(name, editChoice, newValue);
                     if (editStatus == -1)
                     {
-                        _console.DisplayNotFoundMessage();
+                        this.console.DisplayNotFoundMessage();
                     }
                     else if (editStatus == -2)
                     {
-                        _console.DisplayInvalidInputMessage();
+                        this.console.DisplayInvalidInputMessage("Invalid Input! Please enter a valid input");
                     }
                     else
                     {
-                        _console.DisplaySuccess("Contact edited sucessfully");
+                        this.console.DisplaySuccess("Contact edited sucessfully");
                     }
 
                     break;
 
                 case "3": // DELETE
-                    phone = _console.GetPhoneNumber();
-                    int deleteStatus = _handler.DeleteContact(phone);
+                    phone = this.console.GetPhoneNumber();
+                    int deleteStatus = this.handler.Delete(phone);
                     if (deleteStatus == -1)
                     {
-                        _console.DisplayNotFoundMessage();
+                        this.console.DisplayNotFoundMessage();
                     }
                     else
                     {
-                        _console.DisplaySuccess("Contact deleted successfully");
+                        this.console.DisplaySuccess("Contact deleted successfully");
                     }
 
                     break;
 
                 case "4": // SEARCH
-                    name = _console.GetName();
-                    List<Contact>? foundContact = _handler.SearchContact(name);
+                    name = this.console.GetName();
+                    List<Contact>? foundContact = this.handler.Search(name);
                     if (foundContact != null)
                     {
-                        _console.DisplayContactList(foundContact);
+                        this.console.DisplayContact(foundContact);
                     }
                     else
                     {
-                        _console.DisplayNotFoundMessage();
+                        this.console.DisplayNotFoundMessage();
                     }
 
                     break;
 
                 case "5": // SORT
-                    List<Contact>? contacts = _handler.SortContact();
+                    List<Contact>? contacts = this.handler.Sort();
 
                     if (contacts == null)
                     {
-                        _console.DisplayEmptyListMessage();
+                        this.console.DisplayEmptyListMessage();
                     }
                     else
                     {
-                        _console.DisplayContactList(contacts);
+                        this.console.DisplayContact(contacts);
                     }
 
                     break;
 
                 case "6": // EXIT
-                    _console.DisplayExitWarning();
-                    string exitCh = _console.ExitConfirmation();
+                    this.console.DisplayExitWarning();
+                    string exitCh = this.console.ExitConfirmation();
                     if (exitCh == "Y" || exitCh == "y")
                     {
-                        _console.DisplayExitConfirmation();
+                        this.console.DisplayExitConfirmation();
                     }
                     else
                     {
                         ch = "7"; // To prevent while loop termination
-                        _console.DisplayDefaultMessage();
+                        this.console.DisplayDefaultMessage();
                     }
 
                     break;
 
                 default:
-                    _console.DisplayDefaultMessage();
+                    this.console.DisplayDefaultMessage();
                     break;
             }
         }
