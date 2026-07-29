@@ -11,161 +11,175 @@
         /// <summary>
         /// Marks Starting Point of Contact Manager.
         /// </summary>
+        /// 
+        private readonly ConsoleView _console;
+        private readonly ContactService _handler;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContactController"/> class.
+        /// </summary>
+        /// <param name="console">Handles console operations</param>
+        /// <param name="handler">Handles service layer operations</param>
+        internal ContactController(ConsoleView console, ContactService handler)
+        {
+            _console = console;
+            _handler = handler;
+        }
         public void Initialize()
         {
-        ConsoleView console = new ConsoleView();
-        ContactService handler = new ContactService();
+        
+
         string? ch;
         do
         {
             Thread.Sleep(1000);
-            console.ClearConsole();
-            console.DisplayMenu();
-            ch = console.GetChoice();
+            _console.ClearConsole();
+            _console.DisplayMenu();
+            ch = _console.GetChoice();
 
             switch (ch)
             {
                 case "0": // VIEW
-                    List<Contact> contact = handler.GetAllContactInfo();
+                    List<Contact> contact = _handler.GetAllContactInfo();
                     if (contact.Count() != 0)
                     {
-                        console.DisplayContactList(contact);
+                        _console.DisplayContactList(contact);
                     }
                     else
                     {
-                        console.DisplayEmptyListMessage();
+                        _console.DisplayEmptyListMessage();
                     }
 
                     break;
 
                 case "1": // ADD
-                    string name = console.GetName();
-                    string phone = console.GetPhone();
-                    string? email = console.GetEmail();
-                    string? notes = console.GetNotes();
+                    string name = _console.GetName();
+                    string phone = _console.GetPhoneNumber();
+                    string? email = _console.GetEmail();
+                    string? notes = _console.GetNotes();
                     Contact newContact = new Contact(name, phone, email, notes);
-                    int addStatus = handler.AddContact(newContact);
+                    int addStatus = _handler.AddContact(newContact);
                     if (addStatus == -1)
                     {
-                        console.DisplayDuplicateMessage();
+                        _console.DisplayDuplicateMessage();
                     }
                     else if (addStatus == -2)
                     {
-                            console.DisplayInvalidInput();
+                            _console.DisplayInvalidInput();
                     }
                     else if (addStatus == -3)
                     {
-                        console.DisplayInvalidPhoneMessage();
+                        _console.DisplayInvalidPhoneMessage();
                     }
                     else if (addStatus == -4)
                     {
-                        console.DisplayInvalidEmailMessage();
+                        _console.DisplayInvalidEmailMessage();
                     }
                     else
                     {
-                        console.DisplaySuccess("Contact added successfully");
+                        _console.DisplaySuccess("Contact added successfully");
                     }
 
                     break;
 
                 case "2": // EDIT
-                    name = console.GetName();
-                    string editChoice = console.DisplayEditMenu();
+                    name = _console.GetName();
+                    string editChoice = _console.DisplayEditMenu();
                     string newValue = string.Empty;
                     switch (editChoice)
                     {
                         case "1":
-                            newValue = console.GetName();
+                            newValue = _console.GetName();
                             break;
                         case "2":
-                            newValue = console.GetPhone();
+                            newValue = _console.GetPhoneNumber();
                             break;
                         case "3":
-                            newValue = console.GetEmail();
+                            newValue = _console.GetEmail();
                             break;
                         case "4":
-                            newValue = console.GetNotes();
+                            newValue = _console.GetNotes();
                             break;
                         default:
-                            console.DisplayDefaultMessage();
+                            _console.DisplayDefaultMessage();
                             break;
                     }
 
-                    int editStatus = handler.EditContact(name, editChoice, newValue);
+                    int editStatus = _handler.EditContact(name, editChoice, newValue);
                     if (editStatus == -1)
                     {
-                        console.DisplayNotFoundMessage();
+                        _console.DisplayNotFoundMessage();
                     }
                     else if (editStatus == -2)
                     {
-                        console.DisplayInvalidInputMessage();
+                        _console.DisplayInvalidInputMessage();
                     }
                     else
                     {
-                        console.DisplaySuccess("Contact edited sucessfully");
+                        _console.DisplaySuccess("Contact edited sucessfully");
                     }
 
                     break;
 
                 case "3": // DELETE
-                    phone = console.GetPhone();
-                    int deleteStatus = handler.DeleteContact(phone);
+                    phone = _console.GetPhoneNumber();
+                    int deleteStatus = _handler.DeleteContact(phone);
                     if (deleteStatus == -1)
                     {
-                        console.DisplayNotFoundMessage();
+                        _console.DisplayNotFoundMessage();
                     }
                     else
                     {
-                        console.DisplaySuccess("Contact deleted successfully");
+                        _console.DisplaySuccess("Contact deleted successfully");
                     }
 
                     break;
 
                 case "4": // SEARCH
-                    name = console.GetName();
-                    List<Contact>? foundContact = handler.SearchContact(name);
+                    name = _console.GetName();
+                    List<Contact>? foundContact = _handler.SearchContact(name);
                     if (foundContact != null)
                     {
-                        console.DisplayContactList(foundContact);
+                        _console.DisplayContactList(foundContact);
                     }
                     else
                     {
-                        console.DisplayNotFoundMessage();
+                        _console.DisplayNotFoundMessage();
                     }
 
                     break;
 
                 case "5": // SORT
-                    List<Contact>? contacts = handler.SortContact();
+                    List<Contact>? contacts = _handler.SortContact();
 
                     if (contacts == null)
                     {
-                        console.DisplayEmptyListMessage();
+                        _console.DisplayEmptyListMessage();
                     }
                     else
                     {
-                        console.DisplayContactList(contacts);
+                        _console.DisplayContactList(contacts);
                     }
 
                     break;
 
                 case "6": // EXIT
-                    console.DisplayExitWarning();
-                    string exitCh = console.ExitConfirmation();
+                    _console.DisplayExitWarning();
+                    string exitCh = _console.ExitConfirmation();
                     if (exitCh == "Y" || exitCh == "y")
                     {
-                        console.DisplayExitConfirmation();
+                        _console.DisplayExitConfirmation();
                     }
                     else
                     {
                         ch = "7"; // To prevent while loop termination
-                        console.DisplayDefaultMessage();
+                        _console.DisplayDefaultMessage();
                     }
 
                     break;
 
                 default:
-                    console.DisplayDefaultMessage();
+                    _console.DisplayDefaultMessage();
                     break;
             }
         }

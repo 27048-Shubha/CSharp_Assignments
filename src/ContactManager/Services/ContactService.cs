@@ -3,13 +3,20 @@
     using System.Collections.Generic;
     using ContactManager.Models;
     using ContactManager.Persistance;
+    using ContactManager.Validations;
 
     /// <summary>
     /// Handles all I/P Validations.
     /// </summary>
     internal class ContactService
     {
-        private readonly ContactRepository repo = new ContactRepository();
+        private readonly ContactRepository _repo;
+        private readonly ContactValidator _validate;
+
+        public ContactService(ContactRepository repo, ContactValidator validate) {
+            _repo = repo;
+            _validate = validate;
+        }
 
         /// <summary>
         /// to Add new contact to the list.
@@ -22,23 +29,23 @@
             {
                 return -1;
             }
-            else if (ContactManager.Helpers.ContactValidator.IsEmpty(contact.Name))
+            else if (ContactValidator.IsEmpty(contact.Name))
             {
                 return -2;
             }
-            else if (!ContactManager.Helpers.ContactValidator.ValidatePhone(contact.Phone))
+            else if (!ContactValidator.ValidatePhone(contact.PhoneNumber))
             {
                 return -3;
             }
-            else if (ContactManager.Helpers.ContactValidator.IsEmpty(contact.Email))
+            else if (ContactValidator.IsEmpty(contact.Email))
             {
-                if (!ContactManager.Helpers.ContactValidator.ValidateEmail(contact.Email))
+                if (ContactValidator.ValidateEmail(contact.Email))
                 {
                     return -4;
                 }
             }
 
-            this.repo.AddContact(contact);
+            this._repo.Add(contact);
             return 1;
         }
 
@@ -48,7 +55,7 @@
         /// <returns>List of all contacts or null if empty.</returns>
         public List<Contact> GetAllContactInfo()
         {
-            return this.repo.ViewContact();
+            return this._repo.View();
         }
 
         /// <summary>
@@ -58,10 +65,10 @@
         /// <returns>Status of the operation.</returns>
         public int DeleteContact(string phone)
         {
-            Contact contact = this.repo.ExistPhone(phone);
+            Contact contact = this._repo.GetByPhoneNumber(phone);
             if (contact != null)
             {
-                this.repo.DeleteContact(contact);
+                this._repo.Delete(contact);
                 return 1;
             }
             else
@@ -79,7 +86,7 @@
         /// <returns>Status of the operation.</returns>
         public int EditContact(string name, string editChoice, string newValue)
         {
-            Contact? contact = this.repo.GetContact(name);
+            Contact? contact = this._repo.Get(name);
             if (contact == null)
             {
                 return -1;
@@ -88,19 +95,19 @@
             switch (editChoice)
             {
                 case "1":
-                    this.repo.EditName(contact, newValue);
+                    this._repo.EditName(contact, newValue);
                     break;
 
                 case "2":
-                    this.repo.EditPhone(contact, newValue);
+                    this._repo.EditPhone(contact, newValue);
                     break;
 
                 case "3":
-                    this.repo.EditEmail(contact, newValue);
+                    this._repo.EditEmail(contact, newValue);
                     break;
 
                 case "4":
-                    this.repo.EditNotes(contact, newValue);
+                    this._repo.EditNotes(contact, newValue);
                     break;
 
                 default:
@@ -117,9 +124,9 @@
         /// <returns>ContactInfo object if found, otherwise null.</returns>
         public List<Contact>? SearchContact(string name)
         {
-            if (this.repo.Exist(name))
+            if (this._repo.ExistsByName(name))
             {
-                return this.repo.FetchContacts(name);
+                return this._repo.FetchByNameContaining(name);
             }
             else
             {
@@ -134,7 +141,7 @@
         /// <returns> true if new attribute else False. </returns>
         public bool CheckDuplicates(Contact contact)
         {
-            return this.repo.ExistPhone(contact.Phone) != null;
+            return this._repo.GetByPhoneNumber(contact.PhoneNumber) != null;
         }
 
         /// <summary>
@@ -153,12 +160,12 @@
         /// <returns>Sorted list of contacts or null if empty.</returns>
         public List<Contact>? SortContact()
         {
-            if (this.repo.Empty())
+            if (this._repo.Empty())
             {
                 return null;
             }
 
-            return this.repo.SortContact();
+            return this._repo.GetAllSortedByName();
         }
     }
 }

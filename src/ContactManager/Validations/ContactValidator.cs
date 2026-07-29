@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Helpers
+﻿namespace ContactManager.Validations
 {
     using System.Text.RegularExpressions;
 

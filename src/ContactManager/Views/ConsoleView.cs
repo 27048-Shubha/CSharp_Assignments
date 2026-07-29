@@ -37,7 +37,7 @@
         /// <summary>
         /// Displays line break.
         /// </summary>
-        public void DisplayLineBreak()
+        private void DisplayLineBreak()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("------------------------------------------");
@@ -58,7 +58,7 @@
         /// Gets phone number of the contact as input.
         /// </summary>
         /// <returns>User input receiveed.</returns>
-        public string? GetPhone()
+        public string? GetPhoneNumber()
         {
             Console.WriteLine("Enter phone number: ");
             return Console.ReadLine()?.Trim();
@@ -98,11 +98,11 @@
         /// Display list of contacts.
         /// </summary>
         /// <param name="contact">List of contacts to be displayed.</param>
-        public void DisplayContactList(List<Contact> contact)
+        public void DisplayContactList(List<Contact> contacts)
         {
-            foreach (var item in contact)
+            foreach (var item in contacts)
             {
-                Console.WriteLine($"Name: {item.Name}\nPhone Number: {item.Phone}");
+                Console.WriteLine($"Name: {item.Name}\nPhone Number: {item.PhoneNumber}");
                 Console.WriteLine($"Email Id: {(string.IsNullOrWhiteSpace(item.Email) ? "No email id exists" : item.Email)}");
                 Console.WriteLine($"Notes: {(string.IsNullOrWhiteSpace(item.Notes) ? "No notes Exists" : item.Notes)}");
             }

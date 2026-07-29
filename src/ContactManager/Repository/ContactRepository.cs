@@ -7,24 +7,24 @@
     /// </summary>
     internal class ContactRepository
     {
-        private static List<Contact> contactList = new List<Contact>();
+        private readonly List<Contact> contacts = new List<Contact>();
 
         /// <summary>
         /// To add contact to the list.
         /// </summary>
-        /// <param name="contact"> Object that holds new Contact Details.</param>
-        public void AddContact(Contact contact)
+        /// <param name="contact"> The contact to add.</param>
+        public void Add(Contact contact)
         {
-            contactList.Add(contact);
+            contacts.Add(contact);
         }
 
         /// <summary>
         /// to View all contacts in the list.
         /// </summary>
         /// <returns> List of all contacts.</returns>
-        public List<Contact> ViewContact()
+        public List<Contact> View()
         {
-            return new List<Contact>(contactList);
+            return new List<Contact>(contacts);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@
         /// <param name="newPhoneNo"> New Phone number to be updated.</param>
         public void EditPhone(Contact contact, string newPhoneNo)
         {
-            contact.Phone = newPhoneNo;
+            contact.PhoneNumber = newPhoneNo;
         }
 
         /// <summary>
@@ -71,9 +71,9 @@
         /// to Delete a Contact from the List.
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details.</param>
-        public void DeleteContact(Contact contact)
+        public void Delete(Contact contact)
         {
-            contactList.Remove(contact);
+            contacts.Remove(contact);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@
         /// </summary>
         /// <param name="name"> Name of the Contact to be searched.</param>
         /// <returns> ContactInfo object if found, otherwise null.</returns>
-        public Contact? GetContact(string name)
+        public Contact? Get(string name)
         {
-            foreach (var contact in contactList)
+            foreach (var contact in contacts)
             {
                 if (contact.Name == name)
                 {
@@ -99,10 +99,10 @@
         /// </summary>
         /// <param name="name"> Name of the Contact to be searched.</param>
         /// <returns> ContactInfo object if found, otherwise null.</returns>
-        public List<Contact> FetchContacts(string name)
+        public List<Contact> FetchByNameContaining(string name)
         {
             List<Contact> contacts = new List<Contact>();
-            foreach (var contact in contactList)
+            foreach (var contact in this.contacts)
             {
                 if (contact.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
@@ -117,22 +117,22 @@
         /// to Sort Contact.
         /// </summary>
         /// <returns> Sorted List of ContactInfo objects.</returns>
-        public List<Contact> SortContact()
+        public List<Contact> GetAllSortedByName()
         {
-            contactList.Sort((x, y) => x.Name.CompareTo(y.Name));
-            return contactList;
+            contacts.Sort((x, y) => x.Name.CompareTo(y.Name));
+            return contacts;
         }
 
         /// <summary>
         /// to Check if a Contact exists.
         /// </summary>
-        /// <param name="contactName"> Name of the Contact to be checked.</param>
+        /// <param name="name"> Name of the Contact to be checked.</param>
         /// <returns> True if found, otherwise false.</returns>
-        public bool Exist(string contactName)
+        public bool ExistsByName(string name)
         {
-            foreach (var contact in contactList)
+            foreach (var contact in contacts)
             {
-                if (contact.Name.Contains(contactName))
+                if (contact.Name.Contains(name))
                 {
                     return true;
                 }
@@ -146,11 +146,11 @@
         /// </summary>
         /// <param name="phone"> Phone number to be checked.</param>
         /// <returns> ContactInfo object if found, otherwise null.</returns>
-        public Contact? ExistPhone(string phone)
+        public Contact? GetByPhoneNumber(string phone)
         {
-            foreach (var contact in contactList)
+            foreach (var contact in contacts)
             {
-                if (contact.Phone == phone)
+                if (contact.PhoneNumber == phone)
                 {
                     return contact;
                 }
@@ -165,7 +165,7 @@
         /// <returns> True if empty, otherwise false.</returns>
         public bool Empty()
         {
-            if (contactList.Count == 0)
+            if (contacts.Count == 0)
             {
                 return true;
             }

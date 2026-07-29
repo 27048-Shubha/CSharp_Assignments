@@ -12,45 +12,40 @@
         /// </summary>
         /// <param name="name">Name of the Contact.</param>
         /// <param name="phone">Phone number of the Contact.</param>
-        /// <param name="email">Email ID of the Contact.</param>
-        /// <param name="notes">Notes of the Contact.</param>
+        /// <param name="email">Optional Email ID of the Contact.</param>
+        /// <param name="notes">Optional Notes of the Contact.</param>
         public Contact(string name, string phone, string? email = null, string? notes = null)
         {
             this.Id = Guid.NewGuid();
             this.Name = name;
-            this.Phone = phone;
+            this.PhoneNumber = phone;
             this.Email = email;
             this.Notes = notes;
         }
 
         /// <summary>
-        /// Gets or Sets GUID.
+        /// Gets the unique ID assigned to the contact at creation time.
         /// </summary>
-        /// <value>Unique ID given to Contact.</value>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
-        /// Gets or Sets Name.
+        /// Gets or sets the name of the contact.
         /// </summary>
-        /// <value>The name of the Contact.</value>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Phone Number.
+        /// Gets or Sets phone number of the contact.
         /// </summary>
-        /// <value>The Phone Number of the Contact.</value>
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
 
         /// <summary>
-        /// Gets or Sets Email.
+        /// Gets or Sets email id of the contact.
         /// </summary>
-        /// <value>The Email ID of the Contact, By default, holds 'No email found'.</value>
         public string? Email { get; set; }
 
         /// <summary>
-        /// Gets or Sets Notes.
+        /// Gets or Sets notes of the contact.
         /// </summary>
-        /// <value>The Notes for the Contact. By default, holds 'No notes found'.</value>
         public string? Notes { get; set; }
     }
 }
