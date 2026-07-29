@@ -34,12 +34,23 @@
         /// </summary>
         /// <param name="pId">Guid of the product to be updated.</param>
         /// <param name="stock">New stock value to be updated.</param>
-        public void UpdateStock(Guid pId, int stock)
+        public void UpdateStock(Guid pId, decimal stock)
         {
             Product? product = _product.FirstOrDefault(p => p.Id == pId);
             product.StockQuantity = stock;
         }
 
+        public decimal GetProductPrice(Guid pId)
+        {
+            Product foundProduct = _product.FirstOrDefault(p => p.Id == pId);
+            return foundProduct.Price;
+        }
+
+        public decimal GetProductStock (Guid pId)
+        {
+            Product foundProduct = _product.FirstOrDefault(p => p.Id == pId);
+            return foundProduct.StockQuantity;
+        }
         /// <summary>
         /// Deletes existing product
         /// </summary>
@@ -61,17 +72,10 @@
         /// <returns>Returns clone copy of products</returns>
         public List<Product> ViewProducts()
         {
-            List<Product> clone = null;
+            List<Product> clone = new List<Product>();
             foreach (Product item in _product)
             {
-                if (clone == null)
-                {
-                    clone = new List<Product>();
-                }
-                else
-                {
-                    clone.Add(new Product(item.Name, item.Price, item.StockQuantity));
-                }
+                clone.Add(new Product(item.Name, item.Price, item.StockQuantity));
             }
             return clone;
         }

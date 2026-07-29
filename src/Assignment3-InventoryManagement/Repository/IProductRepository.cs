@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="pId">Guid of the product to be updated.</param>
         /// <param name="stock">New stock value to be updated.</param>
-        public void UpdateStock(Guid pId, int stock);
+        public void UpdateStock(Guid pId, decimal stock);
 
         /// <summary>
         /// Deletes existing product

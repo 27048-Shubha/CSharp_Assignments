@@ -56,7 +56,6 @@
             string value = Console.ReadLine();
             if (!TypeValidation.IsValidDecimal(value, out price))
             {
-                this.DisplayInvalidPrice();
                 return false;
             }
             return true;
@@ -67,13 +66,12 @@
         /// </summary>
         /// <param name="stock">Reference to stock of the product</param>
         /// <returns>True if Stock value is valid else False</returns>
-        public bool GetProductStock(out int stock)
+        public bool GetProductStock(out decimal stock)
         {
             this.Display("stock");
             string value = Console.ReadLine();
-            if (!TypeValidation.IsValidInt(value, out stock))
+            if (!TypeValidation.IsValidDecimal(value, out stock))
             {
-                this.DisplayInvalidStock();
                 return false;
             }
             return true;
@@ -85,7 +83,7 @@
         /// <param name="products">Product list tot be displayed</param>
         public void DisplayProducts(List<Product> products)
         {
-            if(products == null)
+            if(products.Count == 0)
             {
                 this.DisplayEmpty();
             }

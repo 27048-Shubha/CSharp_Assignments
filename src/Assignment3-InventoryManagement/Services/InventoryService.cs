@@ -26,11 +26,21 @@
         /// <param name="name">Name of the product</param>
         /// <param name="price">Price of the product</param>
         /// <param name="stock">Stock Quantity of the product</param>
-        public void AddProduct(string name, decimal price, int stock)
+        public void AddProduct(string name, decimal price, decimal stock)
         {
             // if product name, price, stock are valid
             Product product = new Product(name, price, stock);
             _repository.AddProduct(product);
+        }
+
+        public decimal GetProductPrice(Guid pId)
+        {
+            return _repository.GetProductPrice(pId);
+        }  
+
+        public decimal GetProductStock(Guid pId)
+        {
+            return _repository.GetProductStock(pId);
         }
 
         /// <summary>
@@ -39,14 +49,8 @@
         /// <param name="name">Name of the product</param>
         /// <param name="price">Price of the product</param>
         /// <param name="stock">Stock Quantity of the product</param>
-        public void EditProduct(string name, decimal price, int stock)
+        public void EditProduct(Guid pId, string name, decimal price, decimal stock)
         {
-            if (!this.IsExists(name))
-            {
-                throw new Exception("Name Not Exists");
-            }
-
-            Guid pId = _repository.GetProductId(name);
             this.EditProductPrice(pId, price);
             this.EditStockQuantity(pId, stock);
         }
@@ -66,7 +70,7 @@
         /// </summary>
         /// <param name="pId">Product Id whose price to be edited</param>
         /// <param name="stock">New stock value </param>
-        public void EditStockQuantity(Guid pId, int stock)
+        public void EditStockQuantity(Guid pId, decimal stock)
         {
             _repository.UpdateStock(pId, stock);
         }
@@ -120,5 +124,22 @@
 
             return true;
         }
+
+        /// <summary>
+        /// Finds prodcut id based on the name
+        /// </summary>
+        /// <param name="name">Name of the product whose Guid to be found</param>
+        /// <returns>Guid of the product.</returns>
+        public Guid GetId(string name)
+        {
+            if (!this.IsExists(name))
+            {
+                throw new Exception("Name Not Exists");
+            }
+
+            Guid pId = _repository.GetProductId(name);
+            return pId;
+        }
+
     }
 }

@@ -31,7 +31,8 @@
             int choice;
             string name;
             decimal price;
-            int stockQuantity = 0;
+            int editMode = 0;
+            decimal stockQuantity = 0;
             List<Product> products;
 
             do
@@ -42,27 +43,45 @@
                 {
                     case 1:
                         _view.GetProductName(out name);
-                        if (_view.GetProductPrice(out price) && _view.GetProductStock(out stockQuantity))
+                        if (!_view.GetProductPrice(out price))
+                        {
+                            _view.DisplayInvalidPrice();
+                        }
+                        else if (!_view.GetProductStock(out stockQuantity))
+                        {
+                            _view.DisplayInvalidStock();
+                        }
+                        else
                         {
                             _service.AddProduct(name, price, stockQuantity);
+                            _view.DisplaySuccess("Insertion");
                         }
 
                         break;
+
                     case 2:
                         _view.GetProductName(out name);
-                        if (_view.GetProductPrice(out price) && _view.GetProductStock(out stockQuantity))
+                        editMode = 1;
+                        Guid pId;
+                        try
                         {
-                            try
+                            pId = _service.GetId(name);
+                            if (!_view.GetProductPrice(out price) && (price == 0))
                             {
-                                _service.EditProduct(name, price, stockQuantity);
-                                _view.DisplaySuccess("Updation");
+                                price = _service.GetProductPrice(pId);
                             }
-                            catch
+                            if (!_view.GetProductStock(out stockQuantity))
                             {
-                                _view.DisplayNameNotFound(name);
+                                stockQuantity = _service.GetProductStock(pId);
                             }
-                        }
+                            _service.EditProduct(pId, name, price, stockQuantity);
+                            _view.DisplaySuccess("Updation");
 
+                        }
+                        catch
+                        {
+                            _view.DisplayNameNotFound(name);
+                        }
                         break;
 
                     case 3:
@@ -79,11 +98,13 @@
                         }
 
                         break;
+
                     case 4:
                         // View
                         products = _service.ListProducts();
                         _view.DisplayProducts(products);
                         break;
+
                     case 5:
                         // Search By Name
                         _view.GetProductName(out name);
