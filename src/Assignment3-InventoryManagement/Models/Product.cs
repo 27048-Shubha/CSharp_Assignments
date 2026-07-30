@@ -20,6 +20,21 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Product"/> class with same GUID.
+        /// </summary>
+        /// <param name="id">Existing Guid of the product</param>
+        /// <param name="name">Name of the product.</param>
+        /// <param name="price">Price of the product.</param>
+        /// <param name="stock">Stock Quantity of the product.</param>
+        public Product(Guid id, string name, decimal price, decimal stock)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Price = price;
+            this.StockQuantity = stock;
+        }
+
+        /// <summary>
         /// Gets id of product
         /// </summary>
         /// <value>Guid of the product</value>

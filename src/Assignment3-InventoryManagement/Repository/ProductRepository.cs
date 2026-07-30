@@ -75,7 +75,7 @@
             List<Product> clone = new List<Product>();
             foreach (Product item in _product)
             {
-                clone.Add(new Product(item.Name, item.Price, item.StockQuantity));
+                clone.Add(new Product(item.Id, item.Name, item.Price, item.StockQuantity));
             }
             return clone;
         }

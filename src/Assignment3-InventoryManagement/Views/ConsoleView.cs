@@ -15,7 +15,7 @@
         {
             Console.WriteLine("Welcome to Inventory Management System!\n");
 
-            Console.WriteLine("1. Add New Product\n2. Edit a Product\n3. Delete a Product\n4. View All Products\n5. Search Product by Name");
+            Console.WriteLine("1. Add New Product\n2. Edit a Product\n3. Delete a Product\n4. View All Products\n5. Search Product by Name\n6. Exit");
         }
 
         /// <summary>

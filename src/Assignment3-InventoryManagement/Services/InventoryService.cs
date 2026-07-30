@@ -134,7 +134,7 @@
         {
             if (!this.IsExists(name))
             {
-                throw new Exception("Name Not Exists");
+                throw new NameNotFound("Name Not Exists");
             }
 
             Guid pId = _repository.GetProductId(name);
