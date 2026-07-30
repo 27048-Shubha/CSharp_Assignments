@@ -1,6 +1,7 @@
 ﻿namespace ContactManager
 {
     using System;
+    using ContactManager.Helpers;
     using ContactManager.Models;
 
     /// <summary>
@@ -14,7 +15,7 @@
         public void DisplayMenu()
         {
             this.DisplayLineBreak();
-            Console.ForegroundColor = ConsoleColor.Blue;
+            ConsoleColorManager.SetColor(ConsoleColor.Blue);
             Console.WriteLine("Welcome to the Contact Manager! \nEnter your choice:\n0. View all contacts, \n1. Add new contact, \n2. Edit existing contact, \n3. Delete a contact, \n4. Search any contact \n5. View sorted list \n6. Exit");
             Console.ResetColor();
             this.DisplayLineBreak();
@@ -26,6 +27,7 @@
         /// <returns>User input receiveed.</returns>
         public string DisplayEditMenu()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter 1 to edit name");
             Console.WriteLine("2 to edit phone number");
             Console.WriteLine("3 to edit email");
@@ -40,6 +42,7 @@
         /// <returns>User input receiveed.</returns>
         public string GetName()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter name: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
@@ -50,6 +53,7 @@
         /// <returns>User input receiveed.</returns>
         public string GetPhoneNumber()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter phone number: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
@@ -60,6 +64,7 @@
         /// <returns>User input receiveed.</returns>
         public string GetEmail()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter email id: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
@@ -70,6 +75,7 @@
         /// <returns>User input receiveed.</returns>
         public string GetNotes()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter notes: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
@@ -80,6 +86,7 @@
         /// <returns>Input integer received from user.</returns>
         public string GetChoice()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter your choice: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
@@ -90,6 +97,7 @@
         /// <param name="contacts">List of contacts to be displayed.</param>
         public void DisplayContact(IReadOnlyList<Contact> contacts)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
             foreach (var item in contacts)
             {
                 Console.WriteLine($"Name: {item.Name}\nPhone Number: {item.PhoneNumber}");
@@ -103,7 +111,7 @@
         /// </summary>
         public void DisplayDefaultMessage()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Enter valid inputs only!");
             Console.ResetColor();
         }
@@ -114,7 +122,7 @@
         /// <param name="message">Success message to be displayed.</param>
         public void DisplaySuccess(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            ConsoleColorManager.SetColor(ConsoleColor.Green);
             Console.WriteLine($"{message}");
             Console.ResetColor();
         }
@@ -124,7 +132,7 @@
         /// </summary>
         public void DisplayEmptyListMessage()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
             Console.WriteLine("No Contacts to display\n");
             Console.ResetColor();
         }
@@ -134,7 +142,7 @@
         /// </summary>
         public void DisplayDuplicateMessage()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Contact already exists!");
             Console.ResetColor();
         }
@@ -144,7 +152,7 @@
         /// </summary>
         public void DisplayExitWarning()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
             Console.WriteLine("To confirm exit enter 'Y'\n");
             Console.ResetColor();
         }
@@ -163,7 +171,7 @@
         /// </summary>
         public void DisplayExitConfirmation()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            ConsoleColorManager.SetColor(ConsoleColor.Green);
             Console.WriteLine("Thank you for using Contact Manager!");
             Console.ResetColor();
         }
@@ -174,7 +182,7 @@
         /// <param name="message">Message to be printed.</param>
         public void DisplayInvalidInputMessage(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine(message);
             Console.ResetColor();
         }
@@ -184,7 +192,7 @@
         /// </summary>
         public void DisplayNotFoundMessage()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Contact not found!");
             Console.ResetColor();
         }
@@ -202,7 +210,7 @@
         /// </summary>
         private void DisplayLineBreak()
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("------------------------------------------");
             Console.ResetColor();
         }

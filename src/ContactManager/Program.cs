@@ -7,7 +7,7 @@
     using ContactManager.Validations;
 
     /// <summary>
-    /// Manages Initialization of Contact Management System.
+    /// Application entry point and composition root. Wires up the dependencies once and hands control to the controller.
     /// </summary>
     internal class Program
     {

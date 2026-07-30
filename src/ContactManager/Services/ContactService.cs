@@ -101,19 +101,19 @@
             switch (editChoice)
             {
                 case "1":
-                    this.repo.EditName(contact, newValue);
+                    contact.Name = newValue;
                     break;
 
                 case "2":
-                    this.repo.EditPhoneNumber(contact, newValue);
+                    contact.PhoneNumber = newValue;
                     break;
 
                 case "3":
-                    this.repo.EditEmail(contact, newValue);
+                    contact.Email = newValue;
                     break;
 
                 case "4":
-                    this.repo.EditNotes(contact, newValue);
+                    contact.Notes = newValue;
                     break;
 
                 default:

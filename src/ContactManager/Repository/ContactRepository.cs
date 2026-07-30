@@ -1,6 +1,7 @@
 ﻿namespace ContactManager.Persistance
 {
     using System.Collections.Generic;
+    using System.Linq;
     using ContactManager.Models;
 
     /// <summary>
@@ -29,46 +30,6 @@
         }
 
         /// <summary>
-        /// to Edit Name of a Contact.
-        /// </summary>
-        /// <param name="contact"> Object that holds Contact Details.</param>
-        /// <param name="newName"> New Name to be updated.</param>
-        public void EditName(Contact contact, string newName)
-        {
-            contact.Name = newName;
-        }
-
-        /// <summary>
-        /// to Edit Phone number of a Contact.
-        /// </summary>
-        /// <param name="contact"> Object that holds Contact Details.</param>
-        /// <param name="newPhoneNo"> New Phone number to be updated.</param>
-        public void EditPhoneNumber(Contact contact, string newPhoneNo)
-        {
-            contact.PhoneNumber = newPhoneNo;
-        }
-
-        /// <summary>
-        /// to Edit Email of a Contact.
-        /// </summary>
-        /// <param name="contact"> Object that holds Contact Details.</param>
-        /// <param name="newEmail"> New Email to be updated.</param>
-        public void EditEmail(Contact contact, string newEmail)
-        {
-            contact.Email = newEmail;
-        }
-
-        /// <summary>
-        /// to Edit Notes of a Contact.
-        /// </summary>
-        /// <param name="contact"> Object that holds Contact Details.</param>
-        /// <param name="newNotes"> New Notes to be updated.</param>
-        public void EditNotes(Contact contact, string newNotes)
-        {
-            contact.Notes = newNotes;
-        }
-
-        /// <summary>
         /// to Delete a Contact from the List.
         /// </summary>
         /// <param name="contact"> Object that holds Contact Details.</param>
@@ -84,15 +45,7 @@
         /// <returns> ContactInfo object if found, otherwise null.</returns>
         public Contact? Get(string name)
         {
-            foreach (var contact in this.contacts)
-            {
-                if (contact.Name == name)
-                {
-                    return contact;
-                }
-            }
-
-            return null;
+            return this.contacts.FirstOrDefault(c => c.Name == name);
         }
 
         /// <summary>
@@ -120,8 +73,7 @@
         /// <returns> Sorted List of ContactInfo objects.</returns>
         public List<Contact> GetAllSortedByName()
         {
-            this.contacts.Sort((x, y) => x.Name.CompareTo(y.Name));
-            return this.contacts;
+            return this.contacts.OrderBy(c => c.Name).ToList();
         }
 
         /// <summary>
@@ -131,9 +83,10 @@
         /// <returns> True if found, otherwise false.</returns>
         public bool ExistsByName(string name)
         {
+            List<Contact> contacts = new List<Contact>();
             foreach (var contact in this.contacts)
             {
-                if (contact.Name.Contains(name))
+                if (contact.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

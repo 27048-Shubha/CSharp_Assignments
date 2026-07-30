@@ -28,7 +28,7 @@
         }
 
         /// <summary>
-        /// Start of execution of Contact Manager Application.
+        /// Contact Manager Application entry point.
         /// </summary>
         public void Initialize()
         {
