@@ -139,24 +139,6 @@
         }
 
         /// <summary>
-        /// Displays price invalid message.
-        /// </summary>
-        public void DisplayInvalidPrice()
-        {
-            ConsoleColorManager.SetColor(ConsoleColor.Red);
-            Console.WriteLine("Invalid price entered! Price must be a positive decimal!");
-        }
-
-        /// <summary>
-        /// Displays stock invalid message.
-        /// </summary>
-        public void DisplayInvalidStock()
-        {
-            ConsoleColorManager.SetColor(ConsoleColor.Red);
-            Console.WriteLine("Invalid stock quantity entered! Stock Quantity must be an integer!");
-        }
-
-        /// <summary>
         /// Displays choice invalid message.
         /// </summary>
         public void DisplayInvalidChoice()
@@ -180,6 +162,16 @@
         /// </summary>
         /// <param name="message">Message to be displayed.</param>
         public void DisplayMessage(string message)
+        {
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
+            Console.WriteLine($"{message}");
+        }
+
+        /// <summary>
+        /// Displays invalid input message to the console.
+        /// </summary>
+        /// <param name="message">Message to be displayed.</param>
+        public void DisplayInvalidInput(string? message)
         {
             ConsoleColorManager.SetColor(ConsoleColor.Yellow);
             Console.WriteLine($"{message}: ");

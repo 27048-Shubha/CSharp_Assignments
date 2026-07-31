@@ -29,6 +29,15 @@
         public void AddProduct(string name, decimal price, decimal stock)
         {
             // if product name, price, stock are valid
+            if (price <= 0)
+            {
+                throw new ArgumentException("Invalid Input! Price must be a positive value.");
+            }
+            else if (stock < 0)
+            {
+                throw new ArgumentException("Invalid Input! Stock must be an non negative value.");
+            }
+
             Product product = new Product(name, price, stock);
             this.repository.AddProduct(product);
         }

@@ -87,16 +87,23 @@
             this.view.GetProductName(out this.name);
             if (!this.view.GetProductPrice(out this.price))
             {
-                this.view.DisplayInvalidPrice();
+                this.view.DisplayInvalidInput("Invalid Input! Price must be a positive value.");
             }
             else if (!this.view.GetProductStock(out this.stockQuantity))
             {
-                this.view.DisplayInvalidStock();
+                this.view.DisplayInvalidInput("Invalid Input! Stock must be an non negative value.");
             }
             else
             {
-                this.service.AddProduct(this.name, this.price, this.stockQuantity);
-                this.view.DisplaySuccess("Insertion");
+                try
+                {
+                    this.service.AddProduct(this.name, this.price, this.stockQuantity);
+                    this.view.DisplaySuccess("Insertion");
+                }
+                catch (ArgumentException e)
+                {
+                    view.DisplayInvalidInput(e.Message);
+                }
             }
         }
 
