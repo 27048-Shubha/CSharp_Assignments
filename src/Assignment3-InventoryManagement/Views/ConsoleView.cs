@@ -2,30 +2,43 @@
 {
     using Assignment3_InventoryManagement.Helper;
     using Assignment3_InventoryManagement.Models;
+    using ConsoleTables;
 
     /// <summary>
-    /// Manages console operations of inventory system
+    /// Manages console operations of inventory system.
     /// </summary>
     public class ConsoleView
     {
         /// <summary>
-        /// Displays Menu for Inventory System
+        /// Displays Dash.
+        /// </summary>
+        public void DisplayDash()
+        {
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
+            Console.WriteLine("------------------------------------");
+        }
+
+        /// <summary>
+        /// Displays Menu for Inventory System.
         /// </summary>
         public void DisplayMenu()
         {
+            this.DisplayDash();
+            ConsoleColorManager.SetColor(ConsoleColor.Cyan);
             Console.WriteLine("Welcome to Inventory Management System!\n");
-
             Console.WriteLine("1. Add New Product\n2. Edit a Product\n3. Delete a Product\n4. View All Products\n5. Search Product by Name\n6. Exit");
+            this.DisplayDash();
         }
 
         /// <summary>
         /// Gets User's choice for Menu gunctions.
         /// </summary>
         /// <param name="choice">Choice entered by the user.</param>
-        /// <returns>True if user enters valid integer else False</returns>
+        /// <returns>True if user enters valid integer else False.</returns>
         public bool GetUserChoice(out int choice)
         {
-            string value = Console.ReadLine();
+            ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
+            string value = Console.ReadLine() ?? string.Empty;
             if (!TypeValidation.IsValidInt(value, out choice))
             {
                 this.DisplayInvalidChoice();
@@ -36,63 +49,73 @@
         }
 
         /// <summary>
-        /// Get value of name of the product
+        /// Get value of name of the product.
         /// </summary>
-        /// <param name="name">Reference to stock of the product</param>
+        /// <param name="name">Reference to stock of the product.</param>
         public void GetProductName(out string name)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
             this.Display("name");
-            name = Console.ReadLine();
+            name = Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Get value of price of the product
+        /// Get value of price of the product.
         /// </summary>
-        /// <param name="price">Reference to price of the product</param>
-        /// <returns>True if price value entered is valid else False</returns>
+        /// <param name="price">Reference to price of the product.</param>
+        /// <returns>True if price value entered is valid else False.</returns>
         public bool GetProductPrice(out decimal price)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
             this.Display("price");
-            string value = Console.ReadLine();
+            string? value = Console.ReadLine();
             if (!TypeValidation.IsValidDecimal(value, out price))
             {
                 return false;
             }
+
             return true;
         }
 
         /// <summary>
-        /// Get value of stock of the product
+        /// Get value of stock of the product.
         /// </summary>
-        /// <param name="stock">Reference to stock of the product</param>
-        /// <returns>True if Stock value is valid else False</returns>
+        /// <param name="stock">Reference to stock of the product.</param>
+        /// <returns>True if Stock value is valid else False.</returns>
         public bool GetProductStock(out decimal stock)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
             this.Display("stock");
-            string value = Console.ReadLine();
+            string? value = Console.ReadLine();
             if (!TypeValidation.IsValidDecimal(value, out stock))
             {
                 return false;
             }
+
             return true;
         }
 
         /// <summary>
         /// Displays information abouta product.
         /// </summary>
-        /// <param name="products">Product list tot be displayed</param>
+        /// <param name="products">Product list tot be displayed.</param>
         public void DisplayProducts(List<Product> products)
         {
-            if(products.Count == 0)
+            if (products.Count == 0)
             {
+                ConsoleColorManager.SetColor(ConsoleColor.Red);
                 this.DisplayEmpty();
             }
             else
             {
-                foreach (Product item in products)
+                ConsoleColorManager.SetColor(ConsoleColor.Yellow);
+                var table = new ConsoleTable("ID", "NAME", "PRICE", "STOCK QUANTITY");
+                foreach (Product product in products)
                 {
-                    Console.WriteLine($"{item.Id} - {item.Name} - {item.Price} - {item.StockQuantity}\n");
+                    table.AddRow(product.Id.ToString()[..6], product.Name, product.Price, product.StockQuantity);
                 }
+
+                table.Write();
             }
         }
 
@@ -101,17 +124,17 @@
         /// </summary>
         public void DisplayDefault()
         {
-            Console.WriteLine(
-                "Kindly Enter Valid Inputs Only!"
-            );
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
+            Console.WriteLine("Kindly Enter Valid Inputs Only!");
         }
 
         /// <summary>
-        /// Displays name not found message
+        /// Displays name not found message.
         /// </summary>
-        /// <param name="name">User input name to be searchewd</param>
+        /// <param name="name">User input name to be searchewd.</param>
         public void DisplayNameNotFound(string name)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine($"The product {name} is not found in the inventory!");
         }
 
@@ -120,6 +143,7 @@
         /// </summary>
         public void DisplayInvalidPrice()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Invalid price entered! Price must be a positive decimal!");
         }
 
@@ -128,6 +152,7 @@
         /// </summary>
         public void DisplayInvalidStock()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Invalid stock quantity entered! Stock Quantity must be an integer!");
         }
 
@@ -136,42 +161,56 @@
         /// </summary>
         public void DisplayInvalidChoice()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Invalid Choice!");
         }
 
         /// <summary>
         /// Displays choice invalid message.
         /// </summary>
-        /// <param name="message">Input variable name to be entered</param>
+        /// <param name="message">Input variable name to be entered.</param>
         public void Display(string message)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Blue);
             Console.WriteLine($"Enter {message}: ");
         }
 
         /// <summary>
-        /// Displays Messages to the console
+        /// Displays Messages to the console..
         /// </summary>
         /// <param name="message">Message to be displayed.</param>
         public void DisplayMessage(string message)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
             Console.WriteLine($"{message}: ");
         }
 
         /// <summary>
-        /// Displays success message for CRUD operations
+        /// Displays success message for CRUD operations.
         /// </summary>
-        /// <param name="operation">Succeeded operation</param>
+        /// <param name="operation">Succeeded operation.</param>
         public void DisplaySuccess(string operation)
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Green);
             Console.WriteLine($"{operation} successful!");
         }
 
         /// <summary>
-        /// Displays inventory empty warning
+        /// Displays inventory empty warning.
         /// </summary>
         public void DisplayEmpty()
         {
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
             Console.WriteLine("Inventory is empty!");
+        }
+
+        /// <summary>
+        /// Displays exit message.
+        /// </summary>
+        public void DiplayExitMessage()
+        {
+            ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
+            Console.WriteLine("Thank You for using Inventory Management System!");
         }
     }
 }

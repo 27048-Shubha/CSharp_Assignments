@@ -1,25 +1,25 @@
 ﻿namespace Assignment3_InventoryManagement.Controllers
 {
+    using Assignment3_InventoryManagement.Enums;
     using Assignment3_InventoryManagement.Exceptions;
     using Assignment3_InventoryManagement.Models;
     using Assignment3_InventoryManagement.Services;
     using Assignment3_InventoryManagement.Views;
-    using System.Diagnostics;
-    using System.Xml.Linq;
-    using System.Xml.Serialization;
 
     /// <summary>
     /// Manages Initializaiton and Menu for Inventory System.
     /// </summary>
     public class InventoryController
     {
-        private readonly ConsoleView _view;
-        private readonly InventoryService _service;
-        int choice;
-        string name;
-        decimal price;
-        decimal stockQuantity = 0;
-        List<Product> products;
+        private readonly ConsoleView view;
+        private readonly InventoryService service;
+
+        private int choice;
+        private string name;
+        private decimal price;
+        private decimal stockQuantity = 0;
+
+        private List<Product> products;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryController"/> class.
@@ -28,8 +28,8 @@
         /// <param name="service">Object for calling services.</param>
         public InventoryController(ConsoleView view, InventoryService service)
         {
-            this._view = view;
-            this._service = service;
+            this.view = view;
+            this.service = service;
         }
 
         /// <summary>
@@ -39,114 +39,133 @@
         {
             do
             {
-                _view.DisplayMenu();
-                _view.GetUserChoice(out choice);
-                switch (choice)
+                this.view.DisplayDash();
+                this.view.DisplayMenu();
+                this.view.GetUserChoice(out this.choice);
+                switch ((MenuOption)this.choice)
                 {
-                    case 1:
+                    case MenuOption.Add:
                         this.AddProduct();
 
                         break;
 
-                    case 2:
+                    case MenuOption.Edit:
                         this.EditProduct();
                         break;
 
-                    case 3:
+                    case MenuOption.Delete:
                         this.DeleteProduct();
                         break;
 
-                    case 4:
+                    case MenuOption.View:
                         // View
                         this.ViewProducts();
                         break;
 
-                    case 5:
+                    case MenuOption.Search:
                         // Search By Name
                         this.GetProductByName();
                         break;
 
-                    case 6:
+                    case MenuOption.Exit:
+                        this.view.DiplayExitMessage();
                         break;
 
                     default:
-                        _view.DisplayDefault();
+                        this.view.DisplayDefault();
                         break;
                 }
             }
-            while (choice != 6);
+            while (this.choice != 6);
         }
 
-        void AddProduct()
+        /// <summary>
+        /// Adds new product to the product list.
+        /// </summary>
+        public void AddProduct()
         {
-            _view.GetProductName(out name);
-            if (!_view.GetProductPrice(out price))
+            this.view.GetProductName(out this.name);
+            if (!this.view.GetProductPrice(out this.price))
             {
-                _view.DisplayInvalidPrice();
+                this.view.DisplayInvalidPrice();
             }
-            else if (!_view.GetProductStock(out stockQuantity))
+            else if (!this.view.GetProductStock(out this.stockQuantity))
             {
-                _view.DisplayInvalidStock();
+                this.view.DisplayInvalidStock();
             }
             else
             {
-                _service.AddProduct(name, price, stockQuantity);
-                _view.DisplaySuccess("Insertion");
+                this.service.AddProduct(this.name, this.price, this.stockQuantity);
+                this.view.DisplaySuccess("Insertion");
             }
         }
 
-        void EditProduct()
+        /// <summary>
+        /// Edits existing product fields.
+        /// </summary>
+        public void EditProduct()
         {
-            _view.GetProductName(out name);
+            this.view.DisplayMessage("Current inventory:");
+            this.ViewProducts();
+            this.view.DisplayMessage("Click enter to skip editing values");
+            this.view.GetProductName(out this.name);
             Guid pId;
             try
             {
-                pId = _service.GetId(name);
-                if (!_view.GetProductPrice(out price) && (price == 0))
+                pId = this.service.GetId(this.name);
+                if (!this.view.GetProductPrice(out this.price) && (this.price == 0))
                 {
-                    price = _service.GetProductPrice(pId);
+                    this.price = this.service.GetProductPrice(pId);
                 }
-                if (!_view.GetProductStock(out stockQuantity))
-                {
-                    stockQuantity = _service.GetProductStock(pId);
-                }
-                _service.EditProduct(pId, name, price, stockQuantity);
-                _view.DisplaySuccess("Updation");
 
+                if (!this.view.GetProductStock(out this.stockQuantity))
+                {
+                    this.stockQuantity = this.service.GetProductStock(pId);
+                }
+
+                this.service.EditProduct(pId, this.name, this.price, this.stockQuantity);
+                this.view.DisplaySuccess("Updation");
             }
             catch
             {
-                _view.DisplayNameNotFound(name);
+                this.view.DisplayNameNotFound(this.name);
             }
         }
 
+        /// <summary>
+        /// Deletes existing product from the product list.
+        /// </summary>
         public void DeleteProduct()
         {
-            _view.GetProductName(out name);
+            this.view.GetProductName(out this.name);
             try
             {
-                _service.RemoveProduct(name);
-                _view.DisplaySuccess("Deletion");
+                this.service.RemoveProduct(this.name);
+                this.view.DisplaySuccess("Deletion");
             }
             catch (NameNotFound e)
             {
-                _view.DisplayMessage(e.Message);
+                this.view.DisplayMessage(e.Message);
             }
-
         }
 
+        /// <summary>
+        /// Sends product list to the view.
+        /// </summary>
         public void ViewProducts()
         {
-            products = _service.ListProducts();
-            _view.DisplayProducts(products);
+            this.products = this.service.ListProducts();
+            this.view.DisplayProducts(this.products);
         }
 
+        /// <summary>
+        /// Gets product by name.
+        /// </summary>
         public void GetProductByName()
         {
-            _view.GetProductName(out name);
-            products = _service.FindProduct(name);
-            _view.DisplayProducts(products);
+            this.view.GetProductName(out this.name);
+            this.products = this.service.FindProduct(this.name);
+            this.view.DisplayProducts(this.products);
         }
-
     }
 }

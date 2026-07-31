@@ -22,7 +22,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class with same GUID.
         /// </summary>
-        /// <param name="id">Existing Guid of the product</param>
+        /// <param name="id">Existing Guid of the product.</param>
         /// <param name="name">Name of the product.</param>
         /// <param name="price">Price of the product.</param>
         /// <param name="stock">Stock Quantity of the product.</param>
@@ -35,36 +35,36 @@
         }
 
         /// <summary>
-        /// Gets id of product
+        /// Gets id of product.
         /// </summary>
-        /// <value>Guid of the product</value>
+        /// <value>Guid of the product.</value>
         public Guid Id
         {
             get; private set;
         }
 
         /// <summary>
-        /// Gets or sets name of product
+        /// Gets or sets name of product.
         /// </summary>
-        /// <value>Name of the product</value>
+        /// <value>Name of the product.</value>
         public string Name
         {
             get; set;
         }
 
         /// <summary>
-        /// Gets or sets price of product
+        /// Gets or sets price of product.
         /// </summary>
-        /// <value>Price of the product</value>
+        /// <value>Price of the product.</value>
         public decimal Price
         {
             get; set;
         }
 
         /// <summary>
-        /// Gets or sets stock quantity of product
+        /// Gets or sets stock quantity of product.
         /// </summary>
-        /// <value>Stock Quantity of the product</value>
+        /// <value>Stock Quantity of the product.</value>
         public decimal StockQuantity
         {
             get; set;

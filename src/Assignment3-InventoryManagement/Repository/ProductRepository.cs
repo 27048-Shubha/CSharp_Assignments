@@ -3,115 +3,129 @@
     using Assignment3_InventoryManagement.Models;
 
     /// <summary>
-    /// Manages CRUD operations of Inventory Management System
+    /// Manages CRUD operations of Inventory Management System.
     /// </summary>
     public class ProductRepository : IProductRepository
     {
-        private List<Product> _product = new List<Product>();
+        private List<Product> product = new List<Product>();
 
         /// <summary>
-        /// Inserts new product
+        /// Inserts new product.
         /// </summary>
-        /// <param name="product">Product object holding user input</param>
+        /// <param name="product">Product object holding user input.</param>
         public void AddProduct(Product product)
         {
-            _product.Add(product);
+            this.product.Add(product);
         }
 
         /// <summary>
-        /// Updates price of the product
+        /// Updates price of the product.
         /// </summary>
         /// <param name="pId">Guid of the product to be updated.</param>
         /// <param name="price">New Price to be updated.</param>
         public void UpdatePrice(Guid pId, decimal price)
         {
-            Product? product = _product.FirstOrDefault(p => p.Id == pId);
+            Product? product = this.product.First(p => p.Id == pId);
             product.Price = price;
         }
 
         /// <summary>
-        /// Updates stock quantity of the product
+        /// Updates stock quantity of the product.
         /// </summary>
         /// <param name="pId">Guid of the product to be updated.</param>
         /// <param name="stock">New stock value to be updated.</param>
         public void UpdateStock(Guid pId, decimal stock)
         {
-            Product? product = _product.FirstOrDefault(p => p.Id == pId);
+            Product? product = this.product.First(p => p.Id == pId);
             product.StockQuantity = stock;
         }
 
+        /// <summary>
+        /// Gets product price.
+        /// </summary>
+        /// <param name="pId">The id of the product.</param>
+        /// <returns>The price of the product.</returns>
         public decimal GetProductPrice(Guid pId)
         {
-            Product foundProduct = _product.FirstOrDefault(p => p.Id == pId);
-            return foundProduct.Price;
+            Product? foundProduct = this.product.FirstOrDefault(p => p.Id == pId);
+            return foundProduct?.Price ?? 0m;
         }
 
-        public decimal GetProductStock (Guid pId)
-        {
-            Product foundProduct = _product.FirstOrDefault(p => p.Id == pId);
-            return foundProduct.StockQuantity;
-        }
         /// <summary>
-        /// Deletes existing product
+        /// Gets stock quantity of the product.
+        /// </summary>
+        /// <param name="pId">The Id of the product.</param>
+        /// <returns>The stock quantity of the product.</returns>
+        public decimal GetProductStock(Guid pId)
+        {
+            Product? foundProduct = this.product.FirstOrDefault(p => p.Id == pId);
+            return foundProduct?.StockQuantity ?? 0m;
+        }
+
+        /// <summary>
+        /// Deletes existing product.
         /// </summary>
         /// <param name="productId">Guid of the product to be deleted.</param>
         public void DeleteProduct(Guid productId)
         {
-            for (int i = 0; i < _product.Count; i++)
+            for (int i = 0; i < this.product.Count; i++)
             {
-                if (_product[i].Id == productId)
+                if (this.product[i].Id == productId)
                 {
-                    _product.RemoveAt(i);
+                    this.product.RemoveAt(i);
                 }
             }
         }
 
         /// <summary>
-        /// Lists list of all products
+        /// Lists list of all products.
         /// </summary>
-        /// <returns>Returns clone copy of products</returns>
+        /// <returns>Returns clone copy of products.</returns>
         public List<Product> ViewProducts()
         {
             List<Product> clone = new List<Product>();
-            foreach (Product item in _product)
+            foreach (Product item in this.product)
             {
                 clone.Add(new Product(item.Id, item.Name, item.Price, item.StockQuantity));
             }
+
             return clone;
         }
 
         /// <summary>
-        /// Search for the product based on the name
+        /// Search for the product based on the name.
         /// </summary>
-        /// <param name="name">Details of the product</param>
-        /// <returns>Returns product details in the cloned copy</returns>
+        /// <param name="name">Details of the product.</param>
+        /// <returns>Returns product details in the cloned copy.</returns>
         public List<Product> SearchProduct(string name)
         {
             List<Product> products = new List<Product>();
-            foreach (Product product in _product)
+            foreach (Product product in this.product)
             {
                 if (product.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
                     products.Add(new Product(product.Id, product.Name, product.Price, product.StockQuantity));
                 }
             }
+
             return products;
         }
 
         /// <summary>
-        /// Finds prodcut id based on the name
+        /// Finds prodcut id based on the name.
         /// </summary>
-        /// <param name="name">Name of the product whose Guid to be found</param>
+        /// <param name="name">Name of the product whose Guid to be found.</param>
         /// <returns>Guid of the product.</returns>
         public Guid GetProductId(string name)
         {
-            for (int i = 0; i < _product.Count; i++)
+            for (int i = 0; i < this.product.Count; i++)
             {
-                if (_product[i].Name == name)
+                if (this.product[i].Name == name)
                 {
-                    return _product[i].Id;
+                    return this.product[i].Id;
                 }
             }
+
             return Guid.Empty;
         }
     }
