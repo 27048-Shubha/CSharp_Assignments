@@ -92,7 +92,7 @@
             {
                 if (product.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    products.Add(product);
+                    products.Add(new Product(product.Id, product.Name, product.Price, product.StockQuantity));
                 }
             }
             return products;
