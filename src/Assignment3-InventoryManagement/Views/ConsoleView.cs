@@ -31,6 +31,18 @@
         }
 
         /// <summary>
+        /// Displays Menu for Inventory System.
+        /// </summary>
+        public void DisplaySortMenu()
+        {
+            this.DisplayDash();
+            ConsoleColorManager.SetColor(ConsoleColor.Cyan);
+            Console.WriteLine("Enter: \n");
+            Console.WriteLine("1.Sort By Name\n2. Sort By Price\n3. Sort By Stock Quanitty\n4. View All Products\n5. Search Product by Name\n6. Exit");
+            this.DisplayDash();
+        }
+
+        /// <summary>
         /// Gets User's choice for Menu gunctions.
         /// </summary>
         /// <param name="choice">Choice entered by the user.</param>
@@ -101,22 +113,14 @@
         /// <param name="products">Product list tot be displayed.</param>
         public void DisplayProducts(List<Product> products)
         {
-            if (products.Count == 0)
+            ConsoleColorManager.SetColor(ConsoleColor.Yellow);
+            var table = new ConsoleTable("ID", "NAME", "PRICE", "STOCK QUANTITY");
+            foreach (Product product in products)
             {
-                ConsoleColorManager.SetColor(ConsoleColor.Red);
-                this.DisplayEmpty();
+                table.AddRow(product.Id.ToString()[..6], product.Name, product.Price, product.StockQuantity);
             }
-            else
-            {
-                ConsoleColorManager.SetColor(ConsoleColor.Yellow);
-                var table = new ConsoleTable("ID", "NAME", "PRICE", "STOCK QUANTITY");
-                foreach (Product product in products)
-                {
-                    table.AddRow(product.Id.ToString()[..6], product.Name, product.Price, product.StockQuantity);
-                }
 
-                table.Write();
-            }
+            table.Write();
         }
 
         /// <summary>
@@ -126,16 +130,6 @@
         {
             ConsoleColorManager.SetColor(ConsoleColor.Red);
             Console.WriteLine("Kindly Enter Valid Inputs Only!");
-        }
-
-        /// <summary>
-        /// Displays name not found message.
-        /// </summary>
-        /// <param name="name">User input name to be searchewd.</param>
-        public void DisplayNameNotFound(string name)
-        {
-            ConsoleColorManager.SetColor(ConsoleColor.Red);
-            Console.WriteLine($"The product {name} is not found in the inventory!");
         }
 
         /// <summary>
@@ -174,7 +168,7 @@
         public void DisplayInvalidInput(string? message)
         {
             ConsoleColorManager.SetColor(ConsoleColor.Yellow);
-            Console.WriteLine($"{message}: ");
+            Console.WriteLine($"{message}");
         }
 
         /// <summary>
@@ -203,6 +197,15 @@
         {
             ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
             Console.WriteLine("Thank You for using Inventory Management System!");
+        }
+
+        /// <summary>
+        /// Clears console.
+        /// </summary>
+        public void ClearConsole()
+        {
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }

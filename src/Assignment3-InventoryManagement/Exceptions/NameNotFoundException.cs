@@ -5,13 +5,13 @@
     /// <summary>
     /// User Defined Exception when Name Not is not found in product repo extended from Exception.
     /// </summary>
-    public class NameNotFound : Exception
+    public class NameNotFoundException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NameNotFound"/> class.
+        /// Initializes a new instance of the <see cref="NameNotFoundException"/> class.
         /// </summary>
         /// <param name="message">Error message.</param>
-        public NameNotFound(string? message)
+        public NameNotFoundException(string? message)
             : base(message)
         {
             // User Defined Exception.

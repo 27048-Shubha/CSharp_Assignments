@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents CRUD operation menu for inventory system.
     /// </summary>
-    internal enum MenuOption
+    internal enum MenuOptions
     {
         /// <summary>
         /// Represents addition of the new product.

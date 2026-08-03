@@ -128,5 +128,14 @@
 
             return Guid.Empty;
         }
+
+        /// <summary>
+        /// Gets count of products inside product list.
+        /// </summary>
+        /// <returns>The total number of products in the product list. </returns>
+        public int GetProductCount()
+        {
+            return this.product.Count;
+        }
     }
 }

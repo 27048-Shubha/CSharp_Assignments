@@ -104,7 +104,7 @@
             Guid productId = this.repository.GetProductId(name);
             if (productId == Guid.Empty)
             {
-                throw new NameNotFound("Product Name doesn't Exists");
+                throw new NameNotFoundException("Product Name doesn't Exists");
             }
             else
             {
@@ -118,7 +118,14 @@
         /// <returns>List of Products.</returns>
         public List<Product> ListProducts()
         {
-            return this.repository.ViewProducts();
+            if (this.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+            else
+            {
+                return this.repository.ViewProducts();
+            }
         }
 
         /// <summary>
@@ -155,11 +162,85 @@
         {
             if (!this.IsExists(name))
             {
-                throw new NameNotFound("Name Not Exists");
+                throw new NameNotFoundException($"The {name} not found!");
             }
 
             Guid pId = this.repository.GetProductId(name);
             return pId;
+        }
+
+        /// <summary>
+        /// Sorts product list by name of the products.
+        /// </summary>
+        /// <returns>The sorted list of products.</returns>
+        /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
+        public List<Product> SortByName()
+        {
+            if (this.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+            else
+            {
+                List<Product> products = this.ListProducts();
+                products.Sort((a, b) => a.Name.CompareTo(b.Name));
+                return products;
+            }
+        }
+
+        /// <summary>
+        /// Sorts product list by price of the products.
+        /// </summary>
+        /// <returns>The sorted list of products.</returns>
+        /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
+        public List<Product> SortByPrice()
+        {
+            if (this.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+            else
+            {
+                List<Product> products = this.ListProducts();
+                products.Sort((a, b) => a.Price.CompareTo(b.Price));
+                return products;
+            }
+        }
+
+        /// <summary>
+        /// Sorts product list by stock quantity of the products.
+        /// </summary>
+        /// <returns>The sorted list of products.</returns>
+        /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
+        public List<Product> SortByStockQuantity()
+        {
+            if (this.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+            else
+            {
+                List<Product> products = this.ListProducts();
+                products.Sort((a, b) => a.StockQuantity.CompareTo(b.StockQuantity));
+                return products;
+            }
+        }
+
+        /// <summary>
+        /// Checks whether the list is empty.
+        /// </summary>
+        /// <returns>True if the list is empty, else False. </returns>
+        public bool IsEmpty()
+        {
+            int count = this.repository.GetProductCount();
+            if (count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -7,6 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Enums\SortMenuOption.cs" />
+  </ItemGroup>
+
   <ItemGroup Label="CSharpAnalyser">
     <PackageReference Include="ConsoleTables" Version="2.7.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
