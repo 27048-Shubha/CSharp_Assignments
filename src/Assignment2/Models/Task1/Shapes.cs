@@ -1,47 +1,48 @@
-﻿using System;
-
-namespace Assignment2.Models.Task1
+﻿namespace Assignment2.Models.Task1
 {
+    using System;
+
     /// <summary>
-    /// Abstract Class that holds
+    /// Abstract class of shapes containing color, area calculation, print method.
     /// </summary>
     public abstract class Shapes
     {
-        private string _color;
-        private double _area;
+        private string? color;
+        private double area;
+
         /// <summary>
-        /// Gets or sets Color of the Shape
+        /// Gets or sets color of the shape.
         /// </summary>
-        /// <value> Name of the Color entered by the user </value>
-        public string Color
+        /// <value> The name of the color entered by the user. </value>
+        public string? Color
         {
-            get { return _color; }
-            set { _color = value; }
+            get { return this.color; }
+            set { this.color = value; }
         }
 
         /// <summary>
-        /// Gets or sets Area of the Shape
+        /// Gets or sets area of the shape.
         /// </summary>
-        /// <value> Holds value of the area </value>
+        /// <value> The name of the area entered by the user. </value>
         public double Area
         {
-            get { return _area; }
-            set { _area = value; }
+            get { return this.area; }
+            set { this.area = value; }
         }
 
         /// <summary>
-        /// Abstract Method to calculate area
+        /// Abstract method to calculate area.
         /// </summary>
-        /// <returns> Area of the respective shapes after calculation </returns>
+        /// <returns> Area of the shape. </returns>
         public abstract double CalculateArea();
 
         /// <summary>
-        /// Displays Details of the Shape
+        /// Displays details of the shape.
         /// </summary>
-        /// <returns> Details of the Shape </returns>
+        /// <returns> The details of the shape. </returns>
         public string PrintDetails()
         {
-            return $"Shape Type: {GetType().Name} \nColor: {Color} \nArea: {Math.Round(Area, 2)}\n";
+            return $"Shape Type: {this.GetType().Name} \nColor: {this.Color} \nArea: {Math.Round(this.Area, 2)}\n";
         }
     }
 }

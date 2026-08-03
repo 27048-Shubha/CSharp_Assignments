@@ -1,45 +1,46 @@
 ﻿namespace Assignment2.Models.Task2
 {
     /// <summary>
-    /// Handles Bonus Calculation of Developer interited from Employee.
+    /// Handles bonus calculation of the Developer inherited from the Employee.
     /// </summary>
     public class Developer : Employee
     {
-        private decimal _bonus;
+        private decimal bonus;
 
         /// <summary>
-        /// Gets or Sets Bonus of the Developer.
+        /// Gets or sets bonus value of the developer.
         /// </summary>
-        /// <value>Bonus salary of the Developer.</value>
+        /// <value> The bonus salary of the developer. </value>
         public decimal Bonus
         {
             get
             {
-                return _bonus;
+                return this.bonus;
             }
+
             set
             {
-                _bonus = value;
+                this.bonus = value;
             }
         }
 
         /// <summary>
-        /// Calculates Bonus of the Developer.
+        /// Calculates bonus of the developer.
         /// </summary>
-        /// <returns> Calculated Bonus. </returns>
+        /// <returns> The calculted bonus of the developer. </returns>
         public override decimal CalculateBonus()
         {
-            Bonus = Salary * 0.10m;
-            return Bonus;
+            this.Bonus = this.Salary * 0.10m;
+            return this.Bonus;
         }
 
         /// <summary>
-        /// Displays Bonus of the Developer after calling PrintDetails from Base Class.
+        /// Displays the details and the bonus of the developer.
         /// </summary>
-        /// <returns> Details of the Developer. </returns>
+        /// <returns> The details of the developer. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}Bonus: {CalculateBonus()}";
+            return $"{this.PrintDetails()}Bonus: {this.CalculateBonus()}";
         }
     }
 }

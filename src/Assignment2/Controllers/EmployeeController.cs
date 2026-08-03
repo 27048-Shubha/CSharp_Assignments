@@ -1,25 +1,29 @@
-﻿using Assignment2.Services;
-using Assignment2.Views;
-
-namespace Assignment2.Controllers
+﻿namespace Assignment2.Controllers
 {
+    using Assignment2.Services;
+    using Assignment2.Views;
+
     /// <summary>
-    /// Controls Menu service and communicates with Console and Service
+    /// Controls Employee system's menu this.service and communicates with this.console and this.service.
     /// </summary>
     public class EmployeeController
     {
-        private EmployeeView _console;
-        private EmployeeService _service;
-
-        public EmployeeController(EmployeeView _console, EmployeeService _service)
-        {
-            this._console = _console;
-            this._service = _service;
-        }
-
+        private EmployeeView console;
+        private EmployeeService service;
 
         /// <summary>
-        /// Execution of Employee starts here
+        /// Initializes a new instance of the <see cref="EmployeeController"/> class.
+        /// </summary>
+        /// <param name="console"> The object to handle console operations. </param>
+        /// <param name="service"> The object to handle services. </param>
+        public EmployeeController(EmployeeView console, EmployeeService service)
+        {
+            this.console = console;
+            this.service = service;
+        }
+
+        /// <summary>
+        /// Start point of execution of Employee Hierarchy system.
         /// </summary>
         public void Initialize()
         {
@@ -27,35 +31,35 @@ namespace Assignment2.Controllers
 
             do
             {
-                _console.DisplayEmployeeMenu();
-                choice = _console.GetEmployeeMenuInput();
+                this.console.DisplayMenu();
+                choice = this.console.GetUserChoice();
                 string message;
 
                 switch (choice)
                 {
                     case 'D':
                     case 'd':
-                        message = _service.AddDeveloper(_console.GetEmployeeName(), _console.GetEmployeeSalary());
-                        _console.DisplayMessage(message);
+                        message = this.service.AddDeveloper(this.console.GetEmployeeName(), this.console.GetEmployeeSalary());
+                        this.console.DisplayMessage(message);
                         break;
 
                     case 'M':
                     case 'm':
-                        message = _service.AddManager(_console.GetEmployeeName(), _console.GetEmployeeSalary());
-                        _console.DisplayMessage(message);
+                        message = this.service.AddManager(this.console.GetEmployeeName(), this.console.GetEmployeeSalary());
+                        this.console.DisplayMessage(message);
                         break;
-
 
                     case 'Q':
                     case 'q':
-                        _console.DisplayExitMessage();
+                        this.console.DisplayExitMessage();
                         break;
 
                     default:
-                        _console.DisplayDefault();
+                        this.console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'Q' && choice != 'q');
+            }
+            while (choice != 'Q' && choice != 'q');
         }
     }
 }

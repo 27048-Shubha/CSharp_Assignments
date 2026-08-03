@@ -1,22 +1,23 @@
 ﻿namespace Assignment2.Models.Task3
 {
     /// <summary>
-    /// Manages Savings Account inherited from Bank Account class.
+    /// Manages savings account inherited from Bank Account class.
     /// </summary>
     public class SavingsAccount : BankAccount
     {
         /// <summary>
-        /// Implementation of Abstract method that checks and updates balance
+        /// Implements abstract method to withdraw from savings bank account.
         /// </summary>
-        /// <param name="amount">Amount tot be Withdrawn</param>
-        /// <returns>True on </returns>
+        /// <param name="amount">The amount to be withdrawn.</param>
+        /// <returns>True on withdrawal success, False when balance falls beyond minimum balance.</returns>
         public override bool Withdraw(decimal amount)
         {
-            if (base.Balance - amount < 100)
+            if (this.Balance - amount < 100)
             {
                 return false;
             }
-            base.Balance -= amount;
+
+            this.Balance -= amount;
             return true;
         }
     }

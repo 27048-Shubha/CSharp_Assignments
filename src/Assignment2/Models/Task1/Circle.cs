@@ -1,38 +1,38 @@
 ﻿namespace Assignment2.Models.Task1
 {
     /// <summary>
-    /// Holds Attributes and Methods of Circle Inherited from Shapes
+    /// Handles area calculation of the Circle inherited from the Shape.
     /// </summary>
     internal class Circle : Shapes
     {
-        private double _radius;
+        private double radius;
 
         /// <summary>
-        /// Gets or sets Radius of the Circle
+        /// Gets or sets radius of the circle.
         /// </summary>
-        /// <value> Radius of the Circle </value>
+        /// <value> The radius of the circle. </value>
         public double Radius
         {
-            get { return _radius; }
-            set { _radius = value; }
+            get { return this.radius; }
+            set { this.radius = value; }
         }
 
         /// <summary>
-        /// Calculates Area of the Circle
+        /// Calculates area of the circle.
         /// </summary>
-        /// <returns> Area of the Circle </returns>
+        /// <returns> The area of the circle. </returns>
         public override double CalculateArea()
         {
-            return Math.PI * Radius * Radius;
+            return Math.PI * this.Radius * this.Radius;
         }
 
         /// <summary>
-        /// Displays details of Circle
+        /// Displays details of circle.
         /// </summary>
-        /// <returns> Details of the Circle </returns>
+        /// <returns> The details of the cirle. </returns>
         public new string PrintDetails()
         {
-            return base.PrintDetails();
+            return this.PrintDetails();
         }
     }
 }

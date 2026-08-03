@@ -1,86 +1,98 @@
-﻿using Assignment2.Models.Task3;
-using Assignment2.Repository;
-using Assignment2.Validations;
-using Assignment2.Views;
-
-namespace Assignment2.Services
+﻿namespace Assignment2.Services
 {
+    using Assignment2.Models.Task3;
+    using Assignment2.Repository;
+    using Assignment2.Validations;
+
     /// <summary>
-    /// Manages Services of Banking System
+    /// Handles business logic validation and sends call to repository after validation.
     /// </summary>
     public class BankSystemService
     {
-        private BankSystemRepo _repo;
-        private ValidateInput _validate;
+        private BankSystemRepo repo;
+        private ValidateInput validate;
 
-        public BankSystemService(BankSystemRepo _repo, ValidateInput _validate)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BankSystemService"/> class.
+        /// </summary>
+        /// <param name="repo"> The object to handle repository operations. </param>
+        /// <param name="validate"> The object to handle validation operations. </param>
+        public BankSystemService(BankSystemRepo repo, ValidateInput validate)
         {
-            this._repo = _repo;
-            this._validate = _validate;
+            this.repo = repo;
+            this.validate = validate;
         }
 
         /// <summary>
-        /// Checks and passes to the Savings Account Repository
+        /// Calls repo for savings account creation.
         /// </summary>
-        /// <returns> Details of the BankAccount If True, else null</returns>
+        /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateSavingsAccount()
         {
-            //if(_repo.ValidateSalary(salary))
-            {
-                return _repo.CreateSavingsAccount();
-            }
-            return null;
+            return this.repo.CreateSavingsAccount();
         }
 
         /// <summary>
-        /// Checks and passes to the Savings Account Repository
+        /// Calls repo for savings account creation.
         /// </summary>
-        /// <returns> Details of the BankAccount If True, else null</returns>
+        /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateCheckingAccount()
         {
-            //if(_repo.ValidateSalary(salary))
-            {
-                return _repo.CreateCheckingAccount();
-            }
-            return null;
+            return this.repo.CreateCheckingAccount();
         }
 
         /// <summary>
-        /// Checks Balance based on current object.
+        /// Gets balance amount in the current account.
         /// </summary>
-        /// <param name="account">Account whose balance to be checked.</param>
-        /// <returns>Balance of the current account.</returns>
+        /// <param name="account">The account's balance to be checked.</param>
+        /// <returns>The balance of the current account.</returns>
         public decimal CheckBalance(BankAccount account)
         {
             return account.Balance;
         }
 
+        /// <summary>
+        /// Validates and deposits amount to the bank account.
+        /// </summary>
+        /// <param name="account">The account on which amount to be deposited.</param>
+        /// <param name="amount">The amount to be deposited.</param>
+        /// <returns>True on successful deposit operation, else false.</returns>
         public bool DepositAmount(BankAccount account, string amount)
         {
-            if (_validate.IsNumber(amount))
+            if (this.validate.IsNumber(amount))
             {
                 decimal amountDecimal = Convert.ToDecimal(amount);
-                if(!_validate.IsZero(amountDecimal) && !_validate.IsNegative(amountDecimal))
+                if (!this.validate.IsZero(amountDecimal) && !this.validate.IsNegative(amountDecimal))
                 {
                     account.Deposit(amountDecimal);
                     return true;
                 }
+
                 return false;
             }
+
             return false;
         }
 
+        /// <summary>
+        /// Validates and withdraws amount from the account.
+        /// </summary>
+        /// <param name="account">The account from which amount to be withdrawn.</param>
+        /// <param name="amount">The amount to be withdrawn.</param>
+        /// <returns>True on successful withdrawal operation, else false.</returns>
         public bool WithdrawAmount(BankAccount account, string amount)
         {
-            if (_validate.IsNumber(amount))
+            if (this.validate.IsNumber(amount))
             {
                 decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!_validate.IsZero(amountDecimal) && !_validate.IsNegative(amountDecimal))
+                if (!this.validate.IsZero(amountDecimal) && !this.validate.IsNegative(amountDecimal))
                 {
                     return account.Withdraw(amountDecimal);
                 }
+
                 return false;
             }
+
             return false;
         }
     }

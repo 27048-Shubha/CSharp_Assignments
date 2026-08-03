@@ -1,24 +1,19 @@
-﻿using Assignment2.Models.Task1;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment2.Repository
+﻿namespace Assignment2.Repository
 {
+    using Assignment2.Models.Task1;
+
     /// <summary>
-    /// Handles Object Creation of Rectangle and Circle class
+    /// Handles repository operations of the shape hierarchy application.
     /// </summary>
     public class ShapeRepository
     {
         /// <summary>
-        /// Creates object for Rectangle
+        /// Intantiates and initializes object values of rectangle.
         /// </summary>
-        /// <param name="color"> color of the Rectangle </param>
-        /// <param name="length"> length of the Rectangle </param>
-        /// <param name="breadth"> breadth of the Rectangle </param>
-        /// <returns> Details of Rectangle </returns>
+        /// <param name="color">The color of the rectangle. </param>
+        /// <param name="length">The length of the rectangle. </param>
+        /// <param name="breadth">The breadth of the rectangle. </param>
+        /// <returns>The details of rectangle created. </returns>
         public string AddRectangle(string color, double length, double breadth)
         {
             Rectangle rectangle = new Rectangle();
@@ -30,11 +25,11 @@ namespace Assignment2.Repository
         }
 
         /// <summary>
-        /// Creates object for Circle
+        /// Intantiates and initializes object values of circle.
         /// </summary>
-        /// <param name="color"> color of the Circle </param>
-        /// <param name="radius"> radius of the Circle </param>
-        /// <returns> Details of Circle </returns>
+        /// <param name="color">The color of the circle. </param>
+        /// <param name="radius">The radius of the circle. </param>
+        /// <returns>The details of circle created. </returns>
         public string AddCircle(string color, double radius)
         {
             Circle circle = new Circle();

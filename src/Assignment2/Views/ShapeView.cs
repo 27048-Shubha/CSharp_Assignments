@@ -1,78 +1,69 @@
 ﻿namespace Assignment2.Views
 {
     /// <summary>
-    /// Hanldes Console Operations of Shape System
+    /// Hanldes console operations of shape system.
     /// </summary>
-    public class ShapeView: MainView
+    public class ShapeView : MainView
     {
         /// <summary>
-        /// Displays StartUp Menu for Shape System
+        /// Displays start up menu for shape system.
         /// </summary>
         public void DisplayShapesMenu()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            base.DisplayLineBreaker();
-            Console.WriteLine("Welcome to Shape SYSTEM\n");
-            Console.WriteLine("[R] to enter details of Rectangle: ");
-            Console.WriteLine("[C] to enter details of Circle: ");
-            Console.WriteLine("[Q] to Quit: ");
-            base.DisplayLineBreaker();
+            this.DisplayLineBreaker();
+            Console.WriteLine("Welcome to shape system\n");
+            Console.WriteLine("[R] to enter details of rectangle: ");
+            Console.WriteLine("[C] to enter details of circle: ");
+            Console.WriteLine("[Q] to quit: ");
+            this.DisplayLineBreaker();
             Console.ResetColor();
         }
 
         /// <summary>
-        /// Gets Choice for Menu
+        /// Gets color of the shape.
         /// </summary>
-        /// <returns> User's Choice </returns>
-        public char GetShapeMenuInput()
-        {
-            return Char.Parse(Console.ReadLine());
-        }
-
-        /// <summary>
-        /// Gets Color of the Shape
-        /// </summary>
-        /// <returns> Color as Input from user </returns>
+        /// <returns> The color as input from user. </returns>
         public string GetShapeColor()
         {
             Console.WriteLine("Enter Color: ");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Gets Radius of the Circle
+        /// Gets radius of the circle.
         /// </summary>
-        /// <returns> Radius as Input from user </returns>
+        /// <returns> The radius as input from user. </returns>
         public string GetRadius()
         {
             Console.WriteLine("Enter Radius: ");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Gets Length of the Rectangle
+        /// Gets length of the rectangle.
         /// </summary>
-        /// <returns> Length as Input from user </returns>
+        /// <returns> The length as input from user. </returns>
         public string GetLength()
         {
             Console.WriteLine("Enter Length: ");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Gets Breadth of the Rectangle
+        /// Gets breadth of the rectangle.
         /// </summary>
-        /// <returns> Breadth as Input from user </returns>
+        /// <returns> The breadth as input from user. </returns>
         public string GetBreadth()
         {
             Console.WriteLine("Enter Breadth: ");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Displays Message received.
+        /// Displays message received from the user.
         /// </summary>
-        /// <param name="message"> User Details or Error Message as string </param>
+        /// <param name="message"> The message received from the user. </param>
         public void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}");

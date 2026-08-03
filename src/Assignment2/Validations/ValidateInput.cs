@@ -1,36 +1,101 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment2.Validations
+﻿namespace Assignment2.Validations
 {
+    /// <summary>
+    /// Manages input validation operation.
+    /// </summary>
     public class ValidateInput
     {
-        public bool IsZero(decimal n)
+        /// <summary>
+        /// Checks whether the input character is valid or not.
+        /// </summary>
+        /// <param name="input">The input to be validated.</param>
+        /// <param name="value">Stores input if its a character. </param>
+        /// <returns>True if input string is a character else false. </returns>
+        public static bool IsValidChar(string input, out char value)
         {
-            return (n == 0);
+            if (char.TryParse(input, out value))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public bool IsZero(double n)
+        /// <summary>
+        /// Checks whether the input decimal is valid or not.
+        /// </summary>
+        /// <param name="input">The input to be validated.</param>
+        /// <param name="value">Stores input if its a decimal. </param>
+        /// <returns>True if input string is a decimal else false. </returns>
+        public static bool IsValidDecimal(string input, out decimal value)
         {
-            return (n == 0);
+            if (decimal.TryParse(input, out value))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public bool IsNegative(decimal n)
+        /// <summary>
+        /// Checks whether received input is zero or not.
+        /// </summary>
+        /// <param name="num">The input to be validated. </param>
+        /// <returns>True if given input is zero else false. </returns>
+        public bool IsZero(decimal num)
         {
-            return (n < 0);
-        }
-        public bool IsNegative(double n)
-        {
-            return (n < 0);
+            return num == 0;
         }
 
+        /// <summary>
+        /// Checks whether received input is zero or not.
+        /// </summary>
+        /// <param name="num">The input to be validated. </param>
+        /// <returns>True if given input is zero else false. </returns>
+        public bool IsZero(double num)
+        {
+            return num == 0;
+        }
+
+        /// <summary>
+        /// Checks whether received input is negative or not.
+        /// </summary>
+        /// <param name="num">The input to be validated. </param>
+        /// <returns>True if given input is negative else false. </returns>
+        public bool IsNegative(decimal num)
+        {
+            return num < 0;
+        }
+
+        /// <summary>
+        /// Checks whether received input is zero or not.
+        /// </summary>
+        /// <param name="num">The input to be validated. </param>
+        /// <returns>True if given input is zero else false. </returns>
+        public bool IsNegative(double num)
+        {
+            return num < 0;
+        }
+
+        /// <summary>
+        /// Checks whether received input is string or not.
+        /// </summary>
+        /// <param name="input">The input to be validated. </param>
+        /// <returns>True if given input is a string else false. </returns>
         public bool IsString(string input)
         {
-            return input.All(Char.IsLetter);
+            return input.All(char.IsLetter);
         }
+
+        /// <summary>
+        /// Checks whether received input is a number or not.
+        /// </summary>
+        /// <param name="input">The input to be validated. </param>
+        /// <returns>True if given input is a number else false. </returns>
         public bool IsNumber(string input)
         {
             foreach (char c in input)
@@ -40,6 +105,7 @@ namespace Assignment2.Validations
                     return false;
                 }
             }
+
             return true;
         }
     }

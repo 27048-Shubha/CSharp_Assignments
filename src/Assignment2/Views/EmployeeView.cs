@@ -1,62 +1,52 @@
 ﻿namespace Assignment2.Views
 {
     /// <summary>
-    /// Hanldes Console Operations of Employee System
+    /// Hanldes the console operations of employee system.
     /// </summary>
-    public class EmployeeView: MainView
+    public class EmployeeView : MainView
     {
         /// <summary>
-        /// Displays StartUp Menu for Employee System
+        /// Displays startup menu for the employee system.
         /// </summary>
-        public void DisplayEmployeeMenu()
+        public override void DisplayMenu()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            base.DisplayLineBreaker();
-            Console.WriteLine("Welcome to EMPLOYEE SYSTEM\n");
+            this.DisplayLineBreaker();
+            Console.WriteLine("Welcome to employee system\n");
             Console.WriteLine("[D] to enter details of Developer:");
             Console.WriteLine("[M] to enter details of Manager:");
-            base.DisplayLineBreaker();
+            this.DisplayLineBreaker();
             Console.ResetColor();
         }
 
         /// <summary>
-        /// Gets Choice for Menu
+        /// Gets name of the employee.
         /// </summary>
-        /// <returns> User's Choice </returns>
-        public char GetEmployeeMenuInput()
-        {
-            return Char.Parse(Console.ReadLine());
-        }
-
-        /// <summary>
-        /// Gets Name of the Employee
-        /// </summary>
-        /// <returns> Name as Input from user </returns>
+        /// <returns> The input name from the user. </returns>
         public string GetEmployeeName()
         {
             Console.WriteLine("Enter Name: ");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Gets Salary of the Employee
+        /// Gets salary of the employee.
         /// </summary>
-        /// <returns> Name as Input from user </returns>
+        /// <returns> The input salary from user. </returns>
         public string GetEmployeeSalary()
         {
             Console.WriteLine("Enter Salary: ");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Displays Message received.
+        /// Displays the message received as argument.
         /// </summary>
-        /// <param name="message"> User Details or Error Message as string </param>
+        /// <param name="message"> The message received as the argument.</param>
         public void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}\n");
         }
 
-        
     }
 }

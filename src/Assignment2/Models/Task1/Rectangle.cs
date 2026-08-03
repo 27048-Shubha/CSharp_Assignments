@@ -1,50 +1,51 @@
-﻿using System;
-
-namespace Assignment2.Models.Task1
+﻿namespace Assignment2.Models.Task1
 {
+    using System;
+
     /// <summary>
-    /// Holds Attributes and Methods of Rectangle Inherited from Shapes
+    /// Handles area calculation of the Rectangle inherited from the Shape.
     /// </summary>
     public class Rectangle : Shapes
     {
-        private double _length, _breadth;
+        private double length;
+        private double breadth;
 
         /// <summary>
-        /// Gets or sets Length of the Rectangle
+        /// Gets or sets length of the rectangle.
         /// </summary>
-        /// <value> Length of the Rectangle </value>
+        /// <value> The length of the rectangle. </value>
         public double Length
         {
-            get { return _length; }
-            set { _length = value; }
+            get { return this.length; }
+            set { this.length = value; }
         }
 
         /// <summary>
-        /// Gets or sets Breadth of the Rectangle
+        /// Gets or sets breadth of the rectangle.
         /// </summary>
-        /// <value> Breadth of the Rectangle </value>
+        /// <value> The breadth of the rectangle. </value>
         public double Breadth
         {
-            get { return _breadth; }
-            set { _breadth = value; }
+            get { return this.breadth; }
+            set { this.breadth = value; }
         }
 
         /// <summary>
-        /// Calculates Area of the Rectangle
+        /// Calculates area of the rectangle.
         /// </summary>
-        /// <returns> Area of the Rectangle </returns>
+        /// <returns> The calculated area of the rectangle. </returns>
         public override double CalculateArea()
         {
             return this.Length * this.Breadth;
         }
 
         /// <summary>
-        /// Displays details of Rectangle
+        /// Displays details of Rectangle.
         /// </summary>
-        /// <returns> Details of the Rectangle </returns>
+        /// <returns> The details of the rectangle. </returns>
         public new string PrintDetails()
         {
-            return base.PrintDetails();
+            return this.PrintDetails();
         }
     }
 }

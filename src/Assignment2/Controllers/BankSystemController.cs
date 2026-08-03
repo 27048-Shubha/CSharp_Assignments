@@ -1,67 +1,70 @@
-﻿using Assignment2.Models.Task3;
-using Assignment2.Services;
-using Assignment2.Views;
-using System;
-
-namespace Assignment2.Controllers
+﻿namespace Assignment2.Controllers
 {
+    using System;
+    using Assignment2.Models.Task3;
+    using Assignment2.Services;
+    using Assignment2.Views;
+
     /// <summary>
-    /// Manages Banking System's Operation Between Views and Service.
+    /// Controls menu service and communicates with console and service.
     /// </summary>
     public class BankSystemController
     {
-        private BankSystemView _console;
-        private BankSystemService _service;
-
-        public BankSystemController( BankSystemView _console, BankSystemService _service) 
-        { 
-            this._console = _console;
-            this._service = _service;
-        }
-
-        private bool _isSavings = false;
+        private BankSystemView console;
+        private BankSystemService service;
+        private bool isSavings = false;
 
         /// <summary>
-        /// Handles Inputs for Account Creation.
+        /// Initializes a new instance of the <see cref="BankSystemController"/> class.
+        /// </summary>
+        /// <param name="console"> The object to handle console operations. </param>
+        /// <param name="service"> The object to handle services. </param>
+        public BankSystemController(BankSystemView console, BankSystemService service)
+        {
+            this.console = console;
+            this.service = service;
+        }
+
+        /// <summary>
+        /// Start point of execution of Employee Hierarchy system.
         /// </summary>
         public void Initialize()
         {
-            BankAccount account = null;
+            BankAccount account;
             char choice;
-            int amount;
 
             do
             {
-                _console.DisplayMenu();
-                choice = _console.GetMenuInput();
+                this.console.DisplayMenu();
+                choice = this.console.GetUserChoice();
 
                 switch (choice)
                 {
                     case 'S':
                     case 's':
-                        account = _service.CreateSavingsAccount();
+                        account = this.service.CreateSavingsAccount();
                         this.CallService(account);
-                        _isSavings = true;
+                        this.isSavings = true;
                         break;
 
                     case 'C':
                     case 'c':
-                        account = _service.CreateCheckingAccount();
+                        account = this.service.CreateCheckingAccount();
                         this.CallService(account);
                         break;
 
-
                     case 'Q':
                     case 'q':
-                        _console.DisplayExitMessage();
+                        this.console.DisplayExitMessage();
                         break;
 
                     default:
                         // Display invalid option message
-                        _console.InvalidInput();
+                        this.console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'Q' && choice != 'q');
+            }
+            while (choice != 'Q' && choice != 'q');
         }
 
         /// <summary>
@@ -72,69 +75,71 @@ namespace Assignment2.Controllers
         {
             char choice;
             string? amount;
-            _console.DisplayMinBalanceInfo();
+            this.console.DisplayMinBalanceInfo();
 
             do
             {
-                _console.DisplayAccountMenu();
-                
-                choice = _console.GetMenuInput();
+                this.console.DisplayAccountMenu();
+
+                choice = this.console.GetUserChoice();
 
                 switch (choice)
                 {
                     case 'D':
                     case 'd':
-                        amount = _console.GetDepositAmount();
-                        if (_service.DepositAmount(account, amount))
+                        amount = this.console.GetDepositAmount();
+                        if (this.service.DepositAmount(account, amount))
                         {
-                            _console.DepositSuccessMessage(amount);
+                            this.console.DepositSuccessMessage(amount);
                         }
                         else
                         {
-                            _console.InvalidDepositInput();
+                            this.console.DisplayDefault();
                         }
+
                         break;
 
                     case 'W':
                     case 'w':
-                        amount = _console.GetWithdrawAmount();
-                        if(_service.WithdrawAmount(account, amount))
+                        amount = this.console.GetWithdrawAmount();
+                        if (this.service.WithdrawAmount(account, amount))
                         {
-                            _console.WithdrawSuccessMessage(amount);
+                            this.console.WithdrawSuccessMessage(amount);
                         }
                         else
                         {
-                            _console.WithdrawFailureMessage();
-                            _console.DisplayMinBalanceWarning();
+                            this.console.WithdrawFailureMessage();
+                            this.console.DisplayMinBalanceWarning();
                         }
 
-                        decimal amountDecimal = _service.CheckBalance(account);
-                        _console.DisplayBalance(amountDecimal);
+                        decimal amountDecimal = this.service.CheckBalance(account);
+                        this.console.DisplayBalance(amountDecimal);
 
-                        if(_isSavings)
+                        if (this.isSavings)
                         {
-                            _console.DisplayMinBalanceWarning();
+                            this.console.DisplayMinBalanceWarning();
                         }
 
                         break;
 
                     case 'B':
                     case 'b':
-                        amountDecimal = _service.CheckBalance(account);
-                        _console.DisplayBalance(amountDecimal);
+                        amountDecimal = this.service.CheckBalance(account);
+                        this.console.DisplayBalance(amountDecimal);
                         break;
 
                     case 'Q':
                     case 'q':
-                        _console.DisplayExitMessage();
+                        this.console.DisplayExitMessage();
                         return;
 
                     default:
                         // Display invalid option message
-                        _console.InvalidInput();
+                        this.console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'Q' && choice != 'q');
+            }
+            while (choice != 'Q' && choice != 'q');
         }
     }
 }

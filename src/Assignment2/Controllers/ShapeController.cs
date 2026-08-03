@@ -1,66 +1,69 @@
-﻿using Assignment2.Services;
-using Assignment2.Views;
-
-namespace Assignment2.Controllers
+﻿namespace Assignment2.Controllers
 {
+    using Assignment2.Services;
+    using Assignment2.Views;
+
     /// <summary>
-    /// Controls Menu service and communicates with Console and Service
+    /// Controls Shape system's menu service and communicates with console and service.
     /// </summary>
     public class ShapeController
     {
-        private ShapeView _console;
-        private ShapeService _service;
-
-        public ShapeController(ShapeView _console, ShapeService _service)
-        {
-            this._console = _console;
-            this._service = _service;
-        }
-
+        private ShapeView console;
+        private ShapeService service;
 
         /// <summary>
-        /// Execution of Shape starts here
+        /// Initializes a new instance of the <see cref="ShapeController"/> class.
+        /// </summary>
+        /// <param name="console"> The object to handle console operations. </param>
+        /// <param name="service"> The object to handle services. </param>
+        public ShapeController(ShapeView console, ShapeService service)
+        {
+            this.console = console;
+            this.service = service;
+        }
+
+        /// <summary>
+        /// Start point of execution of Shape Hierarchy system.
         /// </summary>
         public void Initialize()
         {
             char choice;
             do
             {
-                _console.DisplayShapesMenu();
-                choice = _console.GetShapeMenuInput();
-                decimal salary;
+                this.console.DisplayShapesMenu();
+                choice = this.console.GetUserChoice();
                 string color;
                 string message;
                 switch (choice)
                 {
                     case 'R':
                     case 'r':
-                        color = _console.GetShapeColor();
-                        string length = _console.GetLength();
-                        string breadth = _console.GetBreadth();
-                        message = _service.AddRectangle(color, length, breadth);
-                        _console.DisplayMessage(message);
+                        color = this.console.GetShapeColor();
+                        string length = this.console.GetLength();
+                        string breadth = this.console.GetBreadth();
+                        message = this.service.AddRectangle(color, length, breadth);
+                        this.console.DisplayMessage(message);
                         break;
 
                     case 'C':
                     case 'c':
-                        color = _console.GetShapeColor();
-                        string radius = _console.GetRadius();
-                        message = _service.AddCircle(color, radius);
-                        _console.DisplayMessage(message);
+                        color = this.console.GetShapeColor();
+                        string radius = this.console.GetRadius();
+                        message = this.service.AddCircle(color, radius);
+                        this.console.DisplayMessage(message);
                         break;
-
 
                     case 'Q':
                     case 'q':
-                        _console.DisplayExitMessage();
+                        this.console.DisplayExitMessage();
                         break;
 
                     default:
-                        _console.DisplayDefault();
+                        this.console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'Q' && choice != 'q');
+            }
+            while (choice != 'Q' && choice != 'q');
         }
     }
 }

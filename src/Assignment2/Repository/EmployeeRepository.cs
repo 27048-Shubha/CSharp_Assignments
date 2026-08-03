@@ -1,23 +1,18 @@
-﻿using Assignment2.Models.Task2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment2.Repository
+﻿namespace Assignment2.Repository
 {
+    using Assignment2.Models.Task2;
+
     /// <summary>
-    /// Handles Object Creation of Manager and Developer class
+    /// Handles repository operations of the employee hierarchy application.
     /// </summary>
     public class EmployeeRepository
     {
         /// <summary>
-        /// Creates object for Manager
+        /// Intantiates and initializes object values of manager.
         /// </summary>
-        /// <param name="name"> Name of the Manager </param>
-        /// <param name="salary"> Salary of the Manager </param>
-        /// <returns> Details of Manager </returns>
+        /// <param name="name">The name of the manager. </param>
+        /// <param name="salary">The salary of the manager. </param>
+        /// <returns>The details of manager created. </returns>
         public string AddManager(string name, decimal salary)
         {
             Manager manager = new Manager();
@@ -28,11 +23,11 @@ namespace Assignment2.Repository
         }
 
         /// <summary>
-        /// Creates object for Developer
+        /// Intantiates and initializes object values of developer.
         /// </summary>
-        /// <param name="name"> Name of the Developer </param>
-        /// <param name="salary"> Salary of the Developer </param>
-        /// <returns> Details of Developer </returns>
+        /// <param name="name">The name of the developer. </param>
+        /// <param name="salary">The salary of the developer. </param>
+        /// <returns>The details of developer created. </returns>
         public string AddDeveloper(string name, decimal salary)
         {
             Developer dev = new Developer();

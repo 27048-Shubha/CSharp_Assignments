@@ -1,46 +1,46 @@
 ﻿namespace Assignment2.Models.Task2
 {
     /// <summary>
-    /// Abstract class of Employee containing Name, Salary and calculates Bonus.
+    /// Abstract class of Employee containing name, salary and bonus calculation.
     /// </summary>
     public abstract class Employee
     {
-        private string _name;
-        private decimal _salary;
+        private string? name;
+        private decimal salary;
 
         /// <summary>
-        /// Gets or Sets Name of the Employee.
+        /// Gets or Sets name of the employee.
         /// </summary>
-        /// <value>Name of the Employee</value>
-        public string Name
+        /// <value>The name of the employee. </value>
+        public string? Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return this.name; }
+            set { this.name = value; }
         }
 
         /// <summary>
-        /// Gets or sets Salary of the Employee.
+        /// Gets or sets salary of the employee.
         /// </summary>
-        /// <value>Calculated Bonus of the Employee.</value>
+        /// <value>The calculated bonus of the employee.</value>
         public decimal Salary
         {
-            get { return _salary; }
-            set { _salary = value; }
+            get { return this.salary; }
+            set { this.salary = value; }
         }
 
         /// <summary>
-        /// Abstract Method to Calculate Bonus.
+        /// Abstract method to calculate bonus.
         /// </summary>
-        /// <returns> Bonus of the Employee</returns>
+        /// <returns>The bonus of the employee.</returns>
         public abstract decimal CalculateBonus();
 
         /// <summary>
-        /// Retrieves Name and Salary fo the Employee.
+        /// Retrieves name and salary fo the employee.
         /// </summary>
-        /// <returns>Name and Salary of the Employee</returns>
+        /// <returns>The name and salary of the employee.</returns>
         public string PrintDetails()
         {
-            return $"Name: {Name}\nSalary: {Salary}";
+            return $"Name: {this.Name}\nSalary: {this.Salary}";
         }
     }
 }

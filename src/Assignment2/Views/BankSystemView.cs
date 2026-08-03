@@ -1,96 +1,64 @@
 ﻿namespace Assignment2.Views
 {
     /// <summary>
-    /// Manages Console Operations of Bank Hierarchy System.
+    /// Manages console operations of the bank hierarchy system.
     /// </summary>
-    public class BankSystemView: MainView
+    public class BankSystemView : MainView
     {
         /// <summary>
-        /// Displays Home Menu Options of Bank System.
+        /// Displays start up menu for shape system.
         /// </summary>
-        public void DisplayMenu()
+        public override void DisplayMenu()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            base.DisplayLineBreaker();
+            this.DisplayLineBreaker();
             Console.WriteLine("Welcome to the Bank System");
-            Console.WriteLine("[C] Create Checking Account:");
-            Console.WriteLine("[S] Create Savings Account:");
+            Console.WriteLine("[C] Create checking account:");
+            Console.WriteLine("[S] Create savings account:");
             Console.WriteLine("[Q] to Quit");
-            base.DisplayLineBreaker();
+            this.DisplayLineBreaker();
             Console.ResetColor();
         }
 
         /// <summary>
-        /// Gets User's Menu choice.
-        /// </summary>
-        /// <returns>User's Input Menu.</returns>
-        public char GetMenuInput()
-        {
-            return Char.Parse(Console.ReadLine());
-        }
-
-        /// <summary>
-        /// Displays Banking Menu Operations of Bank System.
+        /// Displays banking menu operations of the bank system.
         /// </summary>
         public void DisplayAccountMenu()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            base.DisplayLineBreaker();
+            this.DisplayLineBreaker();
             Console.WriteLine("[D] Deposit");
             Console.WriteLine("[W] Withdraw");
             Console.WriteLine("[B] Check Balance");
             Console.WriteLine("[Q] Quit");
-            base.DisplayLineBreaker();
+            this.DisplayLineBreaker();
             Console.ResetColor();
         }
 
         /// <summary>
-        /// Displays Invalid Input & Prompts to enter Input again.
+        /// Gets amount to be deposited.
         /// </summary>
-        /// <returns>User's Choice Input.</returns>
-        public char InvalidInput()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Kindly Enter valid inputs only");
-            Console.ResetColor();
-            return Char.Parse(Console.ReadLine());
-        }
-
-        /// <summary>
-        /// Displays Invalid Input & Prompts to enter Input again.
-        /// </summary>
-        /// <returns>User's Choice Input.</returns>
-        public void InvalidDepositInput()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Kindly Enter valid inputs only");
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Gets Amount to be deposited.
-        /// </summary>
-        /// <returns>User's Input Amount.</returns>
+        /// <returns> The amount entered by the user as input. </returns>
         public string GetDepositAmount()
         {
             Console.WriteLine("Enter Amount to Deposit");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Gets Amount to be Withdraw.
+        /// Gets amount to be withdrawn.
         /// </summary>
-        /// <returns>User's Input Amount.</returns>
+        /// <returns> The amount entered by the user as input. </returns>
         public string GetWithdrawAmount()
         {
             Console.WriteLine("Enter Amount to WithDraw");
-            return Console.ReadLine();
+            return Console.ReadLine() ?? string.Empty;
         }
-        
+
         /// <summary>
-        /// Display Current Balance in Bank Account.
+        /// Display current balance amount in the bank account object.
         /// </summary>
-        /// <param name="balance">Current balance of the object</param>
+        /// <param name="balance">current balance amount in the bank account object.</param>
         public void DisplayBalance(decimal balance)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -99,9 +67,9 @@
         }
 
         /// <summary>
-        /// Displays Withdrawal success message.
+        /// Displays success message of the deposit operation.
         /// </summary>
-        /// <param name="amount">Amount withdrawn.</param>
+        /// <param name="amount"> The amount deposited in the bank account.</param>
         public void DepositSuccessMessage(string amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -109,11 +77,10 @@
             Console.ResetColor();
         }
 
-
         /// <summary>
-        /// Displays Withdrawal success message.
+        /// Displays success message of withdrawal operation.
         /// </summary>
-        /// <param name="amount">Amount withdrawn.</param>
+        /// <param name="amount">The amount withdrawn from the bank account.</param>
         public void WithdrawSuccessMessage(string amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -122,7 +89,7 @@
         }
 
         /// <summary>
-        /// Displays Failure Message for Withdrawal operation
+        /// Displays failure message of withdrawal operation.
         /// </summary>
         public void WithdrawFailureMessage()
         {
@@ -132,7 +99,7 @@
         }
 
         /// <summary>
-        /// Displays Minimum Balance Warning Message
+        /// Displays minimum balance warning message.
         /// </summary>
         public void DisplayMinBalanceWarning()
         {
@@ -142,7 +109,7 @@
         }
 
         /// <summary>
-        /// Displays Info about Inital Minimum Balance
+        /// Displays initial balance information.
         /// </summary>
         public void DisplayMinBalanceInfo()
         {

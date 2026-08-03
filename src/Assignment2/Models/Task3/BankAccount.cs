@@ -1,47 +1,47 @@
 ﻿namespace Assignment2.Models.Task3
 {
     /// <summary>
-    /// Abstract class that Manages AccountNumber, Balance, WithDraw and Deposit
+    /// Abstract class that manages accountNumber, balance, withdraw and deposit.
     /// </summary>
     public abstract class BankAccount
     {
-        private string _accountNumber;
-        private decimal _balance;
+        private string? accountNumber;
+        private decimal balance;
 
         /// <summary>
-        /// Gets and Sets Account Number
+        /// Gets or sets account number.
         /// </summary>
-        /// <value>Default Value</value>
-        public string AccountNumber
+        /// <value>The account number of the bank account.</value>
+        public string? AccountNumber
         {
-            get { return _accountNumber; }
-            set { _accountNumber = value; }
+            get { return this.accountNumber; }
+            set { this.accountNumber = value; }
         }
 
         /// <summary>
-        /// Gets and Sets Balance
+        /// Gets or sets account number.
         /// </summary>
-        /// <value>Balance Amount</value>
+        /// <value>The balance amount of the bank account.</value>
         public decimal Balance
         {
-            get { return _balance; }
-            set { _balance = value; }
+            get { return this.balance; }
+            set { this.balance = value; }
         }
 
         /// <summary>
         /// Adds amount to the existing Balance.
         /// </summary>
-        /// <param name="amount">Amount to be added to the Balance</param>
+        /// <param name="amount">The amount to be added to the balance.</param>
         public void Deposit(decimal amount)
         {
-            Balance += amount;
+            this.Balance += amount;
         }
 
         /// <summary>
-        /// Abstract Method to Withdraw from Bank Account
+        /// Abstract method to withdraw from bank account.
         /// </summary>
-        /// <param name="amount">Amount to be withdrawn.</param>
-        /// <returns>True on withdrawal success, False When Balance Falls beyond Minimum Balance</returns>
+        /// <param name="amount">The amount to be withdrawn.</param>
+        /// <returns>True on withdrawal success, False when balance falls beyond minimum balance.</returns>
         public abstract bool Withdraw(decimal amount);
     }
 }

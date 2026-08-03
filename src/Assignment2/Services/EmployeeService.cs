@@ -1,58 +1,64 @@
-﻿using Assignment2.Repository;
-using Assignment2.Validations;
-using Assignment2.Views;
-
-namespace Assignment2.Services
+﻿namespace Assignment2.Services
 {
+    using Assignment2.Repository;
+    using Assignment2.Validations;
+
     /// <summary>
-    /// Handles Pre-Check (Validation) Before Input Value enters the Repository
+    /// Handles business logic validation and sends call to repository after validation.
     /// </summary>
     public class EmployeeService
     {
-        private ValidateInput _validate;
-        private EmployeeRepository _repo;
+        private ValidateInput validate;
+        private EmployeeRepository repo;
 
-        public EmployeeService(EmployeeRepository _repo,ValidateInput _validate)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeService"/> class.
+        /// </summary>
+        /// <param name="repo"> The object to handle repository operations. </param>
+        /// <param name="validate"> The object to handle validation operations. </param>
+        public EmployeeService(EmployeeRepository repo, ValidateInput validate)
         {
-            this._repo = _repo;
-            this._validate = _validate;
+            this.repo = repo;
+            this.validate = validate;
         }
 
         /// <summary>
-        /// Checks and passes the name, salary to the Employee Repository
+        /// Validates input and sends input parameters to the repository.
         /// </summary>
-        /// <param name="name"> Name of the Manager entered by the user </param>
-        /// <param name="salary"> Salary of the Manager entered by the user </param>
-        /// <returns> Details of the Employee If True, else Invalid Error Message </returns>
+        /// <param name="name"> The name of the manager from the user. </param>
+        /// <param name="salary"> The salary of the manager from the user. </param>
+        /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddManager(string name, string salary)
         {
-            if(_validate.IsNumber(salary))
+            if (this.validate.IsNumber(salary))
             {
                 decimal amount = Convert.ToDecimal(salary);
-                if (!_validate.IsZero(amount) && !_validate.IsNegative(amount))
+                if (!this.validate.IsZero(amount) && !this.validate.IsNegative(amount))
                 {
-                    return _repo.AddManager(name, amount);
+                    return this.repo.AddManager(name, amount);
                 }
             }
+
             return "Invalid Input, Enter Only +ve Numbers";
         }
 
         /// <summary>
-        /// Checks and passes the name, salary to the Employee Repository
+        /// Validates input and sends input parameters to the repository.
         /// </summary>
-        /// <param name="name"> Name of the Developer entered by the user </param>
-        /// <param name="salary"> Salary of the Developer entered by the user </param>
-        /// <returns> Details of the Employee If True, else Invalid Error Message </returns>
+        /// <param name="name"> The name of the developer from the user. </param>
+        /// <param name="salary"> The salary of the developer from the user. </param>
+        /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddDeveloper(string name, string salary)
         {
-            if (_validate.IsNumber(salary))
+            if (this.validate.IsNumber(salary))
             {
                 decimal amount = Convert.ToDecimal(salary);
-                if (!_validate.IsZero(amount) && !_validate.IsNegative(amount))
+                if (!this.validate.IsZero(amount) && !this.validate.IsNegative(amount))
                 {
-                    return _repo.AddDeveloper(name, amount);
+                    return this.repo.AddDeveloper(name, amount);
                 }
             }
+
             return "Invalid Input, Enter Only +ve Numbers";
         }
     }

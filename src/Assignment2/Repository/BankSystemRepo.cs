@@ -1,16 +1,16 @@
-﻿using Assignment2.Models.Task3;
-
-namespace Assignment2.Repository
+﻿namespace Assignment2.Repository
 {
+    using Assignment2.Models.Task3;
+
     /// <summary>
-    /// Manages Bank System Repository
+    /// Handles repository operations of the employee hierarchy application.
     /// </summary>
     public class BankSystemRepo
     {
         /// <summary>
-        /// Creates savings account 
+        /// Intantiates and initializes object values of savings account.
         /// </summary>
-        /// <returns>Savings account created</returns>
+        /// <returns>The details of savings account created. </returns>
         public BankAccount CreateSavingsAccount()
         {
             SavingsAccount account = new SavingsAccount();
@@ -19,9 +19,9 @@ namespace Assignment2.Repository
         }
 
         /// <summary>
-        /// Creates Checking account 
+        /// Intantiates and initializes object values of checking account.
         /// </summary>
-        /// <returns>Checking account created</returns>
+        /// <returns>The details of checking account created. </returns>
         public BankAccount CreateCheckingAccount()
         {
             CheckingAccount account = new CheckingAccount();

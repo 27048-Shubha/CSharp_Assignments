@@ -1,71 +1,72 @@
-﻿using Assignment2.Controllers;
-using Assignment2.Repository;
-using Assignment2.Services;
-using Assignment2.Validations;
-using Assignment2.Views;
-
-namespace Assignment2
+﻿namespace Assignment2
 {
+    using Assignment2.Controllers;
+    using Assignment2.Repository;
+    using Assignment2.Services;
+    using Assignment2.Validations;
+    using Assignment2.Views;
+
     /// <summary>
-    /// Start of CS Project.
+    /// Entry point of application.
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// Beginning Execution of the Program
+        /// Starts and invokes application.
         /// </summary>
         public static void Main()
         {
-            ValidateInput _validate = new ValidateInput();
+            ValidateInput validate = new ValidateInput();
 
-            MainView _console = new MainView();
-            ShapeView _shapeView = new ShapeView();
-            EmployeeView _employeeView = new EmployeeView();
-            BankSystemView _bankSystemView = new BankSystemView();
+            MainView console = new MainView();
+            ShapeView shapeView = new ShapeView();
+            EmployeeView employeeView = new EmployeeView();
+            BankSystemView bankSystemView = new BankSystemView();
 
-            ShapeRepository _shapeRepo = new ShapeRepository();
-            EmployeeRepository _employeeRepo = new EmployeeRepository();
-            BankSystemRepo _bankRepo = new BankSystemRepo();
+            ShapeRepository shapeRepo = new ShapeRepository();
+            EmployeeRepository employeeRepo = new EmployeeRepository();
+            BankSystemRepo bankRepo = new BankSystemRepo();
 
-            ShapeService _shapeService = new ShapeService(_shapeRepo, _validate);
-            EmployeeService _employeeService = new EmployeeService(_employeeRepo, _validate);
-            BankSystemService _bankSystemService = new BankSystemService(_bankRepo, _validate);
+            ShapeService shapeService = new ShapeService(shapeRepo, validate);
+            EmployeeService employeeService = new EmployeeService(employeeRepo, validate);
+            BankSystemService bankSystemService = new BankSystemService(bankRepo, validate);
 
             char choice;
             do
             {
-                _console.DisplayMenu();
-                choice = Char.Parse(Console.ReadLine());
+                console.DisplayMenu();
+                choice = console.GetUserChoice();
                 switch (choice)
                 {
                     case 'S':
                     case 's':
-                        ShapeController shapeController = new ShapeController(_shapeView, _shapeService);
+                        ShapeController shapeController = new ShapeController(shapeView, shapeService);
                         shapeController.Initialize();
                         break;
 
                     case 'E':
                     case 'e':
-                        EmployeeController employeeController = new EmployeeController(_employeeView, _employeeService);
+                        EmployeeController employeeController = new EmployeeController(employeeView, employeeService);
                         employeeController.Initialize();
                         break;
 
                     case 'B':
                     case 'b':
-                        BankSystemController bankController = new BankSystemController(_bankSystemView, _bankSystemService);
+                        BankSystemController bankController = new BankSystemController(bankSystemView, bankSystemService);
                         bankController.Initialize();
                         break;
 
                     case 'Q':
                     case 'q':
-                        _console.DisplayExitMessage();
+                        console.DisplayExitMessage();
                         break;
 
                     default:
-                        _console.DisplayDefault();
+                        console.DisplayDefault();
                         break;
                 }
-            } while (choice != 'q' && choice != 'Q');
+            }
+            while (choice != 'q' || choice != 'Q');
         }
     }
 }

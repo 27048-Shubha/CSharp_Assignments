@@ -1,47 +1,48 @@
-﻿using Assignment2.Models.Task2;
-
-namespace Assignment2.Models.Task2
+﻿namespace Assignment2.Models.Task2
 {
+    using Assignment2.Models.Task2;
+
     /// <summary>
-    /// Handles Bonus Calculation of the Manager inherited from the Employee.
+    /// Handles bonus calculation of the Manager inherited from the Employee.
     /// </summary>
     public class Manager : Employee
     {
-        private decimal _bonus;
+        private decimal bonus;
 
         /// <summary>
-        /// Gets or Sets Bonus value of the Manager
+        /// Gets or sets bonus value of the manager.
         /// </summary>
-        /// <value> Bonus salary of the Manager </value>
+        /// <value> The bonus salary of the manager. </value>
         public decimal Bonus
         {
             get
             {
-                return _bonus;
+                return this.bonus;
             }
+
             set
             {
-                _bonus = value;
+                this.bonus = value;
             }
         }
 
         /// <summary>
-        /// Calculates Bonus of the Developer.
+        /// Calculates bonus of the manager.
         /// </summary>
-        /// <returns> Calculted Bonus. </returns>
+        /// <returns> The calculted bonus of the manager. </returns>
         public override decimal CalculateBonus()
         {
-            this.Bonus = base.Salary * 0.20m;
+            this.Bonus = this.Salary * 0.20m;
             return this.Bonus;
         }
 
         /// <summary>
-        /// Displays Bonus of the Developer after calling PrintDetails from Base Class.
+        /// Displays the details and the bonus of the manager.
         /// </summary>
-        /// <returns> Details of the Developer. </returns>
+        /// <returns> The details of the manager. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()} \nBonus: {this.CalculateBonus()}";
+            return $"{this.PrintDetails()} \nBonus: {this.CalculateBonus()}";
         }
     }
 }
