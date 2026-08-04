@@ -3,7 +3,6 @@
     using System;
     using ContactManager.Helpers;
     using ContactManager.Models;
-    using ;
 
     /// <summary>
     /// Manages all console I/O operations.
@@ -13,11 +12,24 @@
         /// <summary>
         /// Displays open menu.
         /// </summary>
+        public void DisplayWelcome()
+        {
+            this.DisplayLineBreak();
+            ConsoleColorManager.SetColor(ConsoleColor.Blue);
+            Console.WriteLine("Welcome to Contact Manager");
+            Console.ResetColor();
+            this.DisplayLineBreak();
+        }
+
+        /// <summary>
+        /// Displays open menu.
+        /// </summary>
         public void DisplayMenu()
         {
             this.DisplayLineBreak();
             ConsoleColorManager.SetColor(ConsoleColor.Blue);
-            Console.WriteLine("Welcome to the Contact Manager! \nEnter your choice:\n0. View all contacts, \n1. Add new contact, \n2. Edit existing contact, \n3. Delete a contact, \n4. Search any contact \n5. View sorted list \n6. Exit");
+            this.DisplayWelcome();
+            Console.WriteLine("Enter your choice:\n0. View all contacts, \n1. Add new contact, \n2. Edit existing contact, \n3. Delete a contact, \n4. Search any contact \n5. View sorted list \n6. Exit");
             Console.ResetColor();
             this.DisplayLineBreak();
         }
@@ -44,8 +56,8 @@
         public string GetStorageChoice()
         {
             ConsoleColorManager.SetColor(ConsoleColor.White);
-            Console.WriteLine("Enter Y to store contacts in file");
-            Console.WriteLine("Else press any key to continue store in memory");
+            Console.WriteLine("Enter Y to store contacts in file!");
+            Console.WriteLine("Or Press any key to continue store in memory:");
 
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
@@ -103,6 +115,27 @@
             ConsoleColorManager.SetColor(ConsoleColor.White);
             Console.WriteLine("Enter your choice: ");
             return Console.ReadLine()?.Trim() ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Gets file name from the user.
+        /// </summary>
+        /// <returns>Input file name received from the user. </returns>
+        public string GetFileName()
+        {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
+            Console.WriteLine("Enter file name: ");
+            return Console.ReadLine()?.Trim() ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Displays file not found message.
+        /// </summary>
+        public void DisplayFileNotFound()
+        {
+            ConsoleColorManager.SetColor(ConsoleColor.Red);
+            Console.WriteLine("File not found! Enter Y to create new file:");
+            Console.ResetColor();
         }
 
         /// <summary>

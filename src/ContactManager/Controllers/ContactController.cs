@@ -1,9 +1,9 @@
 ﻿namespace ContactManager.Controllers
 {
     using System.Collections.Generic;
+    using ContactManager;
     using ContactManager.Models;
     using ContactManager.Services;
-    using ContactManager;
 
     /// <summary>
     /// Controlls actions between Views and Services.
@@ -13,7 +13,6 @@
         /// <summary>
         /// Marks Starting Point of Contact Manager.
         /// </summary>
-        ///
         private readonly ConsoleView console;
         private readonly ContactService handler;
 
@@ -34,20 +33,6 @@
         public void Initialize()
         {
         string? ch;
-        if (Program.IsFileStorage)
-        {
-            string FileName = console.GetFileName();
-            if (!File.Exists(FileName))
-            {
-                console.DisplayFileNotFound();
-                string choice = console.GetChoice();
-                if(choice != 'Y')
-                {
-                    return;
-                }
-            }
-        }
-
         do
         {
             Thread.Sleep(1000);

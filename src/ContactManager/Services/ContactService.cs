@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using ContactManager.Models;
-    using ContactManager.Persistance;
+    using ContactManager.Repository;
     using ContactManager.Validations;
 
     /// <summary>
@@ -10,7 +10,7 @@
     /// </summary>
     internal class ContactService
     {
-        private readonly ContactRepository repo;
+        private readonly IContactRepository repo;
         private readonly ContactValidator validate;
 
         /// <summary>
@@ -18,11 +18,12 @@
         /// </summary>
         /// <param name="repo">Handles operations of Repository.</param>
         /// <param name="validate">Handles operations of ContactValidator.</param>
-        public ContactService(ContactRepository repo, ContactValidator validate)
+        public ContactService(IContactRepository repo, ContactValidator validate)
         {
             this.repo = repo;
             this.validate = validate;
         }
+
 
         /// <summary>
         /// to Add new contact to the list.

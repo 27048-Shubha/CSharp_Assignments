@@ -1,7 +1,7 @@
 ﻿namespace ContactManager
 {
     using ContactManager.Controllers;
-    using ContactManager.Persistance;
+    using ContactManager.Repository;
     using ContactManager.Services;
     using ContactManager.Validations;
 
@@ -10,8 +10,9 @@
     /// </summary>
     public class Program
     {
-        public static bool IsFileStorage;
-        public static string FileName;
+        public static bool isFileStorage;
+        public static string fileName;
+
         /// <summary>
         /// Execution of flow begins from here.
         /// </summary>
@@ -22,14 +23,34 @@
 
             ConsoleView console = new ConsoleView();
 
-            ContactRepository repository = new ContactRepository();
+            ContactService? service = null;
 
-            ContactService service = new ContactService(repository, validate);
+            console.DisplayWelcome();
+            string choice;
+
+            isFileStorage = console.GetStorageChoice() == "Y" ? true : false;
+
+            if (isFileStorage)
+            {
+                Program.fileName = console.GetFileName();
+                if (!File.Exists(Program.fileName))
+                {
+                    console.DisplayFileNotFound();
+                    choice = console.GetChoice();
+                    if (choice != "Y")
+                    {
+                        return;
+                    }
+                    Console.WriteLine("Printting from Program.cs - file");
+                }
+                service = new ContactService(new CSVContactRepository(fileName), validate);
+            }
+            else
+            {
+                service = new ContactService(new ContactRepository(), validate);
+            }
 
             ContactController controller = new ContactController(console, service);
-
-            FileName = console.GetStorageChoice();
-            IsFileStorage = FileName == "Y" ? true : false;
 
             controller.Initialize();
         }

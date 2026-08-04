@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Persistance
+﻿namespace ContactManager.Repository
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -7,7 +7,7 @@
     /// <summary>
     /// Holds Original List & related CRUD Operations.
     /// </summary>
-    internal class ContactRepository
+    internal class ContactRepository : IContactRepository
     {
         private readonly List<Contact> contacts = new List<Contact>();
 

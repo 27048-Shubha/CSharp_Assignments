@@ -1,19 +1,23 @@
-﻿using ContactManager.Models;
-using ContactManager.Persistance;
-using ContactManager.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ContactManager.Repository
+﻿namespace ContactManager.Repository
 {
+    using System;
+    using System.IO.Enumeration;
+    using ContactManager.Models;
+
+    /// <summary>
+    /// 
+    /// </summary>
     internal class CSVContactRepository : IContactRepository
     {
-        private readonly string filePath = "../Data/"+Program.FileName;
+        public string fileName = "contacts.csv";
+        private readonly string filePath;
         private readonly List<String> headerList = new List<string>() { "Id,Name,PhoneNumber,Email,Notes" };
-        
+
+        public CSVContactRepository(string fileName)
+        {
+            this.filePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "Data", fileName);
+        }
+
         /// <summary>
         /// To add contact to the list.
         /// </summary>
@@ -28,6 +32,7 @@ namespace ContactManager.Repository
 
             List<string> contents = new List<string>() { { $"{contact.Id},{contact.Name},{contact.PhoneNumber},{contact.Email},{contact.Notes}" } };
             File.AppendAllLines(this.filePath, contents);
+            Console.WriteLine("Added in file");
         }
 
         /// <summary>
@@ -36,7 +41,7 @@ namespace ContactManager.Repository
         /// <returns> List of all contacts.</returns>
         public IReadOnlyList<Contact> GetAll()
         {
-            List <Contact> contacts = new List<Contact>();
+            List<Contact> contacts = new List<Contact>();
             string[] lines = File.ReadAllLines(this.filePath);
             Contact newContact;
             string[] words;
@@ -56,8 +61,19 @@ namespace ContactManager.Repository
         /// <param name="contact"> Object that holds Contact Details.</param>
         public void Delete(Contact contact)
         {
-            this.contacts.Remove(contact);
-            
+            List<Contact> contacts = new List<Contact>();
+            string[] lines = File.ReadAllLines(this.filePath);
+            string[] words;
+            foreach (string line in lines)
+            {
+                words = line.Split(',');
+                if (words[1].Contains(contact.Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    File.Delete(line);
+                }
+            }
+
+            //contacts.Remove(contact);
         }
 
         /// <summary>
@@ -67,7 +83,19 @@ namespace ContactManager.Repository
         /// <returns> ContactInfo object if found, otherwise null.</returns>
         public Contact? Get(string name)
         {
-            return this.contacts.FirstOrDefault(c => c.Name == name);
+            string[] lines = File.ReadAllLines(this.filePath);
+            Contact newContact = null;
+            string[] words;
+            foreach (string line in lines)
+            {
+                words = line.Split(',');
+                if (words[1] == name)
+                {
+                    newContact = new Contact(words[0], words[1], words[2], words[3]);
+                }
+            }
+
+            return newContact;
         }
 
         /// <summary>
@@ -78,15 +106,18 @@ namespace ContactManager.Repository
         public List<Contact> FetchByNameContaining(string name)
         {
             List<Contact> contacts = new List<Contact>();
-            foreach (var contact in this.contacts)
+            string[] lines = File.ReadAllLines(this.filePath);
+            string[] words;
+            foreach (string line in lines)
             {
-                if (contact.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                words = line.Split(',');
+                if (words[1].Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    this.contacts.Add(contact);
+                    contacts.Add(new Contact(words[0], words[1], words[2], words[3]));
                 }
             }
 
-            return this.contacts;
+            return contacts;
         }
 
         /// <summary>
@@ -95,7 +126,16 @@ namespace ContactManager.Repository
         /// <returns> Sorted List of ContactInfo objects.</returns>
         public List<Contact> GetAllSortedByName()
         {
-            return this.contacts.OrderBy(c => c.Name).ToList();
+            List<Contact> contacts = new List<Contact>();
+            string[] lines = File.ReadAllLines(this.filePath);
+            string[] words;
+            foreach (string line in lines)
+            {
+                words = line.Split(',');
+                contacts.Add(new Contact(words[0], words[1], words[2], words[3]));
+            }
+
+            return contacts.OrderBy(c => c.Name).ToList();
         }
 
         /// <summary>
@@ -106,9 +146,12 @@ namespace ContactManager.Repository
         public bool ExistsByName(string name)
         {
             List<Contact> contacts = new List<Contact>();
-            foreach (var contact in this.contacts)
+            string[] lines = File.ReadAllLines(this.filePath);
+            string[] words;
+            foreach (string line in lines)
             {
-                if (contact.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                words = line.Split(',');
+                if (words[1].Contains(name, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -124,11 +167,20 @@ namespace ContactManager.Repository
         /// <returns> ContactInfo object if found, otherwise null.</returns>
         public Contact? GetByPhoneNumber(string phone)
         {
-            foreach (var contact in this.contacts)
+            List<Contact> contacts = new List<Contact>();
+
+            if (!File.Exists(this.filePath))
             {
-                if (contact.PhoneNumber == phone)
+                return null;
+            }
+            string[] lines = File.ReadAllLines(this.filePath);
+            string[] words;
+            foreach (string line in lines)
+            {
+                words = line.Split(',');
+                if (words[1] == phone)
                 {
-                    return contact;
+                    return new Contact(words[0], words[1], words[2], words[3]);
                 }
             }
 
@@ -141,7 +193,9 @@ namespace ContactManager.Repository
         /// <returns> True if empty, otherwise false.</returns>
         public bool Empty()
         {
-            if (this.contacts.Count == 0)
+            List<Contact> contacts = new List<Contact>();
+            string[] lines = File.ReadAllLines(this.filePath);
+            if (lines.Length <= 1)
             {
                 return true;
             }
