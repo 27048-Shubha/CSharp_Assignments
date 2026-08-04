@@ -3,6 +3,7 @@
     using System;
     using ContactManager.Helpers;
     using ContactManager.Models;
+    using ;
 
     /// <summary>
     /// Manages all console I/O operations.
@@ -32,6 +33,19 @@
             Console.WriteLine("2 to edit phone number");
             Console.WriteLine("3 to edit email");
             Console.WriteLine("4 to edit notes");
+
+            return Console.ReadLine()?.Trim() ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Displays menu to edit contact attributes.
+        /// </summary>
+        /// <returns>User input receiveed.</returns>
+        public string GetStorageChoice()
+        {
+            ConsoleColorManager.SetColor(ConsoleColor.White);
+            Console.WriteLine("Enter Y to store contacts in file");
+            Console.WriteLine("Else press any key to continue store in memory");
 
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using ContactManager.Models;
     using ContactManager.Services;
+    using ContactManager;
 
     /// <summary>
     /// Controlls actions between Views and Services.
@@ -33,6 +34,20 @@
         public void Initialize()
         {
         string? ch;
+        if (Program.IsFileStorage)
+        {
+            string FileName = console.GetFileName();
+            if (!File.Exists(FileName))
+            {
+                console.DisplayFileNotFound();
+                string choice = console.GetChoice();
+                if(choice != 'Y')
+                {
+                    return;
+                }
+            }
+        }
+
         do
         {
             Thread.Sleep(1000);

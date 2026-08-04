@@ -24,9 +24,26 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Contact"/> class from file repository.
+        /// </summary>
+        /// <param name="id">Id of the Contact.</param>
+        /// <param name="name">Name of the Contact.</param>
+        /// <param name="phone">Phone number of the Contact.</param>
+        /// <param name="email">Optional Email ID of the Contact.</param>
+        /// <param name="notes">Optional Notes of the Contact.</param>
+        public Contact(string id, string name, string phone, string? email = null, string? notes = null)
+        {
+            this.Id = Guid.Parse(id);
+            this.Name = name;
+            this.PhoneNumber = phone;
+            this.Email = email;
+            this.Notes = notes;
+        }
+
+        /// <summary>
         /// Gets the unique ID assigned to the contact at creation time.
         /// </summary>
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the contact.

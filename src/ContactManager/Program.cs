@@ -1,6 +1,5 @@
-﻿namespace Assignment1_ContactManager
+﻿namespace ContactManager
 {
-    using ContactManager;
     using ContactManager.Controllers;
     using ContactManager.Persistance;
     using ContactManager.Services;
@@ -9,8 +8,10 @@
     /// <summary>
     /// Application entry point and composition root. Wires up the dependencies once and hands control to the controller.
     /// </summary>
-    internal class Program
+    public class Program
     {
+        public static bool IsFileStorage;
+        public static string FileName;
         /// <summary>
         /// Execution of flow begins from here.
         /// </summary>
@@ -26,6 +27,9 @@
             ContactService service = new ContactService(repository, validate);
 
             ContactController controller = new ContactController(console, service);
+
+            FileName = console.GetStorageChoice();
+            IsFileStorage = FileName == "Y" ? true : false;
 
             controller.Initialize();
         }
