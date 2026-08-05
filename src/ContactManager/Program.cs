@@ -10,8 +10,15 @@
     /// </summary>
     public class Program
     {
-        public static bool isFileStorage;
-        public static string fileName;
+        /// <summary>
+        /// Indicates whether file storage is being used.
+        /// </summary>
+        private static bool isFileStorage;
+
+        /// <summary>
+        /// Holds name of the file on which operations to be performed.
+        /// </summary>
+        private static string fileName;
 
         /// <summary>
         /// Execution of flow begins from here.
@@ -33,7 +40,7 @@
             if (isFileStorage)
             {
                 Program.fileName = console.GetFileName();
-                if (!File.Exists(Program.fileName))
+                if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "Data", fileName)))
                 {
                     console.DisplayFileNotFound();
                     choice = console.GetChoice();
@@ -41,8 +48,10 @@
                     {
                         return;
                     }
-                    Console.WriteLine("Printting from Program.cs - file");
+
+                    // Console.WriteLine("Printting from Program.cs - file");
                 }
+
                 service = new ContactService(new CSVContactRepository(fileName), validate);
             }
             else

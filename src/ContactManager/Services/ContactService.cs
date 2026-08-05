@@ -24,7 +24,6 @@
             this.validate = validate;
         }
 
-
         /// <summary>
         /// to Add new contact to the list.
         /// </summary>

@@ -15,6 +15,7 @@
         /// </summary>
         private readonly ConsoleView console;
         private readonly ContactService handler;
+        private string? ch;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContactController"/> class.
@@ -34,159 +35,239 @@
         {
         string? ch;
         do
-        {
-            Thread.Sleep(1000);
-            this.console.ClearConsole();
-            this.console.DisplayMenu();
-            ch = this.console.GetChoice();
-
-            switch (ch)
             {
-                case "0": // VIEW
-                    IReadOnlyList<Contact> contact = this.handler.GetAll();
-                    if (contact.Count() != 0)
-                    {
-                        this.console.DisplayContact(contact);
-                    }
-                    else
-                    {
-                        this.console.DisplayEmptyListMessage();
-                    }
+                Thread.Sleep(1000);
+                this.console.ClearConsole();
+                this.console.DisplayMenu();
+                ch = this.console.GetChoice();
 
-                    break;
+                switch (ch)
+                {
+                    case "0": // VIEW
+                        if (!this.IsEmpty())
+                        {
+                            this.View();
+                        }
 
-                case "1": // ADD
-                    string name = this.console.GetName();
-                    string phone = this.console.GetPhoneNumber();
-                    string? email = this.console.GetEmail();
-                    string? notes = this.console.GetNotes();
-                    Contact newContact = new Contact(name, phone, email, notes);
-                    int addStatus = this.handler.Add(newContact);
-                    if (addStatus == -1)
-                    {
-                        this.console.DisplayDuplicateMessage();
-                    }
-                    else if (addStatus == -2)
-                    {
-                        this.console.DisplayInvalidInputMessage("Blank spaces aren't allowed for name! Please enter a valid input!");
-                    }
-                    else if (addStatus == -3)
-                    {
-                        this.console.DisplayInvalidInputMessage("Invalid phone number!\nPlease enter a valid 10-digit phone number containing only 0-9 digits\n(Format:9876543210)");
-                    }
-                    else if (addStatus == -4)
-                    {
-                        this.console.DisplayInvalidInputMessage("Invalid email id! Please enter a valid email id  (Format:yourname@example.com)");
-                    }
-                    else
-                    {
-                        this.console.DisplaySuccess("Contact added successfully");
-                    }
+                        break;
 
-                    break;
+                    case "1": // ADD
+                        this.Add();
+                        break;
 
-                case "2": // EDIT
-                    name = this.console.GetName();
-                    string editChoice = this.console.DisplayEditMenu();
-                    string newValue = string.Empty;
-                    switch (editChoice)
-                    {
-                        case "1":
-                            newValue = this.console.GetName();
-                            break;
-                        case "2":
-                            newValue = this.console.GetPhoneNumber();
-                            break;
-                        case "3":
-                            newValue = this.console.GetEmail();
-                            break;
-                        case "4":
-                            newValue = this.console.GetNotes();
-                            break;
-                        default:
-                            this.console.DisplayDefaultMessage();
-                            break;
-                    }
+                    case "2": // EDIT
+                        if (!this.IsEmpty())
+                        {
+                            this.Edit();
+                        }
 
-                    int editStatus = this.handler.Edit(name, editChoice, newValue);
-                    if (editStatus == -1)
-                    {
-                        this.console.DisplayNotFoundMessage();
-                    }
-                    else if (editStatus == -2)
-                    {
-                        this.console.DisplayInvalidInputMessage("Invalid Input! Please enter a valid input");
-                    }
-                    else
-                    {
-                        this.console.DisplaySuccess("Contact edited sucessfully");
-                    }
+                        break;
 
-                    break;
+                    case "3": // DELETE
+                        if (!this.IsEmpty())
+                        {
+                            this.View();
+                        }
 
-                case "3": // DELETE
-                    phone = this.console.GetPhoneNumber();
-                    int deleteStatus = this.handler.Delete(phone);
-                    if (deleteStatus == -1)
-                    {
-                        this.console.DisplayNotFoundMessage();
-                    }
-                    else
-                    {
-                        this.console.DisplaySuccess("Contact deleted successfully");
-                    }
+                        break;
 
-                    break;
+                    case "4": // SEARCH
+                        if (!this.IsEmpty())
+                        {
+                            this.Search();
+                        }
 
-                case "4": // SEARCH
-                    name = this.console.GetName();
-                    List<Contact>? foundContact = this.handler.Search(name);
-                    if (foundContact != null)
-                    {
-                        this.console.DisplayContact(foundContact);
-                    }
-                    else
-                    {
-                        this.console.DisplayNotFoundMessage();
-                    }
+                        break;
 
-                    break;
+                    case "5": // SORT
+                        if (!this.IsEmpty())
+                        {
+                            this.Sort();
+                        }
 
-                case "5": // SORT
-                    List<Contact>? contacts = this.handler.Sort();
+                        break;
 
-                    if (contacts == null)
-                    {
-                        this.console.DisplayEmptyListMessage();
-                    }
-                    else
-                    {
-                        this.console.DisplayContact(contacts);
-                    }
+                    case "6": // EXIT
+                        this.Exit();
+                        break;
 
-                    break;
-
-                case "6": // EXIT
-                    this.console.DisplayExitWarning();
-                    string exitCh = this.console.ExitConfirmation();
-                    if (exitCh == "Y" || exitCh == "y")
-                    {
-                        this.console.DisplayExitConfirmation();
-                    }
-                    else
-                    {
-                        ch = "7"; // To prevent while loop termination
+                    default:
                         this.console.DisplayDefaultMessage();
-                    }
+                        break;
+                }
+            }
+            while (ch != "6");
+        }
 
+        /// <summary>
+        /// Gets & Displays all contacts.
+        /// </summary>
+        public void View()
+        {
+            IReadOnlyList<Contact> contact = this.handler.GetAll();
+            this.console.DisplayContact(contact);
+        }
+
+        /// <summary>
+        /// Handles console and view for insertion of a contact.
+        /// </summary>
+        public void Add()
+        {
+            string name = this.console.GetName();
+            string phone = this.console.GetPhoneNumber();
+            string? email = this.console.GetEmail();
+            string? notes = this.console.GetNotes();
+            Contact newContact = new Contact(name, phone, email, notes);
+            int addStatus = this.handler.Add(newContact);
+            if (addStatus == -1)
+            {
+                this.console.DisplayDuplicateMessage();
+            }
+            else if (addStatus == -2)
+            {
+                this.console.DisplayInvalidInputMessage("Blank spaces aren't allowed for name! Please enter a valid input!");
+            }
+            else if (addStatus == -3)
+            {
+                this.console.DisplayInvalidInputMessage("Invalid phone number!\nPlease enter a valid 10-digit phone number containing only 0-9 digits\n(Format:9876543210)");
+            }
+            else if (addStatus == -4)
+            {
+                this.console.DisplayInvalidInputMessage("Invalid email id! Please enter a valid email id  (Format:yourname@example.com)");
+            }
+            else
+            {
+                this.console.DisplaySuccess("Contact added successfully");
+            }
+        }
+
+        /// <summary>
+        /// Performs edit operation for a contact on user's choice.
+        /// </summary>
+        public void Edit()
+        {
+            string name = this.console.GetName();
+            string editChoice = this.console.DisplayEditMenu();
+            string newValue = string.Empty;
+            switch (editChoice)
+            {
+                case "1":
+                    newValue = this.console.GetName();
                     break;
-
+                case "2":
+                    newValue = this.console.GetPhoneNumber();
+                    break;
+                case "3":
+                    newValue = this.console.GetEmail();
+                    break;
+                case "4":
+                    newValue = this.console.GetNotes();
+                    break;
                 default:
                     this.console.DisplayDefaultMessage();
                     break;
             }
+
+            int editStatus = this.handler.Edit(name, editChoice, newValue);
+            if (editStatus == -1)
+            {
+                this.console.DisplayNotFoundMessage();
+            }
+            else if (editStatus == -2)
+            {
+                this.console.DisplayInvalidInputMessage("Invalid Input! Please enter a valid input");
+            }
+            else
+            {
+                this.console.DisplaySuccess("Contact edited sucessfully");
+            }
         }
-        while (ch != "6");
+
+        /// <summary>
+        /// Handles deletion of a contact.
+        /// </summary>
+        public void Delete()
+        {
+            string phone = this.console.GetPhoneNumber();
+            int deleteStatus = this.handler.Delete(phone);
+            if (deleteStatus == -1)
+            {
+                this.console.DisplayNotFoundMessage();
+            }
+            else
+            {
+                this.console.DisplaySuccess("Contact deleted successfully");
+            }
+        }
+
+        /// <summary>
+        /// Searches for a contact based on name.
+        /// </summary>
+        public void Search()
+        {
+            string name = this.console.GetName();
+            List<Contact>? foundContact = this.handler.Search(name);
+            if (foundContact != null)
+            {
+                this.console.DisplayContact(foundContact);
+            }
+            else
+            {
+                this.console.DisplayNotFoundMessage();
+            }
+        }
+
+        /// <summary>
+        /// Performs sort operation on the contact list.
+        /// </summary>
+        public void Sort()
+        {
+            List<Contact>? contacts = this.handler.Sort();
+
+            if (contacts == null)
+            {
+                this.console.DisplayEmptyListMessage();
+            }
+            else
+            {
+                this.console.DisplayContact(contacts);
+            }
+        }
+
+        /// <summary>
+        /// Handles exit operation of console application.
+        /// </summary>
+        public void Exit()
+        {
+            this.console.DisplayExitWarning();
+            string exitCh = this.console.ExitConfirmation();
+            if (exitCh == "Y" || exitCh == "y")
+            {
+                this.console.DisplayExitConfirmation();
+            }
+            else
+            {
+                this.ch = "7"; // To prevent while loop termination
+                this.console.DisplayDefaultMessage();
+            }
+        }
+
+        /// <summary>
+        /// Checks whether the contact is empty.
+        /// </summary>
+        /// <returns>True if empty else false.</returns>
+        public bool IsEmpty()
+        {
+            IReadOnlyList<Contact> contact = this.handler.GetAll();
+            bool empty = this.handler.IsEmpty(contact.ToList());
+
+            if (contact.Count() == 0)
+            {
+                this.console.DisplayEmptyListMessage();
+                return true;
+            }
+
+            return false;
         }
     }
 }

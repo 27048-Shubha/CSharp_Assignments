@@ -5,14 +5,21 @@
     using ContactManager.Models;
 
     /// <summary>
-    /// 
+    /// Handles CRUD Operations of Contact Manager using CSV.
     /// </summary>
     internal class CSVContactRepository : IContactRepository
     {
-        public string fileName = "contacts.csv";
+        /// <summary>
+        /// Holds default file name on which operations to be performed.
+        /// </summary>
         private readonly string filePath;
-        private readonly List<String> headerList = new List<string>() { "Id,Name,PhoneNumber,Email,Notes" };
+        private readonly List<string> headerList = new List<string>() { "Id,Name,PhoneNumber,Email,Notes" };
+        private readonly string fileName = "contacts.csv";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSVContactRepository"/> class.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
         public CSVContactRepository(string fileName)
         {
             this.filePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "Data", fileName);
@@ -45,10 +52,10 @@
             string[] lines = File.ReadAllLines(this.filePath);
             Contact newContact;
             string[] words;
-            foreach (string line in lines)
+            for (int i = 1; i < lines.Length; i++)
             {
-                words = line.Split(',');
-                newContact = new Contact(words[0], words[1], words[2], words[3]);
+                words = lines[i].Split(',');
+                newContact = new Contact(words[0], words[1], words[2], words[3], words[4]);
                 contacts.Add(newContact);
             }
 
@@ -72,8 +79,6 @@
                     File.Delete(line);
                 }
             }
-
-            //contacts.Remove(contact);
         }
 
         /// <summary>
@@ -84,7 +89,7 @@
         public Contact? Get(string name)
         {
             string[] lines = File.ReadAllLines(this.filePath);
-            Contact newContact = null;
+            Contact? newContact = null;
             string[] words;
             foreach (string line in lines)
             {
@@ -129,7 +134,7 @@
             List<Contact> contacts = new List<Contact>();
             string[] lines = File.ReadAllLines(this.filePath);
             string[] words;
-            for(int i=1; i<lines.Length; i++)
+            for (int i = 1; i < lines.Length; i++)
             {
                 words = lines[i].Split(',');
                 contacts.Add(new Contact(words[0], words[1], words[2], words[3], words[4]));
@@ -173,12 +178,13 @@
             {
                 return null;
             }
+
             string[] lines = File.ReadAllLines(this.filePath);
             string[] words;
             foreach (string line in lines)
             {
                 words = line.Split(',');
-                if (words[1] == phone)
+                if (words[2] == phone)
                 {
                     return new Contact(words[0], words[1], words[2], words[3]);
                 }

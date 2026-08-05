@@ -55,9 +55,9 @@
         /// <returns>User input receiveed.</returns>
         public string GetStorageChoice()
         {
-            ConsoleColorManager.SetColor(ConsoleColor.White);
-            Console.WriteLine("Enter Y to store contacts in file!");
-            Console.WriteLine("Or Press any key to continue store in memory:");
+            ConsoleColorManager.SetColor(ConsoleColor.Blue);
+            Console.WriteLine("[Y] to store contacts in file");
+            Console.WriteLine("Press any key to continue store in memory:");
 
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
