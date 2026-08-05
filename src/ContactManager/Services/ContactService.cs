@@ -155,7 +155,7 @@
         /// </summary>
         /// <param name="contactList"> Entire List of contacts in contactList. </param>
         /// <returns>True if empty else False.</returns>
-        public bool IsEmpty(List<Contact> contactList)
+        public bool IsEmpty(IReadOnlyList<Contact> contactList)
         {
             return contactList.Count == 0;
         }
