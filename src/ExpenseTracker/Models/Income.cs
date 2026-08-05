@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace ExpenseTracker.Models
 {
-    internal class Income : ICashFlow
+    internal class IncomeRepository : Transaction
     {
         private decimal totalIncome;
         private IncomeSource source;
+        public IncomeRepository(decimal amount, DateOnly date, IncomeSource soruce)
+            : base(amount, date)
+        {
+        }
 
         public IncomeSource Source
         {

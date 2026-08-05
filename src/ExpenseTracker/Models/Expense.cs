@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace ExpenseTracker.Models
 {
-    internal class Expense : ICashFlow
+    internal class Expense : Transaction
     {
+        public Expense(decimal amount, DateOnly date, ExpenseCategory category) 
+            : base(amount, date)
+        {
+        }
+
         private decimal totalExpense;
         private ExpenseCategory category;
 
