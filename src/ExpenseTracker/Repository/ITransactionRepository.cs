@@ -3,17 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ExpenseTracker.Repository
 {
-    public interface ITransactionRepository
+    public interface ITransactionRepository<TTransaction, TCategory>
     {
-        public void Add(decimal amount, DateOnly date, ExpenseCategory category);
-        public void Update();
-        public Guid Get();
-        public void Delete();
-        public void Summary();
-
+        public void Add(decimal amount, DateOnly date, TCategory category );
+        public void Update(Guid id, TTransaction list);
+        public Guid Get(decimal amount);
+        public Guid Get(DateOnly date);
+        public void Delete(Guid id);
     }
 }

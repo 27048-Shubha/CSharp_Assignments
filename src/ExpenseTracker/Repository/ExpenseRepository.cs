@@ -9,17 +9,17 @@ using System.Xml.Linq;
 
 namespace ExpenseTracker.Repository
 {
-    internal class ExpenseRepository : ITransactionRepository
+    internal class ExpenseRepository : ITransactionRepository<>
     {
-        public List<Expense> expenses;
-        public void Add(decimal amount, DateOnly date, ExpenseCategory category)
+        private List<Expense> _expenses;
+        public void Add<T>(decimal amount, DateOnly date, T category)
         {
-            Expense.Add(new Expense(amount, date, category));
+            _expenses.Add(new Expense(amount, date, (ExpenseCategory)(object)category) );
         }
 
         public void Update(Guid id, Expense expenseDetails)
         {
-            foreach (var expense in this.expenses)
+            foreach (var expense in this._expenses)
             {
                 if (id == expense.Id)
                 {
@@ -30,9 +30,21 @@ namespace ExpenseTracker.Repository
             }
         }
 
+        public Expense Get(Guid id)
+        {
+            foreach (var expense in this._expenses)
+            {
+                if (id == expense.Id)
+                {
+                    return expense;
+                }
+            }
+            return null;
+        }
+
         public Guid GetId(decimal amount)
         {
-            foreach (var expense in this.expenses)
+            foreach (var expense in this._expenses)
             {
                 if (expense.amount.Contains(amount, StringComparison.OrdinalIgnoreCase))
                 {
@@ -44,7 +56,7 @@ namespace ExpenseTracker.Repository
 
         public Guid GetId(DateOnly date)
         {
-            foreach (var expense in this.expenses)
+            foreach (var expense in this._expenses)
             {
                 if (expense.date.Contains(date, StringComparison.OrdinalIgnoreCase))
                 {
@@ -56,18 +68,13 @@ namespace ExpenseTracker.Repository
 
         public void Delete(Guid id)
         {
-            foreach (var expense in this.expenses)
+            foreach (var expense in this._expenses)
             {
                 if (id == expense.Id)
                 {
-                    expenses.Remove(expense);
+                    _expenses.Remove(expense);
                 }
             }
-        }
-
-        public void Summary()
-        {
-
         }
     }
 }
