@@ -129,10 +129,10 @@
             List<Contact> contacts = new List<Contact>();
             string[] lines = File.ReadAllLines(this.filePath);
             string[] words;
-            foreach (string line in lines)
+            for(int i=1; i<lines.Length; i++)
             {
-                words = line.Split(',');
-                contacts.Add(new Contact(words[0], words[1], words[2], words[3]));
+                words = lines[i].Split(',');
+                contacts.Add(new Contact(words[0], words[1], words[2], words[3], words[4]));
             }
 
             return contacts.OrderBy(c => c.Name).ToList();
