@@ -3,15 +3,15 @@ using ExpenseTracker.Models;
 
 namespace ExpenseTracker.Repository
 {
-    internal class IncomeRepository: ITransactionRepository
+    internal class IncomeRepository : ITransactionRepository<Income, IncomeSource>
     {
         private List<Income> _incomeDetails;
         public void Add(decimal amount, DateOnly date, IncomeSource category)
         {
-            _incomeDetails.Add(new Expense(amount, date, category));
+            _incomeDetails.Add(new Income(amount, date, category));
         }
 
-        public void Update(Guid id, Expense incomeDetails)
+        public void Update(Guid id, Income incomeDetails)
         {
             foreach (var income in this._incomeDetails)
             {
@@ -19,12 +19,12 @@ namespace ExpenseTracker.Repository
                 {
                     income.Amount = incomeDetails.Amount;
                     income.Date = incomeDetails.Date;
-                    income.Category = incomeDetails.Category;
+                    income.Source = incomeDetails.Source;
                 }
             }
         }
 
-        public Expense Get(Guid id)
+        public Income Get(Guid id)
         {
             foreach (var expense in this._incomeDetails)
             {
@@ -40,9 +40,9 @@ namespace ExpenseTracker.Repository
         {
             foreach (var item in this._incomeDetails)
             {
-                if (item.amount.Contains(amount, StringComparison.OrdinalIgnoreCase))
+                if (item.Amount == amount)
                 {
-                    return this.item.Id;
+                    return item.Id;
                 }
             }
             return Guid.Empty;
@@ -52,11 +52,12 @@ namespace ExpenseTracker.Repository
         {
             foreach (var item in this._incomeDetails)
             {
-                if (item.date.Contains(date, StringComparison.OrdinalIgnoreCase))
+                if (item.Date == date)
                 {
-                    return this.item.Id;
+                    return item.Id;
                 }
             }
+
             return Guid.Empty;
         }
 

@@ -8,20 +8,22 @@ namespace ExpenseTracker.Models
 {
     public class Transaction
     {
-        private Guid id;
-        private decimal amount;
-        private DateOnly date;
+        private Guid _id;
+        private string _transactionId;
+        private decimal _amount;
+        private DateOnly _date;
 
-        public Transaction(decimal amount, DateOnly date)
+        public Transaction(string transactionId, decimal amount, DateOnly date)
         {
-            this.id = new Guid();
-            this.amount = amount;
-            this.date = date;
+            this._id = new Guid();
+            this._transactionId = transactionId;
+            this._amount = amount;
+            this._date = date;
         }
 
-        public Guid Id 
+        public Guid Id
         { 
-            get { return id; }
+            get { return _id; }
         }
 
         public decimal Amount
@@ -29,7 +31,7 @@ namespace ExpenseTracker.Models
             get; set;
         }
 
-        public decimal Date
+        public DateOnly Date
         {
             get; set;
         }

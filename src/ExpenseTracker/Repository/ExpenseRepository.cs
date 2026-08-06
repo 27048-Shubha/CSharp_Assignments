@@ -9,12 +9,15 @@ using System.Xml.Linq;
 
 namespace ExpenseTracker.Repository
 {
-    internal class ExpenseRepository : ITransactionRepository<>
+    internal class ExpenseRepository : ITransactionRepository<Expense, ExpenseCategory>
     {
-        private List<Expense> _expenses;
-        public void Add<T>(decimal amount, DateOnly date, T category)
+        private decimal _transactionCount = 0;
+        private List<Expense> _expenses = new List<Expense>();
+        public void Add(decimal amount, DateOnly date, ExpenseCategory category)
         {
-            _expenses.Add(new Expense(amount, date, (ExpenseCategory)(object)category) );
+            _transactionCount += 1;
+            string transactionId = this._transactionCount.ToString();
+            _expenses.Add(new Expense("E"+transactionId, amount, date, category));
         }
 
         public void Update(Guid id, Expense expenseDetails)
@@ -46,9 +49,9 @@ namespace ExpenseTracker.Repository
         {
             foreach (var expense in this._expenses)
             {
-                if (expense.amount.Contains(amount, StringComparison.OrdinalIgnoreCase))
+                if (expense.Amount == amount)
                 {
-                    return this.expense.Id;
+                    return expense.Id;
                 }
             }
             return Guid.Empty;
@@ -58,9 +61,9 @@ namespace ExpenseTracker.Repository
         {
             foreach (var expense in this._expenses)
             {
-                if (expense.date.Contains(date, StringComparison.OrdinalIgnoreCase))
+                if (expense.Date == date)
                 {
-                    return this.expense.Id;
+                    return expense.Id;
                 }
             }
             return Guid.Empty;

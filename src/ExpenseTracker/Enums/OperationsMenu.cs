@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace ExpenseTracker.Enums
 {
-    public enum ExpenseCategory
+    internal enum OperationsMenu
     {
-        Food = 1,
-        Clothing,
-        Shopping,
-        Essentials,
-        Rent,
-        Gadgets,
+        Add = 1,
+        View,
+        Edit,
+        Delete,
+        // Summary
     }
 }

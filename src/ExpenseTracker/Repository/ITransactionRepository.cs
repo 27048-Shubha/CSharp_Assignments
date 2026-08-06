@@ -1,18 +1,17 @@
-﻿using ExpenseTracker.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
+﻿using ExpenseTracker.Models;
 
 namespace ExpenseTracker.Repository
 {
-    public interface ITransactionRepository<TTransaction, TCategory>
+    public interface ITransactionRepository
+    {
+        public Guid GetId(decimal amount);
+        public Guid GetId(DateOnly date);
+        public void Delete(Guid id);
+    }
+    public interface ITransactionRepository<TTransaction, TCategory> : ITransactionRepository
     {
         public void Add(decimal amount, DateOnly date, TCategory category );
         public void Update(Guid id, TTransaction list);
-        public Guid Get(decimal amount);
-        public Guid Get(DateOnly date);
-        public void Delete(Guid id);
+        public TTransaction Get(Guid id);
     }
 }

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace ExpenseTracker.Models
 {
-    internal class Expense : Transaction
+    public class Expense : Transaction
     {
-        public Expense(decimal amount, DateOnly date, ExpenseCategory category) 
-            : base(amount, date)
+        private decimal _totalExpense;
+        private ExpenseCategory _category;
+
+        public Expense(string transactionId, decimal amount, DateOnly date, ExpenseCategory category) 
+            : base(transactionId, amount, date)
         {
         }
-
-        private decimal totalExpense;
-        private ExpenseCategory category;
 
         public decimal TotalExpense
         {
