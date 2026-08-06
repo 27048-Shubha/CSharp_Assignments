@@ -16,9 +16,9 @@ namespace ExpenseTracker.Models
         public Transaction(string transactionId, decimal amount, DateOnly date)
         {
             this._id = new Guid();
-            this._transactionId = transactionId;
-            this._amount = amount;
-            this._date = date;
+            TransactionId = transactionId;
+            Amount = amount;
+            Date = date;
         }
 
         public Guid Id
@@ -32,6 +32,10 @@ namespace ExpenseTracker.Models
         }
 
         public DateOnly Date
+        {
+            get; set;
+        }
+        public string TransactionId
         {
             get; set;
         }

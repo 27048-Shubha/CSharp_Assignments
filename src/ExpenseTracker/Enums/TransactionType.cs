@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExpenseTracker.Enums
 {
-    internal enum OperationsMenu
+    internal enum TransactionType
     {
-        Add = 1,
-        View,
-        Edit,
-        Delete,
-        Back,
-        // Summary
+        Income = 1,
+        Expense,
     }
 }

@@ -1,11 +1,16 @@
 ﻿using ExpenseTracker.Enums;
 using ExpenseTracker.Models;
+using System.Reflection.Metadata;
 
 namespace ExpenseTracker.Repository
 {
     internal class IncomeRepository : ITransactionRepository<Income, IncomeSource>
     {
         private List<Income> _incomeDetails;
+        public IReadOnlyList<Income> GetAll()
+        {
+            return _incomeDetails;
+        }
         public void Add(decimal amount, DateOnly date, IncomeSource category)
         {
             _incomeDetails.Add(new Income(amount, date, category));
@@ -36,11 +41,11 @@ namespace ExpenseTracker.Repository
             return null;
         }
 
-        public Guid GetId(decimal amount)
+        public Guid GetId(string transactionId)
         {
             foreach (var item in this._incomeDetails)
             {
-                if (item.Amount == amount)
+                if (item.TransactionId == transactionId)
                 {
                     return item.Id;
                 }

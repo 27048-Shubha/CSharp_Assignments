@@ -13,6 +13,7 @@ namespace ExpenseTracker.Repository
     {
         private decimal _transactionCount = 0;
         private List<Expense> _expenses = new List<Expense>();
+
         public void Add(decimal amount, DateOnly date, ExpenseCategory category)
         {
             _transactionCount += 1;

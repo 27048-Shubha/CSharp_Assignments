@@ -4,8 +4,6 @@ namespace ExpenseTracker.Repository
 {
     public interface ITransactionRepository
     {
-        public Guid GetId(decimal amount);
-        public Guid GetId(DateOnly date);
         public void Delete(Guid id);
     }
     public interface ITransactionRepository<TTransaction, TCategory> : ITransactionRepository
