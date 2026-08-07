@@ -8,8 +8,9 @@ namespace ExpenseTracker.Repository
     }
     public interface ITransactionRepository<TTransaction, TCategory> : ITransactionRepository
     {
-        public void Add(decimal amount, DateOnly date, TCategory category );
-        public void Update(Guid id, TTransaction list);
+        public void Add(Transaction transaction);
         public TTransaction Get(Guid id);
+        public void Delete(Guid id);
+        public void Update(Guid id, Transaction expenseDetails);
     }
 }

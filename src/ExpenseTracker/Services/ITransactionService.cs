@@ -1,17 +1,19 @@
-﻿using ExpenseTracker.Models;
-
+﻿using ExpenseTracker.Enums;
+using ExpenseTracker.Models;
+using ExpenseTracker.Repository;
 namespace ExpenseTracker.Services
 {
-    internal interface ITransactionService<T>
-        where T : Transaction
+    internal interface ITransactionService
     {
-        public void Add(decimal amount, DateOnly date, Transaction category);
+        public void Add(Transaction transaction);
+
+        public IReadOnlyList<Transaction> GetAll();
 
         public void Edit(Transaction transaction);
 
         public Transaction Get(string transactionId);
 
-        public IReadOnlyList<Transaction> GetAll();
+        public void Delete(string transactionId);
 
         public void DeleteTransaction(Transaction transaction);
     }

@@ -6,25 +6,35 @@ namespace ExpenseTracker.Repository
 {
     internal class IncomeRepository : ITransactionRepository<Income, IncomeSource>
     {
+        private static decimal _transactionCount = 0;
         private List<Income> _incomeDetails;
+
+        public static string GetTransactionId()
+        {
+            _transactionCount += 1;
+            return _transactionCount.ToString();
+        }
+
         public IReadOnlyList<Income> GetAll()
         {
             return _incomeDetails;
         }
-        public void Add(decimal amount, DateOnly date, IncomeSource category)
+
+        public void Add(Transaction transaction)
         {
-            _incomeDetails.Add(new Income(amount, date, category));
+            _incomeDetails.Add((Income)transaction);
         }
 
-        public void Update(Guid id, Income incomeDetails)
+        public void Update(Guid id, Transaction incomeDetails)
         {
-            foreach (var income in this._incomeDetails)
+            Income income = (Income)incomeDetails;
+            foreach (var item in this._incomeDetails)
             {
-                if (id == income.Id)
+                if (id == item.Id)
                 {
-                    income.Amount = incomeDetails.Amount;
-                    income.Date = incomeDetails.Date;
-                    income.Source = incomeDetails.Source;
+                    item.Amount = income.Amount;
+                    item.Date = income.Date;
+                    item.Source = income.Source;
                 }
             }
         }

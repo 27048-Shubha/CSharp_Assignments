@@ -4,38 +4,44 @@ namespace ExpenseTracker.Controller
 {
     using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
-    using ExpenseTracker.Repository;
     using ExpenseTracker.Services;
     using ExpenseTracker.View;
 
     internal class TransactionController
     {
-        //constructor
-
-        private ITransactionService<Transaction> _service;
+        private IncomeService _incomeService;
+        private ExpenseService _expenseService;
+        private ITransactionService _service;
         private ConsoleView _console;
         private TransactionType _currentType;
+        private int? _choice;
 
-        private int _choice;
+        public TransactionController(ConsoleView console, IncomeService incomeService, ExpenseService expenseService)
+        {
+            this._console = console;
+            this._incomeService = incomeService;
+            this._expenseService = expenseService;
+        }
 
         public void Initialize()
         {
             do
             {
-                _choice = _console.GetChoice();
                 _console.DisplayMainMenu();
+                _choice = _console.GetChoice();
 
                 switch ((Enums.MainMenu)_choice)
                 {
                     case Enums.MainMenu.Income:
-                        this._service = new IncomeService();
+                        this._service = this._incomeService;
                         this._currentType = Enums.TransactionType.Income;
                         this.ChooseOperation();
                         break;
 
                     case Enums.MainMenu.Expense:
-                        //this._service = new ExpenseService();
+                        this._service = this._expenseService;
                         this._currentType = Enums.TransactionType.Expense;
+                        this.ChooseOperation();
                         break;
 
                     case Enums.MainMenu.Exit:
@@ -43,7 +49,7 @@ namespace ExpenseTracker.Controller
                         break;
 
                     default:
-                        this._console.DisplayInvalidInput();
+                        this._console.DisplayInvalidInput("Invalid input menu!");
                         break;
                 }
             }
@@ -53,20 +59,14 @@ namespace ExpenseTracker.Controller
         public void ChooseOperation()
         {
             this._console.DisplayOperationsMenu();
-            int operation = this._console.GetChoice();
+            int? operation;
             do
             {
+                operation = this._console.GetChoice();
                 switch ((Enums.OperationsMenu)operation)
                 {
                     case Enums.OperationsMenu.Add:
-                        if (this.IsEmpty())
-                        {
-                            _console.DisplayEmpty(_currentType);
-                        }
-                        else
-                        {
-                            this.Add();
-                        }
+                        this.Add();
                         break;
 
                     case Enums.OperationsMenu.View:
@@ -117,15 +117,24 @@ namespace ExpenseTracker.Controller
         {
             decimal? amount = _console.GetAmount();
             DateOnly? date = _console.GetDate();
-            TransactionType? category = _console.GetCategory();
-
-            if ((amount == null) || (date == null) || (category == null))
+            if ((amount == null) || (date == null))
             {
-                
+                // m
             }
             else
             {
-                _service.Add(amount, date, category);
+                if(_currentType == Enums.TransactionType.Income)
+                {
+                    IncomeSource incomeSource = _console.GetIncomeSource().Value;
+                    Income income = new Income(IncomeService.GetTransactionId(), amount.Value, date.Value, incomeSource);
+                    _service.Add(income);
+                }
+                else
+                {
+                    ExpenseCategory expenseCategory = _console.GetExpenseCategory().Value;
+                    Expense expense = new Expense(ExpenseService.GetTransactionId(), amount.Value, date.Value, expenseCategory);
+                    _service.Add(expense);
+                }
             }
         }
 
@@ -147,7 +156,7 @@ namespace ExpenseTracker.Controller
             }
             else
             {
-                _console.EditTransaction(transaction);
+                transaction = _console.EditTransaction(transaction);
                 _service.Edit(transaction);
             }
         }
@@ -172,13 +181,7 @@ namespace ExpenseTracker.Controller
         public bool IsEmpty()
         {
             IReadOnlyList<Transaction> transactions = _service.GetAll();
-
-            if (transactions.Count == 0)
-            {
-                return true;
-            }
-
-            return false;
+            return (transactions.Count == 0);
         }
     }
 }

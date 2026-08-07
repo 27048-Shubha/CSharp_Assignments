@@ -11,14 +11,16 @@
         /// <param name="price">Input to be checked.</param>
         /// <param name="priceDecimal">Stores decimal value of input if true,else false.</param>
         /// <returns>True if parsing is su   cessfull, else False.</returns>
-        public static bool IsValidDecimal(string? price, out decimal priceDecimal)
+        public static bool IsValidDecimal(string? price, out decimal? priceDecimal)
         {
-            if (decimal.TryParse(price, out priceDecimal))
+            if (decimal.TryParse(price, out decimal input))
             {
+                priceDecimal = input;
                 return true;
             }
             else
             {
+                priceDecimal = null;
                 return false;
             }
         }
@@ -29,16 +31,16 @@
         /// <param name="stock">Input to be checked.</param>
         /// <param name="stockInt">Stores int value of input if true,else false.</param>
         /// <returns>True if parsing is sucessfull, else False.</returns>
-        public static bool IsValidInt(string stock, out int stockInt)
+        public static bool IsValidInt(string stock, out int? stockInt)
         {
-            if (int.TryParse(stock, out stockInt))
+            if (int.TryParse(stock, out int value))
             {
+                stockInt = value;
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            stockInt = null;
+            return false;
         }
 
         /// <summary>
@@ -51,7 +53,7 @@
             return !string.IsNullOrEmpty(str);
         }
 
-        public static bool IsValidDate(string? input, out DateOnly date)
+        public static bool IsValidDate(string? input, out DateOnly? date)
         {
             date = default;
             if (string.IsNullOrWhiteSpace(input))
@@ -59,7 +61,7 @@
                 return false;
             }
 
-            return DateOnly.TryParseExact(input, "dd-MM-yyyy", out date);
+            return DateOnly.TryParseExact(input, "dd-MM-yyyy", out DateOnly inputDate);
         }
     }
 }

@@ -3,20 +3,24 @@
     using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
     using ExpenseTracker.Validator;
-    using System.Transactions;
 
     internal class ConsoleView
     {
         public void DisplayMainMenu()
         {
-            
+            Console.WriteLine("Welcome to Expense Tracker\n Enter\n 1.CRUD Income \n2. CRUD Expense\n 3. Exit\n");
+        }
+
+        public Transaction EditTransaction(Transaction transaction)
+        {
+            return transaction;
         }
 
         public int? GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
             string input;
-            int choice;
+            int? choice;
             int chances = 0;
 
             do
@@ -36,16 +40,16 @@
 
         public string? GetTransactionId()
         {
-            Console.WriteLine("Enter your choice: ");
+            this.DisplayMessage("Enter Transaction id: ");
             string input = Console.ReadLine();
             return input;
         }
 
         public decimal? GetAmount()
         {
-            Console.WriteLine("Enter your choice: ");
+            this.DisplayMessage("Enter amount: ");
             string input;
-            decimal amount;
+            decimal? amount;
             int chances = 0;
 
             do
@@ -65,9 +69,9 @@
 
         public DateOnly? GetDate()
         {
-            Console.WriteLine("Enter your choice: ");
+            this.DisplayMessage("Enter date: ");
             string input;
-            DateOnly date;
+            DateOnly? date;
             int chances = 0;
 
             do
@@ -85,40 +89,40 @@
             return null;
         }
 
-        public TransactionType? GetCategory()
+        public ExpenseCategory? GetExpenseCategory()
         {
-            Console.WriteLine("Enter your choice: ");
-            string input;
-            int choice;
-            int chances = 0;
-
-            do
+            Console.WriteLine("Enter Expense Category: ");
+            if(Enum.TryParse<ExpenseCategory>(Console.ReadLine(), true, out var category))
             {
-                input = Console.ReadLine();
-                chances++;
-                if (Enum.TryParse<TransactionType> (input, true, out var category))
-                {
-                    return category;
-                }
+                return category;
             }
-            while (chances < 3);
-
-            this.DisplayInvalidInput("Kindly enter valid category as input!");
             return null;
         }
 
-        public void DisplayTransaction(IReadOnlyList<Transaction> transaction)
+        public IncomeSource? GetIncomeSource()
         {
-            Console.Write($"{transaction.TransactionId} - {transaction.Date} - {transaction - Amount} - }");
-            if (transaction is Expense expense)
+            Console.WriteLine("Enter Income Source: ");
+            if (Enum.TryParse<IncomeSource>(Console.ReadLine(), true, out var category))
             {
-                Console.WriteLine($"{expense.Category}");
+                return category;
             }
-            else if (transaction is Income income)
+            return null;
+        }
+
+        public void DisplayTransaction(IReadOnlyList<Transaction> transactions)
+        {
+            foreach (var transaction in transactions)
             {
-                Console.WriteLine($"{income.Source}");
+                Console.Write($"{transaction.TransactionId} - {transaction.Date} - {transaction.Amount} - ");
+                if (transaction is Expense expense)
+                {
+                    Console.WriteLine($"{expense.Category}");
+                }
+                else if (transaction is Income income)
+                {
+                    Console.WriteLine($"{income.Source}");
+                }
             }
-            Console.WriteLine();
         }
 
         public void DisplayExit()
@@ -148,7 +152,7 @@
 
         public void DisplayOperationsMenu()
         {
-
+            // v
         }
 
         public void DisplayEmpty(TransactionType transactionType)
@@ -158,7 +162,7 @@
 
         public void DisplayMessage(string message)
         {
-            Console.WriteLine($"message");
+            Console.WriteLine($"{message}");
         }
     }
 }

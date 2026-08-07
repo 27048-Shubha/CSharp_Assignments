@@ -6,26 +6,37 @@ namespace ExpenseTracker.Services
 {
     internal class IncomeService : ITransactionService
     {
-        private IncomeRepository _repository = new IncomeRepository();
-        public void Add(decimal amount, DateOnly date, IncomeSource category)
+        private IncomeRepository _repository;
+
+        public IncomeService(IncomeRepository incomeRepository)
+        {
+            this._repository = incomeRepository;
+        }
+
+        public void Add(Transaction income)
         {
             //negative amount validation
             //future date validation
-            _repository.Add(amount, date, category);
+            _repository.Add((Income) income);
         }
 
-        public IReadOnlyList<Income> GetAll()
+        public IReadOnlyList<Transaction> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public void Edit(Income transaction)
+        public void Edit(Transaction transaction)
         {
             Guid id = _repository.GetId(transaction.TransactionId);
-            _repository.Update(id, transaction);
+            _repository.Update(id, (Income)transaction);
         }
 
-        public Income Get(string transactionId)
+        public static string GetTransactionId()
+        {
+            return IncomeRepository.GetTransactionId();
+        }
+
+        public Transaction Get(string transactionId)
         {
             Guid id = _repository.GetId(transactionId);
             return _repository.Get(id);
@@ -37,9 +48,9 @@ namespace ExpenseTracker.Services
             _repository.Delete(id);
         }
 
-        public void DeleteTransaction(Income transaction)
+        public void DeleteTransaction(Transaction transaction)
         {
-            Guid id = _repository.GetId(transactionId);
+            Guid id = _repository.GetId(transaction.TransactionId);
             _repository.Delete(id);
         }
     }

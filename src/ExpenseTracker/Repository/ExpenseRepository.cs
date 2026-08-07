@@ -1,42 +1,45 @@
 ﻿using ExpenseTracker.Enums;
 using ExpenseTracker.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace ExpenseTracker.Repository
 {
     internal class ExpenseRepository : ITransactionRepository<Expense, ExpenseCategory>
     {
-        private decimal _transactionCount = 0;
-        private List<Expense> _expenses = new List<Expense>();
+        private static decimal _transactionCount = 0;
+        private List<Expense> _expenseDetails;
 
-        public void Add(decimal amount, DateOnly date, ExpenseCategory category)
+        public IReadOnlyList<Expense> GetAll()
+        {
+            return _expenseDetails;
+        }
+        public static string GetTransactionId()
         {
             _transactionCount += 1;
-            string transactionId = this._transactionCount.ToString();
-            _expenses.Add(new Expense("E"+transactionId, amount, date, category));
+            return _transactionCount.ToString();
         }
 
-        public void Update(Guid id, Expense expenseDetails)
+        public void Add(Transaction transaction)
         {
-            foreach (var expense in this._expenses)
+            _expenseDetails.Add((Expense)transaction);
+        }
+
+        public void Update(Guid id, Transaction expenseDetails)
+        {
+            Expense expense = (Expense)expenseDetails;
+            foreach (var item in this._expenseDetails)
             {
-                if (id == expense.Id)
+                if (id == item.Id)
                 {
-                    expense.Amount = expenseDetails.Amount;
-                    expense.Date = expenseDetails.Date;
-                    expense.Category = expenseDetails.Category;
+                    item.Amount = expense.Amount;
+                    item.Date = expense.Date;
+                    item.Category = expense.Category;
                 }
             }
         }
 
         public Expense Get(Guid id)
         {
-            foreach (var expense in this._expenses)
+            foreach (var expense in this._expenseDetails)
             {
                 if (id == expense.Id)
                 {
@@ -46,9 +49,21 @@ namespace ExpenseTracker.Repository
             return null;
         }
 
+        public Guid GetId(string transactionId)
+        {
+            foreach (var expense in this._expenseDetails)
+            {
+                if (expense.TransactionId == transactionId)
+                {
+                    return expense.Id;
+                }
+            }
+            return Guid.Empty;
+        }
+
         public Guid GetId(decimal amount)
         {
-            foreach (var expense in this._expenses)
+            foreach (var expense in this._expenseDetails)
             {
                 if (expense.Amount == amount)
                 {
@@ -60,7 +75,7 @@ namespace ExpenseTracker.Repository
 
         public Guid GetId(DateOnly date)
         {
-            foreach (var expense in this._expenses)
+            foreach (var expense in this._expenseDetails)
             {
                 if (expense.Date == date)
                 {
@@ -72,11 +87,11 @@ namespace ExpenseTracker.Repository
 
         public void Delete(Guid id)
         {
-            foreach (var expense in this._expenses)
+            foreach (var expense in this._expenseDetails)
             {
                 if (id == expense.Id)
                 {
-                    _expenses.Remove(expense);
+                    _expenseDetails.Remove(expense);
                 }
             }
         }

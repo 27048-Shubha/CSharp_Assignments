@@ -12,7 +12,7 @@ namespace ExpenseTracker.Models
         private decimal _totalExpense;
         private ExpenseCategory _category;
 
-        public Expense(string transactionId, decimal amount, DateOnly date, ExpenseCategory category) 
+        public Expense(string transactionId, decimal amount, DateOnly date, ExpenseCategory category)
             : base(transactionId, amount, date)
         {
         }
