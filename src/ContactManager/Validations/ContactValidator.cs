@@ -5,24 +5,22 @@
     /// <summary>
     /// Helper class - Contains all the Validation.
     /// </summary>
-    internal class ContactValidator
+    internal static class ContactValidator
     {
-        private ConsoleView console = new ConsoleView();
-
         /// <summary>
         /// Validates Phone number based on number of digits.
         /// </summary>
         /// <param name="phone">Input Phone number to be validated.</param>
         /// <returns>True if length == 10 else False.</returns>
-        public static bool ValidatePhone(string phone)
+        public static bool IsValidPhoneNumber(string phone)
         {
             phone = phone.Trim();
-            if (string.IsNullOrEmpty(phone) || phone.Length != 10)
+            if (string.IsNullOrWhiteSpace(phone) || phone.Trim().Length != 10)
             {
                 return false;
             }
 
-            foreach (char c in phone)
+            foreach (char c in phone.Trim())
             {
                 if (!char.IsDigit(c))
                 {
@@ -38,7 +36,7 @@
         /// </summary>
         /// <param name="email">Input email to be validated.</param>
         /// <returns>True if matches regex patter or without whitespace else False.</returns>
-        public static bool ValidateEmail(string? email)
+        public static bool IsValidEmail(string? email)
         {
             return string.IsNullOrWhiteSpace(email) || Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }

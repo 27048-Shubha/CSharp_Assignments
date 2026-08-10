@@ -6,26 +6,23 @@
     using ContactManager.Validations;
 
     /// <summary>
-    /// Handles all I/P Validations.
+    /// Handles business validations of the contact manager.
     /// </summary>
     internal class ContactService
     {
-        private readonly ContactRepository repo;
-        private readonly ContactValidator validate;
+        private readonly ContactRepository _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContactService"/> class.
         /// </summary>
         /// <param name="repo">Handles operations of Repository.</param>
-        /// <param name="validate">Handles operations of ContactValidator.</param>
-        public ContactService(ContactRepository repo, ContactValidator validate)
+        internal ContactService(ContactRepository repo)
         {
-            this.repo = repo;
-            this.validate = validate;
+            this._repository = repo;
         }
 
         /// <summary>
-        /// to Add new contact to the list.
+        /// Adds new contact to the list.
         /// </summary>
         /// <param name="contact">Contact information to add.</param>
         /// <returns>Status of the operation.</returns>
@@ -39,63 +36,63 @@
             {
                 return -2;
             }
-            else if (!ContactValidator.ValidatePhone(contact.PhoneNumber))
+            else if (!ContactValidator.IsValidPhoneNumber(contact.PhoneNumber))
             {
                 return -3;
             }
             else if (ContactValidator.IsEmpty(contact.Email))
             {
-                if (ContactValidator.ValidateEmail(contact.Email))
+                if (ContactValidator.IsValidEmail(contact.Email))
                 {
                     return -4;
                 }
             }
 
-            this.repo.Add(contact);
+            this._repository.Add(contact);
             return 1;
         }
 
         /// <summary>
-        /// to Get all contact information.
+        /// Gets all contact information.
         /// </summary>
         /// <returns>List of all contacts or null if empty.</returns>
         public IReadOnlyList<Contact> GetAll()
         {
-            return this.repo.GetAll();
+            return this._repository.GetAll();
         }
 
         /// <summary>
-        /// to Search for a contact by name.
+        /// Deletes contact from the contact list.
         /// </summary>
         /// <param name="phone">Phone number of the contact to search for.</param>
         /// <returns>Status of the operation.</returns>
-        public int Delete(string phone)
+        public Enums.Status Delete(string phone)
         {
-            Contact? contact = this.repo.GetByPhoneNumber(phone);
+            Contact? contact = this._repository.GetByPhoneNumber(phone);
             if (contact != null)
             {
-                this.repo.Delete(contact);
-                return 1;
+                this._repository.Delete(contact);
+                return Enums.Status.Success;
             }
             else
             {
-                return -1;
+                return Enums.Status.NotFound;
             }
         }
 
         /// <summary>
-        /// to Edit contact information.
+        /// Edits contact information.
         /// </summary>
         /// <param name="name">Name of the contact to edit.</param>
         /// <param name="editChoice">Choice of attribute to edit.</param>
         /// <param name="newValue">New value for the attribute.</param>
         /// <returns>Status of the operation.</returns>
-        public int Edit(string name, string editChoice, string newValue)
+        public Enums.Status Edit(string name, string editChoice, string newValue)
         {
-            Contact? contact = this.repo.Get(name);
+            Contact? contact = this._repository.Get(name);
             if (contact == null)
             {
-                return -1;
+                return Enums.Status.NotFound;
             }
 
             switch (editChoice)
@@ -117,22 +114,22 @@
                     break;
 
                 default:
-                    return -2;
+                    return Enums.Status.InvalidInput;
             }
 
-            return 1;
+            return Enums.Status.Success;
         }
 
         /// <summary>
-        /// to Search for a Contact.
+        /// Searches for a Contact.
         /// </summary>
         /// <param name="name">Name of the contact to search for.</param>
         /// <returns>ContactInfo object if found, otherwise null.</returns>
         public List<Contact>? Search(string name)
         {
-            if (this.repo.ExistsByName(name))
+            if (this._repository.IsExistsByName(name))
             {
-                return this.repo.FetchByNameContaining(name);
+                return this._repository.FetchByNameContaining(name);
             }
             else
             {
@@ -141,17 +138,17 @@
         }
 
         /// <summary>
-        /// to check for existance of new contact number to avoid duplication.
+        /// Checks for existance of new contact number to avoid duplication.
         /// </summary>
         /// <param name="contact"> New Object. </param>
         /// <returns> true if new attribute else False. </returns>
         public bool CheckDuplicates(Contact contact)
         {
-            return this.repo.GetByPhoneNumber(contact.PhoneNumber) != null;
+            return this._repository.GetByPhoneNumber(contact.PhoneNumber) != null;
         }
 
         /// <summary>
-        /// To check whether contactList is empty or not.
+        /// Checks whether passed contactList is empty or not.
         /// </summary>
         /// <param name="contactList"> Entire List of contacts in contactList. </param>
         /// <returns>True if empty else False.</returns>
@@ -161,17 +158,27 @@
         }
 
         /// <summary>
-        /// to Sort Contact.
+        /// Checks whether contact list is empty or not.
+        /// </summary>
+        /// <returns>True if contact exists, else false.</returns>
+        public bool HasContacts()
+        {
+            IReadOnlyList<Contact> contacts = this.GetAll();
+            return contacts.Count != 0;
+        }
+
+        /// <summary>
+        /// Sorts contact list.
         /// </summary>
         /// <returns>Sorted list of contacts or null if empty.</returns>
         public List<Contact>? Sort()
         {
-            if (this.repo.Empty())
+            if (this._repository.IsEmpty())
             {
                 return null;
             }
 
-            return this.repo.GetAllSortedByName();
+            return this._repository.GetAllSortedByName();
         }
     }
 }

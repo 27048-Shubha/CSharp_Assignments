@@ -20,7 +20,7 @@
 - Email & Notes are optional.
 
 2. Edit Existing Contact:
-- Enter 1,2,3,4 to edit Name, Number, Email, Notes respectively.
+- Enter 1,2,3,4 to edit `name`, `phone number`, `email`, `notes` respectively.
 - Once you enter new value, the old value will be replaced.
 
 3. Delete Existing Contact:

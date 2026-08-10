@@ -4,7 +4,6 @@
     using ContactManager.Controllers;
     using ContactManager.Persistance;
     using ContactManager.Services;
-    using ContactManager.Validations;
 
     /// <summary>
     /// Application entry point and composition root. Wires up the dependencies once and hands control to the controller.
@@ -15,16 +14,11 @@
         /// Execution of flow begins from here.
         /// </summary>
         /// <param name="args">CommandLine Args.</param>
-        public static void Main(string[] args)
+        public static void Main()
         {
-            ContactValidator validate = new ContactValidator();
-
             ConsoleView console = new ConsoleView();
-
             ContactRepository repository = new ContactRepository();
-
-            ContactService service = new ContactService(repository, validate);
-
+            ContactService service = new ContactService(repository);
             ContactController controller = new ContactController(console, service);
 
             controller.Initialize();
