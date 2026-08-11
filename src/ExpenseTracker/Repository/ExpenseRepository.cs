@@ -8,14 +8,20 @@ namespace ExpenseTracker.Repository
         private static decimal _transactionCount = 0;
         private List<Expense> _expenseDetails;
 
+        internal ExpenseRepository()
+        {
+            _expenseDetails = new List<Expense>();
+        }
+
         public IReadOnlyList<Expense> GetAll()
         {
             return _expenseDetails;
         }
+
         public static string GetTransactionId()
         {
             _transactionCount += 1;
-            return _transactionCount.ToString();
+            return "E" + _transactionCount.ToString();
         }
 
         public void Add(Transaction transaction)
@@ -87,13 +93,7 @@ namespace ExpenseTracker.Repository
 
         public void Delete(Guid id)
         {
-            foreach (var expense in this._expenseDetails)
-            {
-                if (id == expense.Id)
-                {
-                    _expenseDetails.Remove(expense);
-                }
-            }
+            _expenseDetails.RemoveAll(expense => expense.Id == id);
         }
     }
 }

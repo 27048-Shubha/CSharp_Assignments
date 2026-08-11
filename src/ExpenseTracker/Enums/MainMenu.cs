@@ -8,8 +8,9 @@ namespace ExpenseTracker.Enums
 {
     internal enum MainMenu
     {
-        Expense = 1,
-        Income,
+        Add = 1,
+        Manage,
+        Summary,
         Exit,
     }
 }

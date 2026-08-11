@@ -9,10 +9,15 @@ namespace ExpenseTracker.Repository
         private static decimal _transactionCount = 0;
         private List<Income> _incomeDetails;
 
+        internal IncomeRepository()
+        {
+            _incomeDetails = new List<Income>();
+        }
+
         public static string GetTransactionId()
         {
             _transactionCount += 1;
-            return _transactionCount.ToString();
+            return "I" + _transactionCount.ToString();
         }
 
         public IReadOnlyList<Income> GetAll()
@@ -78,13 +83,7 @@ namespace ExpenseTracker.Repository
 
         public void Delete(Guid id)
         {
-            foreach (var item in this._incomeDetails)
-            {
-                if (id == item.Id)
-                {
-                    _incomeDetails.Remove(item);
-                }
-            }
+            this._incomeDetails.RemoveAll(income => income.Id == id);
         }
     }
 }

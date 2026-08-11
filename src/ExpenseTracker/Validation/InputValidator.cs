@@ -8,19 +8,19 @@
         /// <summary>
         /// Checks whether the input is decimal or not.
         /// </summary>
-        /// <param name="price">Input to be checked.</param>
-        /// <param name="priceDecimal">Stores decimal value of input if true,else false.</param>
+        /// <param name="inputString">Input to be checked.</param>
+        /// <param name="inputDecimal">Stores decimal value of input if true,else false.</param>
         /// <returns>True if parsing is su   cessfull, else False.</returns>
-        public static bool IsValidDecimal(string? price, out decimal? priceDecimal)
+        public static bool IsValidDecimal(string inputString, out decimal inputDecimal)
         {
-            if (decimal.TryParse(price, out decimal input))
+            if (decimal.TryParse(inputString, out decimal input))
             {
-                priceDecimal = input;
+                inputDecimal = input;
                 return true;
             }
             else
             {
-                priceDecimal = null;
+                inputDecimal = 0;
                 return false;
             }
         }
@@ -28,18 +28,18 @@
         /// <summary>
         /// Checks whether the input is int or not.
         /// </summary>
-        /// <param name="stock">Input to be checked.</param>
-        /// <param name="stockInt">Stores int value of input if true,else false.</param>
+        /// <param name="inputString">Input to be checked.</param>
+        /// <param name="inputInt">Stores int value of input if true,else false.</param>
         /// <returns>True if parsing is sucessfull, else False.</returns>
-        public static bool IsValidInt(string stock, out int? stockInt)
+        public static bool IsValidInt(string inputString, out int? inputInt)
         {
-            if (int.TryParse(stock, out int value))
+            if (int.TryParse(inputString, out int input))
             {
-                stockInt = value;
+                inputInt = input;
                 return true;
             }
 
-            stockInt = null;
+            inputInt = null;
             return false;
         }
 
@@ -53,15 +53,14 @@
             return !string.IsNullOrEmpty(str);
         }
 
-        public static bool IsValidDate(string? input, out DateOnly? date)
+        public static bool IsValidDate(string? input, out DateOnly date)
         {
-            date = default;
             if (string.IsNullOrWhiteSpace(input))
             {
                 return false;
             }
 
-            return DateOnly.TryParseExact(input, "dd-MM-yyyy", out DateOnly inputDate);
+            return DateOnly.TryParseExact(input, "dd/MM/yyyy", out date);
         }
     }
 }

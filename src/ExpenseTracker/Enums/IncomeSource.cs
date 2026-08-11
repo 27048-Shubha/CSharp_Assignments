@@ -11,5 +11,6 @@ namespace ExpenseTracker.Enums
         MainSource = 1,
         Bonus,
         PocketMoney,
+        Others
     }
 }

@@ -9,6 +9,8 @@ namespace ExpenseTracker.Enums
     internal enum TransactionType
     {
         Income = 1,
-        Expense,
+        Expense = 2,
+        Summarize = 3,
+        Invalid = 4,
     }
 }

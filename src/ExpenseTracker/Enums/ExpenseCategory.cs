@@ -14,5 +14,6 @@ namespace ExpenseTracker.Enums
         Essentials,
         Rent,
         Gadgets,
+        Others,
     }
 }
