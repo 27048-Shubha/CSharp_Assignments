@@ -19,8 +19,7 @@
                 "1. Add Transaction\n" +
                 "2. Manage Transaction\n" +
                 "3. Summary\n" +
-                "4. Exit"
-                );
+                "4. Exit");
         }
 
         /// <summary>
@@ -33,10 +32,9 @@
                 "1. View\n" +
                 "2. Update\n" +
                 "3. Delete\n" +
-                "4. Back\n"
-            );
+                "4. Back\n");
 
-            for (int attempt = 1; attempt < 3; attempt++)
+            for (int attempt = 1; attempt <= 3; attempt++)
             {
                 if (Enum.TryParse<ManageTransaction>(Console.ReadLine(), true, out var category))
                 {
@@ -52,15 +50,14 @@
         }
 
         /// <summary>
-        /// Displays and gets transaction menu.
+        /// Displays transaction types and retrieves the user's selected transaction type.
         /// </summary>
-        /// <returns>Transaction type choosen by the user</returns>
+        /// <returns>The selected transaction type, or <see cref="TransactionType.Invalid"/> when the input is invalid.</returns>
         public Enums.TransactionType ChooseCategory()
         {
             Console.WriteLine("Choose Category\n" +
                 "1. Income\n" +
-                "2. Expense"
-            );
+                "2. Expense");
             if (Enum.TryParse<TransactionType>(Console.ReadLine(), true, out var category))
             {
                 return category;
@@ -69,6 +66,11 @@
             return Enums.TransactionType.Invalid;
         }
 
+        /// <summary>
+        /// Displays the current transaction values and allows the user to modify selected values.
+        /// </summary>
+        /// <param name="transaction">The transaction containing the current values to display and update.</param>
+        /// <returns>The transaction containing the updated values.</returns>
         public Transaction EditTransaction(Transaction transaction)
         {
             Console.WriteLine("Please Enter to keep the current value.");
@@ -98,12 +100,16 @@
             return transaction;
         }
 
+        /// <summary>
+        /// Retrieves the user's main-menu selection with retry support.
+        /// </summary>
+        /// <returns>The user's selection if valid, else null</returns>
         public int? GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
             string input;
             int? choice;
-            for (int attempt = 1; attempt < 3; attempt++)
+            for (int attempt = 1; attempt <= 3; attempt++)
             {
                 input = Console.ReadLine();
                 if (InputValidator.IsValidInt(input, out choice))
@@ -118,13 +124,35 @@
             return null;
         }
 
+        /// <summary>
+        /// Retrieves a transaction identifier entered by the user.
+        /// </summary>
+        /// <returns>The entered transaction identifier, or <see langword="null"/> after three invalid attempts.</returns>
         public string GetTransactionId()
         {
             this.DisplayMessage("Enter Transaction id: ");
-            string input = Console.ReadLine() ?? string.Empty;
-            return input;
+            int? choice;
+            string input;
+            for (int attempt = 1; attempt <= 3; attempt++)
+            {
+                input = Console.ReadLine() ?? string.Empty;
+                if (!string.IsNullOrEmpty(input))
+                {
+                    return input;
+                }
+
+                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+            }
+
+            this.DisplayInvalidInput("Kindly enter valid choice as input!");
+            return null;
         }
 
+        /// <summary>
+        /// Retrieves a valid transaction amount from the user.
+        /// </summary>
+        /// <param name="isEditMode">Indicates whether the method is being called while editing an existing transaction.</param>
+        /// <returns>The entered amount if valid, else null.</returns>
         public decimal? GetAmount(bool isEditMode)
         {
             this.DisplayMessage("Enter amount: ");
@@ -137,10 +165,12 @@
                 {
                     break;
                 }
+
                 if (InputValidator.IsValidDecimal(input, out amount))
                 {
                     return amount;
                 }
+
                 this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
             }
 
@@ -148,6 +178,11 @@
             return null;
         }
 
+        /// <summary>
+        /// Retrieves a valid transaction date from the user.
+        /// </summary>
+        /// <param name="isEditMode">Indicates whether the method is being called while editing an existing transaction.</param>
+        /// <returns>The entered date, else null<returns>
         public DateOnly? GetDate(bool isEditMode)
         {
             this.DisplayMessage("Enter date: ");
@@ -161,10 +196,12 @@
                 {
                     break;
                 }
+
                 if (InputValidator.IsValidDate(input, out date))
                 {
                     return date;
                 }
+
                 this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
             }
 
@@ -172,6 +209,10 @@
             return null;
         }
 
+        /// <summary>
+        /// Displays the available expense categories and retrieves the user's selection.
+        /// </summary>
+        /// <returns>The selected expense category</returns>
         public ExpenseCategory GetExpenseCategory()
         {
             Console.WriteLine("Enter Expense Category: ");
@@ -184,6 +225,10 @@
             return Enums.ExpenseCategory.Others;
         }
 
+        /// <summary>
+        /// Displays the available income sources and retrieves the user's selection.
+        /// </summary>
+        /// <returns>The selected income source, or <see cref="IncomeSource.Others"/> when the input is invalid.</returns>
         public IncomeSource GetIncomeSource()
         {
             Console.WriteLine("Enter Income Source: ");
@@ -196,6 +241,9 @@
             return Enums.IncomeSource.Others;
         }
 
+        /// <summary>
+        /// Displays all available income sources.
+        /// </summary>
         public void ListIncomeSource()
         {
             var incomeSources = Enum.GetValues<IncomeSource>();
@@ -205,6 +253,9 @@
             }
         }
 
+        /// <summary>
+        /// Displays all available expense categories.
+        /// </summary>
         public void ListExpenseCategory()
         {
             var expenseCategories = Enum.GetValues<ExpenseCategory>();
@@ -214,6 +265,10 @@
             }
         }
 
+        /// <summary>
+        /// Displays a list of transactions with their identifier, date, amount, and category or source.
+        /// </summary>
+        /// <param name="transactions">The transactions to display.</param>
         public void DisplayTransactionList(IReadOnlyList<Transaction> transactions)
         {
             foreach (var transaction in transactions)
@@ -230,6 +285,10 @@
             }
         }
 
+        /// <summary>
+        /// Displays a list of transactions with their identifier, date, amount, and category or source.
+        /// </summary>
+        /// <param name="transaction">The transactions to display.</param>
         public void DisplayTransaction(Transaction transaction)
         {
             Console.Write($"{transaction.TransactionId} - {transaction.Date} - {transaction.Amount} - ");
@@ -243,36 +302,45 @@
             }
         }
 
+        /// <summary>
+        /// Displays a goodbye message when the application exits.
+        /// </summary>
         public void DisplayExit()
         {
             Console.WriteLine("Thank you for using Expense Tracker!");
         }
 
-        public void DisplayWarning()
-        {
-            //Console.WriteLine("Thank you for using Expense Tracker!");
-        }
-
-        public void DisplayError()
-        {
-            //Console.WriteLine("Thank you for using Expense Tracker!");
-        }
-
+        /// <summary>
+        /// Displays a success message for a completed transaction operation.
+        /// </summary>
+        /// <param name="operation">The operation that was completed.</param>
+        /// <param name="transactionId">The identifier of the affected transaction.</param>
         public void DisplaySuccess(string operation, string transactionId)
         {
             Console.WriteLine($"{operation} of {transactionId} is Successful!");
         }
 
+        /// <summary>
+        /// Displays an invalid-input message.
+        /// </summary>
+        /// <param name="message">The message to display.</param>
         public void DisplayInvalidInput(string message)
         {
             Console.WriteLine($"{message}");
         }
 
+        /// <summary>
+        /// Displays a message indicating that no transactions are available.
+        /// </summary>
         public void DisplayEmpty()
         {
             Console.WriteLine("No Transactions made!");
         }
 
+        /// <summary>
+        /// Displays a general message to the user.
+        /// </summary>
+        /// <param name="message">The message to display.</param>
         public void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}");

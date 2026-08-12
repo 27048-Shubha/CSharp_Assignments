@@ -257,7 +257,12 @@ namespace ExpenseTracker.Controller
         public void Delete()
         {
             this.View();
-            string transactionId = _console.GetTransactionId();
+            string transactionId = this._console.GetTransactionId();
+            if(transactionId == null)
+            {
+                this._console.DisplayMessage("Invalid transaction id!");
+            }
+
             Transaction transaction = _service.Get(transactionId);
 
             if (transaction == null)

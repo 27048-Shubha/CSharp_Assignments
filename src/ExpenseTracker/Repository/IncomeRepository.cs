@@ -20,10 +20,11 @@ namespace ExpenseTracker.Repository
         }
 
         /// <summary>
-        /// Generates a unique transaction identifier for an income transaction. /// </summary>
+        /// Generates a unique transaction identifier for an income transaction.
         /// </summary>
-        /// <returns>The generated income transaction string.</returns>
-        /// <value>Id of the transaction</value>
+        /// <returns>
+        /// A unique transaction identifier prefixed with the letter.
+        /// </returns>
         public static string GetTransactionId()
         {
             _transactionCount += 1;
@@ -81,6 +82,7 @@ namespace ExpenseTracker.Repository
                     return expense;
                 }
             }
+
             return null;
         }
 
@@ -98,24 +100,6 @@ namespace ExpenseTracker.Repository
                     return item.Id;
                 }
             }
-            return Guid.Empty;
-        }
-
-        /// <summary>
-        /// Retrieves the unique identifier of an income transaction using its date.
-        /// </summary>
-        /// <param name="date">The date of the income transaction.</param>
-        /// <returns>The unique identifier if found; otherwise, Guid.Empty.</returns>
-        public Guid GetId(DateOnly date)
-        {
-            foreach (var item in this._incomeDetails)
-            {
-                if (item.Date == date)
-                {
-                    return item.Id;
-                }
-            }
-
             return Guid.Empty;
         }
 

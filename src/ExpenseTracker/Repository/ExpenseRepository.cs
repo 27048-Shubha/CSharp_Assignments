@@ -80,6 +80,7 @@
                     return expense;
                 }
             }
+
             return null;
         }
 
@@ -97,6 +98,7 @@
                     return expense.Id;
                 }
             }
+
             return Guid.Empty;
         }
 

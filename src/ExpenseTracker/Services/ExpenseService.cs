@@ -28,7 +28,7 @@ namespace ExpenseTracker.Services
         {
             //negative amount validation
             //future date validation
-            _repository.Add((Expense) expense);
+            _repository.Add((Expense)expense);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace ExpenseTracker.Services
         public void Edit(Transaction transaction)
         {
             Guid id = _repository.GetId(transaction.TransactionId);
-            _repository.Update(id, (Expense) transaction);
+            _repository.Update(id, (Expense)transaction);
         }
 
         /// <summary>

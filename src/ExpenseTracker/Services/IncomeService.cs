@@ -28,7 +28,7 @@ namespace ExpenseTracker.Services
         {
             //negative amount validation
             //future date validation
-            _repository.Add((Income) income);
+            _repository.Add((Income)income);
         }
 
         /// <summary>
