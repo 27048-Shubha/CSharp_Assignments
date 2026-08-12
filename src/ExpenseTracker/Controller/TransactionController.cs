@@ -7,6 +7,9 @@ namespace ExpenseTracker.Controller
     using ExpenseTracker.Services;
     using ExpenseTracker.View;
 
+    /// <summary>
+    /// Coordinates transaction-related operations between the console view and services.
+    /// </summary>
     internal class TransactionController
     {
         private IncomeService _incomeService;
@@ -16,6 +19,12 @@ namespace ExpenseTracker.Controller
         private TransactionType _currentType;
         private int? _choice;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionController"/> class.
+        /// </summary>
+        /// <param name="console">The console view used to receive input and display output.</param>
+        /// <param name="incomeService">The service responsible for income operations.</param>
+        /// <param name="expenseService">The service responsible for expense operations.</param>
         public TransactionController(ConsoleView console, IncomeService incomeService, ExpenseService expenseService)
         {
             this._console = console;
@@ -23,6 +32,9 @@ namespace ExpenseTracker.Controller
             this._expenseService = expenseService;
         }
 
+        /// <summary>
+        /// Starts the main application loop and processes menu selections until the user exits.
+        /// </summary>
         public void Initialize()
         {
             bool isRunning = true;
@@ -64,6 +76,9 @@ namespace ExpenseTracker.Controller
             }
         }
 
+        /// <summary>
+        /// Displays the transaction-management menu and executes the selected operation.
+        /// </summary>
         public void ChooseOperation()
         {
             ManageTransaction operation;
@@ -121,7 +136,7 @@ namespace ExpenseTracker.Controller
         }
 
         /// <summary>
-        /// Adds new transaction to the transaction list.
+        /// Creates and adds a new income or expense transaction.
         /// </summary>
         public void AddTransaction()
         {
@@ -149,6 +164,9 @@ namespace ExpenseTracker.Controller
             }
         }
 
+        /// <summary>
+        /// Selects a transaction type and displays the corresponding transaction-management options.
+        /// </summary>
         public void ManageTransaction()
         {
             this._currentType = this._console.ChooseCategory();
@@ -172,6 +190,9 @@ namespace ExpenseTracker.Controller
             this.ChooseOperation();
         }
 
+        /// <summary>
+        /// Creates and adds a new transaction using the currently selected transaction type.
+        /// </summary>
         public void Add()
         {
             decimal? amount = _console.GetAmount(false);
@@ -198,12 +219,18 @@ namespace ExpenseTracker.Controller
             }
         }
 
+        /// <summary>
+        /// Displays all transactions for the currently selected transaction type.
+        /// </summary>
         public void View()
         {
             IReadOnlyList<Transaction> transaction = _service.GetAll();
             _console.DisplayTransactionList(transaction);
         }
 
+        /// <summary>
+        /// Retrieves a transaction by its identifier and updates its editable values.
+        /// </summary>
         public void Edit()
         {
             this.View();
@@ -224,6 +251,9 @@ namespace ExpenseTracker.Controller
             _console.DisplaySuccess("updation", transactionId);
         }
 
+        /// <summary>
+        /// Retrieves and deletes a transaction based on its identifier.
+        /// </summary>
         public void Delete()
         {
             this.View();
@@ -241,6 +271,10 @@ namespace ExpenseTracker.Controller
             }
         }
 
+        /// <summary>
+        /// Determines whether there are no transactions for the currently selected type.
+        /// </summary>
+        /// <returns>True, transactions are empty else false</returns>
         public bool IsEmpty()
         {
             IReadOnlyList<Transaction> transactions = this._service.GetAll();

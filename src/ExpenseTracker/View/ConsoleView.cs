@@ -4,6 +4,9 @@
     using ExpenseTracker.Models;
     using ExpenseTracker.Validator;
 
+    /// <summary>
+    /// Manages console operations of the application.
+    /// </summary>
     internal class ConsoleView
     {
         /// <summary>

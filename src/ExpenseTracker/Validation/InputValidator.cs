@@ -53,6 +53,12 @@
             return !string.IsNullOrEmpty(str);
         }
 
+        /// <summary>
+        /// Checks whether the given date input is valid or not.
+        /// </summary>
+        /// <param name="input">Input to be checked.</param>
+        /// <param name="date">Stores Date value of input if true,else false.</param>
+        /// <returns>True if valid, else False.</returns>
         public static bool IsValidDate(string? input, out DateOnly date)
         {
             if (string.IsNullOrWhiteSpace(input))
