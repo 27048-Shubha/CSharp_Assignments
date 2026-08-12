@@ -9,14 +9,14 @@
     public class ShapeService
     {
         private ShapeRepository _repo = new ShapeRepository();
-        private ValidateInput _validate = new ValidateInput();
+        private InputValidation _validate = new InputValidation();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
         /// <param name="validate"> The object to handle validation operations. </param>
-        public ShapeService(ShapeRepository repo, ValidateInput validate)
+        public ShapeService(ShapeRepository repo, InputValidation validate)
         {
             this._repo = repo;
             this._validate = validate;

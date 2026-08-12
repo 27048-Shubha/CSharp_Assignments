@@ -10,14 +10,14 @@
     public class BankSystemService
     {
         private BankSystemRepo _repo;
-        private ValidateInput _validate;
+        private InputValidation _validate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
         /// <param name="validate"> The object to handle validation operations. </param>
-        public BankSystemService(BankSystemRepo repo, ValidateInput validate)
+        public BankSystemService(BankSystemRepo repo, InputValidation validate)
         {
             this._repo = repo;
             this._validate = validate;

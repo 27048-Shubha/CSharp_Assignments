@@ -16,7 +16,7 @@
         /// </summary>
         public static void Main()
         {
-            ValidateInput validate = new ValidateInput();
+            InputValidation validate = new InputValidation();
 
             MainView console = new MainView();
             ShapeView shapeView = new ShapeView();

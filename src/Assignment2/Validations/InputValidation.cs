@@ -3,7 +3,7 @@
     /// <summary>
     /// Manages input validation operation.
     /// </summary>
-    public class ValidateInput
+    public class InputValidation
     {
         /// <summary>
         /// Checks whether the input character is valid or not.

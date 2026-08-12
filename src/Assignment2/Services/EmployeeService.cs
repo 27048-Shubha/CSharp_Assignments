@@ -8,7 +8,7 @@
     /// </summary>
     public class EmployeeService
     {
-        private ValidateInput _validate;
+        private InputValidation _validate;
         private EmployeeRepository _repo;
 
         /// <summary>
@@ -16,7 +16,7 @@
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
         /// <param name="validate"> The object to handle validation operations. </param>
-        public EmployeeService(EmployeeRepository repo, ValidateInput validate)
+        public EmployeeService(EmployeeRepository repo, InputValidation validate)
         {
             this._repo = repo;
             this._validate = validate;
