@@ -7,8 +7,8 @@
     /// </summary>
     public class Rectangle : Shapes
     {
-        private double length;
-        private double breadth;
+        private double _length;
+        private double _breadth;
 
         /// <summary>
         /// Gets or sets length of the rectangle.
@@ -16,8 +16,8 @@
         /// <value> The length of the rectangle. </value>
         public double Length
         {
-            get { return this.length; }
-            set { this.length = value; }
+            get { return this._length; }
+            set { this._length = value; }
         }
 
         /// <summary>
@@ -26,8 +26,8 @@
         /// <value> The breadth of the rectangle. </value>
         public double Breadth
         {
-            get { return this.breadth; }
-            set { this.breadth = value; }
+            get { return this._breadth; }
+            set { this._breadth = value; }
         }
 
         /// <summary>
@@ -45,7 +45,7 @@
         /// <returns> The details of the rectangle. </returns>
         public new string PrintDetails()
         {
-            return this.PrintDetails();
+            return base.PrintDetails();
         }
     }
 }

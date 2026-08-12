@@ -88,6 +88,11 @@
         /// <returns>True if given input is a string else false. </returns>
         public bool IsString(string input)
         {
+            if (input.Trim().Equals(string.Empty))
+            {
+                return false;
+            }
+
             return input.All(char.IsLetter);
         }
 
@@ -98,6 +103,11 @@
         /// <returns>True if given input is a number else false. </returns>
         public bool IsNumber(string input)
         {
+            if (input.Trim().Equals(string.Empty))
+            {
+                return false;
+            }
+
             foreach (char c in input)
             {
                 if (!char.IsDigit(c))

@@ -5,8 +5,8 @@
     /// </summary>
     public abstract class Employee
     {
-        private string? name;
-        private decimal salary;
+        private string? _name;
+        private decimal _salary;
 
         /// <summary>
         /// Gets or Sets name of the employee.
@@ -14,8 +14,8 @@
         /// <value>The name of the employee. </value>
         public string? Name
         {
-            get { return this.name; }
-            set { this.name = value; }
+            get { return this._name; }
+            set { this._name = value ?? "Name not defined"; }
         }
 
         /// <summary>
@@ -24,8 +24,8 @@
         /// <value>The calculated bonus of the employee.</value>
         public decimal Salary
         {
-            get { return this.salary; }
-            set { this.salary = value; }
+            get { return this._salary; }
+            set { this._salary = value; }
         }
 
         /// <summary>

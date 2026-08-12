@@ -59,7 +59,7 @@
                     case 'Q':
                     case 'q':
                         console.DisplayExitMessage();
-                        break;
+                        return;
 
                     default:
                         console.DisplayDefault();

@@ -29,8 +29,8 @@
         /// </summary>
         public virtual void DisplayMenu()
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to Hierarchy System!\nMenu:\n'S' to enter Shape hierarchy system\n'E' to enter Employee system\n'B' to enter Banking system\n'Q' to quit\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Welcome to hierarchy system!\nMenu:\n'S' to enter shape hierarchy system\n'E' to enter employee system\n'B' to enter banking system\n'Q' to quit\n");
             Console.ResetColor();
         }
 
@@ -52,7 +52,7 @@
         public void DisplayExitMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Quitting Application...Thank You!");
+            Console.WriteLine("Quitting application... Thank you!");
             Thread.Sleep(1000);
             Console.Clear();
             Console.ResetColor();

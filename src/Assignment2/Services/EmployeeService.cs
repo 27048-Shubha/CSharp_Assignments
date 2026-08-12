@@ -8,8 +8,8 @@
     /// </summary>
     public class EmployeeService
     {
-        private ValidateInput validate;
-        private EmployeeRepository repo;
+        private ValidateInput _validate;
+        private EmployeeRepository _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeService"/> class.
@@ -18,8 +18,8 @@
         /// <param name="validate"> The object to handle validation operations. </param>
         public EmployeeService(EmployeeRepository repo, ValidateInput validate)
         {
-            this.repo = repo;
-            this.validate = validate;
+            this._repo = repo;
+            this._validate = validate;
         }
 
         /// <summary>
@@ -30,16 +30,16 @@
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddManager(string name, string salary)
         {
-            if (this.validate.IsNumber(salary))
+            if (this._validate.IsNumber(salary))
             {
                 decimal amount = Convert.ToDecimal(salary);
-                if (!this.validate.IsZero(amount) && !this.validate.IsNegative(amount))
+                if (!this._validate.IsZero(amount) && !this._validate.IsNegative(amount))
                 {
-                    return this.repo.AddManager(name, amount);
+                    return this._repo.AddManager(name, amount);
                 }
             }
 
-            return "Invalid Input, Enter Only +ve Numbers";
+            return "Invalid input, Enter only +ve numbers as salary";
         }
 
         /// <summary>
@@ -50,16 +50,16 @@
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddDeveloper(string name, string salary)
         {
-            if (this.validate.IsNumber(salary))
+            if (this._validate.IsNumber(salary))
             {
                 decimal amount = Convert.ToDecimal(salary);
-                if (!this.validate.IsZero(amount) && !this.validate.IsNegative(amount))
+                if (!this._validate.IsZero(amount) && !this._validate.IsNegative(amount))
                 {
-                    return this.repo.AddDeveloper(name, amount);
+                    return this._repo.AddDeveloper(name, amount);
                 }
             }
 
-            return "Invalid Input, Enter Only +ve Numbers";
+            return "Invalid input, Enter only +ve numbers as salary";
         }
     }
 }

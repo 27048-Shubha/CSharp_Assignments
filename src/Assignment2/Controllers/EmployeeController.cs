@@ -8,8 +8,8 @@
     /// </summary>
     public class EmployeeController
     {
-        private EmployeeView console;
-        private EmployeeService service;
+        private EmployeeView _console;
+        private EmployeeService _service;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeController"/> class.
@@ -18,8 +18,8 @@
         /// <param name="service"> The object to handle services. </param>
         public EmployeeController(EmployeeView console, EmployeeService service)
         {
-            this.console = console;
-            this.service = service;
+            this._console = console;
+            this._service = service;
         }
 
         /// <summary>
@@ -29,37 +29,36 @@
         {
             char choice;
 
-            do
+            while (true)
             {
-                this.console.DisplayMenu();
-                choice = this.console.GetUserChoice();
+                this._console.DisplayMenu();
+                choice = this._console.GetUserChoice();
                 string message;
 
                 switch (choice)
                 {
                     case 'D':
                     case 'd':
-                        message = this.service.AddDeveloper(this.console.GetEmployeeName(), this.console.GetEmployeeSalary());
-                        this.console.DisplayMessage(message);
+                        message = this._service.AddDeveloper(this._console.GetEmployeeName(), this._console.GetEmployeeSalary());
+                        this._console.DisplayMessage(message);
                         break;
 
                     case 'M':
                     case 'm':
-                        message = this.service.AddManager(this.console.GetEmployeeName(), this.console.GetEmployeeSalary());
-                        this.console.DisplayMessage(message);
+                        message = this._service.AddManager(this._console.GetEmployeeName(), this._console.GetEmployeeSalary());
+                        this._console.DisplayMessage(message);
                         break;
 
-                    case 'Q':
-                    case 'q':
-                        this.console.DisplayExitMessage();
-                        break;
+                    case 'B':
+                    case 'b':
+                        this._console.DisplayExitMessage();
+                        return;
 
                     default:
-                        this.console.DisplayDefault();
+                        this._console.DisplayDefault();
                         break;
                 }
             }
-            while (choice != 'Q' && choice != 'q');
         }
     }
 }

@@ -5,7 +5,7 @@
     /// </summary>
     public class Developer : Employee
     {
-        private decimal bonus;
+        private decimal _bonus;
 
         /// <summary>
         /// Gets or sets bonus value of the developer.
@@ -15,12 +15,12 @@
         {
             get
             {
-                return this.bonus;
+                return this._bonus;
             }
 
             set
             {
-                this.bonus = value;
+                this._bonus = value;
             }
         }
 
@@ -40,7 +40,7 @@
         /// <returns> The details of the developer. </returns>
         public new string PrintDetails()
         {
-            return $"{this.PrintDetails()}Bonus: {this.CalculateBonus()}";
+            return $"{base.PrintDetails()}\nBonus: {this.CalculateBonus()}";
         }
     }
 }

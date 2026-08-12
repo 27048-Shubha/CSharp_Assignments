@@ -8,8 +8,8 @@
     /// </summary>
     public class ShapeService
     {
-        private ShapeRepository repo = new ShapeRepository();
-        private ValidateInput validate = new ValidateInput();
+        private ShapeRepository _repo = new ShapeRepository();
+        private ValidateInput _validate = new ValidateInput();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeService"/> class.
@@ -18,8 +18,8 @@
         /// <param name="validate"> The object to handle validation operations. </param>
         public ShapeService(ShapeRepository repo, ValidateInput validate)
         {
-            this.repo = repo;
-            this.validate = validate;
+            this._repo = repo;
+            this._validate = validate;
         }
 
         /// <summary>
@@ -31,28 +31,28 @@
         /// <returns> The details of the shape If True, else invalid error Message. </returns>
         public string AddRectangle(string color, string lengthStr, string breadthStr)
         {
-            if (!this.validate.IsString(color))
+            if (!this._validate.IsString(color))
             {
-                return "Invalid Input! No numbers or special characters allowed";
+                return "Invalid input for color! No numbers or special characters allowed";
             }
 
             double length, breadth;
             if (!double.TryParse(lengthStr, out length) || !double.TryParse(breadthStr, out breadth))
             {
-                return "Invalid Input! Length and breadth must be valid numbers!";
+                return "Invalid input! Length and breadth must be valid numbers!";
             }
 
-            if (this.validate.IsZero(length) || this.validate.IsZero(breadth))
+            if (this._validate.IsZero(length) || this._validate.IsZero(breadth))
             {
-                return "Invalid Input! Length and breadth must be Non Zero";
+                return "Invalid input! Length and breadth must be Non Zero";
             }
 
-            if (this.validate.IsNegative(length) || this.validate.IsNegative(breadth))
+            if (this._validate.IsNegative(length) || this._validate.IsNegative(breadth))
             {
-                return "Invalid Input! Length and breadth must be Non Negative";
+                return "Invalid input! Length and breadth must be Non Negative";
             }
 
-            return this.repo.AddRectangle(color, length, breadth);
+            return this._repo.AddRectangle(color, length, breadth);
         }
 
         /// <summary>
@@ -63,28 +63,28 @@
         /// <returns> The details of the shape if True, else invalid error message. </returns>
         public string AddCircle(string color, string radiusStr)
         {
-            if (!this.validate.IsString(color))
+            if (!this._validate.IsString(color))
             {
-                return "Invalid Input! No numbers or special characters allowed";
+                return "Invalid input for color! No numbers or special characters allowed";
             }
 
             double radius;
             if (!double.TryParse(radiusStr, out radius))
             {
-                return "Invalid Input! Radius must be valid number!";
+                return "Invalid input! Radius must be valid number!";
             }
 
-            if (this.validate.IsZero(radius))
+            if (this._validate.IsZero(radius))
             {
-                return "Invalid Input! Radius must be a Non Zero value";
+                return "Invalid input! Radius must be a Non Zero value";
             }
 
-            if (this.validate.IsNegative(radius))
+            if (this._validate.IsNegative(radius))
             {
-                return "Invalid Input! Radius must be Non Negative";
+                return "Invalid input! Radius must be Non Negative";
             }
 
-            return this.repo.AddCircle(color, radius);
+            return this._repo.AddCircle(color, radius);
         }
     }
 }

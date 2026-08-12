@@ -12,10 +12,10 @@
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             this.DisplayLineBreaker();
-            Console.WriteLine("Welcome to the Bank System");
-            Console.WriteLine("[C] Create checking account:");
-            Console.WriteLine("[S] Create savings account:");
-            Console.WriteLine("[Q] to Quit");
+            Console.WriteLine("Welcome to the Bank system");
+            Console.WriteLine("[C] Create checking account");
+            Console.WriteLine("[S] Create savings account");
+            Console.WriteLine("[B] to Back to main menu");
             this.DisplayLineBreaker();
             Console.ResetColor();
         }
@@ -41,7 +41,7 @@
         /// <returns> The amount entered by the user as input. </returns>
         public string GetDepositAmount()
         {
-            Console.WriteLine("Enter Amount to Deposit");
+            Console.WriteLine("Enter amount to deposit");
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -51,7 +51,7 @@
         /// <returns> The amount entered by the user as input. </returns>
         public string GetWithdrawAmount()
         {
-            Console.WriteLine("Enter Amount to WithDraw");
+            Console.WriteLine("Enter amount to withdraw");
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -73,7 +73,7 @@
         public void DepositSuccessMessage(string amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Deposit of amount {amount} is Success!");
+            Console.WriteLine($"Deposit of amount {amount} was successful!");
             Console.ResetColor();
         }
 
@@ -84,7 +84,15 @@
         public void WithdrawSuccessMessage(string amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"WithDraw of amount {amount} is Success!");
+            if (amount.Equals("0"))
+            {
+                Console.WriteLine($"The amount entered can't be withdrawn!");
+            }
+            else
+            {
+                Console.WriteLine($"Withdrawal of amount {amount} was successful!");
+            }
+
             Console.ResetColor();
         }
 
@@ -94,7 +102,7 @@
         public void WithdrawFailureMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Invalid Amount Entered! Kindly Check Balance before WithDrawing");
+            Console.WriteLine("Invalid amount entered! Kindly check balance before withdrawing.");
             Console.ResetColor();
         }
 
@@ -104,7 +112,7 @@
         public void DisplayMinBalanceWarning()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Minimum Balance Should be 100");
+            Console.WriteLine("Minimum balance should be 100");
             Console.ResetColor();
         }
 
@@ -114,7 +122,7 @@
         public void DisplayMinBalanceInfo()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Thanks for creating account! Your initial balance is set to 100 by default as per policies!");
+            Console.WriteLine("Thanks for creating an account! Your initial balance is set to 100 by default as per policy!");
             Console.ResetColor();
         }
     }

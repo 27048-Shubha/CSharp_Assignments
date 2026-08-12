@@ -9,8 +9,8 @@
     /// </summary>
     public class BankSystemService
     {
-        private BankSystemRepo repo;
-        private ValidateInput validate;
+        private BankSystemRepo _repo;
+        private ValidateInput _validate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemService"/> class.
@@ -19,8 +19,8 @@
         /// <param name="validate"> The object to handle validation operations. </param>
         public BankSystemService(BankSystemRepo repo, ValidateInput validate)
         {
-            this.repo = repo;
-            this.validate = validate;
+            this._repo = repo;
+            this._validate = validate;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateSavingsAccount()
         {
-            return this.repo.CreateSavingsAccount();
+            return this._repo.CreateSavingsAccount();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateCheckingAccount()
         {
-            return this.repo.CreateCheckingAccount();
+            return this._repo.CreateCheckingAccount();
         }
 
         /// <summary>
@@ -59,10 +59,10 @@
         /// <returns>True on successful deposit operation, else false.</returns>
         public bool DepositAmount(BankAccount account, string amount)
         {
-            if (this.validate.IsNumber(amount))
+            if (this._validate.IsNumber(amount))
             {
                 decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!this.validate.IsZero(amountDecimal) && !this.validate.IsNegative(amountDecimal))
+                if (!this._validate.IsZero(amountDecimal) && !this._validate.IsNegative(amountDecimal))
                 {
                     account.Deposit(amountDecimal);
                     return true;
@@ -82,10 +82,10 @@
         /// <returns>True on successful withdrawal operation, else false.</returns>
         public bool WithdrawAmount(BankAccount account, string amount)
         {
-            if (this.validate.IsNumber(amount))
+            if (this._validate.IsNumber(amount))
             {
                 decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!this.validate.IsZero(amountDecimal) && !this.validate.IsNegative(amountDecimal))
+                if (!this._validate.IsNegative(amountDecimal))
                 {
                     return account.Withdraw(amountDecimal);
                 }

@@ -15,7 +15,7 @@
             Console.WriteLine("Welcome to shape system\n");
             Console.WriteLine("[R] to enter details of rectangle: ");
             Console.WriteLine("[C] to enter details of circle: ");
-            Console.WriteLine("[Q] to quit: ");
+            Console.WriteLine("[B] to back to main menu: ");
             this.DisplayLineBreaker();
             Console.ResetColor();
         }
@@ -26,7 +26,7 @@
         /// <returns> The color as input from user. </returns>
         public string GetShapeColor()
         {
-            Console.WriteLine("Enter Color: ");
+            Console.WriteLine("Enter color: ");
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -36,7 +36,7 @@
         /// <returns> The radius as input from user. </returns>
         public string GetRadius()
         {
-            Console.WriteLine("Enter Radius: ");
+            Console.WriteLine("Enter radius: ");
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -46,7 +46,7 @@
         /// <returns> The length as input from user. </returns>
         public string GetLength()
         {
-            Console.WriteLine("Enter Length: ");
+            Console.WriteLine("Enter length: ");
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -56,7 +56,7 @@
         /// <returns> The breadth as input from user. </returns>
         public string GetBreadth()
         {
-            Console.WriteLine("Enter Breadth: ");
+            Console.WriteLine("Enter breadth: ");
             return Console.ReadLine() ?? string.Empty;
         }
 

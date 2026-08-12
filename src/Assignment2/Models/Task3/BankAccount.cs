@@ -5,8 +5,8 @@
     /// </summary>
     public abstract class BankAccount
     {
-        private string? accountNumber;
-        private decimal balance;
+        private string? _accountNumber;
+        private decimal _balance;
 
         /// <summary>
         /// Gets or sets account number.
@@ -14,8 +14,8 @@
         /// <value>The account number of the bank account.</value>
         public string? AccountNumber
         {
-            get { return this.accountNumber; }
-            set { this.accountNumber = value; }
+            get { return this._accountNumber; }
+            set { this._accountNumber = value; }
         }
 
         /// <summary>
@@ -24,8 +24,8 @@
         /// <value>The balance amount of the bank account.</value>
         public decimal Balance
         {
-            get { return this.balance; }
-            set { this.balance = value; }
+            get { return this._balance; }
+            set { this._balance = value; }
         }
 
         /// <summary>

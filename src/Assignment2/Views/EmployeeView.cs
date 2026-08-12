@@ -15,6 +15,7 @@
             Console.WriteLine("Welcome to employee system\n");
             Console.WriteLine("[D] to enter details of Developer:");
             Console.WriteLine("[M] to enter details of Manager:");
+            Console.WriteLine("[B] to go back to main menu");
             this.DisplayLineBreaker();
             Console.ResetColor();
         }
@@ -25,8 +26,14 @@
         /// <returns> The input name from the user. </returns>
         public string GetEmployeeName()
         {
-            Console.WriteLine("Enter Name: ");
-            return Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("Enter name: ");
+            string name = Console.ReadLine() ?? string.Empty;
+            if (name != string.Empty)
+            {
+                return name;
+            }
+
+            return "Name not defined";
         }
 
         /// <summary>
@@ -35,7 +42,7 @@
         /// <returns> The input salary from user. </returns>
         public string GetEmployeeSalary()
         {
-            Console.WriteLine("Enter Salary: ");
+            Console.WriteLine("Enter salary: ");
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -47,6 +54,5 @@
         {
             Console.WriteLine($"{message}\n");
         }
-
     }
 }
