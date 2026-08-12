@@ -21,14 +21,17 @@ namespace ExpenseTracker.Services
         }
 
         /// <summary>
-        /// Adds a new income transaction.
+        /// Adds a new income to the transaction
         /// </summary>
-        /// <param name="income">The income transaction to add</param>
-        public void Add(Transaction income)
+        /// <param name="transactionId">Id of the transaction</param>
+        /// <param name="amount">Income amount</param>
+        /// <param name="date">Date of transaction</param>
+        /// <param name="incomeSource">Source of income amount</param>
+        public void Add(string transactionId, decimal amount, DateOnly date, IncomeSource incomeSource)
         {
-            //negative amount validation
-            //future date validation
-            _repository.Add((Income)income);
+            // negative amount validation
+            // future date validation
+            _repository.Add((Income)new (transactionId, amount, date, incomeSource));
         }
 
         /// <summary>

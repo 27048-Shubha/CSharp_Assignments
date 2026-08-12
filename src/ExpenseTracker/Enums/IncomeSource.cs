@@ -21,8 +21,13 @@
         PocketMoney,
 
         /// <summary>
+        /// Represents money received from freelancing.
+        /// </summary>
+        Freelance,
+
+        /// <summary>
         /// Represents income received from an unspecified source.
         /// </summary>
-        Others
+        Others,
     }
 }
