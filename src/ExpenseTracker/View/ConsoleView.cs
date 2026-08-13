@@ -81,19 +81,27 @@
                 Console.Write($"Source ({income.Source}): ");
                 string? input = Console.ReadLine()?.Trim();
 
-                if(!string.IsNullOrEmpty(input) && Enum.TryParse(input, true, out IncomeSource source))
+                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, true, out IncomeSource source))
                 {
                     income.Source = source;
                 }
+                else
+                {
+                    income.Source = Enums.IncomeSource.Others;
+                }
             }
-            else if(transaction is Expense expense)
+            else if (transaction is Expense expense)
             {
                 Console.WriteLine($"Category ({expense.Category}): ");
                 string? input = Console.ReadLine()?.Trim();
 
-                if(!string.IsNullOrEmpty(input) && Enum.TryParse(input, out ExpenseCategory category))
+                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, out ExpenseCategory category))
                 {
                     expense.Category = category;
+                }
+                else
+                {
+                    expense.Category = Enums.ExpenseCategory.Others;
                 }
             }
 
@@ -160,10 +168,10 @@
             decimal amount;
             for(int attempt = 1; attempt <= 3; attempt++)
             {
-                input = Console.ReadLine();
+                input = Console.ReadLine().Trim();
                 if(isEditMode && string.IsNullOrEmpty(input))
                 {
-                    break;
+                    return null;
                 }
 
                 if (InputValidator.IsValidDecimal(input, out amount))
@@ -192,9 +200,9 @@
             for (int attempt = 1; attempt <= 3; attempt++)
             {
                 input = Console.ReadLine();
-                if (isEditMode && string.IsNullOrEmpty(input))
+                if (!isEditMode && string.IsNullOrEmpty(input))
                 {
-                    break;
+                    return null;
                 }
 
                 if (InputValidator.IsValidDate(input, out date))
