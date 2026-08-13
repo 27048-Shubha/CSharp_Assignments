@@ -6,9 +6,6 @@
     public class Transaction
     {
         private Guid _id;
-        private string _transactionId;
-        private decimal _amount;
-        private DateOnly _date;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class.
@@ -19,9 +16,9 @@
         public Transaction(string transactionId, decimal amount, DateOnly date)
         {
             this._id = Guid.NewGuid();
-            TransactionId = transactionId;
-            Amount = amount;
-            Date = date;
+            this.TransactionId = transactionId;
+            this.Amount = amount;
+            this.Date = date;
         }
 
         /// <summary>
@@ -30,11 +27,11 @@
         /// <value>A globally unique identifier assigned when the transaction is created.</value>
         public Guid Id
         {
-            get { return _id; }
+            get { return this._id; }
         }
 
         /// <summary>
-        /// Gets the transaction display identifier.
+        /// Gets or Sets the transaction display identifier.
         /// </summary>
         /// <value>An identifier generated for display and user reference.</value>
         public string TransactionId

@@ -7,6 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Models\DTOs\AddIncomeDto.cs" />
+  </ItemGroup>
+
   <ItemGroup Label="CSharpAnalyser">
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>

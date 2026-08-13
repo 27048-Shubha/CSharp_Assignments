@@ -16,7 +16,7 @@ namespace ExpenseTracker.Repository
         /// </summary>
         internal IncomeRepository()
         {
-            _incomeDetails = new List<Income>();
+            this._incomeDetails = new List<Income>();
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace ExpenseTracker.Repository
         /// <returns>A read-only list of all income transactions.</returns>
         public IReadOnlyList<Income> GetAll()
         {
-            return _incomeDetails;
+            return this._incomeDetails;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace ExpenseTracker.Repository
         /// <param name="transaction">The income transaction to add.</param>
         public void Add(Transaction transaction)
         {
-            _incomeDetails.Add((Income)transaction);
+            this._incomeDetails.Add((Income)transaction);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace ExpenseTracker.Repository
         /// </summary>
         /// <param name="id">The unique identifier of the income transaction to retrieve.</param>
         /// <returns>The matching income transaction if found; otherwise, null.</returns>
-        public Income Get(Guid id)
+        public Income? Get(Guid id)
         {
             foreach (var expense in this._incomeDetails)
             {
@@ -100,6 +100,7 @@ namespace ExpenseTracker.Repository
                     return item.Id;
                 }
             }
+
             return Guid.Empty;
         }
 

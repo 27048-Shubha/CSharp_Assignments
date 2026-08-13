@@ -2,6 +2,7 @@
 {
     using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
+    using ExpenseTracker.Models.DTOs;
     using ExpenseTracker.Validator;
 
     /// <summary>
@@ -71,37 +72,39 @@
         /// </summary>
         /// <param name="transaction">The transaction containing the current values to display and update.</param>
         /// <returns>The transaction containing the updated values.</returns>
-        public Transaction EditTransaction(Transaction transaction)
+        public TransactionDto EditTransaction(TransactionDto transaction)
         {
             Console.WriteLine("Please Enter to keep the current value.");
             transaction.Amount = this.GetAmount(true) ?? transaction.Amount;
             transaction.Date = this.GetDate(true) ?? transaction.Date;
-            if (transaction is Income income)
+            if (transaction.Type == TransactionType.Income)
             {
-                Console.Write($"Source ({income.Source}): ");
+                IncomeSource source = GetCurrentIncomeSource(transaction.CategoryOrSource);
+                Console.Write($"Source ({source}): ");
                 string? input = Console.ReadLine()?.Trim();
 
-                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, true, out IncomeSource source))
+                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, true, out IncomeSource parsedSource))
                 {
-                    income.Source = source;
+                    source = parsedSource;
                 }
                 else
                 {
-                    income.Source = Enums.IncomeSource.Others;
+                    source = Enums.IncomeSource.Others;
                 }
             }
-            else if (transaction is Expense expense)
+            else if (transaction.Type == TransactionType.Expense)
             {
-                Console.WriteLine($"Category ({expense.Category}): ");
+                ExpenseCategory category = GetCurrentExpenseCategory(transaction.CategoryOrSource);
+                Console.WriteLine($"Category ({category}): ");
                 string? input = Console.ReadLine()?.Trim();
 
-                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, out ExpenseCategory category))
+                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, out ExpenseCategory parsedCategory))
                 {
-                    expense.Category = category;
+                    category = parsedCategory;
                 }
                 else
                 {
-                    expense.Category = Enums.ExpenseCategory.Others;
+                    category = Enums.ExpenseCategory.Others;
                 }
             }
 
@@ -115,11 +118,11 @@
         public int? GetChoice()
         {
             Console.WriteLine("Enter your choice: ");
-            string input;
+            string? input;
             int? choice;
             for (int attempt = 1; attempt <= 3; attempt++)
             {
-                input = Console.ReadLine();
+                input = Console.ReadLine() ?? string.Empty;
                 if (InputValidator.IsValidInt(input, out choice))
                 {
                     return choice;
@@ -136,10 +139,9 @@
         /// Retrieves a transaction identifier entered by the user.
         /// </summary>
         /// <returns>The entered transaction identifier, or <see langword="null"/> after three invalid attempts.</returns>
-        public string GetTransactionId()
+        public string? GetTransactionId()
         {
             this.DisplayMessage("Enter Transaction id: ");
-            int? choice;
             string input;
             for (int attempt = 1; attempt <= 3; attempt++)
             {
@@ -164,12 +166,12 @@
         public decimal? GetAmount(bool isEditMode)
         {
             this.DisplayMessage("Enter amount: ");
-            string input;
+            string? input;
             decimal amount;
-            for(int attempt = 1; attempt <= 3; attempt++)
+            for (int attempt = 1; attempt <= 3; attempt++)
             {
-                input = Console.ReadLine().Trim();
-                if(isEditMode && string.IsNullOrEmpty(input))
+                input = Console.ReadLine().Trim() ?? string.Empty;
+                if (isEditMode && string.IsNullOrEmpty(input))
                 {
                     return null;
                 }
@@ -194,12 +196,12 @@
         public DateOnly? GetDate(bool isEditMode)
         {
             this.DisplayMessage("Enter date: ");
-            string input;
+            string? input;
             DateOnly date;
 
             for (int attempt = 1; attempt <= 3; attempt++)
             {
-                input = Console.ReadLine();
+                input = Console.ReadLine() ?? string.Empty;
                 if (!isEditMode && string.IsNullOrEmpty(input))
                 {
                     return null;
@@ -225,7 +227,7 @@
         {
             Console.WriteLine("Enter Expense Category: ");
             this.ListExpenseCategory();
-            if(Enum.TryParse<ExpenseCategory>(Console.ReadLine(), true, out var category))
+            if (Enum.TryParse<ExpenseCategory>(Console.ReadLine(), true, out var category))
             {
                 return category;
             }
@@ -236,7 +238,7 @@
         /// <summary>
         /// Displays the available income sources and retrieves the user's selection.
         /// </summary>
-        /// <returns>The selected income source, or <see cref="IncomeSource.Others"/> when the input is invalid.</returns>
+        /// <returns>The selected income parsedSource, or <see cref="IncomeSource.Others"/> when the input is invalid.</returns>
         public IncomeSource GetIncomeSource()
         {
             Console.WriteLine("Enter Income Source: ");
@@ -255,7 +257,7 @@
         public void ListIncomeSource()
         {
             var incomeSources = Enum.GetValues<IncomeSource>();
-            for(int i=0; i<incomeSources.Length; i++)
+            for (int i = 0; i < incomeSources.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {incomeSources[i]}");
             }
@@ -277,37 +279,27 @@
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList(IReadOnlyList<Transaction> transactions)
+        public void DisplayTransactionList(
+            IReadOnlyList<TransactionDto> transactions)
         {
-            foreach (var transaction in transactions)
+            foreach (TransactionDto transaction in transactions)
             {
-                Console.Write($"{transaction.TransactionId} - {transaction.Date} - {transaction.Amount} - ");
-                if (transaction is Expense expense)
-                {
-                    Console.WriteLine($"{expense.Category}");
-                }
-                else if (transaction is Income income)
-                {
-                    Console.WriteLine($"{income.Source}");
-                }
+                this.DisplayTransaction(transaction);
             }
         }
 
         /// <summary>
-        /// Displays a list of transactions with their identifier, date, amount, and category or source.
+        /// Displays a transaction with its identifier, date, amount, and category or parsedSource.
         /// </summary>
         /// <param name="transaction">The transactions to display.</param>
-        public void DisplayTransaction(Transaction transaction)
+        /// <summary>
+        public void DisplayTransaction(TransactionDto transaction)
         {
-            Console.Write($"{transaction.TransactionId} - {transaction.Date} - {transaction.Amount} - ");
-            if (transaction is Expense expense)
-            {
-                Console.WriteLine($"{expense.Category}");
-            }
-            else if (transaction is Income income)
-            {
-                Console.WriteLine($"{income.Source}");
-            }
+            Console.WriteLine(
+                $"{transaction.TransactionId} - " +
+                $"{transaction.Date} - " +
+                $"{transaction.Amount} - " +
+                $"{transaction.CategoryOrSource}");
         }
 
         /// <summary>
@@ -352,6 +344,88 @@
         public void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}");
+        }
+
+        /// <summary>
+        /// Collects updated values for an income transaction from the user.
+        /// </summary>
+        /// <param name="transaction">
+        /// The current transaction values displayed as a DTO.
+        /// </param>
+        /// <returns>
+        /// An <see cref="UpdateIncomeDto"/> containing the updated amount,
+        /// date, and income source.
+        /// </returns>
+        public UpdateIncomeDto EditIncome(TransactionDto transaction)
+        {
+            return new UpdateIncomeDto
+            {
+                Amount = this.GetAmount(true) ?? transaction.Amount,
+                Date = this.GetDate(true) ?? transaction.Date,
+                Source = this.GetIncomeSource(),
+            };
+        }
+
+        /// <summary>
+        /// Collects updated values for an expense transaction from the user.
+        /// </summary>
+        /// <param name="transaction">
+        /// The current transaction values displayed as a DTO.
+        /// </param>
+        /// <returns>
+        /// An <see cref="UpdateExpenseDto"/> containing the updated amount,
+        /// date, and expense category.
+        /// </returns>
+        public UpdateExpenseDto EditExpense(TransactionDto transaction)
+        {
+            return new UpdateExpenseDto
+            {
+                Amount = this.GetAmount(true) ?? transaction.Amount,
+                Date = this.GetDate(true) ?? transaction.Date,
+                Category = this.GetExpenseCategory(),
+            };
+        }
+
+        /// <summary>
+        /// Converts a string into an <see cref="ExpenseCategory"/> value.
+        /// </summary>
+        /// <param name="value">
+        /// The string representation of the expense category.
+        /// </param>
+        /// <returns>
+        /// The parsed expense category if successful; otherwise,
+        /// <see cref="ExpenseCategory.Others"/>.
+        /// </returns>
+        private static ExpenseCategory GetCurrentExpenseCategory(
+            string value)
+        {
+            return Enum.TryParse(
+                value,
+                ignoreCase: true,
+                out ExpenseCategory category)
+                ? category
+                : ExpenseCategory.Others;
+        }
+
+        /// <summary>
+        /// Converts a string into an <see cref="IncomeSource"/> value.
+        /// </summary>
+        /// <param name="value">
+        /// The string representation of the income source.
+        /// </param>
+        /// <returns>
+        /// The parsed income source if successful; otherwise,
+        /// <see cref="IncomeSource.Others"/>.
+        /// </returns>
+        private static IncomeSource GetCurrentIncomeSource(
+    string value)
+        {
+            return Enum.TryParse(
+                value,
+                ignoreCase: true,
+                out IncomeSource source)
+                ? source
+                : IncomeSource.Others;
         }
     }
 }

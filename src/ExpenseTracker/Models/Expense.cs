@@ -7,9 +7,6 @@ namespace ExpenseTracker.Models
     /// </summary>
     public class Expense : Transaction
     {
-        private decimal _totalExpense;
-        private ExpenseCategory _category;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Expense"/> class.
         /// </summary>
@@ -23,7 +20,7 @@ namespace ExpenseTracker.Models
         }
 
         /// <summary>
-        /// Indicates total expense value.
+        /// Gets or sets total expense value.
         /// </summary>
         /// <value>The total expense entered.</value>
         public decimal TotalExpense

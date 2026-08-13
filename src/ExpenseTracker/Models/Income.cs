@@ -7,9 +7,6 @@ namespace ExpenseTracker.Models
     /// </summary>
     internal class Income : Transaction
     {
-        private decimal _totalIncome;
-        private IncomeSource _source;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Income"/> class.
         /// </summary>
@@ -32,7 +29,7 @@ namespace ExpenseTracker.Models
         }
 
         /// <summary>
-        /// Indicates total income value.
+        /// Gets or sets total income value.
         /// </summary>
         /// <value>The total income entered.</value>
         public decimal TotalIncome

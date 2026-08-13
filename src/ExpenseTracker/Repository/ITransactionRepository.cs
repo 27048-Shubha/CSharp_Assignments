@@ -34,12 +34,6 @@ namespace ExpenseTracker.Repository
         public TTransaction Get(Guid id);
 
         /// <summary>
-        /// Deletes a transaction using its unique identifier.
-        /// </summary>
-        /// <param name="id">The unique identifier of the transaction to delete.</param>
-        public void Delete(Guid id);
-
-        /// <summary>
         /// Updates an existing transaction.
         /// </summary>
         /// <param name="id">The unique identifier of the transaction to update.</param>

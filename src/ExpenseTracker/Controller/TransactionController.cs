@@ -4,6 +4,7 @@ namespace ExpenseTracker.Controller
 {
     using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
+    using ExpenseTracker.Models.DTOs;
     using ExpenseTracker.Services;
     using ExpenseTracker.View;
 
@@ -45,7 +46,7 @@ namespace ExpenseTracker.Controller
                 this._console.DisplayMainMenu();
                 this._choice = this._console.GetChoice();
 
-                if (_choice is null)
+                if (this._choice is null)
                 {
                     continue;
                 }
@@ -91,7 +92,7 @@ namespace ExpenseTracker.Controller
                     case Enums.ManageTransaction.View:
                         if (this.IsEmpty())
                         {
-                            _console.DisplayEmpty();
+                            this._console.DisplayEmpty();
                         }
                         else
                         {
@@ -125,7 +126,7 @@ namespace ExpenseTracker.Controller
                         break;
 
                     case Enums.ManageTransaction.Back:
-                        _console.DisplayMessage("Back to Main Menu");
+                        this._console.DisplayMessage("Back to Main Menu");
                         isManageMode = false;
                         return;
 
@@ -154,17 +155,38 @@ namespace ExpenseTracker.Controller
 
             this._currentType = this._console.ChooseCategory();
 
-            if (this._currentType == Enums.TransactionType.Income)
+            try
             {
-                this._service = _incomeService;
-                IncomeSource incomeSource = this._console.GetIncomeSource();
-                _incomeService.Add(IncomeService.GetTransactionId(), amount.Value, date.Value, incomeSource);
+                if (this._currentType == Enums.TransactionType.Income)
+                {
+                    AddIncomeDto dto = new AddIncomeDto()
+                    {
+                        Amount = amount.Value,
+                        Date = date.Value,
+                        Source = this._console.GetIncomeSource(),
+                    };
+
+                    this._incomeService.Add(dto);
+                    this._service = this._incomeService;
+                }
+                else
+                {
+                    AddExpenseDto dto = new AddExpenseDto()
+                    {
+                        Amount = amount.Value,
+                        Date = date.Value,
+                        Category = this._console.GetExpenseCategory(),
+                    };
+
+                    this._expenseService.Add(dto);
+                    this._service = this._expenseService;
+                }
+
+                this._console.DisplaySuccess("Addition", "transaction");
             }
-            else
+            catch (ArgumentException exception)
             {
-                this._service = _expenseService;
-                ExpenseCategory expenseCategory = _console.GetExpenseCategory();
-                _expenseService.Add(ExpenseService.GetTransactionId(), amount.Value, date.Value, expenseCategory);
+                this._console.DisplayMessage(exception.Message);
             }
         }
 
@@ -177,11 +199,11 @@ namespace ExpenseTracker.Controller
 
             if (this._currentType == Enums.TransactionType.Income)
             {
-                this._service = _incomeService;
+                this._service = this._incomeService;
             }
             else
             {
-                this._service = _expenseService;
+                this._service = this._expenseService;
             }
 
             if (this.IsEmpty())
@@ -195,64 +217,63 @@ namespace ExpenseTracker.Controller
         }
 
         /// <summary>
-        /// Creates and adds a new transaction using the currently selected transaction type.
-        /// </summary>
-        public void Add()
-        {
-            decimal? amount = _console.GetAmount(false);
-            DateOnly? date = _console.GetDate(false);
-            if ((amount == null) || (date == null))
-            {
-                return;
-            }
-            else
-            {
-                if (_currentType == Enums.TransactionType.Income)
-                {
-                    IncomeSource incomeSource = _console.GetIncomeSource();
-                    this._service = _incomeService;
-                    _incomeService.Add(IncomeService.GetTransactionId(), amount.Value, date.Value, incomeSource);
-                }
-                else
-                {
-                    ExpenseCategory expenseCategory = _console.GetExpenseCategory();
-                    Expense expense = new Expense(ExpenseService.GetTransactionId(), amount.Value, date.Value, expenseCategory);
-                    this._service = _incomeService;
-                    _expenseService.Add(ExpenseService.GetTransactionId(), amount.Value, date.Value, expenseCategory);
-                }
-            }
-        }
-
-        /// <summary>
         /// Displays all transactions for the currently selected transaction type.
         /// </summary>
         public void View()
         {
-            IReadOnlyList<Transaction> transaction = _service.GetAll();
-            _console.DisplayTransactionList(transaction);
+            if (this._service == null)
+            {
+                return;
+            }
+
+            IReadOnlyList<TransactionDto> transactions = this._service.GetAll();
+            this._console.DisplayTransactionList(transactions);
         }
 
         /// <summary>
-        /// Retrieves a transaction by its identifier and updates its editable values.
+        /// Edits transaction
         /// </summary>
         public void Edit()
         {
             this.View();
-            string transactionId = _console.GetTransactionId();
-            Transaction transaction = _service.Get(transactionId);
 
-            if (transaction is null)
+            if (this._service is null)
             {
-                _console.DisplayMessage("Transaction doesn't exists!");
                 return;
             }
 
-            _console.DisplayTransaction(transaction);
-            Transaction updatedTransaction = _console.EditTransaction(transaction);
+            string? transactionId = this._console.GetTransactionId();
 
-            _service.Edit(updatedTransaction);
+            if (string.IsNullOrWhiteSpace(transactionId))
+            {
+                this._console.DisplayMessage("Invalid transaction id!");
+                return;
+            }
 
-            _console.DisplaySuccess("updation", transactionId);
+            TransactionDto? transaction = this._service.Get(transactionId);
+
+            if (transaction is null)
+            {
+                this._console.DisplayMessage("Transaction doesn't exist!");
+                return;
+            }
+
+            this._console.DisplayTransaction(transaction);
+
+            if (this._currentType == TransactionType.Income)
+            {
+                UpdateIncomeDto dto = this._console.EditIncome(transaction);
+
+                this._incomeService.Edit(transactionId, dto);
+            }
+            else
+            {
+                UpdateExpenseDto dto = this._console.EditExpense(transaction);
+
+                this._expenseService.Edit(transactionId, dto);
+            }
+
+            this._console.DisplaySuccess("Update", transactionId);
         }
 
         /// <summary>
@@ -261,22 +282,22 @@ namespace ExpenseTracker.Controller
         public void Delete()
         {
             this.View();
-            string transactionId = this._console.GetTransactionId();
-            if (transactionId == null)
+            string? transactionId = this._console.GetTransactionId() ?? string.Empty;
+            if (transactionId == null || transactionId == string.Empty)
             {
                 this._console.DisplayMessage("Invalid transaction id!");
             }
 
-            Transaction transaction = _service.Get(transactionId);
+            TransactionDto? transaction = this._service.Get(transactionId);
 
             if (transaction == null)
             {
-                _console.DisplayMessage("Transaction doesn't exists!");
+                this._console.DisplayMessage("Transaction doesn't exists!");
             }
             else
             {
-                _service.DeleteTransaction(transaction);
-                _console.DisplaySuccess("Deletion", $"{transactionId}");
+                this._service.Delete(transactionId);
+                this._console.DisplaySuccess("Deletion", $"{transactionId}");
             }
         }
 
@@ -286,7 +307,7 @@ namespace ExpenseTracker.Controller
         /// <returns>True, transactions are empty else false</returns>
         public bool IsEmpty()
         {
-            IReadOnlyList<Transaction> transactions = this._service.GetAll();
+            IReadOnlyList<TransactionDto> transactions = this._service.GetAll();
             return transactions.Count == 0;
         }
     }

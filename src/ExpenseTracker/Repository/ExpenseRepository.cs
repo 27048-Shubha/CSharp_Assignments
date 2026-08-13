@@ -16,16 +16,7 @@
         /// </summary>
         internal ExpenseRepository()
         {
-            _expenseDetails = new List<Expense>();
-        }
-
-        /// <summary>
-        /// Retrieves all stored expense transactions.
-        /// </summary>
-        /// <returns>A read-only list of expense transactions.</returns>
-        public IReadOnlyList<Expense> GetAll()
-        {
-            return _expenseDetails;
+            this._expenseDetails = new List<Expense>();
         }
 
         /// <summary>
@@ -39,12 +30,21 @@
         }
 
         /// <summary>
+        /// Retrieves all stored expense transactions.
+        /// </summary>
+        /// <returns>A read-only list of expense transactions.</returns>
+        public IReadOnlyList<Expense> GetAll()
+        {
+            return this._expenseDetails;
+        }
+
+        /// <summary>
         /// Adds a new expense transaction to the repository.
         /// </summary>
         /// <param name="transaction">The expense transaction to add.</param>
         public void Add(Transaction transaction)
         {
-            _expenseDetails.Add((Expense)transaction);
+            this._expenseDetails.Add((Expense)transaction);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
         /// </summary>
         /// <param name="id">The unique identifier of the expense.</param>
         /// <returns>The matching expense if found; otherwise, null.</returns>
-        public Expense Get(Guid id)
+        public Expense? Get(Guid id)
         {
             foreach (var expense in this._expenseDetails)
             {
@@ -108,7 +108,7 @@
         /// <param name="id">The unique identifier of the expense to delete.</param>
         public void Delete(Guid id)
         {
-            _expenseDetails.RemoveAll(expense => expense.Id == id);
+            this._expenseDetails.RemoveAll(expense => expense.Id == id);
         }
     }
 }

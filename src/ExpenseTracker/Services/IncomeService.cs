@@ -1,13 +1,13 @@
-﻿using ExpenseTracker.Enums;
-using ExpenseTracker.Models;
-using ExpenseTracker.Repository;
-
-namespace ExpenseTracker.Services
+﻿namespace ExpenseTracker.Services
 {
+    using ExpenseTracker.Models;
+    using ExpenseTracker.Models.DTOs;
+    using ExpenseTracker.Repository;
+
     /// <summary>
     /// rovides business operations for income transactions.
     /// </summary>
-    internal class IncomeService : ITransactionService
+    internal class IncomeService : ITransactionService, ITransactionUpdateService<UpdateIncomeDto>
     {
         private IncomeRepository _repository;
 
@@ -21,36 +21,54 @@ namespace ExpenseTracker.Services
         }
 
         /// <summary>
-        /// Adds a new income to the transaction
+        /// Converts an <see cref="Income"/> model into a
+        /// <see cref="TransactionDto"/> for display.
         /// </summary>
-        /// <param name="transactionId">Id of the transaction</param>
-        /// <param name="amount">Income amount</param>
-        /// <param name="date">Date of transaction</param>
-        /// <param name="incomeSource">Source of income amount</param>
-        public void Add(string transactionId, decimal amount, DateOnly date, IncomeSource incomeSource)
+        /// <param name="income">
+        /// The expense transaction to convert.
+        /// </param>
+        /// <returns>
+        /// A DTO containing the expense identifier, amount, date, and category.
+        /// </returns>
+        public static TransactionDto MapToDto(Income income)
         {
-            // negative amount validation
-            // future date validation
-            _repository.Add((Income)new (transactionId, amount, date, incomeSource));
+            return new TransactionDto
+            {
+                TransactionId = income.TransactionId,
+                Amount = income.Amount,
+                Date = income.Date,
+                CategoryOrSource = income.Source.ToString(),
+            };
         }
 
         /// <summary>
-        ///  Retrieves all income transactions.
+        /// Validates the values required to add an income transaction.
         /// </summary>
-        /// <returns> A read-only list containing the income transactions.</returns>
-        public IReadOnlyList<Transaction> GetAll()
+        /// <param name="dto">
+        /// The income creation DTO to validate.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the amount is zero or negative, or when the date is in
+        /// the future.
+        /// </exception>
+        public static void Validate(AddIncomeDto dto)
         {
-            return _repository.GetAll();
+            ValidateAmountAndDate(dto.Amount, dto.Date);
         }
 
         /// <summary>
-        /// Updates an existing income transaction.
+        /// Validates the values required to update an income transaction.
         /// </summary>
-        /// <param name="transaction">The income transaction containing the updated values.</param>
-        public void Edit(Transaction transaction)
+        /// <param name="dto">
+        /// The income update DTO to validate.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the amount is zero or negative, or when the date is in
+        /// the future.
+        /// </exception>
+        public static void Validate(UpdateIncomeDto dto)
         {
-            Guid id = _repository.GetId(transaction.TransactionId);
-            _repository.Update(id, (Income)transaction);
+            ValidateAmountAndDate(dto.Amount, dto.Date);
         }
 
         /// <summary>
@@ -63,14 +81,88 @@ namespace ExpenseTracker.Services
         }
 
         /// <summary>
+        /// Validates the amount and date of an income transaction.
+        /// </summary>
+        /// <param name="amount">
+        /// The monetary amount of the transaction.
+        /// </param>
+        /// <param name="date">
+        /// The date of the transaction.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the amount is zero or negative, or when the date is in the
+        /// future.
+        /// </exception>
+        public static void ValidateAmountAndDate(decimal amount, DateOnly date)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Amount must be greater than zero.");
+            }
+
+            if (date > DateOnly.FromDateTime(DateTime.Today))
+            {
+                throw new ArgumentException("Future dates are not allowed.");
+            }
+        }
+
+        /// <summary>
+        /// Adds a new income to the transaction
+        /// </summary>
+        /// <param name="dto">DTO of the transaction</param>
+        public void Add(AddIncomeDto dto)
+        {
+            // negative amount validation
+            // future date validation
+            Validate(dto);
+            string transactionId = GetTransactionId();
+            this._repository.Add((Income)new (transactionId, dto.Amount, dto.Date, dto.Source));
+        }
+
+        /// <summary>
+        ///  Retrieves all income transactions.
+        /// </summary>
+        /// <returns> A read-only list containing the income transactions.</returns>
+        public IReadOnlyList<TransactionDto> GetAll()
+        {
+            return this._repository.GetAll().Select(MapToDto).ToList();
+        }
+
+        /// <summary>
+        /// Updates an existing income transaction.
+        /// </summary>
+        /// <param name="transactionId">Transaction Id of the transaction to be edited.</param>
+        /// <param name="dto">Dto for Updation of Income</param>
+        /// <exception cref="InvalidOperationException">Raises when income transaction is not found.</exception>
+        public void Edit(string transactionId, UpdateIncomeDto dto)
+        {
+            Validate(dto);
+            if (!this.TryGetIncome(transactionId, out Income? income))
+            {
+                throw new InvalidOperationException("Income transaction was not found.");
+            }
+
+            income.Amount = dto.Amount;
+            income.Date = dto.Date;
+            income.Source = dto.Source;
+
+            Guid id = this._repository.GetId(transactionId);
+            this._repository.Update(id, income);
+        }
+
+        /// <summary>
         /// Retrieves an income transaction using its transaction identifier.
         /// </summary>
         /// <param name="transactionId">The display identifier of the transaction.</param>
         /// <returns>The matching income transaction if found; otherwise, null.</returns>
-        public Transaction Get(string transactionId)
+        public TransactionDto? Get(string transactionId)
         {
-            Guid id = _repository.GetId(transactionId);
-            return _repository.Get(id);
+            if (!this.TryGetIncome(transactionId, out Income? income))
+            {
+                return null;
+            }
+
+            return MapToDto(income);
         }
 
         /// <summary>
@@ -79,8 +171,8 @@ namespace ExpenseTracker.Services
         /// <param name="transactionId">The display identifier of the transaction to delete.</param>
         public void Delete(string transactionId)
         {
-            Guid id = _repository.GetId(transactionId);
-            _repository.Delete(id);
+            Guid id = this._repository.GetId(transactionId);
+            this._repository.Delete(id);
         }
 
         /// <summary>
@@ -89,8 +181,30 @@ namespace ExpenseTracker.Services
         /// <param name="transaction">The income transaction to delete.</param>
         public void DeleteTransaction(Transaction transaction)
         {
-            Guid id = _repository.GetId(transaction.TransactionId);
-            _repository.Delete(id);
+            Guid id = this._repository.GetId(transaction.TransactionId);
+            this._repository.Delete(id);
+        }
+
+        /// <summary>
+        /// Attempts to retrieve an income transaction using its display identifier.
+        /// </summary>
+        /// <param name="transactionId">
+        /// The display identifier of the income transaction.
+        /// </param>
+        /// <param name="income">
+        /// When this method returns, contains the matching income transaction if
+        /// found; otherwise, <see langword="null"/>.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the income transaction is found; otherwise,
+        /// <see langword="false"/>.
+        /// </returns>
+        private bool TryGetIncome(string transactionId, out Income? income)
+        {
+            Guid id = this._repository.GetId(transactionId);
+            income = this._repository.Get(id);
+
+            return income != null;
         }
     }
 }
