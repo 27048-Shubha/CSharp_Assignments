@@ -25,8 +25,8 @@
         {
             this.DisplayDash();
             ConsoleColorManager.SetColor(ConsoleColor.Cyan);
-            Console.WriteLine("Welcome to Inventory Management System!\n");
-            Console.WriteLine("1. Add New Product\n2. Edit a Product\n3. Delete a Product\n4. View All Products\n5. Search Product by Name\n6. Exit");
+            Console.WriteLine("Welcome To Inventory Management System!\n");
+            Console.WriteLine("1. Add New Product\n2. Edit A Product\n3. Delete A Product\n4. View All Products\n5. Search Product By Name\n6. Exit");
             this.DisplayDash();
         }
 
@@ -38,7 +38,7 @@
             this.DisplayDash();
             ConsoleColorManager.SetColor(ConsoleColor.Cyan);
             Console.WriteLine("Enter: \n");
-            Console.WriteLine("1.Sort By Name\n2. Sort By Price\n3. Sort By Stock Quanitty\n4. View All Products\n5. Search Product by Name\n6. Exit");
+            Console.WriteLine("1.Sort By Name\n2. Sort By Price\n3. Sort By Stock Quanitty\n4. View All Products\n5. Search Product By Name\n6. Exit");
             this.DisplayDash();
         }
 
@@ -68,7 +68,7 @@
         {
             ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
             this.Display("name");
-            name = Console.ReadLine() ?? string.Empty;
+            name = Console.ReadLine() ?? "Unnamed Product";
         }
 
         /// <summary>
@@ -178,7 +178,7 @@
         public void DisplaySuccess(string operation)
         {
             ConsoleColorManager.SetColor(ConsoleColor.Green);
-            Console.WriteLine($"{operation} successful!");
+            Console.WriteLine($"{operation} Successful!");
         }
 
         /// <summary>
@@ -187,7 +187,7 @@
         public void DisplayEmpty()
         {
             ConsoleColorManager.SetColor(ConsoleColor.Yellow);
-            Console.WriteLine("Inventory is empty!");
+            Console.WriteLine("Inventory Is Empty!");
         }
 
         /// <summary>
@@ -196,7 +196,7 @@
         public void DiplayExitMessage()
         {
             ConsoleColorManager.SetColor(ConsoleColor.DarkCyan);
-            Console.WriteLine("Thank You for using Inventory Management System!");
+            Console.WriteLine("Thank You For Using Inventory Management System!");
         }
 
         /// <summary>

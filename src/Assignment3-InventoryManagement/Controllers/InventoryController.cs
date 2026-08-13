@@ -39,7 +39,6 @@
         {
             do
             {
-                this.view.DisplayDash();
                 this.view.DisplayMenu();
                 this.view.GetUserChoice(out this.choice);
                 switch ((MenuOptions)this.choice)
@@ -118,14 +117,14 @@
         /// </summary>
         public void EditProduct()
         {
+            if (this.service.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+
             this.view.DisplayMessage("Current inventory:");
             try
             {
-                if (this.service.IsEmpty())
-                {
-                    throw new EmptyInventoryException("Inventory is currently empty!");
-                }
-
                 this.ViewProducts();
                 this.view.DisplayMessage("Click enter to skip editing values");
                 this.view.GetProductName(out this.name);
@@ -162,6 +161,11 @@
         /// </summary>
         public void DeleteProduct()
         {
+            if (this.service.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+
             this.view.GetProductName(out this.name);
             try
             {
@@ -179,6 +183,11 @@
         /// </summary>
         public void ViewProducts()
         {
+            if (this.service.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+
             try
             {
                 this.products = this.service.ListProducts();
