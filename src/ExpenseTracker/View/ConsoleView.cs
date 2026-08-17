@@ -10,6 +10,16 @@
     internal class ConsoleView
     {
         /// <summary>
+        /// Display storage options of expense tracker.
+        /// </summary>
+        public void DisplayStorageOptions()
+        {
+            Console.WriteLine("Choose\n" +
+                "1. In memory storage\n" +
+                "2. Json storage");
+        }
+
+        /// <summary>
         /// Displays mainmenu options of expense tracker.
         /// </summary>
         public void DisplayMainMenu()
@@ -19,8 +29,30 @@
                 "1. Add Transaction\n" +
                 "2. Manage Transaction\n" +
                 "3. Search Transaction\n" +
-                "4. Summary\n" +
-                "5. Exit");
+                "4. Sort\n" +
+                "5. Summary\n" +
+                "6. Exit");
+        }
+
+        /// <summary>
+        /// Manages transaction menu.
+        /// </summary>
+        /// <returns>Value indicating user's choice.</returns>
+        public Enums.Storage ChooseStorageChoice()
+        {
+            for (int attempt = 1; attempt <= 3; attempt++)
+            {
+                if (Enum.TryParse<Storage>(Console.ReadLine(), true, out var storageType))
+                {
+                    return storageType;
+                }
+
+                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+            }
+
+            this.DisplayInvalidInput("Kindly enter valid choice as input!");
+
+            return Enums.Storage.InMemory;
         }
 
         /// <summary>
@@ -237,7 +269,7 @@
             for (int attempt = 1; attempt <= 3; attempt++)
             {
                 input = Console.ReadLine() ?? string.Empty;
-                if (!isEditMode && string.IsNullOrEmpty(input))
+                if (isEditMode && string.IsNullOrEmpty(input))
                 {
                     return null;
                 }

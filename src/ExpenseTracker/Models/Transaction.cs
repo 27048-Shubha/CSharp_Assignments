@@ -13,7 +13,7 @@
         /// <param name="transactionId">The display identifier of the transaction.</param>
         /// <param name="amount">The monetary value of the transaction.</param>
         /// <param name="date">The date on which the transaction occurred.</param>
-        public Transaction(string transactionId, decimal amount, DateOnly date)
+        public Transaction(string transactionId, decimal amount, string date)
         {
             this._id = Guid.NewGuid();
             this.TransactionId = transactionId;
@@ -52,7 +52,7 @@
         /// Gets or sets the date of the transaction.
         /// </summary>
         /// <value>The transaction date.</value>
-        public DateOnly Date
+        public string Date
         {
             get; set;
         }

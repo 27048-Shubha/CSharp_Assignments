@@ -14,7 +14,7 @@ namespace ExpenseTracker.Models
         /// <param name="amount">The amount spent.</param>
         /// <param name="date">The date on which the expense occurred.</param>
         /// <param name="category">The category of the expense.</param>
-        public Expense(string transactionId, decimal amount, DateOnly date, ExpenseCategory category)
+        public Expense(string transactionId, decimal amount, string date, ExpenseCategory category)
             : base(transactionId, amount, date)
         {
             this.Category = category;

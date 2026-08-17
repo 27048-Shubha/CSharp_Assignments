@@ -21,6 +21,7 @@
         /// <param name="transactionId">The display identifier of the transaction to retrieve.</param>
         /// <returns>A <see cref="TransactionDto"/> representing the transaction when found; otherwise, <see langword="null"/>.</returns>
         public TransactionDto? Get(string transactionId);
+
         /// <summary>
         /// Deletes a transaction using its display identifier.
         /// </summary>

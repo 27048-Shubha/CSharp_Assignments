@@ -14,7 +14,7 @@ namespace ExpenseTracker.Models
         /// <param name="amount">The amount received.</param>
         /// <param name="date">The date on which the income occurred.</param>
         /// <param name="source">The source of the income.</param>
-        public Income(string transactionId, decimal amount, DateOnly date, IncomeSource source)
+        public Income(string transactionId, decimal amount, string date, IncomeSource source)
             : base(transactionId, amount, date)
         {
         }

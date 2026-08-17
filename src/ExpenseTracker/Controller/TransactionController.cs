@@ -46,17 +46,6 @@ namespace ExpenseTracker.Controller
                 this._console.DisplayMainMenu();
                 this._choice = this._console.GetChoice();
 
-                if (this._choice is null)
-                {
-                    continue;
-                }
-
-                if (this._choice is (int)Enums.MainMenu.Add || this._choice is (int)Enums.MainMenu.Exit)
-                {
-                    this._console.DisplayMessage("Transaction list is currently empty. Please add a transaction first.");
-                    continue;
-                }
-
                 switch ((Enums.MainMenu)this._choice)
                 {
                     case Enums.MainMenu.Add:
@@ -289,6 +278,7 @@ namespace ExpenseTracker.Controller
                     this._console.DisplayTransactionList(sortedById);
                     break;
             }
+            this.View();
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <summary>
     /// The repository used to store, retrieve, update, and delete expense transactions.
     /// </summary>
-    private readonly InMemoryExpense _repository;
+    private readonly ITransactionRepository<Expense> _repository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExpenseService"/> class.
@@ -20,9 +20,9 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <param name="expenseRepository">
     /// The repository used to manage expense transactions.
     /// </param>
-    public ExpenseService(InMemoryExpense expenseRepository)
+    public ExpenseService(ITransactionRepository<Expense> expenseRepository)
     {
-        this._repository = expenseRepository;
+        this._repository = expenseRepository ?? throw new ArgumentNullException(nameof(expenseRepository));
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
         {
             TransactionId = expense.TransactionId,
             Amount = expense.Amount,
-            Date = expense.Date,
+            Date = DateOnly.Parse(expense.Date),
             CategoryOrSource = expense.Category.ToString(),
         };
     }
@@ -62,7 +62,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
         {
             TransactionId = expense.TransactionId,
             Amount = expense.Amount,
-            Date = expense.Date,
+            Date = DateOnly.Parse(expense.Date),
             Category = (Enums.ExpenseCategory)expense.Category,
         };
     }
@@ -145,7 +145,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
         Expense expense = new (
             transactionId,
             dto.Amount,
-            dto.Date,
+            dto.Date.ToString(),
             dto.Category);
 
         this._repository.Add(expense);
@@ -251,7 +251,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
         }
 
         expense.Amount = dto.Amount;
-        expense.Date = dto.Date;
+        expense.Date = dto.Date.ToString();
         expense.Category = dto.Category;
 
         Guid id = this._repository.GetId(transactionId);

@@ -1,6 +1,5 @@
 ﻿namespace ExpenseTracker.Services
 {
-    using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
     using ExpenseTracker.Models.DTOs;
     using ExpenseTracker.Repository;
@@ -10,15 +9,15 @@
     /// </summary>
     internal class IncomeService : ITransactionService, ITransactionUpdateService<IncomeDto>
     {
-        private InMemoryIncome _repository;
+        private ITransactionRepository<Income> _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IncomeService"/> class.
         /// </summary>
         /// <param name="incomeRepository">The repository used to store and retrieve income transactions.</param>
-        public IncomeService(InMemoryIncome incomeRepository)
+        public IncomeService(ITransactionRepository<Income> incomeRepository)
         {
-            this._repository = incomeRepository;
+            this._repository = incomeRepository ?? throw new ArgumentNullException(nameof(incomeRepository));
         }
 
         /// <summary>
@@ -37,7 +36,7 @@
             {
                 TransactionId = income.TransactionId,
                 Amount = income.Amount,
-                Date = income.Date,
+                Date = DateOnly.Parse(income.Date),
                 CategoryOrSource = income.Source.ToString(),
             };
         }
@@ -58,7 +57,7 @@
             {
                 TransactionId = income.TransactionId,
                 Amount = income.Amount,
-                Date = income.Date,
+                Date = DateOnly.Parse(income.Date),
                 Source = (Enums.IncomeSource)income.Source,
             };
         }
@@ -103,15 +102,6 @@
         }
 
         /// <summary>
-        /// Sorts the transactions by date in ascending or descending order.
-        /// </summary>
-        /// <returns>Returns the total income amount.</returns>
-        public decimal GetTotalIncome()
-        {
-            return this.GetAllIncome().Sum(income => income.Amount);
-        }
-
-        /// <summary>
         /// Validates the amount and date of an income transaction.
         /// </summary>
         /// <param name="amount">
@@ -138,6 +128,15 @@
         }
 
         /// <summary>
+        /// Sorts the transactions by date in ascending or descending order.
+        /// </summary>
+        /// <returns>Returns the total income amount.</returns>
+        public decimal GetTotalIncome()
+        {
+            return this.GetAllIncome().Sum(income => income.Amount);
+        }
+
+        /// <summary>
         /// Adds a new income to the transaction
         /// </summary>
         /// <param name="dto">DTO of the transaction</param>
@@ -147,7 +146,7 @@
             // future date validation
             Validate(dto);
             string transactionId = GetTransactionId();
-            this._repository.Add((Income)new (transactionId, dto.Amount, dto.Date, dto.Source));
+            this._repository.Add((Income)new (transactionId, dto.Amount, dto.Date.ToString(), dto.Source));
         }
 
         /// <summary>
@@ -165,7 +164,7 @@
             }
 
             income.Amount = dto.Amount;
-            income.Date = dto.Date;
+            income.Date = dto.Date.ToString();
             income.Source = dto.Source;
 
             Guid id = this._repository.GetId(transactionId);

@@ -6,7 +6,7 @@
     /// <summary>
     /// Provides in-memory storage and management operations for expense transactions.
     /// </summary>
-    internal class InMemoryExpense : ITransactionRepository
+    internal class InMemoryExpense : ITransactionRepository<Expense>
     {
         private static decimal _transactionCount = 0;
         private List<Expense> _expenseDetails;
