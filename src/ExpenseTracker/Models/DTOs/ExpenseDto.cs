@@ -5,7 +5,7 @@ namespace ExpenseTracker.Models.DTOs
     /// <summary>
     /// Represents the values that can be updated for an existing expense.
     /// </summary>
-    internal class UpdateExpenseDto
+    internal class ExpenseDto
     {
         /// <summary>
         /// Gets or sets the identifier of the expense transaction.
@@ -37,6 +37,6 @@ namespace ExpenseTracker.Models.DTOs
         /// <value>
         /// The category assigned to the expense.
         /// </value>
-        public ExpenseCategory Category { get; set; }
+        public Enums.ExpenseCategory Category { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace ExpenseTracker.Models.DTOs;
 /// <summary>
 /// Represents the editable values of an existing income transaction.
 /// </summary>
-internal class UpdateIncomeDto
+internal class IncomeDto
 {
     /// <summary>
     /// Gets or sets the identifier of the income transaction to update.
@@ -37,5 +37,5 @@ internal class UpdateIncomeDto
     /// <value>
     /// The new source assigned to the income.
     /// </value>
-    public IncomeSource Source { get; set; }
+    public Enums.IncomeSource Source { get; set; }
 }

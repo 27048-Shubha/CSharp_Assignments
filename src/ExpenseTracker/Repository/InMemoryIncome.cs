@@ -6,15 +6,15 @@ namespace ExpenseTracker.Repository
     /// <summary>
     /// Provides repository operations for managing income transactions.
     /// </summary>
-    internal class IncomeRepository : ITransactionRepository
+    internal class InMemoryIncome : ITransactionRepository
     {
         private static decimal _transactionCount = 0;
         private List<Income> _incomeDetails;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IncomeRepository"/> class.
+        /// Initializes a new instance of the <see cref="InMemoryIncome"/> class.
         /// </summary>
-        internal IncomeRepository()
+        internal InMemoryIncome()
         {
             this._incomeDetails = new List<Income>();
         }

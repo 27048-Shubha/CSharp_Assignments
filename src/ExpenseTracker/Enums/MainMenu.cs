@@ -15,6 +15,16 @@
         Manage,
 
         /// <summary>
+        /// Allows the user to search for transactions based on specific criteria.
+        /// </summary>
+        Search,
+
+        /// <summary>
+        /// Allows the user to sort transactions based on specific criteria.
+        /// </summary>
+        Sort,
+
+        /// <summary>
         /// Generates a financial summary.
         /// </summary>
         Summary,

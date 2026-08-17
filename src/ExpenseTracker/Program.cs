@@ -11,8 +11,8 @@ namespace Assignments
         {
             ConsoleView console = new ConsoleView();
 
-            IncomeRepository incomeRepository = new IncomeRepository();
-            ExpenseRepository expenseRepository = new ExpenseRepository();
+            InMemoryIncome incomeRepository = new InMemoryIncome();
+            InMemoryExpense expenseRepository = new InMemoryExpense();
 
             IncomeService incomeService = new IncomeService(incomeRepository);
             ExpenseService expenseService = new ExpenseService(expenseRepository);

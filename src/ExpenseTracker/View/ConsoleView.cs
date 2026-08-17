@@ -1,7 +1,6 @@
 ﻿namespace ExpenseTracker.View
 {
     using ExpenseTracker.Enums;
-    using ExpenseTracker.Models;
     using ExpenseTracker.Models.DTOs;
     using ExpenseTracker.Validator;
 
@@ -19,8 +18,9 @@
                 "Enter\n" +
                 "1. Add Transaction\n" +
                 "2. Manage Transaction\n" +
-                "3. Summary\n" +
-                "4. Exit");
+                "3. Search Transaction\n" +
+                "4. Summary\n" +
+                "5. Exit");
         }
 
         /// <summary>
@@ -48,6 +48,41 @@
             this.DisplayInvalidInput("Kindly enter valid choice as input!");
 
             return Enums.ManageTransaction.Invalid;
+        }
+
+        /// <summary>
+        /// Prompts the user to choose a sorting criterion for transactions.
+        /// </summary>
+        /// <returns>The chosen sorting criterion, or <see cref="SortBy.Invalid"/> when the input is invalid.</returns>
+        public SortBy ChooseSortBy()
+        {
+            Console.WriteLine("Choose Sort By\n" +
+                "1. Amount\n" +
+                "2. Transaction Id\n" +
+                "3. Date");
+            if (Enum.TryParse<SortBy>(Console.ReadLine(), true, out var category))
+            {
+                return category;
+            }
+
+            return Enums.SortBy.Invalid;
+        }
+
+        /// <summary>
+        /// Prompts the user to choose the order in which to sort transactions (ascending or descending).
+        /// </summary>
+        /// <returns>The chosen order, or <see cref="Order.Ascending"/> when the input is invalid.</returns>
+        public Order ChooseOrderBy()
+        {
+            Console.WriteLine("Choose Order By\n" +
+                "1. Ascending (Default) \n" +
+                "2. Descending");
+            if (Enum.TryParse<Order>(Console.ReadLine(), true, out var category))
+            {
+                return category;
+            }
+
+            return Enums.Order.Ascending;
         }
 
         /// <summary>
@@ -223,7 +258,7 @@
         /// Displays the available expense categories and retrieves the user's selection.
         /// </summary>
         /// <returns>The selected expense category</returns>
-        public ExpenseCategory GetExpenseCategory()
+        public Enums.ExpenseCategory GetExpenseCategory()
         {
             Console.WriteLine("Enter Expense Category: ");
             this.ListExpenseCategory();
@@ -239,7 +274,7 @@
         /// Displays the available income sources and retrieves the user's selection.
         /// </summary>
         /// <returns>The selected income parsedSource, or <see cref="IncomeSource.Others"/> when the input is invalid.</returns>
-        public IncomeSource GetIncomeSource()
+        public Enums.IncomeSource GetIncomeSource()
         {
             Console.WriteLine("Enter Income Source: ");
             this.ListIncomeSource();
@@ -276,6 +311,20 @@
         }
 
         /// <summary>
+        /// Displays a summary of total income, total expense, and balance.
+        /// </summary>
+        /// <param name="totalIncome">Total income amount.</param>
+        /// <param name="totalExpense">Total expense amount.</param>
+        /// <param name="balance">The balance amount.</param>
+        public void DisplaySummary(decimal totalIncome, decimal totalExpense, decimal balance)
+        {
+            Console.WriteLine("=== Summary ===");
+            Console.WriteLine($"Total Income: {totalIncome}");
+            Console.WriteLine($"Total Expense: {totalExpense}");
+            Console.WriteLine($"Balance: {balance}");
+        }
+
+        /// <summary>
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
@@ -283,6 +332,32 @@
             IReadOnlyList<TransactionDto> transactions)
         {
             foreach (TransactionDto transaction in transactions)
+            {
+                this.DisplayTransaction(transaction);
+            }
+        }
+
+        /// <summary>
+        /// Displays a list of transactions with their identifier, date, amount, and category or source.
+        /// </summary>
+        /// <param name="transactions">The transactions to display.</param>
+        public void DisplayTransactionList(
+            IReadOnlyList<IncomeDto> transactions)
+        {
+            foreach (IncomeDto transaction in transactions)
+            {
+                this.DisplayTransaction(transaction);
+            }
+        }
+
+        /// <summary>
+        /// Displays a list of transactions with their identifier, date, amount, and category or source.
+        /// </summary>
+        /// <param name="transactions">The transactions to display.</param>
+        public void DisplayTransactionList(
+            IReadOnlyList<ExpenseDto> transactions)
+        {
+            foreach (ExpenseDto transaction in transactions)
             {
                 this.DisplayTransaction(transaction);
             }
@@ -299,7 +374,35 @@
                 $"{transaction.TransactionId} - " +
                 $"{transaction.Date} - " +
                 $"{transaction.Amount} - " +
-                $"{transaction.CategoryOrSource}");
+                $"{transaction.CategoryOrSource.ToString()}");
+        }
+
+        /// <summary>
+        /// Displays a transaction with its identifier, date, amount, and category or parsedSource.
+        /// </summary>
+        /// <param name="transaction">The transactions to display.</param>
+        /// <summary>
+        public void DisplayTransaction(IncomeDto transaction)
+        {
+            Console.WriteLine(
+                $"{transaction.TransactionId} - " +
+                $"{transaction.Date} - " +
+                $"{transaction.Amount} - " +
+                $"{transaction.Source.ToString()}");
+        }
+
+        /// <summary>
+        /// Displays a transaction with its identifier, date, amount, and category or parsedSource.
+        /// </summary>
+        /// <param name="transaction">The transactions to display.</param>
+        /// <summary>
+        public void DisplayTransaction(ExpenseDto transaction)
+        {
+            Console.WriteLine(
+                $"{transaction.TransactionId} - " +
+                $"{transaction.Date} - " +
+                $"{transaction.Amount} - " +
+                $"{transaction.Category.ToString()}");
         }
 
         /// <summary>
@@ -353,12 +456,12 @@
         /// The current transaction values displayed as a DTO.
         /// </param>
         /// <returns>
-        /// An <see cref="UpdateIncomeDto"/> containing the updated amount,
+        /// An <see cref="IncomeDto"/> containing the updated amount,
         /// date, and income source.
         /// </returns>
-        public UpdateIncomeDto EditIncome(TransactionDto transaction)
+        public IncomeDto EditIncome(TransactionDto transaction)
         {
-            return new UpdateIncomeDto
+            return new IncomeDto
             {
                 Amount = this.GetAmount(true) ?? transaction.Amount,
                 Date = this.GetDate(true) ?? transaction.Date,
@@ -373,17 +476,35 @@
         /// The current transaction values displayed as a DTO.
         /// </param>
         /// <returns>
-        /// An <see cref="UpdateExpenseDto"/> containing the updated amount,
+        /// An <see cref="ExpenseDto"/> containing the updated amount,
         /// date, and expense category.
         /// </returns>
-        public UpdateExpenseDto EditExpense(TransactionDto transaction)
+        public ExpenseDto EditExpense(TransactionDto transaction)
         {
-            return new UpdateExpenseDto
+            return new ExpenseDto
             {
                 Amount = this.GetAmount(true) ?? transaction.Amount,
                 Date = this.GetDate(true) ?? transaction.Date,
                 Category = this.GetExpenseCategory(),
             };
+        }
+
+        /// <summary>
+        /// Prompts the user to choose a search criterion.
+        /// </summary>
+        /// <returns>The selected search criterion.</returns>
+        public Enums.SearchBy ChooseSearchBy()
+        {
+            Console.WriteLine("Choose Search By\n" +
+                "1. Transaction Id\n" +
+                "2. Income Source\n" +
+                "3. Expense Category");
+            if (Enum.TryParse<SearchBy>(Console.ReadLine(), true, out var category))
+            {
+                return category;
+            }
+
+            return Enums.SearchBy.Invalid;
         }
 
         /// <summary>

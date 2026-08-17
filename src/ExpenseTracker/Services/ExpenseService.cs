@@ -7,12 +7,12 @@ namespace ExpenseTracker.Services;
 /// <summary>
 /// Provides business operations for managing expense transactions.
 /// </summary>
-internal sealed class ExpenseService : ITransactionService, ITransactionUpdateService<UpdateExpenseDto>
+internal sealed class ExpenseService : ITransactionService, ITransactionUpdateService<ExpenseDto>
 {
     /// <summary>
     /// The repository used to store, retrieve, update, and delete expense transactions.
     /// </summary>
-    private readonly ExpenseRepository _repository;
+    private readonly InMemoryExpense _repository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExpenseService"/> class.
@@ -20,7 +20,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <param name="expenseRepository">
     /// The repository used to manage expense transactions.
     /// </param>
-    public ExpenseService(ExpenseRepository expenseRepository)
+    public ExpenseService(InMemoryExpense expenseRepository)
     {
         this._repository = expenseRepository;
     }
@@ -47,6 +47,27 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     }
 
     /// <summary>
+    /// Converts an <see cref="Expense"/> model into a
+    /// <see cref="TransactionDto"/> for display.
+    /// </summary>
+    /// <param name="expense">
+    /// The expense transaction to convert.
+    /// </param>
+    /// <returns>
+    /// A DTO containing the expense identifier, amount, date, and category.
+    /// </returns>
+    public static ExpenseDto MapToExpenseDto(Expense expense)
+    {
+        return new ExpenseDto
+        {
+            TransactionId = expense.TransactionId,
+            Amount = expense.Amount,
+            Date = expense.Date,
+            Category = (Enums.ExpenseCategory)expense.Category,
+        };
+    }
+
+    /// <summary>
     /// Generates a unique display identifier for an expense transaction.
     /// </summary>
     /// <returns>
@@ -54,7 +75,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// </returns>
     public static string GetTransactionId()
     {
-        return ExpenseRepository.GetTransactionId();
+        return InMemoryExpense.GetTransactionId();
     }
 
     /// <summary>
@@ -74,7 +95,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <param name="dto">
     /// The updated expense data to validate.
     /// </param>
-    public static void Validate(UpdateExpenseDto dto)
+    public static void Validate(ExpenseDto dto)
     {
         ValidateAmountAndDate(dto.Amount, dto.Date);
     }
@@ -145,13 +166,22 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     }
 
     /// <summary>
+    ///  Retrieves all income transactions.
+    /// </summary>
+    /// <returns> A read-only list containing the income transactions.</returns>
+    public IReadOnlyList<ExpenseDto> GetAllExpense()
+    {
+        return this._repository.GetAll().Select(MapToExpenseDto).ToList();
+    }
+
+    /// <summary>
     /// Retrieves an expense transaction using its display identifier.
     /// </summary>
     /// <param name="transactionId">
     /// The display identifier of the expense transaction.
     /// </param>
     /// <returns>
-    /// A <see cref="TransactionDto"/> representing the expense when found;
+    /// A <see cref="ExpenseDto"/> representing the expense when found;
     /// otherwise, <see langword="null"/>.
     /// </returns>
     public TransactionDto? Get(string transactionId)
@@ -162,6 +192,35 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
         }
 
         return MapToDto(expense);
+    }
+
+    /// <summary>
+    /// Retrieves an expense transaction using its display identifier.
+    /// </summary>
+    /// <param name="transactionId">
+    /// The display identifier of the expense transaction.
+    /// </param>
+    /// <returns>
+    /// A <see cref="TransactionDto"/> representing the expense when found;
+    /// otherwise, <see langword="null"/>.
+    /// </returns>
+    public ExpenseDto? GetExpense(string transactionId)
+    {
+        if (!this.TryGetExpense(transactionId, out Expense? expense))
+        {
+            return null;
+        }
+
+        return MapToExpenseDto(expense);
+    }
+
+    /// <summary>
+    /// Sorts the transactions by date in ascending or descending order.
+    /// </summary>
+    /// <returns>Returns the total expense amount.</returns>
+    public decimal GetTotalExpense()
+    {
+        return this.GetAllExpense().Sum(expense => expense.Amount);
     }
 
     /// <summary>
@@ -181,7 +240,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// </exception>
     public void Edit(
         string transactionId,
-        UpdateExpenseDto dto)
+        ExpenseDto dto)
     {
         Validate(dto);
 
@@ -209,6 +268,85 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     {
         Guid id = this._repository.GetId(transactionId);
         this._repository.Delete(id);
+    }
+
+    /// <summary>
+    /// Returns transaction list based on the id.
+    /// </summary>
+    /// <param name="id">Id of the transaction to be found</param>
+    /// <returns>List of transactions matching the id</returns>
+    public List<TransactionDto> GetTransactionById(string id)
+    {
+        List<TransactionDto> transactions = this.GetAll().Where(transaction => transaction.TransactionId == id).ToList();
+        return transactions;
+    }
+
+    /// <summary>
+    /// Returns transaction list based on the expense category.
+    /// </summary>
+    /// <param name="expenseCategory">The expense category to filter by</param>
+    /// <returns>List of transactions matching the expense category</returns>
+    public List<ExpenseDto> GetTransactionByExpenseCategory(Enums.ExpenseCategory expenseCategory)
+    {
+        List<ExpenseDto> transactions = this.GetAllExpense().Where(transaction => transaction.Category == expenseCategory).ToList();
+        return transactions;
+    }
+
+    /// <summary>
+    /// Sorts the transactions by amount in ascending or descending order.
+    /// </summary>
+    /// <param name="order">Indicates whether to sort in ascending order.</param>
+    /// <returns>The sorted list of transactions.</returns>
+    public IReadOnlyList<TransactionDto> SortByDate(Enums.Order order)
+    {
+        if (order == Enums.Order.Ascending)
+        {
+            IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderBy(transaction => transaction.Date).ToList();
+            return transactionDtos;
+        }
+        else
+        {
+            IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderByDescending(transaction => transaction.Date).ToList();
+            return transactionDtos;
+        }
+    }
+
+    /// <summary>
+    /// Sorts the transactions by amount in ascending or descending order.
+    /// </summary>
+    /// <param name="order">Indicates whether to sort in ascending order.</param>
+    /// <returns>The sorted list of transactions.</returns>
+    public IReadOnlyList<TransactionDto> SortByAmount(Enums.Order order)
+    {
+        if (order == Enums.Order.Ascending)
+        {
+            IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderBy(transaction => transaction.Amount).ToList();
+            return transactionDtos;
+        }
+        else
+        {
+            IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderByDescending(transaction => transaction.Amount).ToList();
+            return transactionDtos;
+        }
+    }
+
+    /// <summary>
+    /// Sorts the transactions by date in ascending or descending order.
+    /// </summary>
+    /// <param name="order">Indicates whether to sort in ascending order.</param>
+    /// <returns>The sorted list of transactions.</returns>
+    public IReadOnlyList<TransactionDto> SortByTransactionId(Enums.Order order)
+    {
+        if (order == Enums.Order.Ascending)
+        {
+            IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderBy(transaction => transaction.TransactionId).ToList();
+            return transactionDtos;
+        }
+        else
+        {
+            IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderByDescending(transaction => transaction.TransactionId).ToList();
+            return transactionDtos;
+        }
     }
 
     /// <summary>

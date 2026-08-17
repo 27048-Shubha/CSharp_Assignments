@@ -51,10 +51,24 @@ namespace ExpenseTracker.Controller
                     continue;
                 }
 
+                if (this._choice is (int)Enums.MainMenu.Add || this._choice is (int)Enums.MainMenu.Exit)
+                {
+                    this._console.DisplayMessage("Transaction list is currently empty. Please add a transaction first.");
+                    continue;
+                }
+
                 switch ((Enums.MainMenu)this._choice)
                 {
                     case Enums.MainMenu.Add:
                         this.AddTransaction();
+                        break;
+
+                    case Enums.MainMenu.Search:
+                        this.SearchTransaction();
+                        break;
+
+                    case Enums.MainMenu.Sort:
+                        this.SortTransaction();
                         break;
 
                     case Enums.MainMenu.Manage:
@@ -62,7 +76,7 @@ namespace ExpenseTracker.Controller
                         break;
 
                     case Enums.MainMenu.Summary:
-                        // this.Summary();
+                        this.Summarize();
                         break;
 
                     case Enums.MainMenu.Exit:
@@ -191,6 +205,93 @@ namespace ExpenseTracker.Controller
         }
 
         /// <summary>
+        /// Searches for transactions based on user-selected criteria and displays the results.
+        /// </summary>
+        public void SearchTransaction()
+        {
+            this._service = this._incomeService;
+            Enums.SearchBy option = this._console.ChooseSearchBy();
+
+            switch (option)
+            {
+                case Enums.SearchBy.TransactionId:
+                    string? transactionId = this._console.GetTransactionId();
+                    TransactionDto? transactionDto = this._incomeService.Get(transactionId);
+                    if (transactionDto is null)
+                    {
+                        this._console.DisplayMessage("Transaction doesn't exist!");
+                    }
+                    else
+                    {
+                        this._console.DisplayTransaction(transactionDto);
+                    }
+
+                    break;
+
+                case Enums.SearchBy.IncomeSource:
+                    Enums.IncomeSource source = this._console.GetIncomeSource();
+                    IReadOnlyList<IncomeDto> income = this._incomeService.GetTransactionByIncomeSource(source);
+                    if (income.Count == 0)
+                    {
+                        this._console.DisplayMessage("No transactions found for the specified source.");
+                    }
+                    else
+                    {
+                        this._console.DisplayTransactionList(income);
+                    }
+
+                    break;
+
+                case Enums.SearchBy.ExpenseCategory:
+                    Enums.ExpenseCategory category = this._console.GetExpenseCategory();
+                    IReadOnlyList<ExpenseDto> expenses = this._expenseService.GetTransactionByExpenseCategory(category);
+                    if (expenses.Count == 0)
+                    {
+                        this._console.DisplayMessage("No transactions found for the specified category.");
+                    }
+                    else
+                    {
+                        this._console.DisplayTransactionList(expenses);
+                    }
+
+                    break;
+
+                default:
+                    this._console.DisplayMessage("Invalid search option.");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Sorts transactions based on user-selected criteria and displays the sorted list.
+        /// </summary>
+        public void SortTransaction()
+        {
+            this._service = this._incomeService;
+
+            Enums.SortBy option = this._console.ChooseSortBy();
+            Enums.Order order = this._console.ChooseOrderBy();
+
+            switch (option)
+            {
+                case Enums.SortBy.Amount:
+                    IReadOnlyList<TransactionDto> sortedByAmount = this._service.SortByAmount(order);
+                    this._console.DisplayTransactionList(sortedByAmount);
+                    break;
+
+                case Enums.SortBy.Date:
+                    IReadOnlyList<TransactionDto> sortedByDate = this._service.SortByDate(order);
+                    this._console.DisplayTransactionList(sortedByDate);
+                    break;
+
+                case Enums.SortBy.TransactionId:
+                    IReadOnlyList<TransactionDto> sortedById = this._service.SortByTransactionId(order);
+                    this._console.DisplayTransactionList(sortedById);
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Selects a transaction type and displays the corresponding transaction-management options.
         /// </summary>
         public void ManageTransaction()
@@ -262,13 +363,13 @@ namespace ExpenseTracker.Controller
 
             if (this._currentType == TransactionType.Income)
             {
-                UpdateIncomeDto dto = this._console.EditIncome(transaction);
+                IncomeDto dto = this._console.EditIncome(transaction);
 
                 this._incomeService.Edit(transactionId, dto);
             }
             else
             {
-                UpdateExpenseDto dto = this._console.EditExpense(transaction);
+                ExpenseDto dto = this._console.EditExpense(transaction);
 
                 this._expenseService.Edit(transactionId, dto);
             }
@@ -299,6 +400,18 @@ namespace ExpenseTracker.Controller
                 this._service.Delete(transactionId);
                 this._console.DisplaySuccess("Deletion", $"{transactionId}");
             }
+        }
+
+        /// <summary>
+        /// Calculates and displays a summary of total income, total expenses, and the resulting balance.
+        /// </summary>
+        public void Summarize()
+        {
+            decimal totalIncome = this._incomeService.GetTotalIncome();
+            decimal totalExpense = this._expenseService.GetTotalExpense();
+            decimal balance = totalIncome - totalExpense;
+
+            this._console.DisplaySummary(totalIncome, totalExpense, balance);
         }
 
         /// <summary>

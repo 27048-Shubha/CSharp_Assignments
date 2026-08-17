@@ -6,15 +6,15 @@
     /// <summary>
     /// Provides in-memory storage and management operations for expense transactions.
     /// </summary>
-    internal class ExpenseRepository : ITransactionRepository
+    internal class InMemoryExpense : ITransactionRepository
     {
         private static decimal _transactionCount = 0;
         private List<Expense> _expenseDetails;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExpenseRepository"/> class.
+        /// Initializes a new instance of the <see cref="InMemoryExpense"/> class.
         /// </summary>
-        internal ExpenseRepository()
+        internal InMemoryExpense()
         {
             this._expenseDetails = new List<Expense>();
         }

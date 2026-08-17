@@ -1,5 +1,6 @@
 ﻿namespace ExpenseTracker.Services
 {
+    using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
     using ExpenseTracker.Models.DTOs;
     using ExpenseTracker.Repository;
@@ -7,15 +8,15 @@
     /// <summary>
     /// rovides business operations for income transactions.
     /// </summary>
-    internal class IncomeService : ITransactionService, ITransactionUpdateService<UpdateIncomeDto>
+    internal class IncomeService : ITransactionService, ITransactionUpdateService<IncomeDto>
     {
-        private IncomeRepository _repository;
+        private InMemoryIncome _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IncomeService"/> class.
         /// </summary>
         /// <param name="incomeRepository">The repository used to store and retrieve income transactions.</param>
-        public IncomeService(IncomeRepository incomeRepository)
+        public IncomeService(InMemoryIncome incomeRepository)
         {
             this._repository = incomeRepository;
         }
@@ -38,6 +39,27 @@
                 Amount = income.Amount,
                 Date = income.Date,
                 CategoryOrSource = income.Source.ToString(),
+            };
+        }
+
+        /// <summary>
+        /// Converts an <see cref="Income"/> model into a
+        /// <see cref="TransactionDto"/> for display.
+        /// </summary>
+        /// <param name="income">
+        /// The income transaction to convert.
+        /// </param>
+        /// <returns>
+        /// A DTO containing the income identifier, amount, date, and source.
+        /// </returns>
+        public static IncomeDto MapToIncomeDto(Income income)
+        {
+            return new IncomeDto
+            {
+                TransactionId = income.TransactionId,
+                Amount = income.Amount,
+                Date = income.Date,
+                Source = (Enums.IncomeSource)income.Source,
             };
         }
 
@@ -66,7 +88,7 @@
         /// Thrown when the amount is zero or negative, or when the date is in
         /// the future.
         /// </exception>
-        public static void Validate(UpdateIncomeDto dto)
+        public static void Validate(IncomeDto dto)
         {
             ValidateAmountAndDate(dto.Amount, dto.Date);
         }
@@ -77,7 +99,16 @@
         /// <returns> A string identifier prefixed with the letter I.</returns>
         public static string GetTransactionId()
         {
-            return IncomeRepository.GetTransactionId();
+            return InMemoryIncome.GetTransactionId();
+        }
+
+        /// <summary>
+        /// Sorts the transactions by date in ascending or descending order.
+        /// </summary>
+        /// <returns>Returns the total income amount.</returns>
+        public decimal GetTotalIncome()
+        {
+            return this.GetAllIncome().Sum(income => income.Amount);
         }
 
         /// <summary>
@@ -120,21 +151,12 @@
         }
 
         /// <summary>
-        ///  Retrieves all income transactions.
-        /// </summary>
-        /// <returns> A read-only list containing the income transactions.</returns>
-        public IReadOnlyList<TransactionDto> GetAll()
-        {
-            return this._repository.GetAll().Select(MapToDto).ToList();
-        }
-
-        /// <summary>
         /// Updates an existing income transaction.
         /// </summary>
         /// <param name="transactionId">Transaction Id of the transaction to be edited.</param>
         /// <param name="dto">Dto for Updation of Income</param>
         /// <exception cref="InvalidOperationException">Raises when income transaction is not found.</exception>
-        public void Edit(string transactionId, UpdateIncomeDto dto)
+        public void Edit(string transactionId, IncomeDto dto)
         {
             Validate(dto);
             if (!this.TryGetIncome(transactionId, out Income? income))
@@ -166,6 +188,21 @@
         }
 
         /// <summary>
+        /// Retrieves an income transaction using its transaction identifier.
+        /// </summary>
+        /// <param name="transactionId">The display identifier of the transaction.</param>
+        /// <returns>The matching income transaction if found; otherwise, null.</returns>
+        public IncomeDto? GetIncome(string transactionId)
+        {
+            if (!this.TryGetIncome(transactionId, out Income? income))
+            {
+                return null;
+            }
+
+            return MapToIncomeDto(income);
+        }
+
+        /// <summary>
         /// Deletes an income transaction using the transaction identifier.
         /// </summary>
         /// <param name="transactionId">The display identifier of the transaction to delete.</param>
@@ -183,6 +220,103 @@
         {
             Guid id = this._repository.GetId(transaction.TransactionId);
             this._repository.Delete(id);
+        }
+
+        /// <summary>
+        ///  Retrieves all income transactions.
+        /// </summary>
+        /// <returns> A read-only list containing the income transactions.</returns>
+        public IReadOnlyList<TransactionDto> GetAll()
+        {
+            return this._repository.GetAll().Select(MapToDto).ToList();
+        }
+
+        /// <summary>
+        ///  Retrieves all income transactions.
+        /// </summary>
+        /// <returns> A read-only list containing the income transactions.</returns>
+        public IReadOnlyList<IncomeDto> GetAllIncome()
+        {
+            return this._repository.GetAll().Select(MapToIncomeDto).ToList();
+        }
+
+        /// <summary>
+        /// Returns transaction list based on the income source.
+        /// </summary>
+        /// <param name="id">Id of the transaction to be found</param>
+        /// <returns>List of transactions matching the id</returns>
+        public List<IncomeDto> GetTransactionById(string id)
+        {
+            List<IncomeDto> transactions = this.GetAllIncome().Where(transaction => transaction.TransactionId == id).ToList();
+            return transactions;
+        }
+
+        /// <summary>
+        /// Returns transaction list based on the income source.
+        /// </summary>
+        /// <param name="incomeSource">The income source to filter by</param>
+        /// <returns>List of transactions matching the income source</returns>
+        public List<IncomeDto> GetTransactionByIncomeSource(Enums.IncomeSource incomeSource)
+        {
+            List<IncomeDto> transactions = this.GetAllIncome().Where(transaction => transaction.Source == incomeSource).ToList();
+            return transactions;
+        }
+
+        /// <summary>
+        /// Sorts the transactions by amount in ascending or descending order.
+        /// </summary>
+        /// <param name="order">Indicates whether to sort in ascending order.</param>
+        /// <returns>The sorted list of transactions.</returns>
+        public IReadOnlyList<TransactionDto> SortByDate(Enums.Order order)
+        {
+            if (order == Enums.Order.Ascending)
+            {
+                IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderBy(transaction => transaction.Date).ToList();
+                return transactionDtos;
+            }
+            else
+            {
+                IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderByDescending(transaction => transaction.Date).ToList();
+                return transactionDtos;
+            }
+        }
+
+        /// <summary>
+        /// Sorts the transactions by amount in ascending or descending order.
+        /// </summary>
+        /// <param name="order">Indicates whether to sort in ascending order.</param>
+        /// <returns>The sorted list of transactions.</returns>
+        public IReadOnlyList<TransactionDto> SortByAmount(Enums.Order order)
+        {
+            if (order == Enums.Order.Ascending)
+            {
+                IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderBy(transaction => transaction.Amount).ToList();
+                return transactionDtos;
+            }
+            else
+            {
+                IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderByDescending(transaction => transaction.Amount).ToList();
+                return transactionDtos;
+            }
+        }
+
+        /// <summary>
+        /// Sorts the transactions by date in ascending or descending order.
+        /// </summary>
+        /// <param name="order">Indicates whether to sort in ascending order.</param>
+        /// <returns>The sorted list of transactions.</returns>
+        public IReadOnlyList<TransactionDto> SortByTransactionId(Enums.Order order)
+        {
+            if (order == Enums.Order.Ascending)
+            {
+                IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderBy(transaction => transaction.TransactionId).ToList();
+                return transactionDtos;
+            }
+            else
+            {
+                IReadOnlyList<TransactionDto> transactionDtos = this.GetAll().OrderByDescending(transaction => transaction.TransactionId).ToList();
+                return transactionDtos;
+            }
         }
 
         /// <summary>
@@ -204,7 +338,7 @@
             Guid id = this._repository.GetId(transactionId);
             income = this._repository.Get(id);
 
-            return income != null;
+            return income is not null;
         }
     }
 }
