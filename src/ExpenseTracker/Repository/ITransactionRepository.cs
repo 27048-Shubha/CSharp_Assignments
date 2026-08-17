@@ -20,7 +20,7 @@ namespace ExpenseTracker.Repository
         /// </summary>
         /// <param name="id">The unique identifier of the transaction</param>
         /// <returns>The matching transaction if found; otherwise, null.</returns>
-        public TTransaction Get(Guid id);
+        public TTransaction? Get(Guid id);
 
         /// <summary>
         /// Retrieves a transaction using its unique identifier.

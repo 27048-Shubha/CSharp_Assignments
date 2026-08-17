@@ -3,6 +3,8 @@
     using ExpenseTracker.Enums;
     using ExpenseTracker.Models.DTOs;
     using ExpenseTracker.Validator;
+    using Spectre.Console;
+    using ChartColor = Spectre.Console.Color;
 
     /// <summary>
     /// Manages console operations of the application.
@@ -354,6 +356,23 @@
             Console.WriteLine($"Total Income: {totalIncome}");
             Console.WriteLine($"Total Expense: {totalExpense}");
             Console.WriteLine($"Balance: {balance}");
+        }
+
+        /// <summary>
+        /// Displays chart to the console.
+        /// </summary>
+        /// <param name="totalIncome">Total income generated.</param>
+        /// <param name="totalExpense">Total expense generated.</param>
+        public void DisplayChart(decimal totalIncome, decimal totalExpense)
+        {
+            var chart = new BreakdownChart().Width(60).AddItem("Income", (double)totalIncome, ChartColor.Green).AddItem("Expense", (double)totalExpense, ChartColor.Red);
+
+            AnsiConsole.Write(chart);
+
+            AnsiConsole.MarkupLine(
+                    $"Balance:[/] {totalIncome - totalExpense:C}");
+
+            Thread.Sleep(1000); // 1 min delay to show the chart to the users.
         }
 
         /// <summary>

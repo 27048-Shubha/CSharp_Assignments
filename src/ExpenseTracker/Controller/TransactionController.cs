@@ -278,6 +278,7 @@ namespace ExpenseTracker.Controller
                     this._console.DisplayTransactionList(sortedById);
                     break;
             }
+
             this.View();
         }
 
@@ -402,6 +403,7 @@ namespace ExpenseTracker.Controller
             decimal balance = totalIncome - totalExpense;
 
             this._console.DisplaySummary(totalIncome, totalExpense, balance);
+            this._console.DisplayChart(totalIncome, totalExpense);
         }
 
         /// <summary>

@@ -178,7 +178,7 @@
         /// <returns>The matching income transaction if found; otherwise, null.</returns>
         public TransactionDto? Get(string transactionId)
         {
-            if (!this.TryGetIncome(transactionId, out Income? income))
+            if (!this.TryGetIncome(transactionId, out Income? income) || income is null)
             {
                 return null;
             }

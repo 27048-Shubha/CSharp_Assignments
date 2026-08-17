@@ -34,10 +34,7 @@
         /// Gets or Sets the transaction display identifier.
         /// </summary>
         /// <value>An identifier generated for display and user reference.</value>
-        public string TransactionId
-        {
-            get; set;
-        }
+        public string TransactionId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the transaction amount.
@@ -52,9 +49,6 @@
         /// Gets or sets the date of the transaction.
         /// </summary>
         /// <value>The transaction date.</value>
-        public string Date
-        {
-            get; set;
-        }
+        public string Date { get; set; } = string.Empty;
     }
 }

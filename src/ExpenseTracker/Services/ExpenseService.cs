@@ -186,7 +186,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// </returns>
     public TransactionDto? Get(string transactionId)
     {
-        if (!this.TryGetExpense(transactionId, out Expense? expense))
+        if (!this.TryGetExpense(transactionId, out Expense? expense) || expense is null)
         {
             return null;
         }

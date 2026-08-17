@@ -1,7 +1,8 @@
 ﻿namespace ExpenseTracker.Repository
 {
-    using ExpenseTracker.Models;
     using System.Text.Json;
+    using ExpenseTracker.Models;
+
     /// <summary>
     /// Provides repository operations for managing income transactions.
     /// </summary>
@@ -9,7 +10,6 @@
     {
         private static string filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\Data\Transactions.json"));
         private static decimal _transactionCount = 0;
-        private List<JsonTransaction> _transactions;
 
         /// <summary>
         /// Generates a unique transaction identifier for an income transaction.
@@ -30,7 +30,7 @@
         public IReadOnlyList<Income> GetAll()
         {
             var jsonString = File.ReadAllText(filePath);
-            IReadOnlyList<JsonTransaction> loadedTransactions = ReadTransactions();
+            IReadOnlyList<JsonTransaction> loadedTransactions = this.ReadTransactions();
             List<Income> incomeList = new List<Income>();
 
             foreach (var item in loadedTransactions)
@@ -88,7 +88,7 @@
                     nameof(transaction));
             }
 
-            RewriteTransaction(id, new JsonTransaction
+            this.RewriteTransaction(id, new JsonTransaction
             {
                 Id = income.Id,
                 TransactionId = income.TransactionId,
@@ -96,7 +96,7 @@
                 Date = income.Date,
                 TransactionType = nameof(Income),
                 Source = income.Source,
-                TotalIncome = income.TotalIncome
+                TotalIncome = income.TotalIncome,
             });
         }
 
@@ -108,7 +108,8 @@
         public Income? Get(Guid id)
         {
             var jsonString = File.ReadAllText(filePath);
-            List<JsonTransaction> loadedExpense = JsonSerializer.Deserialize<List<JsonTransaction>>(jsonString);
+            List<JsonTransaction> loadedExpense =
+                JsonSerializer.Deserialize<List<JsonTransaction>>(jsonString) ?? new List<JsonTransaction>();
 
             foreach (var item in loadedExpense)
             {
@@ -133,7 +134,7 @@
         public Guid GetId(string transactionId)
         {
             var jsonString = File.ReadAllText(filePath);
-            List<JsonTransaction> loadedExpense = JsonSerializer.Deserialize<List<JsonTransaction>>(jsonString);
+            List<JsonTransaction>? loadedExpense = JsonSerializer.Deserialize<List<JsonTransaction>>(jsonString);
 
             foreach (var item in loadedExpense)
             {
@@ -193,6 +194,7 @@
                     ? new List<JsonTransaction>()
                     : new List<JsonTransaction> { transaction };
             }
+
             return new List<JsonTransaction>();
         }
 
@@ -203,7 +205,7 @@
         /// <param name="updatedTransaction">Content to be rewritten with.</param>
         private void RewriteTransaction(Guid id, JsonTransaction updatedTransaction)
         {
-            var transactions = ReadTransactions();
+            var transactions = this.ReadTransactions();
 
             var index = transactions.FindIndex(item => item.Id == id);
 
