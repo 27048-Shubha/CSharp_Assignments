@@ -1,4 +1,4 @@
-﻿namespace ExceptionHandling.Task3
+﻿namespace ExceptionHandling.Task5
 {
     /// <summary>
     /// Custom exception to handle invalid user input.

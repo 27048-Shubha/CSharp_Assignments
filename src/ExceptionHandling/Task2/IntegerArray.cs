@@ -1,4 +1,4 @@
-﻿namespace ExceptionHandling.Task3
+﻿namespace ExceptionHandling.Task2
 {
     using System;
 
@@ -7,7 +7,7 @@
     /// </summary>
     public class IntegerArray
     {
-        private int[] _array;
+        private int[] _nums;
         private int _size;
 
         /// <summary>
@@ -15,17 +15,17 @@
         /// </summary>
         internal IntegerArray()
         {
-            this._array = new int[5];
+            this._nums = new int[5];
             this._size = 5;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegerArray"/> class.
         /// </summary>
-        /// <param name="size">Size of the integer array.</param>
+        /// <param name="size">Size of the array.</param>
         internal IntegerArray(int size)
         {
-            this._array = new int[size];
+            this._nums = new int[size];
             this._size = size;
         }
 
@@ -37,14 +37,7 @@
             for (int i = 0; i < this._size; i++)
             {
                 Console.WriteLine($"Enter array element {i}: ");
-                if (int.TryParse(Console.ReadLine(), out int element))
-                {
-                    this._array[i] = element;
-                }
-                else
-                {
-                    throw new InvalidUserInputException("Invalid input: User input must be an integer.");
-                }
+                this._nums[i] = int.Parse(Console.ReadLine());
             }
         }
 
@@ -59,7 +52,7 @@
             int index = int.Parse(Console.ReadLine());
             try
             {
-                return this._array[index];
+                return this._nums[index];
             }
             catch
             {
@@ -68,22 +61,18 @@
         }
 
         /// <summary>
-        /// Gets user input and calls division operation.
+        /// Gets user input and calls array operation.
         /// </summary>
         public void Run()
         {
             Console.WriteLine("Enter size of the array: ");
-            int size = int.Parse(Console.ReadLine());
+            int arraySize = int.Parse(Console.ReadLine());
 
-            IntegerArray array = new IntegerArray(size);
+            IntegerArray array = new IntegerArray(arraySize);
+            array.InsertElements();
             try
             {
-                array.InsertElements();
                 array.FetchElement();
-            }
-            catch (InvalidUserInputException exception)
-            {
-                Console.WriteLine(exception.Message);
             }
             catch (IndexOutOfRangeException exception)
             {

@@ -1,4 +1,6 @@
-﻿namespace ExceptionHandling.Task3
+﻿using ExceptionHandling.Task4;
+
+namespace ExceptionHandling.Task4
 {
     using System;
 
@@ -12,7 +14,8 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegerArray"/> class.
-        /// </summary>
+        /// <summary>
+        /// <param name="size">Size of the array.</param>
         internal IntegerArray()
         {
             this._array = new int[5];
@@ -22,7 +25,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegerArray"/> class.
         /// </summary>
-        /// <param name="size">Size of the integer array.</param>
+        /// <param name="size">Size of the array.</param>
         internal IntegerArray(int size)
         {
             this._array = new int[size];
@@ -63,7 +66,7 @@
             }
             catch
             {
-                throw new IndexOutOfRangeException($"Valid index range: {0} to {this._size-1}");
+                throw new IndexOutOfRangeException("Valid index range: {0} to {size}}");
             }
         }
 
@@ -74,12 +77,10 @@
         {
             Console.WriteLine("Enter size of the array: ");
             int size = int.Parse(Console.ReadLine());
-
-            IntegerArray array = new IntegerArray(size);
             try
             {
-                array.InsertElements();
-                array.FetchElement();
+                this.InsertElements();
+                this.FetchElement();
             }
             catch (InvalidUserInputException exception)
             {
@@ -87,7 +88,7 @@
             }
             catch (IndexOutOfRangeException exception)
             {
-                Console.WriteLine($"Invalid index\n{exception.Message}");
+                Console.WriteLine($"{exception.Message}");
             }
         }
     }
