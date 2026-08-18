@@ -15,11 +15,6 @@
         Manage,
 
         /// <summary>
-        /// Generates a financial summary.
-        /// </summary>
-        Summary,
-
-        /// <summary>
         /// Exits the application.
         /// </summary>
         Exit,

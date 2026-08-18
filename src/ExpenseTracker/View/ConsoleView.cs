@@ -19,8 +19,7 @@
                 "Enter\n" +
                 "1. Add Transaction\n" +
                 "2. Manage Transaction\n" +
-                "3. Summary\n" +
-                "4. Exit");
+                "3. Exit");
         }
 
         /// <summary>
@@ -202,7 +201,7 @@
             for (int attempt = 1; attempt <= 3; attempt++)
             {
                 input = Console.ReadLine() ?? string.Empty;
-                if (!isEditMode && string.IsNullOrEmpty(input))
+                if (isEditMode && string.IsNullOrEmpty(input))
                 {
                     return null;
                 }

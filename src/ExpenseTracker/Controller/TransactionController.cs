@@ -61,10 +61,6 @@ namespace ExpenseTracker.Controller
                         this.ManageTransaction();
                         break;
 
-                    case Enums.MainMenu.Summary:
-                        // this.Summary();
-                        break;
-
                     case Enums.MainMenu.Exit:
                         this._console.DisplayExit();
                         isRunning = false;
