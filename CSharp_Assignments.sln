@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandling", "src\ExceptionHandling\ExceptionHandling.csproj", "{E57011AB-966E-4194-96D4-84EB95B685C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +31,18 @@ Global
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E57011AB-966E-4194-96D4-84EB95B685C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E57011AB-966E-4194-96D4-84EB95B685C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E57011AB-966E-4194-96D4-84EB95B685C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E57011AB-966E-4194-96D4-84EB95B685C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E57011AB-966E-4194-96D4-84EB95B685C0} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4C30E87-39A0-4182-9710-F6D3E7AC3A6D}
 	EndGlobalSection
 EndGlobal
