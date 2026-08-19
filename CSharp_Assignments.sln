@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWashManagement", "src\CarWashManagement\CarWashManagement.csproj", "{3B9C82D1-E76F-4C31-9665-823ACA62CECD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +31,18 @@ Global
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9C82D1-E76F-4C31-9665-823ACA62CECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9C82D1-E76F-4C31-9665-823ACA62CECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9C82D1-E76F-4C31-9665-823ACA62CECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9C82D1-E76F-4C31-9665-823ACA62CECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B9C82D1-E76F-4C31-9665-823ACA62CECD} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A336B77-3B0D-4504-86A5-8F50D3DD77AF}
 	EndGlobalSection
 EndGlobal
