@@ -1,37 +1,37 @@
 ﻿namespace Assignment2.Models.Task1
 {
     /// <summary>
-    /// Handles area calculation of the Rectangle inherited from the Shape.
+    /// Handles _area calculation of the Rectangle inherited from the Shape.
     /// </summary>
     public class Rectangle : Shapes
     {
-        private double length;
-        private double breadth;
+        private double _length;
+        private double _breadth;
 
         /// <summary>
-        /// Gets or sets length of the rectangle.
+        /// Gets or sets _length of the rectangle.
         /// </summary>
-        /// <value> The length of the rectangle. </value>
+        /// <value> The _length of the rectangle. </value>
         public double Length
         {
-            get { return this.length; }
-            set { this.length = value; }
+            get { return this._length; }
+            set { this._length = value; }
         }
 
         /// <summary>
-        /// Gets or sets breadth of the rectangle.
+        /// Gets or sets _breadth of the rectangle.
         /// </summary>
-        /// <value> The breadth of the rectangle. </value>
+        /// <value> The _breadth of the rectangle. </value>
         public double Breadth
         {
-            get { return this.breadth; }
-            set { this.breadth = value; }
+            get { return this._breadth; }
+            set { this._breadth = value; }
         }
 
         /// <summary>
-        /// Calculates area of the rectangle.
+        /// Calculates _area of the rectangle.
         /// </summary>
-        /// <returns> The calculated area of the rectangle. </returns>
+        /// <returns> The calculated _area of the rectangle. </returns>
         public override double CalculateArea()
         {
             return this.Length * this.Breadth;

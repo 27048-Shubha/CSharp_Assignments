@@ -10,9 +10,9 @@
         /// <summary>
         /// Intantiates and initializes object values of rectangle.
         /// </summary>
-        /// <param name="color">The color of the rectangle. </param>
-        /// <param name="length">The length of the rectangle. </param>
-        /// <param name="breadth">The breadth of the rectangle. </param>
+        /// <param name="color">The _color of the rectangle. </param>
+        /// <param name="length">The _length of the rectangle. </param>
+        /// <param name="breadth">The _breadth of the rectangle. </param>
         /// <returns>The details of rectangle created. </returns>
         public string AddRectangle(string color, double length, double breadth)
         {
@@ -27,8 +27,8 @@
         /// <summary>
         /// Intantiates and initializes object values of circle.
         /// </summary>
-        /// <param name="color">The color of the circle. </param>
-        /// <param name="radius">The radius of the circle. </param>
+        /// <param name="color">The _color of the circle. </param>
+        /// <param name="radius">The _radius of the circle. </param>
         /// <returns>The details of circle created. </returns>
         public string AddCircle(string color, double radius)
         {

@@ -9,7 +9,7 @@
         /// Implements abstract method to withdraw from savings bank account.
         /// </summary>
         /// <param name="amount">The amount to be withdrawn.</param>
-        /// <returns>True on withdrawal success, False when balance falls beyond minimum balance.</returns>
+        /// <returns>True on withdrawal success, False when _balance falls beyond minimum _balance.</returns>
         public override bool Withdraw(decimal amount)
         {
             if (this.Balance - amount < 100)

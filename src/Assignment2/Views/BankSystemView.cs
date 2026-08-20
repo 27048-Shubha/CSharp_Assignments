@@ -1,7 +1,7 @@
 ﻿namespace Assignment2.Views
 {
     /// <summary>
-    /// Manages console operations of the bank hierarchy system.
+    /// Manages _console operations of the bank hierarchy system.
     /// </summary>
     public class BankSystemView : MainView
     {
@@ -56,9 +56,9 @@
         }
 
         /// <summary>
-        /// Display current balance amount in the bank account object.
+        /// Display current _balance amount in the bank account object.
         /// </summary>
-        /// <param name="balance">current balance amount in the bank account object.</param>
+        /// <param name="balance">current _balance amount in the bank account object.</param>
         public void DisplayBalance(decimal balance)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -107,7 +107,7 @@
         }
 
         /// <summary>
-        /// Displays minimum balance warning message.
+        /// Displays minimum _balance warning message.
         /// </summary>
         public void DisplayMinBalanceWarning()
         {
@@ -117,7 +117,7 @@
         }
 
         /// <summary>
-        /// Displays initial balance information.
+        /// Displays initial _balance information.
         /// </summary>
         public void DisplayMinBalanceInfo()
         {

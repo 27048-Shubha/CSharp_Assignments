@@ -9,41 +9,40 @@
     /// </summary>
     public class BankSystemService
     {
-        private BankSystemRepo repo;
+        private BankSystemRepo _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
-        /// <param name="validate"> The object to handle validation operations. </param>
         public BankSystemService(BankSystemRepo repo)
         {
-            this.repo = repo;
+            this._repo = repo;
         }
 
         /// <summary>
-        /// Calls repo for savings account creation.
+        /// Calls _repo for savings account creation.
         /// </summary>
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateSavingsAccount()
         {
-            return this.repo.CreateSavingsAccount();
+            return this._repo.CreateSavingsAccount();
         }
 
         /// <summary>
-        /// Calls repo for savings account creation.
+        /// Calls _repo for savings account creation.
         /// </summary>
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateCheckingAccount()
         {
-            return this.repo.CreateCheckingAccount();
+            return this._repo.CreateCheckingAccount();
         }
 
         /// <summary>
-        /// Gets balance amount in the current account.
+        /// Gets _balance amount in the current account.
         /// </summary>
-        /// <param name="account">The account's balance to be checked.</param>
-        /// <returns>The balance of the current account.</returns>
+        /// <param name="account">The account's _balance to be checked.</param>
+        /// <returns>The _balance of the current account.</returns>
         public decimal CheckBalance(BankAccount account)
         {
             return account.Balance;

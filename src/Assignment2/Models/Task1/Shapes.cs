@@ -3,35 +3,35 @@
     using System;
 
     /// <summary>
-    /// Abstract class of shapes containing color, area calculation, print method.
+    /// Abstract class of shapes containing _color, _area calculation, print method.
     /// </summary>
     public abstract class Shapes
     {
-        private string? color;
-        private double area;
+        private string? _color;
+        private double _area;
 
         /// <summary>
-        /// Gets or sets color of the shape.
+        /// Gets or sets _color of the shape.
         /// </summary>
-        /// <value> The name of the color entered by the user. </value>
+        /// <value> The name of the _color entered by the user. </value>
         public string? Color
         {
-            get { return this.color; }
-            set { this.color = value; }
+            get { return this._color; }
+            set { this._color = value; }
         }
 
         /// <summary>
-        /// Gets or sets area of the shape.
+        /// Gets or sets _area of the shape.
         /// </summary>
-        /// <value> The name of the area entered by the user. </value>
+        /// <value> The name of the _area entered by the user. </value>
         public double Area
         {
-            get { return this.area; }
-            set { this.area = value; }
+            get { return this._area; }
+            set { this._area = value; }
         }
 
         /// <summary>
-        /// Abstract method to calculate area.
+        /// Abstract method to calculate _area.
         /// </summary>
         /// <returns> Area of the shape. </returns>
         public abstract double CalculateArea();

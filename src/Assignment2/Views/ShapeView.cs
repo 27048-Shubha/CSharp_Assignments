@@ -1,7 +1,7 @@
 ﻿namespace Assignment2.Views
 {
     /// <summary>
-    /// Hanldes console operations of shape system.
+    /// Hanldes _console operations of shape system.
     /// </summary>
     public class ShapeView : MainView
     {
@@ -21,9 +21,9 @@
         }
 
         /// <summary>
-        /// Gets color of the shape.
+        /// Gets _color of the shape.
         /// </summary>
-        /// <returns> The color as input from user. </returns>
+        /// <returns> The _color as input from user. </returns>
         public string GetShapeColor()
         {
             Console.WriteLine("Enter color: ");
@@ -31,9 +31,9 @@
         }
 
         /// <summary>
-        /// Gets radius of the circle.
+        /// Gets _radius of the circle.
         /// </summary>
-        /// <returns> The radius as input from user. </returns>
+        /// <returns> The _radius as input from user. </returns>
         public string GetRadius()
         {
             Console.WriteLine("Enter radius: ");
@@ -41,9 +41,9 @@
         }
 
         /// <summary>
-        /// Gets length of the rectangle.
+        /// Gets _length of the rectangle.
         /// </summary>
-        /// <returns> The length as input from user. </returns>
+        /// <returns> The _length as input from user. </returns>
         public string GetLength()
         {
             Console.WriteLine("Enter length: ");
@@ -51,9 +51,9 @@
         }
 
         /// <summary>
-        /// Gets breadth of the rectangle.
+        /// Gets _breadth of the rectangle.
         /// </summary>
-        /// <returns> The breadth as input from user. </returns>
+        /// <returns> The _breadth as input from user. </returns>
         public string GetBreadth()
         {
             Console.WriteLine("Enter breadth: ");

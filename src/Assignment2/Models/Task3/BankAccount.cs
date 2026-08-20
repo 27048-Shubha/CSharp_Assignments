@@ -1,12 +1,12 @@
 ﻿namespace Assignment2.Models.Task3
 {
     /// <summary>
-    /// Abstract class that manages accountNumber, balance, withdraw and deposit.
+    /// Abstract class that manages _accountNumber, _balance, withdraw and deposit.
     /// </summary>
     public abstract class BankAccount
     {
-        private string? accountNumber;
-        private decimal balance;
+        private string? _accountNumber;
+        private decimal _balance;
 
         /// <summary>
         /// Gets or sets account number.
@@ -14,24 +14,24 @@
         /// <value>The account number of the bank account.</value>
         public string? AccountNumber
         {
-            get { return this.accountNumber; }
-            set { this.accountNumber = value; }
+            get { return this._accountNumber; }
+            set { this._accountNumber = value; }
         }
 
         /// <summary>
         /// Gets or sets account number.
         /// </summary>
-        /// <value>The balance amount of the bank account.</value>
+        /// <value>The _balance amount of the bank account.</value>
         public decimal Balance
         {
-            get { return this.balance; }
-            set { this.balance = value; }
+            get { return this._balance; }
+            set { this._balance = value; }
         }
 
         /// <summary>
         /// Adds amount to the existing Balance.
         /// </summary>
-        /// <param name="amount">The amount to be added to the balance.</param>
+        /// <param name="amount">The amount to be added to the _balance.</param>
         public void Deposit(decimal amount)
         {
             this.Balance += amount;
@@ -41,7 +41,7 @@
         /// Abstract method to withdraw from bank account.
         /// </summary>
         /// <param name="amount">The amount to be withdrawn.</param>
-        /// <returns>True on withdrawal success, False when balance falls beyond minimum balance.</returns>
+        /// <returns>True on withdrawal success, False when _balance falls beyond minimum _balance.</returns>
         public abstract bool Withdraw(decimal amount);
     }
 }
