@@ -67,5 +67,5 @@ Contains custom exceptions.
 
 Provides utility methods.
 
-- **ConsoleColorManager.cs** – Handles colored font console output.
+- **cs** – Handles colored font console output.
 - **TypeValidation.cs** – Validates user input types.

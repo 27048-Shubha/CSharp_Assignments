@@ -3,7 +3,7 @@
     /// <summary>
     /// Manages Validations for Input Data Type.
     /// </summary>
-    public static class TypeValidation
+    public static class TypeValidator
     {
         /// <summary>
         /// Checks whether the input is decimal or not.
@@ -13,14 +13,7 @@
         /// <returns>True if parsing is sucessfull, else False.</returns>
         public static bool IsValidDecimal(string? price, out decimal priceDecimal)
         {
-            if (decimal.TryParse(price, out priceDecimal))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+             return decimal.TryParse(price, out priceDecimal);
         }
 
         /// <summary>
@@ -31,14 +24,7 @@
         /// <returns>True if parsing is sucessfull, else False.</returns>
         public static bool IsValidInt(string stock, out int stockInt)
         {
-            if (int.TryParse(stock, out stockInt))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return int.TryParse(stock, out stockInt);
         }
 
         /// <summary>
@@ -46,7 +32,7 @@
         /// </summary>
         /// <param name="str">String to be checked.</param>
         /// <returns>True if Not Empty or Null else False.</returns>
-        public static bool IsNotNull(string str)
+        public static bool HasValue(string? str)
         {
             return !string.IsNullOrEmpty(str);
         }

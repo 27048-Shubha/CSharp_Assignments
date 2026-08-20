@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// User Defined Exception when Name Not is not found in product repo extended from Exception.
+    /// User Defined Exception when Name Not is not found in _products repo extended from Exception.
     /// </summary>
     public class EmptyInventoryException : Exception
     {
