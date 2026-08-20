@@ -19,12 +19,21 @@
             this._users = new List<User>();
         }
 
+        /// <summary>
+        /// Gets data from json file.
+        /// </summary>
+        /// <param name="userEmail">Email id of the user whose data to be fetched.</param>
+        /// <returns>User data</returns>
         public User GetUserData(string userEmail)
         {
             this._users = this.ReadFromJson();
             return _users.Find(user => user.EmailId == userEmail);
         }
 
+        /// <summary>
+        /// Adds new user to the json file.
+        /// </summary>
+        /// <param name="newUserData">New user to be added to the json file.</param>
         public void Add(User newUserData)
         {
             List<User> existingUsers = ReadFromJson();
@@ -32,6 +41,11 @@
             File.WriteAllText(_filePath, JsonSerializer.Serialize(this._users));
         }
 
+        /// <summary>
+        /// Fetches password from the json file.
+        /// </summary>
+        /// <param name="inputEmail">Email id of the user whose password to be fetched.</param>
+        /// <returns>Password of the respectived email id.</returns>
         public string FetchPassword(string inputEmail)
         {
             List<User> existingUsers = ReadFromJson();
@@ -46,6 +60,10 @@
             }
         }
 
+        /// <summary>
+        /// Returns list of users from json file.
+        /// </summary>
+        /// <returns>List of users stored in json file.</returns>
         public List<User> ReadFromJson()
         {
             string jsonData = File.ReadAllText(_filePath);

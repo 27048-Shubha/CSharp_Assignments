@@ -1,25 +1,30 @@
-﻿using CarWashManagement.Models;
-using CarWashManagement.Service;
+﻿using CarWashManagement.Service;
 using CarWashManagement.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarWashManagement.Controller
 {
+    /// <summary>
+    /// Controls between user repository and console operations.
+    /// </summary>
     public class UserController
     {
         private readonly AuthService _authService = null;
         private readonly ConsoleView _console = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// </summary>
+        /// <param name="console">Object to handle console operation.</param>
+        /// <param name="authService">Object to control authentication.</param>
         internal UserController(ConsoleView console, AuthService authService)
         {
             this._authService = authService;
             this._console = console;
         }
 
+        /// <summary>
+        /// Manages registration operation.
+        /// </summary>
         public void Register()
         {
             string firstName = _console.GetName("First");
@@ -37,6 +42,9 @@ namespace CarWashManagement.Controller
             _authService.Register(firstName, lastName, emailId, phoneNumber, password);
         }
 
+        /// <summary>
+        /// Manages login operation.
+        /// </summary>
         public void Login()
         {
             string emailId = _console.GetEmailId();
@@ -51,6 +59,9 @@ namespace CarWashManagement.Controller
             }
         }
 
+        /// <summary>
+        /// Handles logout operation.
+        /// </summary>
         public void LogOut()
         {
             SessionManager.CurrentUser = null;
