@@ -1,25 +1,23 @@
 ﻿namespace Assignment2.Services
 {
     using Assignment2.Repository;
-    using Assignment2.Validations;
+    using Assignment2.Validators;
 
     /// <summary>
     /// Handles business logic validation and sends call to repository after validation.
     /// </summary>
     public class EmployeeService
     {
-        private InputValidation _validate;
-        private EmployeeRepository _repo;
+        private EmployeeRepository repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
         /// <param name="validate"> The object to handle validation operations. </param>
-        public EmployeeService(EmployeeRepository repo, InputValidation validate)
+        public EmployeeService(EmployeeRepository repo)
         {
-            this._repo = repo;
-            this._validate = validate;
+            this.repo = repo;
         }
 
         /// <summary>
@@ -30,12 +28,12 @@
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddManager(string name, string salary)
         {
-            if (this._validate.IsNumber(salary))
+            if (InputValidator.IsNumber(salary))
             {
                 decimal amount = Convert.ToDecimal(salary);
-                if (!this._validate.IsZero(amount) && !this._validate.IsNegative(amount))
+                if (!InputValidator.IsZero(amount) && !InputValidator.IsNegative(amount))
                 {
-                    return this._repo.AddManager(name, amount);
+                    return this.repo.AddManager(name, amount);
                 }
             }
 
@@ -50,12 +48,12 @@
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddDeveloper(string name, string salary)
         {
-            if (this._validate.IsNumber(salary))
+            if (InputValidator.IsNumber(salary))
             {
                 decimal amount = Convert.ToDecimal(salary);
-                if (!this._validate.IsZero(amount) && !this._validate.IsNegative(amount))
+                if (!InputValidator.IsZero(amount) && !InputValidator.IsNegative(amount))
                 {
-                    return this._repo.AddDeveloper(name, amount);
+                    return this.repo.AddDeveloper(name, amount);
                 }
             }
 

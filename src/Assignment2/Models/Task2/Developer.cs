@@ -5,7 +5,7 @@
     /// </summary>
     public class Developer : Employee
     {
-        private decimal _bonus;
+        private decimal bonus;
 
         /// <summary>
         /// Gets or sets bonus value of the developer.
@@ -15,12 +15,12 @@
         {
             get
             {
-                return this._bonus;
+                return this.bonus;
             }
 
             set
             {
-                this._bonus = value;
+                this.bonus = value;
             }
         }
 

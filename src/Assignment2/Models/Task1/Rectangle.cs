@@ -1,14 +1,12 @@
 ﻿namespace Assignment2.Models.Task1
 {
-    using System;
-
     /// <summary>
     /// Handles area calculation of the Rectangle inherited from the Shape.
     /// </summary>
     public class Rectangle : Shapes
     {
-        private double _length;
-        private double _breadth;
+        private double length;
+        private double breadth;
 
         /// <summary>
         /// Gets or sets length of the rectangle.
@@ -16,8 +14,8 @@
         /// <value> The length of the rectangle. </value>
         public double Length
         {
-            get { return this._length; }
-            set { this._length = value; }
+            get { return this.length; }
+            set { this.length = value; }
         }
 
         /// <summary>
@@ -26,8 +24,8 @@
         /// <value> The breadth of the rectangle. </value>
         public double Breadth
         {
-            get { return this._breadth; }
-            set { this._breadth = value; }
+            get { return this.breadth; }
+            set { this.breadth = value; }
         }
 
         /// <summary>

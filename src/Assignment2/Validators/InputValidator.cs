@@ -1,9 +1,9 @@
-﻿namespace Assignment2.Validations
+﻿namespace Assignment2.Validators
 {
     /// <summary>
     /// Manages input validation operation.
     /// </summary>
-    public class InputValidation
+    public static class InputValidator
     {
         /// <summary>
         /// Checks whether the input character is valid or not.
@@ -46,7 +46,7 @@
         /// </summary>
         /// <param name="num">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public bool IsZero(decimal num)
+        public static bool IsZero(decimal num)
         {
             return num == 0;
         }
@@ -56,7 +56,7 @@
         /// </summary>
         /// <param name="num">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public bool IsZero(double num)
+        public static bool IsZero(double num)
         {
             return num == 0;
         }
@@ -66,7 +66,7 @@
         /// </summary>
         /// <param name="num">The input to be validated. </param>
         /// <returns>True if given input is negative else false. </returns>
-        public bool IsNegative(decimal num)
+        public static bool IsNegative(decimal num)
         {
             return num < 0;
         }
@@ -76,7 +76,7 @@
         /// </summary>
         /// <param name="num">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public bool IsNegative(double num)
+        public static bool IsNegative(double num)
         {
             return num < 0;
         }
@@ -86,7 +86,7 @@
         /// </summary>
         /// <param name="input">The input to be validated. </param>
         /// <returns>True if given input is a string else false. </returns>
-        public bool IsString(string input)
+        public static bool IsString(string input)
         {
             if (input.Trim().Equals(string.Empty))
             {
@@ -101,7 +101,7 @@
         /// </summary>
         /// <param name="input">The input to be validated. </param>
         /// <returns>True if given input is a number else false. </returns>
-        public bool IsNumber(string input)
+        public static bool IsNumber(string input)
         {
             if (input.Trim().Equals(string.Empty))
             {

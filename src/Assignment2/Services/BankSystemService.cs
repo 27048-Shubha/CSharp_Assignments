@@ -2,25 +2,23 @@
 {
     using Assignment2.Models.Task3;
     using Assignment2.Repository;
-    using Assignment2.Validations;
+    using Assignment2.Validators;
 
     /// <summary>
     /// Handles business logic validation and sends call to repository after validation.
     /// </summary>
     public class BankSystemService
     {
-        private BankSystemRepo _repo;
-        private InputValidation _validate;
+        private BankSystemRepo repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
         /// <param name="validate"> The object to handle validation operations. </param>
-        public BankSystemService(BankSystemRepo repo, InputValidation validate)
+        public BankSystemService(BankSystemRepo repo)
         {
-            this._repo = repo;
-            this._validate = validate;
+            this.repo = repo;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateSavingsAccount()
         {
-            return this._repo.CreateSavingsAccount();
+            return this.repo.CreateSavingsAccount();
         }
 
         /// <summary>
@@ -38,7 +36,7 @@
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateCheckingAccount()
         {
-            return this._repo.CreateCheckingAccount();
+            return this.repo.CreateCheckingAccount();
         }
 
         /// <summary>
@@ -59,10 +57,10 @@
         /// <returns>True on successful deposit operation, else false.</returns>
         public bool DepositAmount(BankAccount account, string amount)
         {
-            if (this._validate.IsNumber(amount))
+            if (InputValidator.IsNumber(amount))
             {
                 decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!this._validate.IsZero(amountDecimal) && !this._validate.IsNegative(amountDecimal))
+                if (!InputValidator.IsZero(amountDecimal) && !InputValidator.IsNegative(amountDecimal))
                 {
                     account.Deposit(amountDecimal);
                     return true;
@@ -82,10 +80,10 @@
         /// <returns>True on successful withdrawal operation, else false.</returns>
         public bool WithdrawAmount(BankAccount account, string amount)
         {
-            if (this._validate.IsNumber(amount))
+            if (InputValidator.IsNumber(amount))
             {
                 decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!this._validate.IsNegative(amountDecimal))
+                if (!InputValidator.IsNegative(amountDecimal))
                 {
                     return account.Withdraw(amountDecimal);
                 }

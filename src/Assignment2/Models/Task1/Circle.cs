@@ -5,7 +5,7 @@
     /// </summary>
     internal class Circle : Shapes
     {
-        private double _radius;
+        private double radius;
 
         /// <summary>
         /// Gets or sets radius of the circle.
@@ -13,8 +13,8 @@
         /// <value> The radius of the circle. </value>
         public double Radius
         {
-            get { return this._radius; }
-            set { this._radius = value; }
+            get { return this.radius; }
+            set { this.radius = value; }
         }
 
         /// <summary>

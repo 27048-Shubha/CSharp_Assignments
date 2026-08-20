@@ -7,8 +7,8 @@
     /// </summary>
     public abstract class Shapes
     {
-        private string? _color;
-        private double _area;
+        private string? color;
+        private double area;
 
         /// <summary>
         /// Gets or sets color of the shape.
@@ -16,8 +16,8 @@
         /// <value> The name of the color entered by the user. </value>
         public string? Color
         {
-            get { return this._color; }
-            set { this._color = value; }
+            get { return this.color; }
+            set { this.color = value; }
         }
 
         /// <summary>
@@ -26,8 +26,8 @@
         /// <value> The name of the area entered by the user. </value>
         public double Area
         {
-            get { return this._area; }
-            set { this._area = value; }
+            get { return this.area; }
+            set { this.area = value; }
         }
 
         /// <summary>

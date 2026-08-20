@@ -29,14 +29,14 @@ This console application demonstrates OOP concepts using three modules:
 
 - Supports managers and developers.
 - Accepts employee name and monthly salary.
-- Calculates role-based bonuses.
+- Calculates role-based bonuses where developer gets 10% of his salary as bonus, while manager gets 20% of his salary as his bonus
 - Displays employee details and bonus information.
 
 `Employee` is the abstract base class. `Manager` and `Developer` inherit from it and implement their own bonus calculations.
 
 ## Bank Account Manager
 
-- Creates savings and checking accounts.
+- Creates savings and checking accounts with initial balance of Rs.100 for both the accounts and minimum balance for the savings accout is Rs.100.
 - Accepts account details and initial deposits.
 - Supports deposits, withdrawals and balance checking.
 - Displays account and transaction details.

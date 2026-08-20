@@ -8,8 +8,8 @@
     /// </summary>
     public class EmployeeController
     {
-        private EmployeeView _console;
-        private EmployeeService _service;
+        private EmployeeView console;
+        private EmployeeService service;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeController"/> class.
@@ -18,8 +18,8 @@
         /// <param name="service"> The object to handle services. </param>
         public EmployeeController(EmployeeView console, EmployeeService service)
         {
-            this._console = console;
-            this._service = service;
+            this.console = console;
+            this.service = service;
         }
 
         /// <summary>
@@ -31,31 +31,31 @@
 
             while (true)
             {
-                this._console.DisplayMenu();
-                choice = this._console.GetUserChoice();
+                this.console.DisplayMenu();
+                choice = this.console.GetUserChoice();
                 string message;
 
                 switch (choice)
                 {
                     case 'D':
                     case 'd':
-                        message = this._service.AddDeveloper(this._console.GetEmployeeName(), this._console.GetEmployeeSalary());
-                        this._console.DisplayMessage(message);
+                        message = this.service.AddDeveloper(this.console.GetEmployeeName(), this.console.GetEmployeeSalary());
+                        this.console.DisplayMessage(message);
                         break;
 
                     case 'M':
                     case 'm':
-                        message = this._service.AddManager(this._console.GetEmployeeName(), this._console.GetEmployeeSalary());
-                        this._console.DisplayMessage(message);
+                        message = this.service.AddManager(this.console.GetEmployeeName(), this.console.GetEmployeeSalary());
+                        this.console.DisplayMessage(message);
                         break;
 
                     case 'B':
                     case 'b':
-                        this._console.DisplayExitMessage();
+                        this.console.DisplayExitMessage();
                         return;
 
                     default:
-                        this._console.DisplayDefault();
+                        this.console.DisplayDefault();
                         break;
                 }
             }

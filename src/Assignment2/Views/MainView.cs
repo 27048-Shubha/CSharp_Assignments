@@ -1,6 +1,6 @@
 ﻿namespace Assignment2.Views
 {
-    using Assignment2.Validations;
+    using Assignment2.Validators;
 
     /// <summary>
     /// Manages main console operations of the application.
@@ -16,7 +16,7 @@
             char choice;
             char defaultChoice = 'D';
             string value = Console.ReadLine() ?? string.Empty;
-            if (!InputValidation.IsValidChar(value, out choice))
+            if (!InputValidator.IsValidChar(value, out choice))
             {
                 return defaultChoice;
             }

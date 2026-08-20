@@ -1,13 +1,11 @@
 ﻿namespace Assignment2.Models.Task2
 {
-    using Assignment2.Models.Task2;
-
     /// <summary>
     /// Handles bonus calculation of the Manager inherited from the Employee.
     /// </summary>
     public class Manager : Employee
     {
-        private decimal _bonus;
+        private decimal bonus;
 
         /// <summary>
         /// Gets or sets bonus value of the manager.
@@ -17,12 +15,12 @@
         {
             get
             {
-                return this._bonus;
+                return this.bonus;
             }
 
             set
             {
-                this._bonus = value;
+                this.bonus = value;
             }
         }
 

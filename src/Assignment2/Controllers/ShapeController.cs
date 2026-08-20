@@ -8,8 +8,8 @@
     /// </summary>
     public class ShapeController
     {
-        private ShapeView _console;
-        private ShapeService _service;
+        private ShapeView console;
+        private ShapeService service;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeController"/> class.
@@ -18,8 +18,8 @@
         /// <param name="service"> The object to handle services. </param>
         public ShapeController(ShapeView console, ShapeService service)
         {
-            this._console = console;
-            this._service = service;
+            this.console = console;
+            this.service = service;
         }
 
         /// <summary>
@@ -30,36 +30,36 @@
             char choice;
             while (true)
             {
-                this._console.DisplayShapesMenu();
-                choice = this._console.GetUserChoice();
+                this.console.DisplayShapesMenu();
+                choice = this.console.GetUserChoice();
                 string color;
                 string message;
                 switch (choice)
                 {
                     case 'R':
                     case 'r':
-                        color = this._console.GetShapeColor();
-                        string length = this._console.GetLength();
-                        string breadth = this._console.GetBreadth();
-                        message = this._service.AddRectangle(color, length, breadth);
-                        this._console.DisplayMessage(message);
+                        color = this.console.GetShapeColor();
+                        string length = this.console.GetLength();
+                        string breadth = this.console.GetBreadth();
+                        message = this.service.AddRectangle(color, length, breadth);
+                        this.console.DisplayMessage(message);
                         break;
 
                     case 'C':
                     case 'c':
-                        color = this._console.GetShapeColor();
-                        string radius = this._console.GetRadius();
-                        message = this._service.AddCircle(color, radius);
-                        this._console.DisplayMessage(message);
+                        color = this.console.GetShapeColor();
+                        string radius = this.console.GetRadius();
+                        message = this.service.AddCircle(color, radius);
+                        this.console.DisplayMessage(message);
                         break;
 
                     case 'B':
                     case 'b':
-                        this._console.DisplayExitMessage();
+                        this.console.DisplayExitMessage();
                         return;
 
                     default:
-                        this._console.DisplayDefault();
+                        this.console.DisplayDefault();
                         break;
                 }
             }

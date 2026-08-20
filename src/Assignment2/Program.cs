@@ -3,7 +3,7 @@
     using Assignment2.Controllers;
     using Assignment2.Repository;
     using Assignment2.Services;
-    using Assignment2.Validations;
+    using Assignment2.Validators;
     using Assignment2.Views;
 
     /// <summary>
@@ -16,8 +16,6 @@
         /// </summary>
         public static void Main()
         {
-            InputValidation validate = new InputValidation();
-
             MainView console = new MainView();
             ShapeView shapeView = new ShapeView();
             EmployeeView employeeView = new EmployeeView();
@@ -27,9 +25,9 @@
             EmployeeRepository employeeRepo = new EmployeeRepository();
             BankSystemRepo bankRepo = new BankSystemRepo();
 
-            ShapeService shapeService = new ShapeService(shapeRepo, validate);
-            EmployeeService employeeService = new EmployeeService(employeeRepo, validate);
-            BankSystemService bankSystemService = new BankSystemService(bankRepo, validate);
+            ShapeService shapeService = new ShapeService(shapeRepo);
+            EmployeeService employeeService = new EmployeeService(employeeRepo);
+            BankSystemService bankSystemService = new BankSystemService(bankRepo);
 
             char choice;
             do
