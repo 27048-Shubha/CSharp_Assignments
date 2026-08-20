@@ -264,7 +264,7 @@
         /// <returns>The entered date, else null<returns>
         public DateOnly? GetDate(bool isEditMode)
         {
-            this.DisplayMessage("Enter date: ");
+            this.DisplayMessage("Enter date (Format: DD/MM/YYYY) : ");
             string? input;
             DateOnly date;
 
