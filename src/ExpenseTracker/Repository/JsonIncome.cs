@@ -9,7 +9,7 @@
     internal class JsonIncome : ITransactionRepository<Income>
     {
         private static string filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\Data\Transactions.json"));
-        private static decimal _transactionCount = 0;
+        private static int _transactionCount = 0;
 
         /// <summary>
         /// Generates a unique transaction identifier for an income transaction.
@@ -154,7 +154,7 @@
         public void Delete(Guid id)
         {
             var jsonString = File.ReadAllText(filePath);
-            List<JsonTransaction> loadedExpense = JsonSerializer.Deserialize<List<JsonTransaction>>(jsonString);
+            List<JsonTransaction> loadedExpense = JsonSerializer.Deserialize<List<JsonTransaction>>(jsonString) ?? new List<JsonTransaction>();
 
             var updatedExpense = loadedExpense.FindAll(income => income.Id != id);
             File.WriteAllText(filePath, JsonSerializer.Serialize(updatedExpense));

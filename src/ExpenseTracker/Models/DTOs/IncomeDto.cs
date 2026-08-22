@@ -37,5 +37,5 @@ internal class IncomeDto
     /// <value>
     /// The new source assigned to the income.
     /// </value>
-    public Enums.IncomeSource Source { get; set; }
+    public IncomeSource Source { get; set; }
 }

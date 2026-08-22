@@ -8,7 +8,7 @@ namespace ExpenseTracker.Repository
     /// </summary>
     internal class InMemoryIncome : ITransactionRepository<Income>
     {
-        private static decimal _transactionCount = 0;
+        private static int _transactionCount = 0;
         private List<Income> _incomeDetails;
 
         /// <summary>
@@ -57,14 +57,15 @@ namespace ExpenseTracker.Repository
         public void Update(Guid id, Transaction incomeDetails)
         {
             Income income = (Income)incomeDetails;
-            foreach (var item in this._incomeDetails)
+
+            var item = this._incomeDetails.FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
             {
-                if (id == item.Id)
-                {
-                    item.Amount = income.Amount;
-                    item.Date = income.Date;
-                    item.Source = income.Source;
-                }
+                item.Amount = income.Amount;
+                item.Date = income.Date;
+                item.Source = income.Source;
+                return;
             }
         }
 
@@ -75,11 +76,11 @@ namespace ExpenseTracker.Repository
         /// <returns>The matching income transaction if found; otherwise, null.</returns>
         public Income? Get(Guid id)
         {
-            foreach (var expense in this._incomeDetails)
+            foreach (var income in this._incomeDetails)
             {
-                if (id == expense.Id)
+                if (id == income.Id)
                 {
-                    return expense;
+                    return income;
                 }
             }
 
@@ -110,7 +111,12 @@ namespace ExpenseTracker.Repository
         /// <param name="id">The unique identifier of the income transaction to delete.</param>
         public void Delete(Guid id)
         {
-            this._incomeDetails.RemoveAll(income => income.Id == id);
+            var income = this._incomeDetails.FirstOrDefault(x => x.Id == id);
+
+            if (income != null)
+            {
+                this._incomeDetails.Remove(income);
+            }
         }
     }
 }

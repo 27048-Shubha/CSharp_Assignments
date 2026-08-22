@@ -28,8 +28,6 @@
         /// <summary>
         /// Indicates an invalid menu selection.
         /// </summary>
-        Invalid = -1,
-
-        // Summary
+        Invalid,
     }
 }

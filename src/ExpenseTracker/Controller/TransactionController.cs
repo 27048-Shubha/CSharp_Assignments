@@ -11,7 +11,7 @@ namespace ExpenseTracker.Controller
     /// <summary>
     /// Coordinates transaction-related operations between the console view and services.
     /// </summary>
-    internal class TransactionController
+    public class TransactionController
     {
         private IncomeService _incomeService;
         private ExpenseService _expenseService;
@@ -26,7 +26,7 @@ namespace ExpenseTracker.Controller
         /// <param name="console">The console view used to receive input and display output.</param>
         /// <param name="incomeService">The service responsible for income operations.</param>
         /// <param name="expenseService">The service responsible for expense operations.</param>
-        public TransactionController(ConsoleView console, IncomeService incomeService, ExpenseService expenseService)
+        internal TransactionController(ConsoleView console, IncomeService incomeService, ExpenseService expenseService)
         {
             this._console = console;
             this._incomeService = incomeService;
@@ -209,6 +209,7 @@ namespace ExpenseTracker.Controller
                     if (transactionDto is null)
                     {
                         this._console.DisplayMessage("Transaction doesn't exist!");
+                        return;
                     }
                     else
                     {
@@ -378,6 +379,7 @@ namespace ExpenseTracker.Controller
             if (transactionId == null || transactionId == string.Empty)
             {
                 this._console.DisplayMessage("Invalid transaction id!");
+                return;
             }
 
             TransactionDto? transaction = this._service.Get(transactionId);

@@ -8,7 +8,7 @@
     /// </summary>
     internal class InMemoryExpense : ITransactionRepository<Expense>
     {
-        private static decimal _transactionCount = 0;
+        private static int _transactionCount = 0;
         private List<Expense> _expenseDetails;
 
         /// <summary>
@@ -55,14 +55,15 @@
         public void Update(Guid id, Transaction expenseDetails)
         {
             Expense expense = (Expense)expenseDetails;
-            foreach (var item in this._expenseDetails)
+
+            var item = this._expenseDetails.FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
             {
-                if (id == item.Id)
-                {
-                    item.Amount = expense.Amount;
-                    item.Date = expense.Date;
-                    item.Category = expense.Category;
-                }
+                item.Amount = expense.Amount;
+                item.Date = expense.Date;
+                item.Category = expense.Category;
+                return;
             }
         }
 
@@ -108,7 +109,12 @@
         /// <param name="id">The unique identifier of the expense to delete.</param>
         public void Delete(Guid id)
         {
-            this._expenseDetails.RemoveAll(expense => expense.Id == id);
+            var expense = this._expenseDetails.FirstOrDefault(x => x.Id == id);
+
+            if (expense != null)
+            {
+                this._expenseDetails.Remove(expense);
+            }
         }
     }
 }

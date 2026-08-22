@@ -37,6 +37,6 @@ namespace ExpenseTracker.Models.DTOs
         /// <value>
         /// The category assigned to the expense.
         /// </value>
-        public Enums.ExpenseCategory Category { get; set; }
+        public ExpenseCategory Category { get; set; }
     }
 }

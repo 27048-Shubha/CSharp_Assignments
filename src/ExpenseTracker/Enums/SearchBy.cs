@@ -11,7 +11,7 @@
         TransactionId = 1,
 
         /// <summary>
-        /// Represents the option to search transactions by their amount.
+        /// Represents the option to search transactions by their income source.
         /// </summary>
         IncomeSource,
 

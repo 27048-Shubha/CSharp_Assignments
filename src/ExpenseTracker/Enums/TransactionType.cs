@@ -16,11 +16,6 @@
         Expense = 2,
 
         /// <summary>
-        /// Represents a request to summarize transactions.
-        /// </summary>
-        Summarize = 3,
-
-        /// <summary>
         /// Indicates an invalid transaction type.
         /// </summary>
         Invalid = 4,
