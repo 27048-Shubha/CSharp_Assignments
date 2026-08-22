@@ -1,4 +1,6 @@
-﻿namespace Assignment2.Models.Task3
+﻿using Assignment2.Validators;
+
+namespace Assignment2.Models
 {
     /// <summary>
     /// Manages checking account inherited from bank account class.
@@ -9,10 +11,10 @@
         /// Implements abstract method to withdraw from savings bank account.
         /// </summary>
         /// <param name="amount">The amount to be withdrawn.</param>
-        /// <returns>True on withdrawal success, False when _balance falls beyond minimum _balance.</returns>
+        /// <returns>Returns true on withdrawal success, false when _balance falls beyond minimum _balance.</returns>
         public override bool Withdraw(decimal amount)
         {
-            if (this.Balance - amount >= 0)
+            if (WithDrawalValidator.IsWithdrawalAllowed(amount))
             {
                 this.Balance -= amount;
                 return true;

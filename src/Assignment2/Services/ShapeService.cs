@@ -8,7 +8,7 @@
     /// </summary>
     public class ShapeService
     {
-        private ShapeRepository _repo = new ShapeRepository();
+        private readonly ShapeRepository _repo = new ShapeRepository();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeService"/> class.
@@ -22,9 +22,9 @@
         /// <summary>
         /// Validates input and sends input parameters to the repository.
         /// </summary>
-        /// <param name="color"> The _color of the rectangle from the user. </param>
-        /// <param name="lengthStr"> The _length of the rectangle from the user. </param>
-        /// <param name="breadthStr"> The _breadth of the rectangle from the user. </param
+        /// <param name="color"> The color of the rectangle from the user. </param>
+        /// <param name="lengthStr"> The length of the rectangle from the user. </param>
+        /// <param name="breadthStr"> The breadth of the rectangle from the user. </param
         /// <returns> The details of the shape If True, else invalid error Message. </returns>
         public string AddRectangle(string color, string lengthStr, string breadthStr)
         {
@@ -55,8 +55,8 @@
         /// <summary>
         /// Validates input and sends input parameters to the repository.
         /// </summary>
-        /// <param name="color"> The _color of the circle from the user. </param>
-        /// <param name="radiusStr"> The _radius of the circle from the user. </param>
+        /// <param name="color"> The color of the circle from the user. </param>
+        /// <param name="radiusStr"> The radius of the circle from the user. </param>
         /// <returns> The details of the shape if True, else invalid error message. </returns>
         public string AddCircle(string color, string radiusStr)
         {

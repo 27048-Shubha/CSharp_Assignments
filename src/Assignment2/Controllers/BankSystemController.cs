@@ -1,6 +1,6 @@
 ﻿namespace Assignment2.Controllers
 {
-    using Assignment2.Models.Task3;
+    using Assignment2.Models;
     using Assignment2.Services;
     using Assignment2.Views;
 

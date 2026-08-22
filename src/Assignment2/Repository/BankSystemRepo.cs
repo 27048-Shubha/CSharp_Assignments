@@ -1,6 +1,6 @@
 ﻿namespace Assignment2.Repository
 {
-    using Assignment2.Models.Task3;
+    using Assignment2.Models;
 
     /// <summary>
     /// Handles repository operations of the employee hierarchy application.
@@ -8,13 +8,18 @@
     public class BankSystemRepo
     {
         /// <summary>
+        /// Constant representing minimum balance threshold.
+        /// </summary>
+        public const decimal MinimumBalance = 100;
+
+        /// <summary>
         /// Intantiates and initializes object values of savings account.
         /// </summary>
         /// <returns>The details of savings account created. </returns>
         public BankAccount CreateSavingsAccount()
         {
             SavingsAccount account = new SavingsAccount();
-            account.Balance = 100;
+            account.Balance = MinimumBalance;
             return account;
         }
 
@@ -25,7 +30,7 @@
         public BankAccount CreateCheckingAccount()
         {
             CheckingAccount account = new CheckingAccount();
-            account.Balance = 100;
+            account.Balance = MinimumBalance;
             return account;
         }
     }

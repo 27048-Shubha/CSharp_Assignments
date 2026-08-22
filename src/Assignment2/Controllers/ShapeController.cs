@@ -4,7 +4,7 @@
     using Assignment2.Views;
 
     /// <summary>
-    /// Controls Shape system's menu _service and communicates with _console and _service.
+    /// Controls Shape system's menu service and communicates with console and service.
     /// </summary>
     public class ShapeController
     {
@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeController"/> class.
         /// </summary>
-        /// <param name="console"> The object to handle _console operations. </param>
+        /// <param name="console"> The object to handle console operations. </param>
         /// <param name="service"> The object to handle services. </param>
         public ShapeController(ShapeView console, ShapeService service)
         {

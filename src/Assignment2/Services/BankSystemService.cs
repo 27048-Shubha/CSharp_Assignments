@@ -1,6 +1,6 @@
 ﻿namespace Assignment2.Services
 {
-    using Assignment2.Models.Task3;
+    using Assignment2.Models;
     using Assignment2.Repository;
     using Assignment2.Validators;
 
@@ -32,7 +32,7 @@
         /// <summary>
         /// Calls _repo for savings account creation.
         /// </summary>
-        /// <returns> The details of the new bank account created if True, else null.</returns>
+        /// <returns> The details of the new bank account created if true, else null.</returns>
         public BankAccount CreateCheckingAccount()
         {
             return this._repo.CreateCheckingAccount();

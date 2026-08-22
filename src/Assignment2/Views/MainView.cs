@@ -3,7 +3,7 @@
     using Assignment2.Validators;
 
     /// <summary>
-    /// Manages main _console operations of the application.
+    /// Manages main console operations of the application.
     /// </summary>
     public class MainView
     {

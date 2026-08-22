@@ -56,9 +56,9 @@
         }
 
         /// <summary>
-        /// Display current _balance amount in the bank account object.
+        /// Display current balance amount in the bank account object.
         /// </summary>
-        /// <param name="balance">current _balance amount in the bank account object.</param>
+        /// <param _name="balance">current balance amount in the bank account object.</param>
         public void DisplayBalance(decimal balance)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -69,7 +69,7 @@
         /// <summary>
         /// Displays success message of the deposit operation.
         /// </summary>
-        /// <param name="amount"> The amount deposited in the bank account.</param>
+        /// <param _name="amount"> The amount deposited in the bank account.</param>
         public void DepositSuccessMessage(string amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -80,7 +80,7 @@
         /// <summary>
         /// Displays success message of withdrawal operation.
         /// </summary>
-        /// <param name="amount">The amount withdrawn from the bank account.</param>
+        /// <param _name="amount">The amount withdrawn from the bank account.</param>
         public void WithdrawSuccessMessage(string amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -107,7 +107,7 @@
         }
 
         /// <summary>
-        /// Displays minimum _balance warning message.
+        /// Displays minimum balance warning message.
         /// </summary>
         public void DisplayMinBalanceWarning()
         {
@@ -117,7 +117,7 @@
         }
 
         /// <summary>
-        /// Displays initial _balance information.
+        /// Displays initial balance information.
         /// </summary>
         public void DisplayMinBalanceInfo()
         {

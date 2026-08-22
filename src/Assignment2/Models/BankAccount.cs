@@ -1,32 +1,26 @@
-﻿namespace Assignment2.Models.Task3
+﻿namespace Assignment2.Models
 {
     /// <summary>
     /// Abstract class that manages _accountNumber, _balance, withdraw and deposit.
     /// </summary>
     public abstract class BankAccount
     {
-        private string? _accountNumber;
-        private decimal _balance;
+        /// <summary>
+        /// Constant representing minimum balance threshold.
+        /// </summary>
+        public const decimal MinimumBalance = 100;
 
         /// <summary>
         /// Gets or sets account number.
         /// </summary>
         /// <value>The account number of the bank account.</value>
-        public string? AccountNumber
-        {
-            get { return this._accountNumber; }
-            set { this._accountNumber = value; }
-        }
+        public string? AccountNumber { get; set; }
 
         /// <summary>
         /// Gets or sets account number.
         /// </summary>
         /// <value>The _balance amount of the bank account.</value>
-        public decimal Balance
-        {
-            get { return this._balance; }
-            set { this._balance = value; }
-        }
+        public decimal Balance { get; set; }
 
         /// <summary>
         /// Adds amount to the existing Balance.
@@ -41,7 +35,7 @@
         /// Abstract method to withdraw from bank account.
         /// </summary>
         /// <param name="amount">The amount to be withdrawn.</param>
-        /// <returns>True on withdrawal success, False when _balance falls beyond minimum _balance.</returns>
+        /// <returns>Returns true on withdrawal success, false when _balance falls beyond minimum _balance.</returns>
         public abstract bool Withdraw(decimal amount);
     }
 }

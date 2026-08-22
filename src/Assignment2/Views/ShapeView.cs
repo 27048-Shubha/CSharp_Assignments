@@ -21,9 +21,9 @@
         }
 
         /// <summary>
-        /// Gets _color of the shape.
+        /// Gets color of the shape.
         /// </summary>
-        /// <returns> The _color as input from user. </returns>
+        /// <returns> The color as input from user. </returns>
         public string GetShapeColor()
         {
             Console.WriteLine("Enter color: ");
@@ -31,9 +31,9 @@
         }
 
         /// <summary>
-        /// Gets _radius of the circle.
+        /// Gets radius of the circle.
         /// </summary>
-        /// <returns> The _radius as input from user. </returns>
+        /// <returns> The =radius as input from user. </returns>
         public string GetRadius()
         {
             Console.WriteLine("Enter radius: ");
@@ -41,9 +41,9 @@
         }
 
         /// <summary>
-        /// Gets _length of the rectangle.
+        /// Gets length of the rectangle.
         /// </summary>
-        /// <returns> The _length as input from user. </returns>
+        /// <returns> The length as input from user. </returns>
         public string GetLength()
         {
             Console.WriteLine("Enter length: ");
@@ -51,9 +51,9 @@
         }
 
         /// <summary>
-        /// Gets _breadth of the rectangle.
+        /// Gets breadth of the rectangle.
         /// </summary>
-        /// <returns> The _breadth as input from user. </returns>
+        /// <returns> The breadth as input from user. </returns>
         public string GetBreadth()
         {
             Console.WriteLine("Enter breadth: ");

@@ -8,7 +8,7 @@
     /// </summary>
     public class EmployeeService
     {
-        private EmployeeRepository _repo;
+        private readonly EmployeeRepository _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeService"/> class.
@@ -23,8 +23,8 @@
         /// <summary>
         /// Validates input and sends input parameters to the repository.
         /// </summary>
-        /// <param name="name"> The name of the manager from the user. </param>
-        /// <param name="salary"> The _salary of the manager from the user. </param>
+        /// <param name="name"> The _name of the manager from the user. </param>
+        /// <param name="salary"> The salary of the manager from the user. </param>
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddManager(string name, string salary)
         {
@@ -43,8 +43,8 @@
         /// <summary>
         /// Validates input and sends input parameters to the repository.
         /// </summary>
-        /// <param name="name"> The name of the developer from the user. </param>
-        /// <param name="salary"> The _salary of the developer from the user. </param>
+        /// <param name="name"> The _name of the developer from the user. </param>
+        /// <param name="salary"> The salary of the developer from the user. </param>
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddDeveloper(string name, string salary)
         {

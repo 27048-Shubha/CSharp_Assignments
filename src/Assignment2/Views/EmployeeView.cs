@@ -1,7 +1,7 @@
 ﻿namespace Assignment2.Views
 {
     /// <summary>
-    /// Hanldes the _console operations of employee system.
+    /// Hanldes the console operations of employee system.
     /// </summary>
     public class EmployeeView : MainView
     {
@@ -21,9 +21,9 @@
         }
 
         /// <summary>
-        /// Gets name of the employee.
+        /// Gets _name of the employee.
         /// </summary>
-        /// <returns> The input name from the user. </returns>
+        /// <returns> The input _name from the user. </returns>
         public string GetEmployeeName()
         {
             Console.WriteLine("Enter name: ");
@@ -37,9 +37,9 @@
         }
 
         /// <summary>
-        /// Gets _salary of the employee.
+        /// Gets salary of the employee.
         /// </summary>
-        /// <returns> The input _salary from user. </returns>
+        /// <returns> The input salary from user. </returns>
         public string GetEmployeeSalary()
         {
             Console.WriteLine("Enter salary: ");
@@ -49,7 +49,7 @@
         /// <summary>
         /// Displays the message received as argument.
         /// </summary>
-        /// <param name="message"> The message received as the argument.</param>
+        /// <param _name="message"> The message received as the argument.</param>
         public void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}\n");
