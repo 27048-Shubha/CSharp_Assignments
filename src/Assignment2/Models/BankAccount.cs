@@ -27,10 +27,10 @@
         }
 
         /// <summary>
-        /// Abstract method to withdraw from bank account.
+        /// Withdraws the specified amount from the bank account and updates the balance if the withdrawal satisfies the account's withdrawal rules.
         /// </summary>
-        /// <param name="amount">The amount to be withdrawn.</param>
-        /// <returns>Returns true on withdrawal success, false when _balance falls beyond minimum _balance.</returns>
+        /// <param name="amount">The amount to withdraw.</param>
+        /// <returns> Returns true if the withdrawal is successful and the amount is deducted from the account balance; otherwise,false. </returns>
         public abstract bool Withdraw(decimal amount);
     }
 }
