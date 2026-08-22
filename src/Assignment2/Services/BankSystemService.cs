@@ -54,18 +54,12 @@
         /// <param name="account">The account on which amount to be deposited.</param>
         /// <param name="amount">The amount to be deposited.</param>
         /// <returns>True on successful deposit operation, else false.</returns>
-        public bool DepositAmount(BankAccount account, string amount)
+        public bool DepositAmount(BankAccount account, decimal amount)
         {
-            if (InputValidator.IsNumber(amount))
+            if (!InputValidator.IsZero(amount) && !InputValidator.IsNegative(amount))
             {
-                decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!InputValidator.IsZero(amountDecimal) && !InputValidator.IsNegative(amountDecimal))
-                {
-                    account.Deposit(amountDecimal);
-                    return true;
-                }
-
-                return false;
+                account.Deposit(amount);
+                return true;
             }
 
             return false;
@@ -77,17 +71,11 @@
         /// <param name="account">The account from which amount to be withdrawn.</param>
         /// <param name="amount">The amount to be withdrawn.</param>
         /// <returns>True on successful withdrawal operation, else false.</returns>
-        public bool WithdrawAmount(BankAccount account, string amount)
+        public bool WithdrawAmount(BankAccount account, decimal amount)
         {
-            if (InputValidator.IsNumber(amount))
+            if (!InputValidator.IsNegative(amount))
             {
-                decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!InputValidator.IsNegative(amountDecimal))
-                {
-                    return account.Withdraw(amountDecimal);
-                }
-
-                return false;
+                return account.Withdraw(amount);
             }
 
             return false;

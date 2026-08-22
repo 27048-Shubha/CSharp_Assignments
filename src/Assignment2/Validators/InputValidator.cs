@@ -8,83 +8,80 @@
         /// <summary>
         /// Checks whether the input character is valid or not.
         /// </summary>
-        /// <param _name="input">The input to be validated.</param>
-        /// <param _name="value">Stores input if its a character. </param>
+        /// <param name="input">The input to be validated.</param>
+        /// <param name="value">Stores input if its a character. </param>
         /// <returns>True if input string is a character else false. </returns>
         public static bool IsValidChar(string input, out char value)
         {
-            if (char.TryParse(input, out value))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return char.TryParse(input, out value);
         }
 
         /// <summary>
         /// Checks whether the input decimal is valid or not.
         /// </summary>
-        /// <param _name="input">The input to be validated.</param>
-        /// <param _name="value">Stores input if its a decimal. </param>
+        /// <param name="input">The input to be validated.</param>
+        /// <param name="value">Stores input if its a decimal. </param>
         /// <returns>True if input string is a decimal else false. </returns>
         public static bool IsValidDecimal(string input, out decimal value)
         {
-            if (decimal.TryParse(input, out value))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return decimal.TryParse(input, out value);
+        }
+
+        /// <summary>
+        /// Checks whether the input double is valid or not.
+        /// </summary>
+        /// <param name="input">The input to be validated.</param>
+        /// <param name="value">Stores input if its a double. </param>
+        /// <returns>True if input string is a double else false. </returns>
+        public static bool IsValidDouble(string input, out double value)
+        {
+            return double.TryParse(input, out value);
         }
 
         /// <summary>
         /// Checks whether received input is zero or not.
         /// </summary>
-        /// <param _name="num">The input to be validated. </param>
+        /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public static bool IsZero(decimal num)
+        public static bool IsZero(decimal number)
         {
-            return num == 0;
+            return number == 0;
         }
 
         /// <summary>
         /// Checks whether received input is zero or not.
         /// </summary>
-        /// <param _name="num">The input to be validated. </param>
+        /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public static bool IsZero(double num)
+        public static bool IsZero(double number)
         {
-            return num == 0;
+            return number == 0;
         }
 
         /// <summary>
         /// Checks whether received input is negative or not.
         /// </summary>
-        /// <param _name="num">The input to be validated. </param>
+        /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is negative else false. </returns>
-        public static bool IsNegative(decimal num)
+        public static bool IsNegative(decimal number)
         {
-            return num < 0;
+            return number < 0;
         }
 
         /// <summary>
         /// Checks whether received input is zero or not.
         /// </summary>
-        /// <param _name="num">The input to be validated. </param>
+        /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public static bool IsNegative(double num)
+        public static bool IsNegative(double number)
         {
-            return num < 0;
+            return number < 0;
         }
 
         /// <summary>
         /// Checks whether received input is string or not.
         /// </summary>
-        /// <param _name="input">The input to be validated. </param>
+        /// <param name="input">The input to be validated. </param>
         /// <returns>True if given input is a string else false. </returns>
         public static bool IsString(string input)
         {
@@ -99,7 +96,7 @@
         /// <summary>
         /// Checks whether received input is a number or not.
         /// </summary>
-        /// <param _name="input">The input to be validated. </param>
+        /// <param name="input">The input to be validated. </param>
         /// <returns>True if given input is a number else false. </returns>
         public static bool IsNumber(string input)
         {

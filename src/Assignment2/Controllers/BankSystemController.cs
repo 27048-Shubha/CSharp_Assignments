@@ -1,6 +1,7 @@
 ﻿namespace Assignment2.Controllers
 {
     using Assignment2.Models;
+    using Assignment2.Repository;
     using Assignment2.Services;
     using Assignment2.Views;
 
@@ -32,7 +33,7 @@
             BankAccount account;
             char choice;
 
-            do
+            while (true)
             {
                 this._console.DisplayMenu();
                 choice = this._console.GetUserChoice();
@@ -64,7 +65,6 @@
                         break;
                 }
             }
-            while (choice != 'Q' && choice != 'q');
         }
 
         /// <summary>
@@ -74,7 +74,7 @@
         public void CallService(BankAccount account)
         {
             char choice;
-            string? amount;
+            decimal amount;
             this._console.DisplayMinBalanceInfo();
 
             while (true)
@@ -109,15 +109,14 @@
                         else
                         {
                             this._console.WithdrawFailureMessage();
+                            if (this._isSavings)
+                            {
+                                this._console.DisplayMinBalanceWarning();
+                            }
                         }
 
                         decimal amountDecimal = this._service.CheckBalance(account);
                         this._console.DisplayBalance(amountDecimal);
-
-                        if (this._isSavings)
-                        {
-                            this._console.DisplayMinBalanceWarning();
-                        }
 
                         break;
 

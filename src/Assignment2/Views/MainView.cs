@@ -30,7 +30,12 @@
         public virtual void DisplayMenu()
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Welcome to hierarchy system!\nMenu:\n'S' to enter shape hierarchy system\n'E' to enter employee system\n'B' to enter banking system\n'Q' to quit\n");
+            Console.WriteLine("Welcome to hierarchy system!");
+            Console.WriteLine("Menu:");
+            Console.WriteLine("[S] Shape System");
+            Console.WriteLine("[E] Employee System");
+            Console.WriteLine("[B] Banking System");
+            Console.WriteLine("[Q] Quit");
             Console.ResetColor();
         }
 

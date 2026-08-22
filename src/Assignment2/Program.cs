@@ -29,8 +29,12 @@
             EmployeeService employeeService = new EmployeeService(employeeRepo);
             BankSystemService bankSystemService = new BankSystemService(bankRepo);
 
+            ShapeController shapeController = new ShapeController(shapeView, shapeService);
+            EmployeeController employeeController = new EmployeeController(employeeView, employeeService);
+            BankSystemController bankController = new BankSystemController(bankSystemView, bankSystemService);
+
             char choice;
-            do
+            while (true)
             {
                 console.DisplayMenu();
                 choice = console.GetUserChoice();
@@ -38,19 +42,16 @@
                 {
                     case 'S':
                     case 's':
-                        ShapeController shapeController = new ShapeController(shapeView, shapeService);
                         shapeController.Initialize();
                         break;
 
                     case 'E':
                     case 'e':
-                        EmployeeController employeeController = new EmployeeController(employeeView, employeeService);
                         employeeController.Initialize();
                         break;
 
                     case 'B':
                     case 'b':
-                        BankSystemController bankController = new BankSystemController(bankSystemView, bankSystemService);
                         bankController.Initialize();
                         break;
 
@@ -64,7 +65,6 @@
                         break;
                 }
             }
-            while (choice != 'q' || choice != 'Q');
         }
     }
 }

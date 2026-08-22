@@ -1,7 +1,9 @@
-﻿namespace Assignment2.Views
+﻿using Assignment2.Validators;
+
+namespace Assignment2.Views
 {
     /// <summary>
-    /// Hanldes the console operations of employee system.
+    /// Handles the console operations of employee system.
     /// </summary>
     public class EmployeeView : MainView
     {
@@ -21,9 +23,9 @@
         }
 
         /// <summary>
-        /// Gets _name of the employee.
+        /// Gets name of the employee.
         /// </summary>
-        /// <returns> The input _name from the user. </returns>
+        /// <returns> The input name from the user. </returns>
         public string GetEmployeeName()
         {
             Console.WriteLine("Enter name: ");
@@ -40,16 +42,26 @@
         /// Gets salary of the employee.
         /// </summary>
         /// <returns> The input salary from user. </returns>
-        public string GetEmployeeSalary()
+        public decimal GetEmployeeSalary()
         {
-            Console.WriteLine("Enter salary: ");
-            return Console.ReadLine() ?? string.Empty;
+            while (true)
+            {
+                Console.WriteLine("Enter salary: ");
+                if (InputValidator.IsValidDecimal(Console.ReadLine(), out decimal salary))
+                {
+                    return salary;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! Salary must be a valid number!");
+                }
+            }
         }
 
         /// <summary>
         /// Displays the message received as argument.
         /// </summary>
-        /// <param _name="message"> The message received as the argument.</param>
+        /// <param name="message"> The message received as the argument.</param>
         public void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}\n");

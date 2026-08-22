@@ -14,8 +14,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeController"/> class.
         /// </summary>
-        /// <param _name="console"> The object to handle _console operations. </param>
-        /// <param _name="service"> The object to handle services. </param>
+        /// <param name="console"> The object to handle _console operations. </param>
+        /// <param name="service"> The object to handle services. </param>
         public EmployeeController(EmployeeView console, EmployeeService service)
         {
             this._console = console;

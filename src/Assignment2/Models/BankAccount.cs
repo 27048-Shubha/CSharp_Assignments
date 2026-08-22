@@ -6,11 +6,6 @@
     public abstract class BankAccount
     {
         /// <summary>
-        /// Constant representing minimum balance threshold.
-        /// </summary>
-        public const decimal MinimumBalance = 100;
-
-        /// <summary>
         /// Gets or sets account number.
         /// </summary>
         /// <value>The account number of the bank account.</value>

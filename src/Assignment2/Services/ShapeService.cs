@@ -23,22 +23,11 @@
         /// Validates input and sends input parameters to the repository.
         /// </summary>
         /// <param name="color"> The color of the rectangle from the user. </param>
-        /// <param name="lengthStr"> The length of the rectangle from the user. </param>
-        /// <param name="breadthStr"> The breadth of the rectangle from the user. </param
+        /// <param name="length"> The length of the rectangle from the user. </param>
+        /// <param name="breadth"> The breadth of the rectangle from the user. </param
         /// <returns> The details of the shape If True, else invalid error Message. </returns>
-        public string AddRectangle(string color, string lengthStr, string breadthStr)
+        public string AddRectangle(string color, double length, double breadth)
         {
-            if (!InputValidator.IsString(color))
-            {
-                return "Invalid input for color! No numbers or special characters allowed";
-            }
-
-            double length, breadth;
-            if (!double.TryParse(lengthStr, out length) || !double.TryParse(breadthStr, out breadth))
-            {
-                return "Invalid input! Length and breadth must be valid numbers!";
-            }
-
             if (InputValidator.IsZero(length) || InputValidator.IsZero(breadth))
             {
                 return "Invalid input! Length and breadth must be Non Zero";
@@ -56,29 +45,23 @@
         /// Validates input and sends input parameters to the repository.
         /// </summary>
         /// <param name="color"> The color of the circle from the user. </param>
-        /// <param name="radiusStr"> The radius of the circle from the user. </param>
+        /// <param name="radius"> The radius of the circle from the user. </param>
         /// <returns> The details of the shape if True, else invalid error message. </returns>
-        public string AddCircle(string color, string radiusStr)
+        public string AddCircle(string color, double radius)
         {
             if (!InputValidator.IsString(color))
             {
                 return "Invalid input for color! No numbers or special characters allowed";
             }
 
-            double radius;
-            if (!double.TryParse(radiusStr, out radius))
-            {
-                return "Invalid input! Radius must be valid number!";
-            }
-
             if (InputValidator.IsZero(radius))
             {
-                return "Invalid input! Radius must be a Non Zero value";
+                return "Invalid input! Radius must be a non zero value";
             }
 
             if (InputValidator.IsNegative(radius))
             {
-                return "Invalid input! Radius must be Non Negative";
+                return "Invalid input! Radius must be non negative";
             }
 
             return this._repo.AddCircle(color, radius);

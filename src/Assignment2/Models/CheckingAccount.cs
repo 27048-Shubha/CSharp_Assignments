@@ -14,7 +14,7 @@ namespace Assignment2.Models
         /// <returns>Returns true on withdrawal success, false when _balance falls beyond minimum _balance.</returns>
         public override bool Withdraw(decimal amount)
         {
-            if (WithDrawalValidator.IsWithdrawalAllowed(amount))
+            if (this.Balance - amount >= 0)
             {
                 this.Balance -= amount;
                 return true;

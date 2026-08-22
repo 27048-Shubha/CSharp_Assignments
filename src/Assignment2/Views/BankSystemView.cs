@@ -1,5 +1,6 @@
 ﻿namespace Assignment2.Views
 {
+    using Assignment2.Validators;
     /// <summary>
     /// Manages _console operations of the bank hierarchy system.
     /// </summary>
@@ -39,26 +40,46 @@
         /// Gets amount to be deposited.
         /// </summary>
         /// <returns> The amount entered by the user as input. </returns>
-        public string GetDepositAmount()
+        public decimal GetDepositAmount()
         {
-            Console.WriteLine("Enter amount to deposit");
-            return Console.ReadLine() ?? string.Empty;
+            while (true)
+            {
+                Console.WriteLine("Enter deposit amount: ");
+                if (InputValidator.IsValidDecimal(Console.ReadLine(), out decimal amount))
+                {
+                    return amount;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! Amount must be a valid number!");
+                }
+            }
         }
 
         /// <summary>
         /// Gets amount to be withdrawn.
         /// </summary>
         /// <returns> The amount entered by the user as input. </returns>
-        public string GetWithdrawAmount()
+        public decimal GetWithdrawAmount()
         {
-            Console.WriteLine("Enter amount to withdraw");
-            return Console.ReadLine() ?? string.Empty;
+            while (true)
+            {
+                Console.WriteLine("Enter withdraw amount: ");
+                if (InputValidator.IsValidDecimal(Console.ReadLine(), out decimal amount))
+                {
+                    return amount;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! Amount must be a valid number!");
+                }
+            }
         }
 
         /// <summary>
         /// Display current balance amount in the bank account object.
         /// </summary>
-        /// <param _name="balance">current balance amount in the bank account object.</param>
+        /// <param name="balance">current balance amount in the bank account object.</param>
         public void DisplayBalance(decimal balance)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -69,8 +90,8 @@
         /// <summary>
         /// Displays success message of the deposit operation.
         /// </summary>
-        /// <param _name="amount"> The amount deposited in the bank account.</param>
-        public void DepositSuccessMessage(string amount)
+        /// <param name="amount"> The amount deposited in the bank account.</param>
+        public void DepositSuccessMessage(decimal amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Deposit of amount {amount} was successful!");
@@ -80,8 +101,8 @@
         /// <summary>
         /// Displays success message of withdrawal operation.
         /// </summary>
-        /// <param _name="amount">The amount withdrawn from the bank account.</param>
-        public void WithdrawSuccessMessage(string amount)
+        /// <param name="amount">The amount withdrawn from the bank account.</param>
+        public void WithdrawSuccessMessage(decimal amount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             if (amount.Equals("0"))

@@ -26,15 +26,11 @@
         /// <param name="name"> The _name of the manager from the user. </param>
         /// <param name="salary"> The salary of the manager from the user. </param>
         /// <returns> The details of the employee If True, else invalid error message. </returns>
-        public string AddManager(string name, string salary)
+        public string AddManager(string name, decimal salary)
         {
-            if (InputValidator.IsNumber(salary))
+            if (!InputValidator.IsZero(salary) && !InputValidator.IsNegative(salary))
             {
-                decimal amount = Convert.ToDecimal(salary);
-                if (!InputValidator.IsZero(amount) && !InputValidator.IsNegative(amount))
-                {
-                    return this._repo.AddManager(name, amount);
-                }
+                    return this._repo.AddManager(name, salary);
             }
 
             return "Invalid input, Enter only +ve numbers as salary";
@@ -46,15 +42,11 @@
         /// <param name="name"> The _name of the developer from the user. </param>
         /// <param name="salary"> The salary of the developer from the user. </param>
         /// <returns> The details of the employee If True, else invalid error message. </returns>
-        public string AddDeveloper(string name, string salary)
+        public string AddDeveloper(string name, decimal salary)
         {
-            if (InputValidator.IsNumber(salary))
+            if (!InputValidator.IsZero(salary) && !InputValidator.IsNegative(salary))
             {
-                decimal amount = Convert.ToDecimal(salary);
-                if (!InputValidator.IsZero(amount) && !InputValidator.IsNegative(amount))
-                {
-                    return this._repo.AddDeveloper(name, amount);
-                }
+                return this._repo.AddDeveloper(name, salary);
             }
 
             return "Invalid input, Enter only +ve numbers as salary";

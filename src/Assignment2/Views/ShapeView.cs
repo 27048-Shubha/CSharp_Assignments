@@ -1,10 +1,13 @@
 ﻿namespace Assignment2.Views
 {
+    using Assignment2.Validators;
+
     /// <summary>
-    /// Hanldes _console operations of shape system.
+    /// Handles console operations of shape system.
     /// </summary>
     public class ShapeView : MainView
     {
+        private readonly string _defaultColor = "Red";
         /// <summary>
         /// Displays start up menu for shape system.
         /// </summary>
@@ -27,37 +30,67 @@
         public string GetShapeColor()
         {
             Console.WriteLine("Enter color: ");
-            return Console.ReadLine() ?? string.Empty;
+            return Console.ReadLine() ?? this._defaultColor;
         }
 
         /// <summary>
         /// Gets radius of the circle.
         /// </summary>
-        /// <returns> The =radius as input from user. </returns>
-        public string GetRadius()
+        /// <returns> The radius as input from user. </returns>
+        public double GetRadius()
         {
-            Console.WriteLine("Enter radius: ");
-            return Console.ReadLine() ?? string.Empty;
+            while (true)
+            {
+                Console.WriteLine("Enter radius: ");
+                if (InputValidator.IsValidDouble(Console.ReadLine(), out double radius))
+                {
+                    return radius;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! Length must be valid numbers!");
+                }
+            }
         }
 
         /// <summary>
         /// Gets length of the rectangle.
         /// </summary>
         /// <returns> The length as input from user. </returns>
-        public string GetLength()
+        public double GetLength()
         {
-            Console.WriteLine("Enter length: ");
-            return Console.ReadLine() ?? string.Empty;
+            while (true)
+            {
+                Console.WriteLine("Enter length: ");
+                if (InputValidator.IsValidDouble(Console.ReadLine(), out double length))
+                {
+                    return length;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! Length must be a valid number!");
+                }
+            }
         }
 
         /// <summary>
         /// Gets breadth of the rectangle.
         /// </summary>
         /// <returns> The breadth as input from user. </returns>
-        public string GetBreadth()
+        public double GetBreadth()
         {
-            Console.WriteLine("Enter breadth: ");
-            return Console.ReadLine() ?? string.Empty;
+            while (true)
+            {
+                Console.WriteLine("Enter breadth: ");
+                if (InputValidator.IsValidDouble(Console.ReadLine(), out double breadth))
+                {
+                    return breadth;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! Breadth must be a valid number!");
+                }
+            }
         }
 
         /// <summary>
@@ -66,7 +99,7 @@
         /// <param name="message"> The message received from the user. </param>
         public void DisplayMessage(string message)
         {
-            Console.WriteLine($"{message}");
+            Console.WriteLine(message);
         }
     }
 }
