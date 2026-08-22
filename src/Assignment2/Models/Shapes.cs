@@ -18,7 +18,6 @@
         /// </summary>
         /// <returns> The calculated area of the shape. </returns>
         public abstract double CalculateArea();
-        public abstract double CalculateArea();
 
         /// <summary>
         /// Displays details of the shape.
