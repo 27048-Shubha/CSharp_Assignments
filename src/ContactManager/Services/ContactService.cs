@@ -10,7 +10,7 @@
     /// </summary>
     internal class ContactService
     {
-        private readonly ContactRepository repository;
+        private readonly ContactRepository _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContactService"/> class.
@@ -18,7 +18,7 @@
         /// <param name="repo">Handles operations of Repository.</param>
         internal ContactService(ContactRepository repo)
         {
-            this.repository = repo;
+            this._repository = repo;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@
                 }
             }
 
-            this.repository.Add(contact);
+            this._repository.Add(contact);
             return 1;
         }
 
@@ -58,7 +58,7 @@
         /// <returns>List of all contacts or null if empty.</returns>
         public IReadOnlyList<Contact> GetAll()
         {
-            return this.repository.GetAll();
+            return this._repository.GetAll();
         }
 
         /// <summary>
@@ -68,10 +68,10 @@
         /// <returns>Status of the operation.</returns>
         public Enums.Status Delete(string phone)
         {
-            Contact? contact = this.repository.GetByPhoneNumber(phone);
+            Contact? contact = this._repository.GetByPhoneNumber(phone);
             if (contact != null)
             {
-                this.repository.Delete(contact);
+                this._repository.Delete(contact);
                 return Enums.Status.Success;
             }
             else
@@ -89,7 +89,7 @@
         /// <returns>Status of the operation.</returns>
         public Enums.Status Edit(string name, string editChoice, string newValue)
         {
-            Contact? contact = this.repository.Get(name);
+            Contact? contact = this._repository.Get(name);
             if (contact == null)
             {
                 return Enums.Status.NotFound;
@@ -127,9 +127,9 @@
         /// <returns>ContactInfo object if found, otherwise null.</returns>
         public List<Contact>? Search(string name)
         {
-            if (this.repository.IsExistsByName(name))
+            if (this._repository.IsExistsByName(name))
             {
-                return this.repository.FetchByNameContaining(name);
+                return this._repository.FetchByNameContaining(name);
             }
             else
             {
@@ -144,7 +144,7 @@
         /// <returns> true if new attribute else False. </returns>
         public bool CheckDuplicates(Contact contact)
         {
-            return this.repository.GetByPhoneNumber(contact.PhoneNumber) != null;
+            return this._repository.GetByPhoneNumber(contact.PhoneNumber) != null;
         }
 
         /// <summary>
@@ -173,12 +173,12 @@
         /// <returns>Sorted list of contacts or null if empty.</returns>
         public List<Contact>? Sort()
         {
-            if (this.repository.IsEmpty())
+            if (this._repository.IsEmpty())
             {
                 return null;
             }
 
-            return this.repository.GetAllSortedByName();
+            return this._repository.GetAllSortedByName();
         }
     }
 }
