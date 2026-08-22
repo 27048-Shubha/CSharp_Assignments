@@ -66,7 +66,7 @@ namespace ExceptionHandling.Task4
             }
             catch
             {
-                throw new IndexOutOfRangeException("Valid index range: {0} to {size}}");
+                throw new IndexOutOfRangeException($"Valid index range: {0} to {this._size}");
             }
         }
 
@@ -75,21 +75,8 @@ namespace ExceptionHandling.Task4
         /// </summary>
         public void Run()
         {
-            Console.WriteLine("Enter size of the array: ");
-            int size = int.Parse(Console.ReadLine());
-            try
-            {
-                this.InsertElements();
-                this.FetchElement();
-            }
-            catch (InvalidUserInputException exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-            catch (IndexOutOfRangeException exception)
-            {
-                Console.WriteLine($"{exception.Message}");
-            }
+            this.InsertElements();
+            this.FetchElement();
         }
     }
 }

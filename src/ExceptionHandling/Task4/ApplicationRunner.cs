@@ -17,13 +17,13 @@ namespace ExceptionHandling.Task4
         /// </summary>
         public static void Run()
         {
-            AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
+            AppDomain.CurrentDomain.UnhandledException += ApplicationRunner.ExceptionHandler;
             IntegerArray integerArray = new IntegerArray();
             integerArray.Run();
         }
 
         /// <summary>
-        /// Hnadles exception thrown globally through AppDomain.
+        /// Handles exception thrown globally through AppDomain.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="exception">Event arguments of unhandled exception.</param>
@@ -32,6 +32,7 @@ namespace ExceptionHandling.Task4
             Console.WriteLine($"Exception handled using AppDomain UnhandledException event.");
             Console.WriteLine("Unexpected exception occured!");
             Console.WriteLine(((Exception)exception.ExceptionObject).Message);
+            Console.WriteLine("Terminating...");
         }
     }
 }

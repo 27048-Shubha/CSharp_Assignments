@@ -32,7 +32,7 @@ namespace ExceptionHandling.Task5
         }
 
         /// <summary>
-        /// Hnadles exception thrown globally through AppDomain.
+        /// Handles exception thrown globally through AppDomain.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="exception">Event arguments of unhandled exception.</param>

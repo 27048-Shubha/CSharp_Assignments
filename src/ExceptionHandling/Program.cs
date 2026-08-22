@@ -19,6 +19,7 @@
             string? choice;
             do
             {
+                Console.Clear();
                 Console.WriteLine("------------------ MAIN MENU --------------------");
                 Console.WriteLine("Choose one option from the below:");
                 Console.WriteLine("1. Task 1 - Try-Catch-Finally block simulation\n" +
@@ -44,12 +45,10 @@
                         task3.Run();
                         break;
                     case "4":
-                        ExceptionHandling.Task4.IntegerArray task4 = new ExceptionHandling.Task4.IntegerArray();
-                        task4.Run();
+                        ExceptionHandling.Task4.ApplicationRunner.Run();
                         break;
                     case "5":
-                        ExceptionHandling.Task5.IntegerArray task5 = new ExceptionHandling.Task5.IntegerArray();
-                        task5.Run();
+                        ExceptionHandling.Task5.ApplicationRunner.Run();
                         break;
                     case "6":
                         Console.WriteLine("Exiting application...");
@@ -59,6 +58,9 @@
                         Console.WriteLine("Invalid choice");
                         break;
                 }
+
+                Console.WriteLine("Reloading MainMenu...");
+                Thread.Sleep(1000);
             }
             while (choice != "6");
         }
