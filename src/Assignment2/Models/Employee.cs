@@ -18,9 +18,9 @@
         public decimal Salary { get; set; }
 
         /// <summary>
-        /// Abstract method to calculate bonus.
+        /// Calculates the bonus amount for the employee based on the employee type and its bonus calculation rules.
         /// </summary>
-        /// <returns>The bonus of the employee.</returns>
+        /// <returns> The bonus amount applicable to the employee.  </returns>
         public abstract decimal CalculateBonus();
 
         /// <summary>

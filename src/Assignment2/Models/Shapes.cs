@@ -14,9 +14,10 @@
         public string Color { get; set; } = string.Empty;
 
         /// <summary>
-        /// Abstract method to calculate area.
+        /// Calculates the area of the shape using the dimensions specific to the shape type.
         /// </summary>
-        /// <returns> Area of the shape. </returns>
+        /// <returns> The calculated area of the shape. </returns>
+        public abstract double CalculateArea();
         public abstract double CalculateArea();
 
         /// <summary>
