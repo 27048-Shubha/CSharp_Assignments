@@ -4,7 +4,7 @@
     using Assignment2.Views;
 
     /// <summary>
-    /// Controls Employee system's menu this._service and communicates with this._console and this._service.
+    /// Controls Employee system's menu service and communicates with console and service.
     /// </summary>
     public class EmployeeController
     {

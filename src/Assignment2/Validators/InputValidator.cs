@@ -53,7 +53,7 @@
         /// </summary>
         /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public static bool IsZero(double number)
+        public static bool IsGreaterThanZero(double number)
         {
             return number == 0;
         }
@@ -64,16 +64,6 @@
         /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is negative else false. </returns>
         public static bool IsNegative(decimal number)
-        {
-            return number < 0;
-        }
-
-        /// <summary>
-        /// Checks whether received input is zero or not.
-        /// </summary>
-        /// <param name="number">The input to be validated. </param>
-        /// <returns>True if given input is zero else false. </returns>
-        public static bool IsNegative(double number)
         {
             return number < 0;
         }

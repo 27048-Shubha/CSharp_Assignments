@@ -28,14 +28,9 @@
         /// <returns> The details of the shape If True, else invalid error Message. </returns>
         public string AddRectangle(string color, double length, double breadth)
         {
-            if (InputValidator.IsZero(length) || InputValidator.IsZero(breadth))
+            if (InputValidator.IsGreaterThanZero(length) || InputValidator.IsGreaterThanZero(breadth))
             {
-                return "Invalid input! Length and breadth must be Non Zero";
-            }
-
-            if (InputValidator.IsNegative(length) || InputValidator.IsNegative(breadth))
-            {
-                return "Invalid input! Length and breadth must be Non Negative";
+                return "Invalid input! Length and breadth must be greater than zero.";
             }
 
             return this._repo.AddRectangle(color, length, breadth);
@@ -49,19 +44,9 @@
         /// <returns> The details of the shape if True, else invalid error message. </returns>
         public string AddCircle(string color, double radius)
         {
-            if (!InputValidator.IsString(color))
+            if (InputValidator.IsGreaterThanZero(radius))
             {
-                return "Invalid input for color! No numbers or special characters allowed";
-            }
-
-            if (InputValidator.IsZero(radius))
-            {
-                return "Invalid input! Radius must be a non zero value";
-            }
-
-            if (InputValidator.IsNegative(radius))
-            {
-                return "Invalid input! Radius must be non negative";
+                return "Invalid input! Radius must be greater than zero.";
             }
 
             return this._repo.AddCircle(color, radius);

@@ -1,13 +1,13 @@
 ﻿namespace Assignment2.Views
 {
     using Assignment2.Validators;
+    using System.Drawing;
 
     /// <summary>
     /// Handles console operations of shape system.
     /// </summary>
     public class ShapeView : MainView
     {
-        private readonly string _defaultColor = "Red";
         /// <summary>
         /// Displays start up menu for shape system.
         /// </summary>
@@ -29,8 +29,22 @@
         /// <returns> The color as input from user. </returns>
         public string GetShapeColor()
         {
-            Console.WriteLine("Enter color: ");
-            return Console.ReadLine() ?? this._defaultColor;
+            string color;
+            while (true)
+            {
+                Console.WriteLine("Enter color: ");
+                color = Console.ReadLine() ?? string.Empty;
+                if (InputValidator.IsString(color))
+                {
+                    return color;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input for color! No numbers or special characters allowed");
+                }
+            }
+
+            return color;
         }
 
         /// <summary>
