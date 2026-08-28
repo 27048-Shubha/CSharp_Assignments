@@ -1,12 +1,17 @@
-﻿using ConsoleTables;
-using LINQ.Models;
-using LINQ.Models.DTOs;
-using Spectre.Console;
-
-namespace LINQ.Views
+﻿namespace LINQ.Views
 {
+    using ConsoleTables;
+    using LINQ.Models;
+    using LINQ.Models.DTOs;
+
+    /// <summary>
+    /// Manages console operations of the application.
+    /// </summary>
     public class ConsoleView
     {
+        /// <summary>
+        /// Displays a message and waits for the user to press a key before clearing the console.
+        /// </summary>
         public void Continue()
         {
             Console.WriteLine("Press any key to continue");
@@ -14,6 +19,10 @@ namespace LINQ.Views
             Console.Clear();
         }
 
+        /// <summary>
+        /// Prompts the user to select a task from the menu and returns the selected option.
+        /// </summary>
+        /// <returns>The selected task menu option.</returns>
         public Enums.TaskMenu GetUserChoice()
         {
             while (true)
@@ -36,6 +45,10 @@ namespace LINQ.Views
             }
         }
 
+        /// <summary>
+        /// Displays a collection of products in a console table.
+        /// </summary>
+        /// <param name="list">The list of products to display.</param>
         public void Display(List<Product> list)
         {
             var table = new ConsoleTable("Product Id", "Product Name", "Product Price", "Product Category");
@@ -48,6 +61,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays a read-only collection of products in a console table.
+        /// </summary>
+        /// <param name="list">The read-only list of products to display</param>
         public void Display(IReadOnlyList<Product> list)
         {
             var table = new ConsoleTable("Product Id", "Product Name", "Product Price", "Product Category");
@@ -60,6 +77,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays a read-only collection of suppliers in a console table.
+        /// </summary>
+        /// <param name="list">The read-only list of suppliers to display.</param>
         public void Display(IReadOnlyList<Supplier> list)
         {
             var table = new ConsoleTable("Supplier Id", "Supplier Name", "Product Id");
@@ -72,6 +93,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays a read-only collection of orders in a console table.
+        /// </summary>
+        /// <param name="list">The read-only list of orders to display.</param>
         public void Display(IReadOnlyList<Order> list)
         {
             var table = new ConsoleTable("Order Id", "Order Date", "Order Status");
@@ -84,6 +109,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays filtered product information in a console table.
+        /// </summary>
+        /// <param name="list">The filtered product details to display.</param>
         public void Display(List<FilterProductsDTO> list)
         {
             var table = new ConsoleTable("Product Name", "Product Price");
@@ -96,6 +125,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays category summary information in a console table.
+        /// </summary>
+        /// <param name="list">The category summary details to display.</param>
         public void Display(List<CategorySummaryDTO> list)
         {
             var table = new ConsoleTable(
@@ -116,6 +149,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays product and supplier information in a console table.
+        /// </summary>
+        /// <param name="list">The product supplier information to display.</param>
         public void Display(List<ProductSupplierInfoDTO> list)
         {
             var table = new ConsoleTable(
@@ -140,6 +177,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays unique number pairs in a console table.
+        /// </summary>
+        /// <param name="list">The collection of pairs to display.</param>
         public void Display(List<PairDTO> list)
         {
             var table = new ConsoleTable(
@@ -156,6 +197,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays a collection of suppliers in a console table.
+        /// </summary>
+        /// <param name="list">The suppliers to display.</param>
         public void Display(List<Supplier> list)
         {
             var table = new ConsoleTable(
@@ -174,6 +219,10 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays a collection of orders in a console table.
+        /// </summary>
+        /// <param name="list">The orders to display.</param>
         public void Display(List<Order> list)
         {
             var table = new ConsoleTable(
@@ -192,11 +241,19 @@ namespace LINQ.Views
             table.Write();
         }
 
+        /// <summary>
+        /// Displays an integer value in the console.
+        /// </summary>
+        /// <param name="data">The integer value to display.</param>
         public void Display(int data)
         {
             Console.WriteLine(data);
         }
 
+        /// <summary>
+        /// Displays a message in the console.
+        /// </summary>
+        /// <param name="message">The message to display.</param>
         public void Display(string message)
         {
             Console.WriteLine(message);

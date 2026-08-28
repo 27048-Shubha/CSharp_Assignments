@@ -1,20 +1,20 @@
-﻿using LINQ.Models;
-using LINQ.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace LINQ.Tasks
+﻿namespace LINQ.Tasks
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using LINQ.Models;
+    using LINQ.Models.DTOs;
+
+    /// <summary>
+    /// Performs grouping and join operations using LINQ.
+    /// </summary>
     public class Task2
     {
-        private IReadOnlyList<Product> _products;
-
+        /// <summary>
+        /// Groups products by category and generates summary information.
+        /// </summary>
+        /// <param name="products">The collection of products to group.</param>
+        /// <returns>A list containing category summary information.</returns>
         public List<CategorySummaryDTO> FilterProducts(IReadOnlyList<Product> products)
         {
             List<CategorySummaryDTO> filteredProducts = products.GroupBy(product => product.Category)
@@ -30,6 +30,12 @@ namespace LINQ.Tasks
             return filteredProducts;
         }
 
+        /// <summary>
+        /// Joins products and suppliers and returns combined information.
+        /// </summary>
+        /// <param name="products">The collection of products.</param>
+        /// <param name="suppliers">The collection of suppliers.</param>
+        /// <returns>A list containing product and supplier information.</returns>
         public List<ProductSupplierInfoDTO> PerformInnerJoin(IReadOnlyList<Product> products, IReadOnlyList<Supplier> suppliers)
         {
             List<ProductSupplierInfoDTO> joinedInfo = (from product in products

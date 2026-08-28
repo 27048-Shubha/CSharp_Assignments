@@ -1,11 +1,14 @@
-﻿using LINQ.Models;
-using LINQ.Models.DTOs;
-using LINQ.Service;
-using LINQ.Tasks;
-using LINQ.Views;
-
-namespace LINQ.Controllers
+﻿namespace LINQ.Controllers
 {
+    using LINQ.Models;
+    using LINQ.Models.DTOs;
+    using LINQ.Service;
+    using LINQ.Tasks;
+    using LINQ.Views;
+
+    /// <summary>
+    /// Handles execution of all LINQ tasks and manages product, supplier, and order data retrieval.
+    /// </summary>
     public class TaskController
     {
         private IReadOnlyList<Product> _products;
@@ -16,6 +19,13 @@ namespace LINQ.Controllers
         private OrderService _orderService;
         private ConsoleView _console;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskController"/> class.
+        /// </summary>
+        /// <param name="productService">Product data service.</param>
+        /// <param name="supplierService">Supplier data service.</param>
+        /// <param name="orderService">Order data service.</param>
+        /// <param name="console">Console view used for user interaction.</param>
         internal TaskController(ProductService productService, SupplierService supplierService, OrderService orderService, ConsoleView console)
         {
             this._productService = productService;
@@ -24,6 +34,9 @@ namespace LINQ.Controllers
             this._console = console;
         }
 
+        /// <summary>
+        /// Loads all required data and displays the task menu continuously.
+        /// </summary>
         public void RunTasks()
         {
             this.LoadProducts();
@@ -69,53 +82,92 @@ namespace LINQ.Controllers
             }
         }
 
+        /// <summary>
+        /// Loads all products from the product service.
+        /// </summary>
         public void LoadProducts() => this._products = this._productService.GetAll();
 
+        /// <summary>
+        /// Loads all suppliers from the supplier service.
+        /// </summary>
         public void LoadSuppliers() => this._suppliers = this._supplierService.GetAll();
 
+        /// <summary>
+        /// Loads all orders from the order service.
+        /// </summary>
         public void LoadOrders() => this._orders = this._orderService.GetAll();
 
+        /// <summary>
+        /// Filters electronics products, sorts them by price, and calculates the average price.
+        /// </summary>
         public void RunTask1()
         {
             Task1 task1 = new Task1();
             List<FilterProductsDTO> filteredProducts = task1.FilterProducts(this._products);
+            this._console.Display("\n=== Electronics Products (Price > 500) ===");
             this._console.Display(filteredProducts);
+
             List<FilterProductsDTO> sortedProducts = task1.SortProducts(filteredProducts);
-            this._console.Display(sortedProducts);
+            this._console.Display("\n=== Electronics Products Sorted By Price (Descending) ==="); this._console.Display(sortedProducts);
+
             decimal average = task1.FindAverage(sortedProducts);
+            this._console.Display("\n=== Average Price Of Electronics Products (Price > 500) ===");
+            this._console.Display($"{average}");
         }
 
+        /// <summary>
+        /// Generates category summaries and performs an inner join between products and suppliers.
+        /// </summary>
         public void RunTask2()
         {
             Task2 task2 = new Task2();
             List<CategorySummaryDTO> filteredProducts = task2.FilterProducts(this._products);
+            this._console.Display("\n=== Category Summary (Count & Most Expensive Product) ===");
             this._console.Display(filteredProducts);
+
             List<ProductSupplierInfoDTO> joinedInfo = task2.PerformInnerJoin(this._products, this._suppliers);
+            this._console.Display("\n=== Product Supplier Details (Inner Join) ===");
             this._console.Display(joinedInfo);
         }
 
+        /// <summary>
+        /// Finds the second highest number and displays unique pairs whose sum matches the target value.
+        /// </summary>
         public void RunTask3()
         {
             Task3 task3 = new Task3();
             int secondHighestNumber = task3.FindSecondHighestNumber();
+            this._console.Display("\n=== Second Highest Number In Array ===");
             this._console.Display(secondHighestNumber);
+
             List<PairDTO> joinedInfo = task3.UniquePairsAddUptoTarget();
+            this._console.Display("\n=== Unique Pairs Matching Target Sum ===");
             this._console.Display(joinedInfo);
         }
 
+        /// <summary>
+        /// Demonstrates sorting books by price using both standard and optimized LINQ queries.
+        /// </summary>
         public void RunTask4()
         {
             Task4 task4 = new Task4();
             List<Product> sortedProducts = task4.SortProduct(this._products);
+            this._console.Display("\n=== Books Sorted By Price ===");
             this._console.Display(sortedProducts);
+
             sortedProducts = task4.OptimizedSortProduct(this._products);
+            this._console.Display("\n=== Optimized Query - Books Sorted By Price ===");
             this._console.Display(sortedProducts);
         }
 
+        /// <summary>
+        /// Demonstrates the custom QueryBuilder implementation using filtering, sorting, and joining operations.
+        /// </summary>
         public void RunTask5()
         {
-            QueryBuilder queryBuilder = new QueryBuilder();
+            Task5_QueryBuilder queryBuilder = new Task5_QueryBuilder(this._products, this._suppliers);
             List<ProductSupplierInfoDTO> result = queryBuilder.Filter(p => p.Price > 500).SortBy(p => p.Price).Join((p, s) => p.Id == s.SupplierId).Execute();
+            this._console.Display($"");
             this._console.Display(result);
         }
     }

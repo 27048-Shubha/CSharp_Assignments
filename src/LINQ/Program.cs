@@ -1,13 +1,19 @@
-﻿using LINQ.Controllers;
-using LINQ.Repository;
-using LINQ.Service;
-using LINQ.Views;
-
-namespace Assignments
+﻿namespace Assignments
 {
+    using LINQ.Controllers;
+    using LINQ.Repository;
+    using LINQ.Service;
+    using LINQ.Views;
+
+    /// <summary>
+    /// Manages overall flow of the program.
+    /// </summary>
     public class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// Entry point of the program.
+        /// </summary>
+        public static void Main()
         {
             ConsoleView console = new ConsoleView();
 
