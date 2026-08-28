@@ -15,11 +15,7 @@
         /// <returns>The details of manager created. </returns>
         public string AddManager(string name, decimal salary)
         {
-            Manager manager = new Manager()
-            {
-                Name = name,
-                Salary = salary,
-            };
+            Manager manager = new Manager(name, salary);
             return manager.PrintDetails();
         }
 
@@ -31,11 +27,7 @@
         /// <returns>The details of developer created. </returns>
         public string AddDeveloper(string name, decimal salary)
         {
-            Developer dev = new Developer()
-            {
-                Name = name,
-                Salary = salary,
-            };
+            Developer dev = new Developer(name, salary);
             return dev.PrintDetails();
         }
     }

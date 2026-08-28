@@ -34,7 +34,7 @@
             {
                 Console.WriteLine("Enter color: ");
                 color = Console.ReadLine() ?? string.Empty;
-                if (InputValidator.IsString(color))
+                if (InputValidator.IsValidAlphabeticInput(color))
                 {
                     return color;
                 }

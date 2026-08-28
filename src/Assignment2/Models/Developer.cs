@@ -6,6 +6,16 @@
     public class Developer : Employee
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Developer"/> class.
+        /// </summary>
+        /// <param name="name">Name of the developer.</param>
+        /// <param name="salary">Salary of the developer.</param>
+        internal Developer(string name, decimal salary) 
+            : base(name, salary)
+        {
+        }
+
+        /// <summary>
         /// Gets bonus value of the developer.
         /// </summary>
         /// <value> The bonus salary of the developer. </value>
@@ -26,7 +36,7 @@
         /// <returns> The details of the developer. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}\nBonus: {this.CalculateBonus()}";
+            return base.PrintDetails(this.CalculateBonus());
         }
     }
 }

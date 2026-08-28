@@ -28,7 +28,7 @@
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddManager(string name, decimal salary)
         {
-            if (!InputValidator.IsZero(salary) && !InputValidator.IsNegative(salary))
+            if (InputValidator.IsPositive(salary))
             {
                     return this._repo.AddManager(name, salary);
             }
@@ -44,7 +44,7 @@
         /// <returns> The details of the employee If True, else invalid error message. </returns>
         public string AddDeveloper(string name, decimal salary)
         {
-            if (!InputValidator.IsZero(salary) && !InputValidator.IsNegative(salary))
+            if (InputValidator.IsPositive(salary))
             {
                 return this._repo.AddDeveloper(name, salary);
             }

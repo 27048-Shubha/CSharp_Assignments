@@ -6,6 +6,11 @@
     public abstract class BankAccount
     {
         /// <summary>
+        /// Minimum balance value for the account.
+        /// </summary>
+        protected static readonly decimal MinimumBalance = 100m;
+
+        /// <summary>
         /// Gets or sets account number.
         /// </summary>
         /// <value>The account number of the bank account.</value>
@@ -27,10 +32,11 @@
         }
 
         /// <summary>
-        /// Withdraws the specified amount from the bank account and updates the balance if the withdrawal satisfies the account's withdrawal rules.
+        /// Attempts to withdraw the specified amount from the account balance.
         /// </summary>
         /// <param name="amount">The amount to withdraw.</param>
-        /// <returns> Returns true if the withdrawal is successful and the amount is deducted from the account balance; otherwise,false. </returns>
+        /// <returns>True, if the withdrawal is completed successfully, else if the withdrawal cannot be performed according to the account's withdrawal rules.
+        /// </returns>
         public abstract bool Withdraw(decimal amount);
     }
 }

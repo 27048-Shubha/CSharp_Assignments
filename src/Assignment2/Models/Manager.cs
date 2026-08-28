@@ -6,6 +6,16 @@
     public class Manager : Employee
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Manager"/> class.
+        /// </summary>
+        /// <param name="name">Name of the manager.</param>
+        /// <param name="salary">Salary of the manager.</param>
+        internal Manager(string name, decimal salary)
+            : base(name, salary)
+        {
+        }
+
+        /// <summary>
         /// Gets bonus value of the manager.
         /// </summary>
         /// <value> The bonus salary of the manager. </value>
@@ -26,7 +36,7 @@
         /// <returns> The details of the manager. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}\nBonus: {this.CalculateBonus()}";
+            return base.PrintDetails(this.CalculateBonus());
         }
     }
 }

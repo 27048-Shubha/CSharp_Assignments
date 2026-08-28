@@ -3,8 +3,19 @@
     /// <summary>
     /// Handles area calculation of the Circle inherited from the Shape.
     /// </summary>
-    public class Circle : Shapes
+    public class Circle : Shape
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Circle"/> class.
+        /// </summary>
+        /// <param name="color">Color of the shape</param>
+        /// <param name="radius">Radius of the circle</param>
+        internal Circle(string color, double radius)
+            :base(color)
+        {
+            this.Radius = radius;
+        }
+
         /// <summary>
         /// Gets or sets radius of the circle.
         /// </summary>

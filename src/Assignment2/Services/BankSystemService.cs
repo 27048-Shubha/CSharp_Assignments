@@ -9,13 +9,13 @@
     /// </summary>
     public class BankSystemService
     {
-        private BankSystemRepo _repo;
+        private BankSystemRepository _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
-        public BankSystemService(BankSystemRepo repo)
+        public BankSystemService(BankSystemRepository repo)
         {
             this._repo = repo;
         }

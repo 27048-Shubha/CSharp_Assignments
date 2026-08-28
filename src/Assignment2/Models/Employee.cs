@@ -6,10 +6,21 @@
     public abstract class Employee
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Employee"/> class.
+        /// </summary>
+        /// <param name="name">Name of the employee.</param>
+        /// <param name="salary">Salary of the employee.</param>
+        internal Employee(string name, decimal salary)
+        {
+            this.Name = name;
+            this.Salary = salary;
+        }
+
+        /// <summary>
         /// Gets or Sets name of the employee.
         /// </summary>
         /// <value>The name of the employee. </value>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets salary of the employee.
@@ -24,12 +35,13 @@
         public abstract decimal CalculateBonus();
 
         /// <summary>
-        /// Retrieves name and salary fo the employee.
+        /// Retrieves name, salary and bonus fo the employee.
         /// </summary>
-        /// <returns>The name and salary of the employee.</returns>
-        public string PrintDetails()
+        /// <param name="bonus">Bonus of the employee.</param>
+        /// <returns>The name, salary and bonus of the employee.</returns>
+        public string PrintDetails(decimal bonus)
         {
-            return $"Name: {this.Name}\nSalary: {this.Salary}";
+            return $"Name: {this.Name}\nSalary: {this.Salary}\n Bonus: {bonus}";
         }
     }
 }

@@ -53,9 +53,19 @@
         /// </summary>
         /// <param name="number">The input to be validated. </param>
         /// <returns>True if given input is zero else false. </returns>
-        public static bool IsGreaterThanZero(double number)
+        public static bool IsPositive(double number)
         {
-            return number == 0;
+            return number > 0;
+        }
+
+        /// <summary>
+        /// Checks whether received input is zero or not.
+        /// </summary>
+        /// <param name="number">The input to be validated. </param>
+        /// <returns>True if given input is zero else false. </returns>
+        public static bool IsPositive(decimal number)
+        {
+            return number > 0;
         }
 
         /// <summary>
@@ -73,14 +83,9 @@
         /// </summary>
         /// <param name="input">The input to be validated. </param>
         /// <returns>True if given input is a string else false. </returns>
-        public static bool IsString(string input)
+        public static bool IsValidAlphabeticInput(string input)
         {
-            if (input.Trim().Equals(string.Empty))
-            {
-                return false;
-            }
-
-            return input.All(char.IsLetter);
+            return !string.IsNullOrWhiteSpace(input) && input.All(char.IsLetter);
         }
 
         /// <summary>
@@ -95,15 +100,7 @@
                 return false;
             }
 
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return input.All(char.IsDigit);
         }
     }
 }
