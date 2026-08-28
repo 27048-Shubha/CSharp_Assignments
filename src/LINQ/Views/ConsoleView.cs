@@ -66,7 +66,7 @@ namespace LINQ.Views
 
             foreach (var item in list)
             {
-                table.AddRow(item.ProductId, item.SupplierId, item.ProductId);
+                table.AddRow(item.ProductId, item.SupplierName, item.SupplierId);
             }
 
             table.Write();

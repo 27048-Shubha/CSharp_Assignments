@@ -1,67 +1,64 @@
 ﻿using LINQ.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace LINQ.Repository
 {
     public class ProductRepository
     {
+        private readonly string _filePath;
+        private readonly string _directoryName;
         internal ProductRepository()
         {
             this.Products = new List<Product>();
+            this._directoryName = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+            this._filePath =  Path.Combine(this._directoryName, "products.json");
         }
 
         public List<Product> Products { get; set; }
 
         public void Add(Product product)
         {
+            this.ReadFromJson();
             this.Products.Add(product);
+            this.WriteToJson();
         }
 
         public IReadOnlyList<Product> GetAll()
         {
-            return (IReadOnlyList<Product>)this.Products;
+            this.ReadFromJson();
+            return this.Products;
         }
 
-        //public List<Product> ReadFromJson()
-        //{
-        //    if (!File.Exists(filePath))
-        //    {
-        //        return new List<Product>();
-        //    }
+        public void ReadFromJson()
+        {
+            string directory = Path.GetDirectoryName(this._filePath)!;
 
-        //    var json = File.ReadAllText(filePath).Trim();
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
 
-        //    if (string.IsNullOrWhiteSpace(json))
-        //    {
-        //        return new List<Product>();
-        //    }
+            if (!File.Exists(this._filePath))
+            {
+                File.Create(this._filePath).Dispose();
+            }
 
-        //    if (json.StartsWith("["))
-        //    {
-        //        return JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
-        //    }
+            var json = File.ReadAllText(this._filePath).Trim();
 
-        //    if (json.StartsWith("{"))
-        //    {
-        //        var products = JsonSerializer.Deserialize<Product>(json);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                this.Products = new List<Product>();
+                return;
+            }
 
-        //        return products is null
-        //            ? new List<Product>()
-        //            : new List<Product> { products };
-        //    }
+            this.Products = JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
+        }
 
-        //    return new List<Product>();
-        //}
-
-        //public void WriteToJson()
-        //{
-
-        //}
+        public void WriteToJson()
+        {
+            string newData = JsonSerializer.Serialize(Products);
+            File.WriteAllText(this._filePath, newData);
+        }
     }
 }
