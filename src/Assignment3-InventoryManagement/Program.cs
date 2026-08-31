@@ -11,8 +11,8 @@
     internal class Program
     {
         private static ConsoleView view = new ConsoleView();
-        private static ProductRepository repo = new ProductRepository();
-        private static InventoryService service = new InventoryService(repo);
+        private static ProductRepository repository = new ProductRepository();
+        private static InventoryService service = new InventoryService(repository);
         private static InventoryController controller = new InventoryController(view, service);
 
         /// <summary>
