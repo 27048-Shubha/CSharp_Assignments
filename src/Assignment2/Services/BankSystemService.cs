@@ -56,7 +56,7 @@
         /// <returns>True on successful deposit operation, else false.</returns>
         public bool DepositAmount(BankAccount account, decimal amount)
         {
-            if (!InputValidator.IsZero(amount) && !InputValidator.IsNegative(amount))
+            if (!Validator.IsZero(amount) && !Validator.IsNegative(amount))
             {
                 account.Deposit(amount);
                 return true;
@@ -73,7 +73,7 @@
         /// <returns>True on successful withdrawal operation, else false.</returns>
         public bool WithdrawAmount(BankAccount account, decimal amount)
         {
-            if (!InputValidator.IsNegative(amount))
+            if (!Validator.IsNegative(amount))
             {
                 return account.Withdraw(amount);
             }

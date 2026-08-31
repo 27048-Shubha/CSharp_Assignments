@@ -16,12 +16,7 @@
         /// <returns>The details of rectangle created. </returns>
         public string AddRectangle(string color, double length, double breadth)
         {
-            Rectangle rectangle = new Rectangle()
-            {
-                Color = color,
-                Length = length,
-                Breadth = breadth,
-            };
+            Rectangle rectangle = new Rectangle(color, length, breadth);
             return rectangle.PrintDetails();
         }
 
@@ -33,11 +28,7 @@
         /// <returns>The details of circle created. </returns>
         public string AddCircle(string color, double radius)
         {
-            Circle circle = new Circle()
-            {
-                Color = color,
-                Radius = radius,
-            };
+            Circle circle = new Circle(color, radius);
             return circle.PrintDetails();
         }
     }

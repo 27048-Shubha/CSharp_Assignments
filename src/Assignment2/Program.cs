@@ -23,7 +23,7 @@
 
             ShapeRepository shapeRepo = new ShapeRepository();
             EmployeeRepository employeeRepo = new EmployeeRepository();
-            BankSystemRepo bankRepo = new BankSystemRepo();
+            BankSystemRepository bankRepo = new BankSystemRepository();
 
             ShapeService shapeService = new ShapeService(shapeRepo);
             EmployeeService employeeService = new EmployeeService(employeeRepo);

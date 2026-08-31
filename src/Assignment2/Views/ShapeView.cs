@@ -34,7 +34,7 @@
             {
                 Console.WriteLine("Enter color: ");
                 color = Console.ReadLine() ?? string.Empty;
-                if (InputValidator.IsValidAlphabeticInput(color))
+                if (Validator.IsValidAlphabeticInput(color))
                 {
                     return color;
                 }
@@ -56,7 +56,7 @@
             while (true)
             {
                 Console.WriteLine("Enter radius: ");
-                if (InputValidator.IsValidDouble(Console.ReadLine(), out double radius))
+                if (Validator.IsValidDouble(Console.ReadLine(), out double radius))
                 {
                     return radius;
                 }
@@ -76,7 +76,7 @@
             while (true)
             {
                 Console.WriteLine("Enter length: ");
-                if (InputValidator.IsValidDouble(Console.ReadLine(), out double length))
+                if (Validator.IsValidDouble(Console.ReadLine(), out double length))
                 {
                     return length;
                 }
@@ -96,7 +96,7 @@
             while (true)
             {
                 Console.WriteLine("Enter breadth: ");
-                if (InputValidator.IsValidDouble(Console.ReadLine(), out double breadth))
+                if (Validator.IsValidDouble(Console.ReadLine(), out double breadth))
                 {
                     return breadth;
                 }

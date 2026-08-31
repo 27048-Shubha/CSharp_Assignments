@@ -47,7 +47,7 @@ namespace Assignment2.Views
             while (true)
             {
                 Console.WriteLine("Enter salary: ");
-                if (InputValidator.IsValidDecimal(Console.ReadLine(), out decimal salary))
+                if (Validator.IsValidDecimal(Console.ReadLine(), out decimal salary))
                 {
                     return salary;
                 }

@@ -6,11 +6,6 @@
     public abstract class BankAccount
     {
         /// <summary>
-        /// Minimum balance value for the account.
-        /// </summary>
-        protected static readonly decimal MinimumBalance = 100m;
-
-        /// <summary>
         /// Gets or sets account number.
         /// </summary>
         /// <value>The account number of the bank account.</value>

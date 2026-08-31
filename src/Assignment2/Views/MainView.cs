@@ -16,7 +16,7 @@
             char choice;
             char defaultChoice = 'D';
             string value = Console.ReadLine() ?? string.Empty;
-            if (!InputValidator.IsValidChar(value, out choice))
+            if (!Validator.IsValidChar(value, out choice))
             {
                 return defaultChoice;
             }

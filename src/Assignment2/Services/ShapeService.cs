@@ -28,7 +28,7 @@
         /// <returns> The details of the shape If True, else invalid error Message. </returns>
         public string AddRectangle(string color, double length, double breadth)
         {
-            if (InputValidator.IsPositive(length) && InputValidator.IsPositive(breadth))
+            if (Validator.IsPositive(length) && Validator.IsPositive(breadth))
             {
                 return this._repo.AddRectangle(color, length, breadth);
             }
@@ -44,7 +44,7 @@
         /// <returns> The details of the shape if True, else invalid error message. </returns>
         public string AddCircle(string color, double radius)
         {
-            if (InputValidator.IsPositive(radius))
+            if (Validator.IsPositive(radius))
             {
                 return this._repo.AddCircle(color, radius);
             }

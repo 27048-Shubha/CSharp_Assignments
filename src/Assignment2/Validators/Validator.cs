@@ -3,8 +3,13 @@
     /// <summary>
     /// Manages input validation operation.
     /// </summary>
-    public static class InputValidator
+    public static class Validator
     {
+        /// <summary>
+        /// Represents minimum balance amount.
+        /// </summary>
+        private static readonly decimal MinimumBalance = 100m;
+
         /// <summary>
         /// Checks whether the input character is valid or not.
         /// </summary>
@@ -101,6 +106,21 @@
             }
 
             return input.All(char.IsDigit);
+        }
+
+        /// <summary>
+        /// Checks whether withdrawal is allowed or not.
+        /// </summary>
+        /// <param name="currentBalance">Current account balance.</param>
+        /// <param name="withdrawalAmount">Amount to be withdrawn.</param>
+        /// <param name="isSavingsAccount">Flag to indicate account type</param>
+        /// <returns>True if withdrawal possible, else false</returns>
+        public static bool IsWithdrawalAllowed(
+            decimal currentBalance,
+            decimal withdrawalAmount,
+            bool isSavingsAccount)
+        {
+            return currentBalance - withdrawalAmount >= (isSavingsAccount ? MinimumBalance : 0);
         }
     }
 }

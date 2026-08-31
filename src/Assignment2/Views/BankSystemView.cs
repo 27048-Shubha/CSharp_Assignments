@@ -45,7 +45,7 @@
             while (true)
             {
                 Console.WriteLine("Enter deposit amount: ");
-                if (InputValidator.IsValidDecimal(Console.ReadLine(), out decimal amount))
+                if (Validator.IsValidDecimal(Console.ReadLine(), out decimal amount))
                 {
                     return amount;
                 }
@@ -65,7 +65,7 @@
             while (true)
             {
                 Console.WriteLine("Enter withdraw amount: ");
-                if (InputValidator.IsValidDecimal(Console.ReadLine(), out decimal amount))
+                if (Validator.IsValidDecimal(Console.ReadLine(), out decimal amount))
                 {
                     return amount;
                 }
