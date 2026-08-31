@@ -166,7 +166,15 @@
         public void RunTask5()
         {
             Task5_QueryBuilder queryBuilder = new Task5_QueryBuilder(this._products, this._suppliers);
+            this._console.Display("\n=== Demonstration of filtering, sorting, joining using custom query builder ===");
+
+            this._console.Display("\n=== Filter products of price greater than 500 & Sort by price then perform join based on supplier id ===");
             List<ProductSupplierInfoDTO> result = queryBuilder.Filter(p => p.Price > 500).SortBy(p => p.Price).Join((p, s) => p.Id == s.SupplierId).Execute();
+            this._console.Display($"");
+            this._console.Display(result);
+
+            this._console.Display("\n=== Filter products that starts with \"C\" & Sort by price then perform join based on supplier id ===");
+            result = queryBuilder.Filter(p => p.Name.StartsWith("C")).SortBy(p => p.Price).Join((p, s) => p.Id == s.SupplierId).Execute();
             this._console.Display($"");
             this._console.Display(result);
         }
