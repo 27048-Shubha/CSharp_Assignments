@@ -108,7 +108,8 @@
             this._console.Display(filteredProducts);
 
             List<FilterProductsDTO> sortedProducts = task1.SortProducts(filteredProducts);
-            this._console.Display("\n=== Electronics Products Sorted By Price (Descending) ==="); this._console.Display(sortedProducts);
+            this._console.Display("\n=== Electronics Products Sorted By Price (Descending) ===");
+            this._console.Display(sortedProducts);
 
             decimal average = task1.FindAverage(sortedProducts);
             this._console.Display("\n=== Average Price Of Electronics Products (Price > 500) ===");
@@ -150,13 +151,14 @@
         /// </summary>
         public void RunTask4()
         {
-            Task4 task4 = new Task4();
-            List<Product> sortedProducts = task4.SortProduct(this._products);
-            this._console.Display("\n=== Books Sorted By Price ===");
-            this._console.Display(sortedProducts);
+            Task4 task4 = new Task4(_console);
 
-            sortedProducts = task4.OptimizedSortProduct(this._products);
-            this._console.Display("\n=== Optimized Query - Books Sorted By Price ===");
+            List<Product> sortedProducts = task4.FilterFirstApproach(this._products);
+            task4.NoLINQApproach(this._products);
+            task4.ManualFilterThenQueryApproach(this._products);
+            task4.LookUpBasedApproach(this._products);
+
+            this._console.Display("\n=== Books Sorted By Price ===");
             this._console.Display(sortedProducts);
         }
 
