@@ -1,12 +1,12 @@
 ﻿namespace Assignment2.Controllers
 {
-    using System;
-    using Assignment2.Models.Task3;
+    using Assignment2.Models;
+    using Assignment2.Repository;
     using Assignment2.Services;
     using Assignment2.Views;
 
     /// <summary>
-    /// Controls menu service and communicates with console and service.
+    /// Controls menu _service and communicates with _console and _service.
     /// </summary>
     public class BankSystemController
     {
@@ -17,7 +17,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemController"/> class.
         /// </summary>
-        /// <param name="console"> The object to handle console operations. </param>
+        /// <param name="console"> The object to handle _console operations. </param>
         /// <param name="service"> The object to handle services. </param>
         public BankSystemController(BankSystemView console, BankSystemService service)
         {
@@ -33,7 +33,7 @@
             BankAccount account;
             char choice;
 
-            do
+            while (true)
             {
                 this._console.DisplayMenu();
                 choice = this._console.GetUserChoice();
@@ -43,15 +43,15 @@
                     case 'S':
                     case 's':
                         account = this._service.CreateSavingsAccount();
-                        this.CallService(account);
                         this._isSavings = true;
+                        this.CallService(account);
                         break;
 
                     case 'C':
                     case 'c':
                         account = this._service.CreateCheckingAccount();
-                        this.CallService(account);
                         this._isSavings = false;
+                        this.CallService(account);
                         break;
 
                     case 'B':
@@ -65,7 +65,6 @@
                         break;
                 }
             }
-            while (choice != 'Q' && choice != 'q');
         }
 
         /// <summary>
@@ -75,7 +74,7 @@
         public void CallService(BankAccount account)
         {
             char choice;
-            string? amount;
+            decimal amount;
             this._console.DisplayMinBalanceInfo();
 
             while (true)
@@ -110,16 +109,14 @@
                         else
                         {
                             this._console.WithdrawFailureMessage();
-                            this._console.DisplayMinBalanceWarning();
+                            if (this._isSavings)
+                            {
+                                this._console.DisplayMinBalanceWarning();
+                            }
                         }
 
                         decimal amountDecimal = this._service.CheckBalance(account);
                         this._console.DisplayBalance(amountDecimal);
-
-                        if (this._isSavings)
-                        {
-                            this._console.DisplayMinBalanceWarning();
-                        }
 
                         break;
 

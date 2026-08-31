@@ -1,21 +1,26 @@
-﻿namespace Assignment2.Models.Task1
+﻿namespace Assignment2.Models
 {
     /// <summary>
     /// Handles area calculation of the Circle inherited from the Shape.
     /// </summary>
-    internal class Circle : Shapes
+    public class Circle : Shape
     {
-        private double _radius;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Circle"/> class.
+        /// </summary>
+        /// <param name="color">Color of the shape</param>
+        /// <param name="radius">Radius of the circle</param>
+        internal Circle(string color, double radius)
+            :base(color)
+        {
+            this.Radius = radius;
+        }
 
         /// <summary>
         /// Gets or sets radius of the circle.
         /// </summary>
         /// <value> The radius of the circle. </value>
-        public double Radius
-        {
-            get { return this._radius; }
-            set { this._radius = value; }
-        }
+        public double Radius { get;  set; }
 
         /// <summary>
         /// Calculates area of the circle.

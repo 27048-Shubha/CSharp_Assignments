@@ -1,30 +1,25 @@
-﻿namespace Assignment2.Models.Task2
+﻿namespace Assignment2.Models
 {
-    using Assignment2.Models.Task2;
-
     /// <summary>
     /// Handles bonus calculation of the Manager inherited from the Employee.
     /// </summary>
     public class Manager : Employee
     {
-        private decimal _bonus;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Manager"/> class.
+        /// </summary>
+        /// <param name="name">Name of the manager.</param>
+        /// <param name="salary">Salary of the manager.</param>
+        internal Manager(string name, decimal salary)
+            : base(name, salary)
+        {
+        }
 
         /// <summary>
-        /// Gets or sets bonus value of the manager.
+        /// Gets bonus value of the manager.
         /// </summary>
         /// <value> The bonus salary of the manager. </value>
-        public decimal Bonus
-        {
-            get
-            {
-                return this._bonus;
-            }
-
-            set
-            {
-                this._bonus = value;
-            }
-        }
+        public decimal Bonus { get; } = 0.20m;
 
         /// <summary>
         /// Calculates bonus of the manager.
@@ -32,8 +27,7 @@
         /// <returns> The calculted bonus of the manager. </returns>
         public override decimal CalculateBonus()
         {
-            this.Bonus = this.Salary * 0.20m;
-            return this.Bonus;
+            return this.Salary * this.Bonus;
         }
 
         /// <summary>
@@ -42,7 +36,7 @@
         /// <returns> The details of the manager. </returns>
         public new string PrintDetails()
         {
-            return $"{base.PrintDetails()}\nBonus: {this.CalculateBonus()}";
+            return base.PrintDetails(this.CalculateBonus());
         }
     }
 }

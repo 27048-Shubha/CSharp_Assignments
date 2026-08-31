@@ -1,6 +1,6 @@
 ﻿namespace Assignment2.Views
 {
-    using Assignment2.Validations;
+    using Assignment2.Validators;
 
     /// <summary>
     /// Manages main console operations of the application.
@@ -16,7 +16,7 @@
             char choice;
             char defaultChoice = 'D';
             string value = Console.ReadLine() ?? string.Empty;
-            if (!InputValidation.IsValidChar(value, out choice))
+            if (!Validator.IsValidChar(value, out choice))
             {
                 return defaultChoice;
             }
@@ -30,7 +30,12 @@
         public virtual void DisplayMenu()
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Welcome to hierarchy system!\nMenu:\n'S' to enter shape hierarchy system\n'E' to enter employee system\n'B' to enter banking system\n'Q' to quit\n");
+            Console.WriteLine("Welcome to hierarchy system!");
+            Console.WriteLine("Menu:");
+            Console.WriteLine("[S] Shape System");
+            Console.WriteLine("[E] Employee System");
+            Console.WriteLine("[B] Banking System");
+            Console.WriteLine("[Q] Quit");
             Console.ResetColor();
         }
 
