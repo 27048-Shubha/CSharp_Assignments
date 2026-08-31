@@ -34,9 +34,9 @@
         /// </summary>
         /// <param name="predicate">The filter condition.</param>
         /// <returns>The current query builder instance.</returns>
-        public Task5_QueryBuilder Filter(Expression<Func<Product, bool>> predicate)
+        public Task5_QueryBuilder Filter(Func<Product, bool> predicate)
         {
-            this._productQuery = this._productQuery.Where(predicate.Compile());
+            this._productQuery = this._productQuery.Where(predicate);
             return this;
         }
 
@@ -46,9 +46,9 @@
         /// <typeparam name="TKey">The type of the sorting key.</typeparam>
         /// <param name="predicate">The key selector used for sorting.</param>
         /// <returns>The current query builder instance.</returns>
-        public Task5_QueryBuilder SortBy<TKey>(Expression<Func<Product, TKey>> predicate)
+        public Task5_QueryBuilder SortBy<TKey>(Func<Product, TKey> predicate)
         {
-            this._productQuery = this._productQuery.OrderBy(predicate.Compile());
+            this._productQuery = this._productQuery.OrderBy(predicate);
             return this;
         }
 
@@ -57,17 +57,18 @@
         /// </summary>
         /// <param name="predicate">The join condition.</param>
         /// <returns>The current query builder instance.</returns>
-        public Task5_QueryBuilder Join(Expression<Func<Product, Supplier, bool>> predicate)
+        public Task5_QueryBuilder Join(Func<Product, Supplier, bool> predicate)
         {
-            Func<Product, Supplier, bool> joinCondition = predicate.Compile();
+            // Func<Product, Supplier, bool> joinCondition = predicate.Compile();
             this._productSupplierQuery = this._productQuery.SelectMany(
-                product => this._suppliers
-                    .Where(supplier => joinCondition(product, supplier)), (product, supplier) => new ProductSupplierInfoDTO
+                    product => this._suppliers
+                    .Where(supplier => predicate(product, supplier)), 
+                    (product, supplier) => new ProductSupplierInfoDTO
                     {
-                        ProductId = product.Id,
-                        ProductName = product.Name,
-                        SupplierId = supplier.SupplierId,
-                        SupplierName = supplier.SupplierName,
+                         ProductId = product.Id,
+                         ProductName = product.Name,
+                         SupplierId = supplier.SupplierId,
+                         SupplierName = supplier.SupplierName,
                     });
             return this;
         }
