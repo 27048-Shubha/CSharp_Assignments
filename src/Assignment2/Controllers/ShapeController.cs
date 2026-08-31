@@ -39,8 +39,8 @@
                     case 'R':
                     case 'r':
                         color = this._console.GetShapeColor();
-                        string length = this._console.GetLength();
-                        string breadth = this._console.GetBreadth();
+                        double length = this._console.GetLength();
+                        double breadth = this._console.GetBreadth();
                         message = this._service.AddRectangle(color, length, breadth);
                         this._console.DisplayMessage(message);
                         break;
@@ -48,7 +48,7 @@
                     case 'C':
                     case 'c':
                         color = this._console.GetShapeColor();
-                        string radius = this._console.GetRadius();
+                        double radius = this._console.GetRadius();
                         message = this._service.AddCircle(color, radius);
                         this._console.DisplayMessage(message);
                         break;

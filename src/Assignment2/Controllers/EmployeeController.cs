@@ -4,7 +4,7 @@
     using Assignment2.Views;
 
     /// <summary>
-    /// Controls Employee system's menu this.service and communicates with this.console and this.service.
+    /// Controls Employee system's menu service and communicates with console and service.
     /// </summary>
     public class EmployeeController
     {
@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeController"/> class.
         /// </summary>
-        /// <param name="console"> The object to handle console operations. </param>
+        /// <param name="console"> The object to handle _console operations. </param>
         /// <param name="service"> The object to handle services. </param>
         public EmployeeController(EmployeeView console, EmployeeService service)
         {

@@ -1,30 +1,27 @@
 ﻿namespace Assignment2.Services
 {
-    using Assignment2.Models.Task3;
+    using Assignment2.Models;
     using Assignment2.Repository;
-    using Assignment2.Validations;
+    using Assignment2.Validators;
 
     /// <summary>
     /// Handles business logic validation and sends call to repository after validation.
     /// </summary>
     public class BankSystemService
     {
-        private BankSystemRepo _repo;
-        private InputValidation _validate;
+        private BankSystemRepository _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankSystemService"/> class.
         /// </summary>
         /// <param name="repo"> The object to handle repository operations. </param>
-        /// <param name="validate"> The object to handle validation operations. </param>
-        public BankSystemService(BankSystemRepo repo, InputValidation validate)
+        public BankSystemService(BankSystemRepository repo)
         {
             this._repo = repo;
-            this._validate = validate;
         }
 
         /// <summary>
-        /// Calls repo for savings account creation.
+        /// Calls _repo for savings account creation.
         /// </summary>
         /// <returns> The details of the new bank account created if True, else null.</returns>
         public BankAccount CreateSavingsAccount()
@@ -33,19 +30,19 @@
         }
 
         /// <summary>
-        /// Calls repo for savings account creation.
+        /// Calls _repo for savings account creation.
         /// </summary>
-        /// <returns> The details of the new bank account created if True, else null.</returns>
+        /// <returns> The details of the new bank account created if true, else null.</returns>
         public BankAccount CreateCheckingAccount()
         {
             return this._repo.CreateCheckingAccount();
         }
 
         /// <summary>
-        /// Gets balance amount in the current account.
+        /// Gets _balance amount in the current account.
         /// </summary>
-        /// <param name="account">The account's balance to be checked.</param>
-        /// <returns>The balance of the current account.</returns>
+        /// <param name="account">The account's _balance to be checked.</param>
+        /// <returns>The _balance of the current account.</returns>
         public decimal CheckBalance(BankAccount account)
         {
             return account.Balance;
@@ -57,18 +54,12 @@
         /// <param name="account">The account on which amount to be deposited.</param>
         /// <param name="amount">The amount to be deposited.</param>
         /// <returns>True on successful deposit operation, else false.</returns>
-        public bool DepositAmount(BankAccount account, string amount)
+        public bool DepositAmount(BankAccount account, decimal amount)
         {
-            if (this._validate.IsNumber(amount))
+            if (!Validator.IsZero(amount) && !Validator.IsNegative(amount))
             {
-                decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!this._validate.IsZero(amountDecimal) && !this._validate.IsNegative(amountDecimal))
-                {
-                    account.Deposit(amountDecimal);
-                    return true;
-                }
-
-                return false;
+                account.Deposit(amount);
+                return true;
             }
 
             return false;
@@ -80,17 +71,11 @@
         /// <param name="account">The account from which amount to be withdrawn.</param>
         /// <param name="amount">The amount to be withdrawn.</param>
         /// <returns>True on successful withdrawal operation, else false.</returns>
-        public bool WithdrawAmount(BankAccount account, string amount)
+        public bool WithdrawAmount(BankAccount account, decimal amount)
         {
-            if (this._validate.IsNumber(amount))
+            if (!Validator.IsNegative(amount))
             {
-                decimal amountDecimal = Convert.ToDecimal(amount);
-                if (!this._validate.IsNegative(amountDecimal))
-                {
-                    return account.Withdraw(amountDecimal);
-                }
-
-                return false;
+                return account.Withdraw(amount);
             }
 
             return false;

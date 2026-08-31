@@ -3,7 +3,7 @@
     using Assignment2.Controllers;
     using Assignment2.Repository;
     using Assignment2.Services;
-    using Assignment2.Validations;
+    using Assignment2.Validators;
     using Assignment2.Views;
 
     /// <summary>
@@ -16,8 +16,6 @@
         /// </summary>
         public static void Main()
         {
-            InputValidation validate = new InputValidation();
-
             MainView console = new MainView();
             ShapeView shapeView = new ShapeView();
             EmployeeView employeeView = new EmployeeView();
@@ -25,14 +23,18 @@
 
             ShapeRepository shapeRepo = new ShapeRepository();
             EmployeeRepository employeeRepo = new EmployeeRepository();
-            BankSystemRepo bankRepo = new BankSystemRepo();
+            BankSystemRepository bankRepo = new BankSystemRepository();
 
-            ShapeService shapeService = new ShapeService(shapeRepo, validate);
-            EmployeeService employeeService = new EmployeeService(employeeRepo, validate);
-            BankSystemService bankSystemService = new BankSystemService(bankRepo, validate);
+            ShapeService shapeService = new ShapeService(shapeRepo);
+            EmployeeService employeeService = new EmployeeService(employeeRepo);
+            BankSystemService bankSystemService = new BankSystemService(bankRepo);
+
+            ShapeController shapeController = new ShapeController(shapeView, shapeService);
+            EmployeeController employeeController = new EmployeeController(employeeView, employeeService);
+            BankSystemController bankController = new BankSystemController(bankSystemView, bankSystemService);
 
             char choice;
-            do
+            while (true)
             {
                 console.DisplayMenu();
                 choice = console.GetUserChoice();
@@ -40,19 +42,16 @@
                 {
                     case 'S':
                     case 's':
-                        ShapeController shapeController = new ShapeController(shapeView, shapeService);
                         shapeController.Initialize();
                         break;
 
                     case 'E':
                     case 'e':
-                        EmployeeController employeeController = new EmployeeController(employeeView, employeeService);
                         employeeController.Initialize();
                         break;
 
                     case 'B':
                     case 'b':
-                        BankSystemController bankController = new BankSystemController(bankSystemView, bankSystemService);
                         bankController.Initialize();
                         break;
 
@@ -66,7 +65,6 @@
                         break;
                 }
             }
-            while (choice != 'q' || choice != 'Q');
         }
     }
 }
