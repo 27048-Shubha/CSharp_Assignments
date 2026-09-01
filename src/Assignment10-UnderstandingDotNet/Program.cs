@@ -1,14 +1,22 @@
 ﻿namespace Debugging
 {
-    internal class Program
+    /// <summary>
+    /// Handles main flow of the application.
+    /// </summary>
+    public class Program
     {
-        static int num;
-        static void Main(string[] args)
+        /// <summary>
+        /// Execution start of the application.
+        /// </summary>
+        public static void Main()
         {
             Program.Run();
         }
 
-        static void Run()
+        /// <summary>
+        /// Runs basic calculator operations.
+        /// </summary>
+        public static void Run()
         {
             MathUtils utilHandler = new MathUtils();
 
@@ -18,8 +26,7 @@
             Console.WriteLine("Enter operand 2: ");
             int number2 = int.Parse(Console.ReadLine());
 
-
-            Console.WriteLine($"Addition of {number1} and {number2} results {utilHandler.Add(number1,number2)}");
+            Console.WriteLine($"Addition of {number1} and {number2} results {utilHandler.Add(number1, number2)}");
 
             Console.WriteLine($"Subtraction of {number1} and {number2} results {utilHandler.Subtract(number1, number2)}");
 
