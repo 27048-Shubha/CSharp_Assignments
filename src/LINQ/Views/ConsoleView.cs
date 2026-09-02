@@ -3,6 +3,7 @@
     using ConsoleTables;
     using LINQ.Models;
     using LINQ.Models.DTOs;
+    using LINQ.Enums;
 
     /// <summary>
     /// Manages console operations of the application.
@@ -34,7 +35,7 @@
                     "4. View task 4\n" +
                     "5. View task 5\n");
 
-                if (Enum.TryParse<Enums.TaskMenu>(Console.ReadLine(), out Enums.TaskMenu userChoice))
+                if (Enum.TryParse<TaskMenu>(Console.ReadLine(), out TaskMenu userChoice))
                 {
                     return userChoice;
                 }
@@ -43,6 +44,20 @@
                     Console.WriteLine("Kindly enter valid inputs only!");
                 }
             }
+        }
+
+        /// <summary>
+        /// Displays a array of elements.=
+        /// </summary>
+        /// <param name="list">The array of integers to display.</param>
+        public void Display(int array[])
+        {
+            foreach (int item in array)
+            {
+                Console.Write(item + " ");
+            }
+
+            Console.WriteLine();
         }
 
         /// <summary>

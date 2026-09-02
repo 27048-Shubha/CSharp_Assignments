@@ -123,11 +123,11 @@
         {
             Task2 task2 = new Task2();
             List<CategorySummaryDTO> filteredProducts = task2.FilterProducts(this._products);
-            this._console.Display("\n=== Category Summary (Count & Most Expensive Product) ===");
+            this._console.Display("\n=== Category summary (Count & most expensive product) ===");
             this._console.Display(filteredProducts);
 
             List<ProductSupplierInfoDTO> joinedInfo = task2.PerformInnerJoin(this._products, this._suppliers);
-            this._console.Display("\n=== Product Supplier Details (Inner Join) ===");
+            this._console.Display("\n=== Product-Supplier details (Inner join) ===");
             this._console.Display(joinedInfo);
         }
 
@@ -137,12 +137,17 @@
         public void RunTask3()
         {
             Task3 task3 = new Task3();
+
+            int[] array = task3.GetArray();
+            this._console.Display("\n=== Source array ===");
+            this._console.Display(array);
+
             int secondHighestNumber = task3.FindSecondHighestNumber();
-            this._console.Display("\n=== Second Highest Number In Array ===");
+            this._console.Display("\n=== Second highest number in array ===");
             this._console.Display(secondHighestNumber);
 
             List<PairDTO> joinedInfo = task3.UniquePairsAddUptoTarget();
-            this._console.Display("\n=== Unique Pairs Matching Target Sum ===");
+            this._console.Display("\n=== Unique pairs matching target sum ===");
             this._console.Display(joinedInfo);
         }
 
@@ -158,7 +163,7 @@
             task4.ManualFilterThenQueryApproach(this._products);
             task4.LookUpBasedApproach(this._products);
 
-            this._console.Display("\n=== Books Sorted By Price ===");
+            this._console.Display("\n=== Books sorted by price ===");
             this._console.Display(sortedProducts);
         }
 

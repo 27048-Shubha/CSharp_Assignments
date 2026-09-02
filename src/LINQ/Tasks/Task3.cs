@@ -26,13 +26,13 @@
         public List<PairDTO> UniquePairsAddUptoTarget()
         {
             List<PairDTO> pairs = this._numbers.SelectMany(
-                            (a, i) => this._numbers
+                            (value1, i) => this._numbers
                             .Skip(i + 1)
-                            .Where(b => a + b == this._target)
-                            .Select(b => new PairDTO()
+                            .Where(value2 => value1 + value2 == this._target)
+                            .Select(value2 => new PairDTO()
                             {
-                                Value1 = a,
-                                Value2 = b,
+                                Value1 = value1,
+                                Value2 = value2,
                             })).ToList();
 
             return pairs;

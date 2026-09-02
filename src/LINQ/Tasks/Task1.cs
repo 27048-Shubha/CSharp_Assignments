@@ -2,6 +2,7 @@
 {
     using LINQ.Models;
     using LINQ.Models.DTOs;
+    using LINQ.Enums;
 
     /// <summary>
     /// Performs filtering, sorting, and aggregation operations on products.
@@ -15,7 +16,7 @@
         /// <returns>A list of filtered product information.</returns>
         public List<FilterProductsDTO> FilterProducts(IReadOnlyList<Product> products)
         {
-            List<Product> filteredProducts = products.Where(product => (product.Category == Enums.ProductCategory.Electronics) && (product.Price > 500)).ToList();
+            List<Product> filteredProducts = products.Where(product => (product.Category == ProductCategory.Electronics) && (product.Price > 500)).ToList();
             return filteredProducts.Select(product => new FilterProductsDTO()
             {
                 ProductName = product.Name,
@@ -40,7 +41,7 @@
         /// <returns>The average product price.</returns>
         public decimal FindAverage(List<FilterProductsDTO> products)
         {
-            return products.Average(product => product.ProductPrice);
+            return Math.Round(products.Average(product => product.ProductPrice), 2);
         }
     }
 }
