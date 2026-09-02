@@ -1,7 +1,7 @@
 ﻿namespace Debugging
 {
     /// <summary>
-    /// Implements methods for calculator operations.
+    /// Implements methods for calculator operations
     /// </summary>
     public class MathUtils : IMathUtils
     {
@@ -48,8 +48,7 @@
         {
             if (number2 == 0)
             {
-                Console.WriteLine("Divisor is zero! Invalid operation. Returning zero...");
-                return 0;
+                throw new ArgumentException("Invalid operation! Operand2 (Divisor) should not be zero.");
             }
 
             return number1 / number2;
