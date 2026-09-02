@@ -11,6 +11,15 @@
         private int _target = 22;
 
         /// <summary>
+        /// Returns array of integers.
+        /// </summary>
+        /// <returns>Array of integers</returns>
+        public int[] GetArray()
+        {
+            return this._numbers;
+        }
+
+        /// <summary>
         /// Finds the second highest number from the collection.
         /// </summary>
         /// <returns>The second highest number.</returns>

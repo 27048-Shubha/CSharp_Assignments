@@ -1,10 +1,10 @@
-﻿namespace LINQ.Views
-{
-    using ConsoleTables;
-    using LINQ.Models;
-    using LINQ.Models.DTOs;
-    using LINQ.Enums;
+﻿using ConsoleTables;
+using LINQ.Enums;
+using LINQ.Models;
+using LINQ.Models.DTOs;
 
+namespace LINQ.Views
+{
     /// <summary>
     /// Manages console operations of the application.
     /// </summary>
@@ -49,8 +49,8 @@
         /// <summary>
         /// Displays a array of elements.=
         /// </summary>
-        /// <param name="list">The array of integers to display.</param>
-        public void Display(int array[])
+        /// <param name="array">The array of integers to display.</param>
+        public void Display(int[] array)
         {
             foreach (int item in array)
             {
