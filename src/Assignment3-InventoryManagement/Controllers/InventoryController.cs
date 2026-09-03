@@ -7,7 +7,7 @@
     using Assignment3_InventoryManagement.Views;
 
     /// <summary>
-    /// Manages Initializaiton and Menu for Inventory System.
+    /// Manages initializaiton and menu for inventory system.
     /// </summary>
     public class InventoryController
     {
@@ -100,7 +100,7 @@
         }
 
         /// <summary>
-        /// Adds new _products to the _products list.
+        /// Adds new products to the products list.
         /// </summary>
         public void AddProduct()
         {
@@ -128,7 +128,7 @@
         }
 
         /// <summary>
-        /// Edits existing _products fields.
+        /// Edits existing products fields.
         /// </summary>
         public void EditProduct()
         {
@@ -172,7 +172,7 @@
         }
 
         /// <summary>
-        /// Deletes existing _products from the _products list.
+        /// Deletes existing products from the products list.
         /// </summary>
         public void DeleteProduct()
         {
@@ -194,7 +194,7 @@
         }
 
         /// <summary>
-        /// Sends _products list to the _view.
+        /// Sends products list to the view.
         /// </summary>
         public void ViewProducts()
         {
@@ -215,7 +215,7 @@
         }
 
         /// <summary>
-        /// Gets _products by _name.
+        /// Gets products by name.
         /// </summary>
         public void GetProductByName()
         {
@@ -231,9 +231,8 @@
         }
 
         /// <summary>
-        /// Sorts _products list by user's _choice.
+        /// Sorts products list by user's choice.
         /// </summary>
-        /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
         public void SortProduct()
         {
             int sortChoice;

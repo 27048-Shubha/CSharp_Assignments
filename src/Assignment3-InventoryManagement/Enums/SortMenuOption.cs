@@ -1,17 +1,17 @@
 ﻿namespace Assignment3_InventoryManagement.Enums
 {
     /// <summary>
-    /// User Defined Exception when Inventory is found empty with no _products extended from Exception.
+    /// Enum representing sort menu options
     /// </summary>
     internal enum SortMenuOptions
     {
         /// <summary>
-        /// Represents sort option by _name.
+        /// Represents sort option by name.
         /// </summary>
         ByName = 1,
 
         /// <summary>
-        /// Represents sort option by _price.
+        /// Represents sort option by price.
         /// </summary>
         ByPrice,
 

@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryService"/> class.
         /// </summary>
-        /// <param name="repository">Object for calling _repository for operations.</param>
+        /// <param name="repository">Object for calling repository for operations.</param>
         public InventoryService(ProductRepository repository)
         {
             this._repository = repository;
@@ -23,12 +23,11 @@
         /// <summary>
         /// Creates object to be stored in Product list.
         /// </summary>
-        /// <param name="name">Name of the _products.</param>
-        /// <param name="price">Price of the _products.</param>
-        /// <param name="stock">Stock Quantity of the _products.</param>
+        /// <param name="name">Name of the products.</param>
+        /// <param name="price">Price of the products.</param>
+        /// <param name="stock">Stock Quantity of the products.</param>
         public void AddProduct(string name, decimal price, decimal stock)
         {
-            // if _products name, _price, stock are valid
             if (price <= 0)
             {
                 throw new ArgumentException("Invalid Input! Price must be a positive value.");
@@ -43,20 +42,20 @@
         }
 
         /// <summary>
-        /// Gets _products _price from _repository.
+        /// Gets _products price from repository.
         /// </summary>
-        /// <param name="pId">The id of the _products.</param>
-        /// <returns>The _price of the _products.</returns>
+        /// <param name="pId">The id of the products.</param>
+        /// <returns>The price of the products.</returns>
         public decimal GetProductPrice(Guid pId)
         {
             return this._repository.GetProductPrice(pId);
         }
 
         /// <summary>
-        /// Gets stock of the _products.
+        /// Gets stock of the products.
         /// </summary>
-        /// <param name="pId">The id of the _products.</param>
-        /// <returns>The stock quanitity of the _products.</returns>
+        /// <param name="pId">The id of the products.</param>
+        /// <returns>The stock quanitity of the products.</returns>
         public decimal GetProductStock(Guid pId)
         {
             return this._repository.GetProductStock(pId);
@@ -65,10 +64,10 @@
         /// <summary>
         /// Checks and Edits object to be stored in Product list.
         /// </summary>
-        /// <param name="pId">Id of the _products.</param>
-        /// <param name="name">Name of the _products.</param>
-        /// <param name="price">Price of the _products.</param>
-        /// <param name="stock">Stock Quantity of the _products.</param>
+        /// <param name="pId">Id of the products.</param>
+        /// <param name="name">Name of the products.</param>
+        /// <param name="price">Price of the products.</param>
+        /// <param name="stock">Stock Quantity of the products.</param>
         public void EditProduct(Guid pId, string name, decimal price, decimal stock)
         {
             this.EditProductPrice(pId, price);
@@ -76,19 +75,19 @@
         }
 
         /// <summary>
-        /// Edits _price of the _products.
+        /// Edits price of the products.
         /// </summary>
-        /// <param name="pId">Product Id whose _price to be edited.</param>
-        /// <param name="price">New _price value. </param>
+        /// <param name="pId">Product Id whose price to be edited.</param>
+        /// <param name="price">New price value. </param>
         public void EditProductPrice(Guid pId, decimal price)
         {
             this._repository.UpdatePrice(pId, price);
         }
 
         /// <summary>
-        /// Edits stock of the _products.
+        /// Edits stock of the products.
         /// </summary>
-        /// <param name="pId">Product Id whose _price to be edited.</param>
+        /// <param name="pId">Product Id whose price to be edited.</param>
         /// <param name="stock">New stock value. </param>
         public void EditStockQuantity(Guid pId, decimal stock)
         {
@@ -96,9 +95,9 @@
         }
 
         /// <summary>
-        /// Gets Guid of the _products and calls repo for deletion.
+        /// Gets Guid of the products and calls repo for deletion.
         /// </summary>
-        /// <param name="name">Name of the _products to be deleted.</param>
+        /// <param name="name">Name of the products to be deleted.</param>
         public void RemoveProduct(string name)
         {
             Guid productId = this._repository.GetProductId(name);
@@ -113,9 +112,9 @@
         }
 
         /// <summary>
-        /// Returns list of Products in Product list.
+        /// Returns list of products in product list.
         /// </summary>
-        /// <returns>List of Products.</returns>
+        /// <returns>List of products.</returns>
         public List<Product> ListProducts()
         {
             if (this.IsEmpty())
@@ -129,17 +128,17 @@
         }
 
         /// <summary>
-        /// Calls repo to search for the _products.
+        /// Calls repo to search for the products.
         /// </summary>
-        /// <param name="name">Name of the _products.</param>
-        /// <returns>Product object holding details on _products to be searched.</returns>
+        /// <param name="name">Name of the products.</param>
+        /// <returns>Product object holding details on _roducts to be searched.</returns>
         public List<Product> FindProduct(string name)
         {
             return this._repository.SearchProduct(name);
         }
 
         /// <summary>
-        /// Checks if the _products exists in the repo already.
+        /// Checks if the products exists in the repository already.
         /// </summary>
         /// <param name="name">Name to be checked for existence.</param>
         /// <returns>True if exists else False.</returns>
@@ -156,8 +155,8 @@
         /// <summary>
         /// Finds prodcut id based on the name.
         /// </summary>
-        /// <param name="name">Name of the _products whose Guid to be found.</param>
-        /// <returns>Guid of the _products.</returns>
+        /// <param name="name">Name of the products whose Guid to be found.</param>
+        /// <returns>Guid of the products.</returns>
         public Guid GetId(string name)
         {
             if (!this.IsExists(name))
@@ -170,9 +169,9 @@
         }
 
         /// <summary>
-        /// Sorts _products list by name of the _products.
+        /// Sorts _products list by name of the products.
         /// </summary>
-        /// <returns>The sorted list of _products.</returns>
+        /// <returns>The sorted list of products.</returns>
         /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
         public List<Product> SortByName()
         {
@@ -189,9 +188,9 @@
         }
 
         /// <summary>
-        /// Sorts _products list by _price of the _products.
+        /// Sorts products list by _price of the products.
         /// </summary>
-        /// <returns>The sorted list of _products.</returns>
+        /// <returns>The sorted list of products.</returns>
         /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
         public List<Product> SortByPrice()
         {
@@ -208,9 +207,9 @@
         }
 
         /// <summary>
-        /// Sorts _products list by stock quantity of the _products.
+        /// Sorts _products list by stock quantity of the products.
         /// </summary>
-        /// <returns>The sorted list of _products.</returns>
+        /// <returns>The sorted list of products.</returns>
         /// <exception cref="EmptyInventoryException">Thrown when inventory is empty. </exception>
         public List<Product> SortByStockQuantity()
         {

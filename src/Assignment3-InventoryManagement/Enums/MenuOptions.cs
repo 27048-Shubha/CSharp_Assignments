@@ -6,27 +6,27 @@
     internal enum MenuOptions
     {
         /// <summary>
-        /// Represents addition of the new _products.
+        /// Represents addition of the new products.
         /// </summary>
         Add = 1,
 
         /// <summary>
-        /// Represents updation of the existing _products.
+        /// Represents updation of the existing products.
         /// </summary>
         Edit,
 
         /// <summary>
-        /// Reperesents deletion of the existing _products.
+        /// Reperesents deletion of the existing products.
         /// </summary>
         Delete,
 
         /// <summary>
-        /// Represents _view operation of all the _products.
+        /// Represents view operation of all the products.
         /// </summary>
         View,
 
         /// <summary>
-        /// Represents search of a _products.
+        /// Represents search of a products.
         /// </summary>
         Search,
 

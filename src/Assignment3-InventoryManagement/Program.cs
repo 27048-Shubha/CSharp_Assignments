@@ -16,10 +16,9 @@
         private static InventoryController controller = new InventoryController(view, service);
 
         /// <summary>
-        /// Serves as start of Execution, Calls controller.
+        /// Serves as start of execution, calls controller.
         /// </summary>
-        /// <param name="args">Command Line arguments.</param>
-        public static void Main(string[] args)
+        public static void Main()
         {
             controller.Initialize();
         }

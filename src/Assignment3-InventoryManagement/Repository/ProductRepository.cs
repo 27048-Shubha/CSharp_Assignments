@@ -3,14 +3,14 @@
     using Assignment3_InventoryManagement.Models;
 
     /// <summary>
-    /// Manages CRUD operations of Inventory Management System.
+    /// Manages CRUD operations of the inventory management system.
     /// </summary>
     public class ProductRepository : IProductRepository
     {
         private List<Product> _products = new List<Product>();
 
         /// <summary>
-        /// Inserts new _products.
+        /// Inserts new products.
         /// </summary>
         /// <param name="product">Product object holding user input.</param>
         public void AddProduct(Product product)
@@ -19,9 +19,9 @@
         }
 
         /// <summary>
-        /// Updates price of the _products.
+        /// Updates price of the products.
         /// </summary>
-        /// <param name="pId">Guid of the _products to be updated.</param>
+        /// <param name="pId">Guid of the products to be updated.</param>
         /// <param name="price">New Price to be updated.</param>
         public void UpdatePrice(Guid pId, decimal price)
         {
@@ -30,9 +30,9 @@
         }
 
         /// <summary>
-        /// Updates stock quantity of the _products.
+        /// Updates stock quantity of the products.
         /// </summary>
-        /// <param name="pId">Guid of the _products to be updated.</param>
+        /// <param name="pId">Guid of the products to be updated.</param>
         /// <param name="stock">New stock value to be updated.</param>
         public void UpdateStock(Guid pId, decimal stock)
         {
@@ -41,10 +41,10 @@
         }
 
         /// <summary>
-        /// Gets _products price.
+        /// Gets products price.
         /// </summary>
-        /// <param name="pId">The id of the _products.</param>
-        /// <returns>The price of the _products.</returns>
+        /// <param name="pId">The id of the products.</param>
+        /// <returns>The price of the products.</returns>
         public decimal GetProductPrice(Guid pId)
         {
             Product? foundProduct = this._products.FirstOrDefault(p => p.Id == pId);
@@ -52,10 +52,10 @@
         }
 
         /// <summary>
-        /// Gets stock quantity of the _products.
+        /// Gets stock quantity of the products.
         /// </summary>
-        /// <param name="pId">The Id of the _products.</param>
-        /// <returns>The stock quantity of the _products.</returns>
+        /// <param name="pId">The Id of the products.</param>
+        /// <returns>The stock quantity of the products.</returns>
         public decimal GetProductStock(Guid pId)
         {
             Product? foundProduct = this._products.FirstOrDefault(p => p.Id == pId);
@@ -63,18 +63,18 @@
         }
 
         /// <summary>
-        /// Deletes existing _products.
+        /// Deletes existing products.
         /// </summary>
-        /// <param name="productId">Guid of the _products to be deleted.</param>
+        /// <param name="productId">Guid of the products to be deleted.</param>
         public void DeleteProduct(Guid productId)
         {
             this._products.RemoveAll(item => item.Id == productId);
         }
 
         /// <summary>
-        /// Lists list of all _products.
+        /// Lists list of all products.
         /// </summary>
-        /// <returns>Returns clone copy of _products.</returns>
+        /// <returns>Returns clone copy of products.</returns>
         public List<Product> ViewProducts()
         {
             List<Product> clone = new List<Product>();
@@ -87,10 +87,10 @@
         }
 
         /// <summary>
-        /// Search for the _products based on the name.
+        /// Search for the products based on the name.
         /// </summary>
-        /// <param name="name">Details of the _products.</param>
-        /// <returns>Returns _products details in the cloned copy.</returns>
+        /// <param name="name">Details of the products.</param>
+        /// <returns>Returns products details in the cloned copy.</returns>
         public List<Product> SearchProduct(string name)
         {
             List<Product> products = new List<Product>();
@@ -108,8 +108,8 @@
         /// <summary>
         /// Finds prodcut id based on the name.
         /// </summary>
-        /// <param name="name">Name of the _products whose Guid to be found.</param>
-        /// <returns>Guid of the _products.</returns>
+        /// <param name="name">Name of the products whose Guid to be found.</param>
+        /// <returns>Guid of the products.</returns>
         public Guid GetProductId(string name)
         {
             for (int i = 0; i < this._products.Count; i++)
@@ -124,9 +124,9 @@
         }
 
         /// <summary>
-        /// Gets count of _products inside _products list.
+        /// Gets count of products inside products list.
         /// </summary>
-        /// <returns>The total number of _products in the _products list. </returns>
+        /// <returns>The total number of products in the products list. </returns>
         public int GetProductCount()
         {
             return this._products.Count;

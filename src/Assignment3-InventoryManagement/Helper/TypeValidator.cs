@@ -1,7 +1,7 @@
 ﻿namespace Assignment3_InventoryManagement.Helper
 {
     /// <summary>
-    /// Manages Validations for Input Data Type.
+    /// Manages validations for input data type.
     /// </summary>
     public static class TypeValidator
     {

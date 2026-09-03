@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// User Defined Exception when Name Not is not found in _products repo extended from Exception.
+    /// User Defined Exception when Name Not is not found in products repository extended from Exception.
     /// </summary>
     public class NameNotFoundException : Exception
     {

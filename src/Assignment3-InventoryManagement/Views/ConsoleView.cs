@@ -10,7 +10,7 @@
     public class ConsoleView
     {
         /// <summary>
-        /// Displays Dash.
+        /// Displays dashed line.
         /// </summary>
         public void DisplayDash()
         {
@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        /// Displays Menu for Inventory System.
+        /// Displays menu for inventory system.
         /// </summary>
         public void DisplayMenu()
         {
@@ -35,7 +35,7 @@
         }
 
         /// <summary>
-        /// Displays Menu for Inventory System.
+        /// Displays menu for inventory system.
         /// </summary>
         public void DisplaySortMenu()
         {
@@ -47,7 +47,7 @@
         }
 
         /// <summary>
-        /// Gets User's _choice for Menu gunctions.
+        /// Gets user's choice for menu functions.
         /// </summary>
         /// <param name="choice">Choice entered by the user.</param>
         /// <returns>True if user enters valid integer else False.</returns>
@@ -65,9 +65,9 @@
         }
 
         /// <summary>
-        /// Get value of name of the _products.
+        /// Get value of name of the products.
         /// </summary>
-        /// <param name="name">Reference to stock of the _products.</param>
+        /// <param name="name">Reference to stock of the products.</param>
         public void GetProductName(out string name)
         {
             SetColor(ConsoleColor.DarkCyan);
@@ -76,10 +76,10 @@
         }
 
         /// <summary>
-        /// Get value of price of the _products.
+        /// Get value of price of the products.
         /// </summary>
-        /// <param name="price">Reference to price of the _products.</param>
-        /// <returns>True if price value entered is valid else False.</returns>
+        /// <param name="price">Reference to price of the products.</param>
+        /// <returns>True if price value entered is valid else false.</returns>
         public bool GetProductPrice(out decimal price)
         {
             SetColor(ConsoleColor.DarkCyan);
@@ -94,10 +94,10 @@
         }
 
         /// <summary>
-        /// Get value of stock of the _products.
+        /// Get value of stock of the products.
         /// </summary>
-        /// <param name="stock">Reference to stock of the _products.</param>
-        /// <returns>True if Stock value is valid else False.</returns>
+        /// <param name="stock">Reference to stock of the products.</param>
+        /// <returns>True if stock value is valid else False.</returns>
         public bool GetProductStock(out decimal stock)
         {
             SetColor(ConsoleColor.DarkCyan);
@@ -112,7 +112,7 @@
         }
 
         /// <summary>
-        /// Displays information abouta _products.
+        /// Displays information about products.
         /// </summary>
         /// <param name="products">Product list tot be displayed.</param>
         public void DisplayProducts(List<Product> products)
@@ -134,7 +134,7 @@
         }
 
         /// <summary>
-        /// Displays Invalid Input warning.
+        /// Displays invalid input warning.
         /// </summary>
         public void DisplayDefault()
         {
@@ -143,7 +143,7 @@
         }
 
         /// <summary>
-        /// Displays _choice invalid message.
+        /// Displays choice invalid message.
         /// </summary>
         public void DisplayInvalidChoice()
         {
@@ -152,7 +152,7 @@
         }
 
         /// <summary>
-        /// Displays _choice invalid message.
+        /// Displays choice invalid message.
         /// </summary>
         /// <param name="message">Input variable name to be entered.</param>
         public void Display(string message)
@@ -162,7 +162,7 @@
         }
 
         /// <summary>
-        /// Displays Messages to the console..
+        /// Displays messages to the console..
         /// </summary>
         /// <param name="message">Message to be displayed.</param>
         public void DisplayMessage(string message)
