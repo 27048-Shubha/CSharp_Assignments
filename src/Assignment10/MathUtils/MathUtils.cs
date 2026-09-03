@@ -1,9 +1,9 @@
 ﻿namespace Calculator
 {
     /// <summary>
-    /// Implements methods for calculator operations
+    /// Manages methods for calculator operations
     /// </summary>
-    public class MathUtils : IMathUtils
+    public class MathUtils
     {
         /// <summary>
         /// Adds two numbers.
@@ -11,10 +11,7 @@
         /// <param name="number1">User input for number 1.</param>
         /// <param name="number2">User input for number 2.</param>
         /// <returns>Sum of passed inputs.</returns>
-        public int Add(int number1, int number2)
-        {
-            return number1 + number2;
-        }
+        public int Add(int number1, int number2) => number1 + number2;
 
         /// <summary>
         /// Subtracts two numbers.
@@ -22,10 +19,7 @@
         /// <param name="number1">User input for number 1.</param>
         /// <param name="number2">User input for number 2.</param>
         /// <returns>Difference of passed inputs.</returns>
-        public int Subtract(int number1, int number2)
-        {
-            return number1 - number2;
-        }
+        public int Subtract(int number1, int number2) => number1 - number2;
 
         /// <summary>
         /// Multiplies two numbers.
@@ -33,10 +27,7 @@
         /// <param name="number1">User input for number 1.</param>
         /// <param name="number2">User input for number 2.</param>
         /// <returns>Multiplication result of passed inputs.</returns>
-        public int Multiply(int number1, int number2)
-        {
-            return number1 * number2;
-        }
+        public int Multiply(int number1, int number2) => number1 * number2;
 
         /// <summary>
         /// Divides two numbers.
@@ -44,7 +35,7 @@
         /// <param name="number1">User input for number 1.</param>
         /// <param name="number2">User input for number 2.</param>
         /// <returns>Division result of passed inputs.</returns>
-        public int Divide(int number1, int number2)
+        public double Divide(int number1, int number2)
         {
             if (number2 == 0)
             {

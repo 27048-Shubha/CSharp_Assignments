@@ -44,6 +44,8 @@
             {
                 Console.WriteLine(exception.Message);
             }
+
+            Console.ReadKey();
         }
     }
 }

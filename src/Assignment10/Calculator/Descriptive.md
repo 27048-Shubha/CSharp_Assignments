@@ -1,6 +1,6 @@
 1. Explain what the .NET platform is and its primary purpose. 
 	- .NET platform is a software development platform developed and maintained by Microsoft
-	- It provides everything needed to run applications.
+	- It provides runtime, libraries, compiler support, memory management, application frameworks needed to run applications.
 	- Primary purpose of .NET platform: To provide runtime & common set of libraries so that developers can focus on building application without worrying about low-level memory management and platform specific complexities
 
 ---
@@ -48,7 +48,7 @@
 			- `x = 10; y = x;`
 			- When assigning x to y, a copy of the value is created.
 	- Reference type:
-		- A value type stores a reference(address) to an object.
+		- A reference type stores a reference(address) to an object.
 		- Example: `class` `object` `delegate` 
 		- Memory:
 			- `Product p1 = new Product();`
