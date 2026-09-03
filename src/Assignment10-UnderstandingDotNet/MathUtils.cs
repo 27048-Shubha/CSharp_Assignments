@@ -1,4 +1,4 @@
-﻿namespace Debugging
+﻿namespace Calculator
 {
     /// <summary>
     /// Implements methods for calculator operations
@@ -48,7 +48,7 @@
         {
             if (number2 == 0)
             {
-                throw new ArgumentException("Invalid operation! Operand2 (Divisor) should not be zero.");
+                throw new ArgumentException("Division cannot be performed! Divisor (Operand 2) should be non-zero.");
             }
 
             return number1 / number2;

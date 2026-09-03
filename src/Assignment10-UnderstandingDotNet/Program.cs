@@ -1,4 +1,4 @@
-﻿namespace Debugging
+﻿namespace Calculator
 {
     /// <summary>
     /// Handles main flow of the application.
@@ -27,7 +27,7 @@
 
                 Console.WriteLine("Enter operand 2: ");
                 int number2 = int.Parse(Console.ReadLine());
-           
+
                 Console.WriteLine($"Addition of {number1} and {number2} results {utilHandler.Add(number1, number2)}");
 
                 Console.WriteLine($"Subtraction of {number1} and {number2} results {utilHandler.Subtract(number1, number2)}");
@@ -36,15 +36,14 @@
 
                 Console.WriteLine($"Division of {number1} and {number2} results {utilHandler.Divide(number1, number2)}");
             }
-            catch(ArgumentException exception)
+            catch (ArgumentException exception)
             {
                 Console.WriteLine(exception.Message);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
             }
-            
         }
     }
 }
