@@ -42,7 +42,7 @@
                 throw new ArgumentException("Division cannot be performed! Divisor (Operand 2) should be non-zero.");
             }
 
-            return number1 / number2;
+            return (double)number1 / number2;
         }
     }
 }

@@ -74,9 +74,12 @@
 	- Globalization
 		- The process of designing an application so it can work with multiple cultures and regions.
 		- Example: Currency and date formatting (dd/MM/yyyy) 
+		- Key application/feature: Culture-aware date formatting, Culture-aware currency formatting, Number formatting, Time formatting, Calendar support
+		- (Here the culture means a set of regional and language-specific rules that determine how users expect information to be displayed and interpreted)
 	- Localization
 		- The process of adapting an application for a specific language or region.
 		- Example: English, French, Tamil UI text.
+		- Key application/feature: Translation of UI text, Error message translation, Resource files (.resx in .NET), Language switching without changing code
 ---
 
 8. Explain the role of the Common Intermediate Language (CIL) and Just-In-Time (JIT) compilation in the .NET framework. 
