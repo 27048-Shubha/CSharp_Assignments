@@ -1,7 +1,13 @@
 ﻿namespace Assignments
 {
-    internal class Program
+    /// <summary>
+    /// Manages flow of demonstration.
+    /// </summary>
+    public class Program
     {
+        /// <summary>
+        /// Creates array of integers to represent heap memory creation.
+        /// </summary>
         public static void CreateArray()
         {
             Console.WriteLine("Running CreateArray()...");
@@ -16,6 +22,9 @@
             Console.WriteLine($"Array Length: {array.Length}");
         }
 
+        /// <summary>
+        /// Performs calculation to represent stack memory creation.
+        /// </summary>
         public static void Calculate()
         {
             Console.WriteLine("Running Calculate()...");
@@ -37,7 +46,10 @@
             Console.ReadLine();
         }
 
-        public static void Main(string[] args)
+        /// <summary>
+        /// Entry point of the program.
+        /// </summary>
+        public static void Main()
         {
             Program.CreateArray();
             Program.Calculate();
