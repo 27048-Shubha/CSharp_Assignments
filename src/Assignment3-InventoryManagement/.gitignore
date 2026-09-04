@@ -1,0 +1,55 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Test results
+TestResults/
+*.trx
+
+# Code coverage
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+Generated/
+
+# Publish output
+publish/
+
+# Local settings
+appsettings.Development.json
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# SQL Server LocalDB
+*.mdf
+*.ldf
