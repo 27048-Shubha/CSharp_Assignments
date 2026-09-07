@@ -1,11 +1,15 @@
-﻿namespace Assignments
+﻿namespace GarbageCollection.Program
 {
+    using GarbageCollection.Student;
+
     /// <summary>
     /// Manages entry flow of the demonstration.
     /// </summary>
     public class Program
     {
         private static List<Student>? _students = new List<Student>();
+        private static string name = "Shubha";
+        private static int age = 20;
 
         /// <summary>
         /// Creates objects of students class.
@@ -14,11 +18,10 @@
         {
             for (int i = 0; i < 10_000_000; i++)
             {
-                _students.Add(new Student
+                if (_students != null)
                 {
-                    Name = "Shubha",
-                    Age = 20,
-                });
+                    _students.Add(new Student(Program.name, Program.age));
+                }
             }
 
             Console.WriteLine("Objects created.");
@@ -47,23 +50,5 @@
             Program.CreateObjects();
             Program.TriggerGC();
         }
-    }
-
-    /// <summary>
-    /// Represents student details.
-    /// </summary>
-    public class Student
-    {
-        /// <summary>
-        /// Name of the student.
-        /// </summary>
-        /// <value>Student name.</value>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Age of the student.
-        /// </summary>
-        /// <value>Student age.</value>
-        public int Age { get; set; }
     }
 }
