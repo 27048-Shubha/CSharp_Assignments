@@ -5,33 +5,32 @@
     /// </summary>
     public class Program
     {
+        private static readonly string _content = "Hello World!";
+
         /// <summary>
         /// Entry point of the program.
         /// </summary>
         public static void Main()
         {
-            using (FileWriter writer = new FileWriter())
+            Console.WriteLine($"Content to be written to the file: {Program._content}");
+
+            using (FileHandler handler1 = new FileHandler())
             {
-                writer.WriteFile("Hello world!");
+                handler1.WriteFile("Hello world!");
             }
+
+            using StreamReader reader = new StreamReader("./TextFile.txt");
+            Console.WriteLine($"Content read from the file: {reader.ReadLine()}");
         }
     }
 
     /// <summary>
     /// Manages file operations.
     /// </summary>
-    public class FileWriter : IDisposable
+    public class FileHandler : IDisposable
     {
         private readonly string _filePath = "./TextFile.txt";
         private StreamWriter _writer;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FileWriter"/> class.
-        /// </summary>
-        public FileWriter()
-        {
-            this._writer = new StreamWriter(this._filePath);
-        }
 
         /// <summary>
         /// Writes text inside the file.
@@ -39,6 +38,7 @@
         /// <param name="text">Text to be written into the file.</param>
         public void WriteFile(string text)
         {
+            this._writer = new StreamWriter(this._filePath);
             this._writer.WriteLine(text);
         }
 
@@ -48,7 +48,6 @@
         public void Dispose()
         {
             this._writer.Dispose();
-            this._writer.Close();
         }
     }
 }
