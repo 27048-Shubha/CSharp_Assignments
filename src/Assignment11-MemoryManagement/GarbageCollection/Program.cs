@@ -5,7 +5,7 @@
     /// </summary>
     public class Program
     {
-        private static List<Student> _students = new List<Student>();
+        private static List<Student>? _students = new List<Student>();
 
         /// <summary>
         /// Creates objects of students class.
