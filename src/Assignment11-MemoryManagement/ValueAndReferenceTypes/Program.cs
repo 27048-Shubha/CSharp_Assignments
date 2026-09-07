@@ -5,6 +5,9 @@
     /// </summary>
     public class Program
     {
+        private static readonly string _name = "Shubha";
+        private static readonly int _age = 20;
+
         /// <summary>
         /// Displays dash to the console.
         /// </summary>
@@ -48,14 +51,8 @@
         /// </summary>
         public static void Main()
         {
-            Console.Write("Enter name: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Enter age: ");
-            int age = int.Parse(Console.ReadLine());
-
-            PersonStruct person1 = new PersonStruct(name, age);
-            PersonClass person2 = new PersonClass(name, age);
+            PersonStruct person1 = new PersonStruct(Program._name, Program._age);
+            PersonClass person2 = new PersonClass(Program._name, Program._age);
 
             Console.WriteLine("\nContents before modifying:");
             Program.Display(person1, person2);
