@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment12-MemoryOptimization", "src\Assignment12-MemoryOptimization\Assignment12-MemoryOptimization.csproj", "{D2512091-56DE-4A27-AAF1-61DED67CB28E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +31,15 @@ Global
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2512091-56DE-4A27-AAF1-61DED67CB28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2512091-56DE-4A27-AAF1-61DED67CB28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2512091-56DE-4A27-AAF1-61DED67CB28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2512091-56DE-4A27-AAF1-61DED67CB28E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FD3CD81-F563-46B4-B089-E41E7234E66B}
 	EndGlobalSection
 EndGlobal
