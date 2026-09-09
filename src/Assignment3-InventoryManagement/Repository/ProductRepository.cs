@@ -13,7 +13,7 @@
         /// Inserts new products.
         /// </summary>
         /// <param name="product">Product object holding user input.</param>
-        public void AddProduct(Product product)
+        public void Add(Product product)
         {
             this._products.Add(product);
         }
@@ -66,7 +66,7 @@
         /// Deletes existing products.
         /// </summary>
         /// <param name="productId">Guid of the products to be deleted.</param>
-        public void DeleteProduct(Guid productId)
+        public void Delete(Guid productId)
         {
             this._products.RemoveAll(item => item.Id == productId);
         }
@@ -75,7 +75,7 @@
         /// Lists list of all products.
         /// </summary>
         /// <returns>Returns clone copy of products.</returns>
-        public List<Product> ViewProducts()
+        public List<Product> ViewAll()
         {
             List<Product> clone = new List<Product>();
             foreach (Product item in this._products)
@@ -91,7 +91,7 @@
         /// </summary>
         /// <param name="name">Details of the products.</param>
         /// <returns>Returns products details in the cloned copy.</returns>
-        public List<Product> SearchProduct(string name)
+        public List<Product> SearchByName(string name)
         {
             List<Product> products = new List<Product>();
             foreach (Product product in this._products)
@@ -110,7 +110,7 @@
         /// </summary>
         /// <param name="name">Name of the products whose Guid to be found.</param>
         /// <returns>Guid of the products.</returns>
-        public Guid GetProductId(string name)
+        public Guid GetId(string name)
         {
             for (int i = 0; i < this._products.Count; i++)
             {

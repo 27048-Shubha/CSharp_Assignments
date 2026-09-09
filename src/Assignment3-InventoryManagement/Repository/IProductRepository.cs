@@ -11,7 +11,7 @@
         /// Inserts new products.
         /// </summary>
         /// <param name="product">Product object holding user input.</param>
-        public void AddProduct(Product product);
+        public void Add(Product product);
 
         /// <summary>
         /// Updates _price of the products.
@@ -31,26 +31,26 @@
         /// Deletes existing _products.
         /// </summary>
         /// <param name="productId">Guid of the products to be deleted.</param>
-        public void DeleteProduct(Guid productId);
+        public void Delete(Guid productId);
 
         /// <summary>
         /// Lists list of all products.
         /// </summary>
         /// <returns>Returns clone copy of products.</returns>
-        public List<Product> ViewProducts();
+        public List<Product> ViewAll();
 
         /// <summary>
         /// Search for the products based on the name.
         /// </summary>
         /// <param name="name">Details of the products.</param>
         /// <returns>Returns products details in the cloned copy.</returns>
-        public List<Product> SearchProduct(string name);
+        public List<Product> SearchByName(string name);
 
         /// <summary>
         /// Finds prodcut id based on the name.
         /// </summary>
         /// <param name="name">Name of the products whose Guid to be found.</param>
         /// <returns>Guid of the products.</returns>
-        public Guid GetProductId(string name);
+        public Guid GetId(string name);
     }
 }

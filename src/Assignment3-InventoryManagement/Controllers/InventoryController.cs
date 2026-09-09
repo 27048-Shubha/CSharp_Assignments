@@ -102,7 +102,7 @@
         /// <summary>
         /// Adds new products to the products list.
         /// </summary>
-        public void AddProduct()
+        private void AddProduct()
         {
             this._view.GetProductName(out this._name);
             if (!this._view.GetProductPrice(out this._price))
@@ -130,7 +130,7 @@
         /// <summary>
         /// Edits existing products fields.
         /// </summary>
-        public void EditProduct()
+        private void EditProduct()
         {
             if (this._service.IsEmpty())
             {
@@ -174,7 +174,7 @@
         /// <summary>
         /// Deletes existing products from the products list.
         /// </summary>
-        public void DeleteProduct()
+        private void DeleteProduct()
         {
             if (this._service.IsEmpty())
             {
@@ -196,7 +196,7 @@
         /// <summary>
         /// Sends products list to the view.
         /// </summary>
-        public void ViewProducts()
+        private void ViewProducts()
         {
             try
             {
@@ -217,7 +217,7 @@
         /// <summary>
         /// Gets products by name.
         /// </summary>
-        public void GetProductByName()
+        private void GetProductByName()
         {
             if (this._service.IsEmpty())
             {
@@ -233,7 +233,7 @@
         /// <summary>
         /// Sorts products list by user's choice.
         /// </summary>
-        public void SortProduct()
+        private void SortProduct()
         {
             int sortChoice;
             this._view.DisplaySortMenu();

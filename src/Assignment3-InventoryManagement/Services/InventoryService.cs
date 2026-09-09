@@ -38,7 +38,7 @@
             }
 
             Product product = new Product(name, price, stock);
-            this._repository.AddProduct(product);
+            this._repository.Add(product);
         }
 
         /// <summary>
@@ -100,14 +100,14 @@
         /// <param name="name">Name of the products to be deleted.</param>
         public void RemoveProduct(string name)
         {
-            Guid productId = this._repository.GetProductId(name);
+            Guid productId = this._repository.GetId(name);
             if (productId == Guid.Empty)
             {
                 throw new NameNotFoundException("Product Name doesn't Exists");
             }
             else
             {
-                this._repository.DeleteProduct(productId);
+                this._repository.Delete(productId);
             }
         }
 
@@ -123,7 +123,7 @@
             }
             else
             {
-                return this._repository.ViewProducts();
+                return this._repository.ViewAll();
             }
         }
 
@@ -134,7 +134,7 @@
         /// <returns>Product object holding details on _roducts to be searched.</returns>
         public List<Product> FindProduct(string name)
         {
-            return this._repository.SearchProduct(name);
+            return this._repository.SearchByName(name);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@
         /// <returns>True if exists else False.</returns>
         public bool IsExists(string name)
         {
-            if (this._repository.GetProductId(name) == Guid.Empty)
+            if (this._repository.GetId(name) == Guid.Empty)
             {
                 return false;
             }
@@ -164,7 +164,7 @@
                 throw new NameNotFoundException($"The {name} not found!");
             }
 
-            Guid pId = this._repository.GetProductId(name);
+            Guid pId = this._repository.GetId(name);
             return pId;
         }
 
