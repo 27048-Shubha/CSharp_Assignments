@@ -13,59 +13,49 @@
 - Edit product details
 - Delete a product
 - Sort products - by name, price, stock quantity
-- Input validation
-- Exception handling for Name not found and Inventory empty cases.
 
-## MVC Architecture
+## Guide for navigating through the application
 
-### Model
+1. Run the application.
+2. Choose an option from the main menu:
 
-Contains the data model.
+   - 1 to Add Product
+   - 2 to Edit Product
+   - 3 to Delete Product
+   - 4 to View Products
+   - 5 to Search Product
+   - 6 to Exit
 
-- **Product.cs** – Represents a product in the inventory.
+3. Enter the required product details when prompted.
+4. For editing or deleting, provide the product name.
+5. View displays all available products in the inventory.
+6. Search displays products matching the entered name.
+7. Invalid inputs and errors are displayed with appropriate messages.
+8. Select **Exit** to close the application.
 
-### View
+## Error Handling
 
-Responsible for interacting with the user through the console.
+- **Add Product**
+  - Validates positive price and non-negative stock.
+  - Handles `ArgumentException`.
 
-- **ConsoleView.cs** – Displays menus, reads input, and prints results in respective console colors.
+- **Edit Product**
+  - Throws `EmptyInventoryException` if inventory is empty.
+  - Throws `NameNotFoundException` if product is not found.
 
-### Controller
+- **Delete Product**
+  - Throws `EmptyInventoryException` if inventory is empty.
+  - Throws `NameNotFoundException` if product is not found.
 
-Acts as the bridge between the View and the Service layer.
+- **View Products**
+  - Throws `EmptyInventoryException` when no products are available.
 
-- **InventoryController.cs** – Receives user requests and invokes the appropriate service methods.
+- **Search Product**
+  - Displays a message when inventory is empty.
+  - Handles product not found scenarios.
 
-### Service
-
-Contains the business logic of the application.
-
-- **InventoryService.cs** – Performs validation and inventory operations before interacting with the repository.
-
-### Repository
-
-Handles data storage and retrieval.
-
-- **IProductRepository.cs** – Repository interface (contract).
-- **ProductRepository.cs** – Manages the in-memory list of products.
-
-### Enums
-
-Stores menu choices for better readability and maintainability, instead of direct usage of numerics/options.
-
-- **MenuOptions.cs**
-- **SortMenuOptions.cs**
-
-### Exceptions
-
-Contains custom exceptions.
-
-- **EmptyInventoryException.cs** 
-- **NameNotFoundException.cs**
-
-### Helper
-
-Provides utility methods.
-
-- **cs** – Handles colored font console output.
-- **TypeValidation.cs** – Validates user input types.
+- **Global Exception Handling**
+  - Catches and displays:
+    - `EmptyInventoryException`
+    - `NameNotFoundException`
+    - General `Exception`
