@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// Gets _products price from repository.
+        /// Gets _products price from inventory.
         /// </summary>
         /// <param name="pId">The id of the products.</param>
         /// <returns>The price of the products.</returns>
@@ -142,7 +142,7 @@
         }
 
         /// <summary>
-        /// Checks if the products exists in the repository already.
+        /// Checks if the products exists in the inventory already.
         /// </summary>
         /// <param name="name">Name to be checked for existence.</param>
         /// <returns>True if exists else False.</returns>
