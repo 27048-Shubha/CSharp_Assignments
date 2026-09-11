@@ -62,7 +62,6 @@ Here,
 
 - The collection size remains bounded.
 - Old references are removed periodically.
-- Removed arrays become eligible for garbage collection.
 - Heap usage stabilizes instead of growing indefinitely.
 
 ---
