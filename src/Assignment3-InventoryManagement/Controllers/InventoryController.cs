@@ -26,7 +26,7 @@
         /// </summary>
         /// <param name="view">Object for calling console operations.</param>
         /// <param name="service">Object for calling services.</param>
-        public InventoryController(ConsoleView view, InventoryService service)
+        public InventoryController(InventoryService service, ConsoleView view)
         {
             this._view = view;
             this._service = service;
@@ -35,7 +35,7 @@
         /// <summary>
         /// Handles user menu operation calls.
         /// </summary>
-        public void Initialize()
+        public void Run()
         {
             try
             {

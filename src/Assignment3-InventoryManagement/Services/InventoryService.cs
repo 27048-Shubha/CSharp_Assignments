@@ -3,20 +3,24 @@
     using Assignment3_InventoryManagement.Exceptions;
     using Assignment3_InventoryManagement.Models;
     using Assignment3_InventoryManagement.Repository;
+    using Assignment3_InventoryManagement.Views;
 
     /// <summary>
     /// Manages CRUD calls to Repository.
     /// </summary>
     public class InventoryService
     {
+        private readonly ConsoleView _console;
         private readonly ProductRepository _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryService"/> class.
         /// </summary>
-        /// <param name="repository">Object for calling repository for operations.</param>
-        public InventoryService(ProductRepository repository)
+        /// <param name="repository">Object to handle repository operations.</param>
+        /// <param name="console">Object to handle console operations.</param>
+        public InventoryService(ProductRepository repository, ConsoleView console)
         {
+            this._console = console;
             this._repository = repository;
         }
 

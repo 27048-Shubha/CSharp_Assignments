@@ -6,21 +6,20 @@
     using Assignment3_InventoryManagement.Views;
 
     /// <summary>
-    /// Start of the program & maintains functional dependency.
+    /// Application entry point and composition root.
     /// </summary>
-    internal class Program
+    public class Program
     {
-        private static ConsoleView view = new ConsoleView();
-        private static ProductRepository repository = new ProductRepository();
-        private static InventoryService service = new InventoryService(repository);
-        private static InventoryController controller = new InventoryController(view, service);
-
         /// <summary>
         /// Serves as start of execution, calls controller.
         /// </summary>
         public static void Main()
         {
-            controller.Initialize();
+            ConsoleView view = new ConsoleView();
+            ProductRepository repository = new ProductRepository();
+            InventoryService service = new InventoryService(repository, view);
+            InventoryController controller = new InventoryController(service, view);
+            controller.Run();
         }
-}
+    }
 }
