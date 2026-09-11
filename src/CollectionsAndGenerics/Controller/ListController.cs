@@ -4,15 +4,25 @@
     using CollectionsAndGenerics.Services;
     using CollectionsAndGenerics.View;
 
+    /// <summary>
+    /// Controlls list operations.
+    /// </summary>
     internal class ListController
     {
         private readonly ListOperationsService<string> _service;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListController"/> class.
+        /// </summary>
+        /// <param name="service">Object to handle list services</param>
         internal ListController(ListOperationsService<string> service)
         {
             this._service = service;
         }
 
+        /// <summary>
+        /// Entry point of list operation demonstration.
+        /// </summary>
         public void Run()
         {
             this.DisplayHeader();
@@ -39,7 +49,7 @@
             IReadOnlyList<string> bookList = this._service.GetAll();
             ConsoleView.DisplayMessage("\nBooks Available:");
             ConsoleView.DisplayMessage("--------------------------------------------------------");
-            ConsoleView.DisplayList(bookList);
+            ConsoleView.DisplayCollection(bookList);
             ConsoleView.DisplayMessage("\n");
         }
 

@@ -2,8 +2,10 @@
 {
     using CollectionsAndGenerics.Services;
     using CollectionsAndGenerics.View;
-    using System.Runtime.Intrinsics.X86;
 
+    /// <summary>
+    /// Controlls overall application flow.
+    /// </summary>
     internal class MainController
     {
         private readonly StackOperationsService<char> _stackService;
@@ -11,6 +13,13 @@
         private readonly ListOperationsService<string> _listService;
         private readonly DictionaryOperationsService<string, int> _dictService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainController"/> class.
+        /// </summary>
+        /// <param name="stackService">Object to handle stack services</param>
+        /// <param name="queueService">Object to handle queue services</param>
+        /// <param name="listService">Object to handle list services</param>
+        /// <param name="dictService">Object to handle dictionary services</param>
         public MainController(StackOperationsService<char> stackService, QueueOperationsService<string> queueService, ListOperationsService<string> listService, DictionaryOperationsService<string, int> dictService)
         {
             this._stackService = stackService;
@@ -19,6 +28,9 @@
             this._dictService = dictService;
         }
 
+        /// <summary>
+        /// Entry point of collections and generics demonstration.
+        /// </summary>
         public void Run()
         {
             string? choice;
@@ -82,21 +94,33 @@
             while (true);
         }
 
+        /// <summary>
+        /// Initializes list operation.
+        /// </summary>
         public void InitializeList()
         {
             new ListController(_listService).Run();
         }
 
+        /// <summary>
+        /// Initializes stack operation.
+        /// </summary>
         public void InitializeStack()
         {
             new StackController(_stackService).Run();
         }
 
+        /// <summary>
+        /// Initializes queue operation.
+        /// </summary>
         public void InitializeQueue()
         {
             new QueueController(_queueService).Run();
         }
 
+        /// <summary>
+        /// Initializes dictionary operation.
+        /// </summary>
         public void InitializeDict()
         {
             new DictController(_dictService).Run();

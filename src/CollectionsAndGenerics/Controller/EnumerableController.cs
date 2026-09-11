@@ -3,8 +3,14 @@
     using CollectionsAndGenerics.View;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Controlls enumerable demonstration.
+    /// </summary>
     public class EnumerableController
     {
+        /// <summary>
+        /// Entry point of enumerables demonstration.
+        /// </summary>
         public void Run()
         {
             List<int> listOfElements = new List<int> { 1, 2, 3, 4, 5 };

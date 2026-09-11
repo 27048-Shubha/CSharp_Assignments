@@ -2,26 +2,41 @@
 {
     using System;
 
+    /// <summary>
+    /// Manages console operations.
+    /// </summary>
     public static class ConsoleView
     {
+        /// <summary>
+        /// Displays message to the console.
+        /// </summary>
+        /// <param name="message">Message to display.</param>
         public static void DisplayMessage(string message)
         {
             Console.WriteLine($"{message}");
         }
 
-        public static void DisplayList(IReadOnlyCollection<string> list)
+        /// <summary>
+        /// Displays collection to the user.
+        /// </summary>
+        /// <param name="collection">Collection to be displayed.</param>
+        public static void DisplayCollection(IReadOnlyCollection<string> collection)
         {
-            if(list.Count == 0)
+            if(collection.Count == 0)
             {
                 ConsoleView.DisplayMessage("Currently empty");
             }
 
-            foreach (string item in list)
+            foreach (string item in collection)
             {
                 ConsoleView.DisplayMessage($"{item}");
             }
         }
 
+        /// <summary>
+        /// Displays dictionary to the user.
+        /// </summary>
+        /// <param name="dict">Dictionary to be displayed.</param>
         public static void DisplayDictionary(IReadOnlyDictionary<string, int> dict)
         {
             if (dict.Count == 0)

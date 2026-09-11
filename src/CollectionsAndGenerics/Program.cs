@@ -1,12 +1,17 @@
 ﻿using CollectionsAndGenerics.Controller;
 using CollectionsAndGenerics.Services;
-using CollectionsAndGenerics.View;
 
 namespace Assignments
 {
+    /// <summary>
+    /// Entry point of execution.
+    /// </summary>
     internal class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// Entry point of application execution.
+        /// </summary>
+        public static void Main()
         {
              StackOperationsService<char> stackService = new StackOperationsService<char>();
              QueueOperationsService<string> queueService = new QueueOperationsService<string>();

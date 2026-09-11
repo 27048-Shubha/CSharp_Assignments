@@ -3,8 +3,14 @@
     using System.Collections.Generic;
     using CollectionsAndGenerics.View;
 
+    /// <summary>
+    /// Handles dictionary operations.
+    /// </summary>
     public class DictionaryExplorer
     {
+        /// <summary>
+        /// Entry point of dictionary immutability demonstration.
+        /// </summary>
         public void Run()
         {
             IReadOnlyDictionary<string, int> dictionary = GenerateDictionary();
@@ -14,6 +20,10 @@
             ConsoleView.DisplayMessage("dictionary[\"Apple\"] = 10; throws error because IReadOnlyDictionary is immutable");
         }
 
+        /// <summary>
+        /// Generates and adds key-value pairs to the dictionary.
+        /// </summary>
+        /// <returns>Read only dictionary generated.</returns>
         public IReadOnlyDictionary<string, int> GenerateDictionary()
         {
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
@@ -26,6 +36,10 @@
             return dictionary;
         }
 
+        /// <summary>
+        /// Displays dictionary to the console.
+        /// </summary>
+        /// <param name="dictionary">Dictionary to be printed</param>
         public void PrintDictionary(IReadOnlyDictionary<string, int> dictionary)
         {
             ConsoleView.DisplayMessage("Content in Dictionary:");

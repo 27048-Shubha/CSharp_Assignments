@@ -3,15 +3,25 @@ using CollectionsAndGenerics.View;
 
 namespace CollectionsAndGenerics.Controller
 {
+    /// <summary>
+    /// Controlls queue operations.
+    /// </summary>
     public class QueueController
     {
         private readonly QueueOperationsService<string> _service;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueueController"/> class.
+        /// </summary>
+        /// <param name="service">Object to handle queue services</param>
         internal QueueController(QueueOperationsService<string> service)
         {
             this._service = service;
         }
 
+        /// <summary>
+        /// Entry point of queue operation demonstration.
+        /// </summary>
         public void Run()
         {
             this.DisplayHeader();
@@ -66,7 +76,7 @@ namespace CollectionsAndGenerics.Controller
 
             ConsoleView.DisplayMessage("------------------------------------------------");
 
-            ConsoleView.DisplayList(people);
+            ConsoleView.DisplayCollection(people);
         }
     }
 }

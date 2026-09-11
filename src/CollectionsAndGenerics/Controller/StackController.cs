@@ -1,18 +1,28 @@
-﻿using System.Text;
-using CollectionsAndGenerics.Services;
-using CollectionsAndGenerics.View;
-
-namespace CollectionsAndGenerics.Controller
+﻿namespace CollectionsAndGenerics.Controller
 {
+    using System.Text;
+    using CollectionsAndGenerics.Services;
+    using CollectionsAndGenerics.View;
+
+    /// <summary>
+    /// Controlls stack operations.
+    /// </summary>
     internal class StackController
     {
         private readonly StackOperationsService<char> _service;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StackController"/> class.
+        /// </summary>
+        /// <param name="service">Object to handle stack services</param>
         internal StackController(StackOperationsService<char> service)
         {
             this._service = service;
         }
 
+        /// <summary>
+        /// Entry point of stack operation demonstration.
+        /// </summary>
         public void Run()
         {
             this.DisplayHeader();

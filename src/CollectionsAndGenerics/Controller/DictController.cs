@@ -1,22 +1,27 @@
 ﻿using CollectionsAndGenerics.Services;
 using CollectionsAndGenerics.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CollectionsAndGenerics.Controller
 {
+    /// <summary>
+    /// Controlls dictionary operations.
+    /// </summary>
     public class DictController
     {
         private readonly DictionaryOperationsService<string, int> _service;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DictController"/> class.
+        /// </summary>
+        /// <param name="service">Object to handle dictionary services</param>
         internal DictController(DictionaryOperationsService<string, int> service)
         {
             this._service = service;
         }
 
+        /// <summary>
+        /// Entry point of dictionary operation demonstration.
+        /// </summary>
         public void Run()
         {
             this.DisplayHeader();
