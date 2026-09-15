@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsAndGenerics", "src\CollectionsAndGenerics\CollectionsAndGenerics.csproj", "{1AEF35BF-2DA5-4610-BF58-0C9ECD1C92C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +31,15 @@ Global
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AEF35BF-2DA5-4610-BF58-0C9ECD1C92C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AEF35BF-2DA5-4610-BF58-0C9ECD1C92C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AEF35BF-2DA5-4610-BF58-0C9ECD1C92C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AEF35BF-2DA5-4610-BF58-0C9ECD1C92C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C780FFA-169F-4A30-BA02-9BD840744C4C}
 	EndGlobalSection
 EndGlobal
