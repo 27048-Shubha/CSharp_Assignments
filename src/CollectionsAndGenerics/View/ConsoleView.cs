@@ -8,6 +8,16 @@
     public static class ConsoleView
     {
         /// <summary>
+        /// Pauses the console by prompting user to press any key to continue.
+        /// </summary>
+        public static void PauseAndClear()
+        {
+            DisplayMessage("\nPress any key to continue...");
+            Console.ReadKey(intercept: true);
+            Console.Clear();
+        }
+
+        /// <summary>
         /// Displays message to the console.
         /// </summary>
         /// <param name="message">Message to display.</param>
@@ -22,7 +32,7 @@
         /// <param name="collection">Collection to be displayed.</param>
         public static void DisplayCollection(IReadOnlyCollection<string> collection)
         {
-            if(collection.Count == 0)
+            if (collection.Count == 0)
             {
                 ConsoleView.DisplayMessage("Currently empty");
             }
@@ -46,7 +56,7 @@
 
             foreach (var item in dict)
             {
-                ConsoleView.DisplayMessage( $"{item.Key} : Grade {item.Value}");
+                ConsoleView.DisplayMessage($"{item.Key} : Grade {item.Value}");
             }
         }
     }

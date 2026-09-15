@@ -5,7 +5,7 @@
     using CollectionsAndGenerics.View;
 
     /// <summary>
-    /// Controlls stack operations.
+    /// Controls stack operations.
     /// </summary>
     internal class StackController
     {
@@ -57,7 +57,7 @@
 
         private string PopCharacters()
         {
-            StringBuilder resultString = new();
+            StringBuilder resultString = new ();
 
             while (!this._service.IsEmpty())
             {

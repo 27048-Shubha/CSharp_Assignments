@@ -5,7 +5,7 @@
     using CollectionsAndGenerics.View;
 
     /// <summary>
-    /// Controlls list operations.
+    /// Controls list operations.
     /// </summary>
     internal class ListController
     {

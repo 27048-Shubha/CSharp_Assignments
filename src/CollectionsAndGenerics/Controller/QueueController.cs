@@ -4,7 +4,7 @@ using CollectionsAndGenerics.View;
 namespace CollectionsAndGenerics.Controller
 {
     /// <summary>
-    /// Controlls queue operations.
+    /// Controls queue operations.
     /// </summary>
     public class QueueController
     {

@@ -4,7 +4,7 @@
     using CollectionsAndGenerics.View;
 
     /// <summary>
-    /// Controlls overall application flow.
+    /// Controls overall application flow.
     /// </summary>
     internal class MainController
     {
@@ -88,8 +88,7 @@
 
                 ConsoleView.DisplayMessage("\nConsole will be refreshed within 5 seconds... Kindly wait");
 
-                Thread.Sleep(5000);
-                Console.Clear();
+                ConsoleView.PauseAndClear();
             }
             while (true);
         }
@@ -99,7 +98,7 @@
         /// </summary>
         public void InitializeList()
         {
-            new ListController(_listService).Run();
+            new ListController(this._listService).Run();
         }
 
         /// <summary>
@@ -107,7 +106,7 @@
         /// </summary>
         public void InitializeStack()
         {
-            new StackController(_stackService).Run();
+            new StackController(this._stackService).Run();
         }
 
         /// <summary>
@@ -115,7 +114,7 @@
         /// </summary>
         public void InitializeQueue()
         {
-            new QueueController(_queueService).Run();
+            new QueueController(this._queueService).Run();
         }
 
         /// <summary>
@@ -123,7 +122,7 @@
         /// </summary>
         public void InitializeDict()
         {
-            new DictController(_dictService).Run();
+            new DictController(this._dictService).Run();
         }
     }
 }

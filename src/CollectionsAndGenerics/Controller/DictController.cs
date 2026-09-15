@@ -4,7 +4,7 @@ using CollectionsAndGenerics.View;
 namespace CollectionsAndGenerics.Controller
 {
     /// <summary>
-    /// Controlls dictionary operations.
+    /// Controls dictionary operations.
     /// </summary>
     public class DictController
     {
