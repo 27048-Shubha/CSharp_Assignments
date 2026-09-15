@@ -31,6 +31,11 @@
         Search,
 
         /// <summary>
+        /// Represents sorting operation of a products.
+        /// </summary>
+        Sort,
+
+        /// <summary>
         /// Represents exit operation from the application.
         /// </summary>
         Exit,

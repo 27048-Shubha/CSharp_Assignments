@@ -10,17 +10,14 @@
     /// </summary>
     public class InventoryService
     {
-        private readonly ConsoleView _console;
         private readonly IProductRepository _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryService"/> class.
         /// </summary>
         /// <param name="repository">Object to handle repository operations.</param>
-        /// <param name="console">Object to handle console operations.</param>
-        public InventoryService(IProductRepository repository, ConsoleView console)
+        public InventoryService(IProductRepository repository)
         {
-            this._console = console;
             this._repository = repository;
         }
 

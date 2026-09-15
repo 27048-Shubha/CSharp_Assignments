@@ -49,19 +49,20 @@
         /// <summary>
         /// Gets user's choice for menu functions.
         /// </summary>
-        /// <param name="choice">Choice entered by the user.</param>
         /// <returns>True if user enters valid integer else False.</returns>
-        public bool GetUserChoice(out int choice)
+        public int GetUserChoice()
         {
             SetColor(ConsoleColor.DarkCyan);
-            string value = Console.ReadLine() ?? string.Empty;
-            if (!TypeValidator.IsValidInt(value, out choice))
+            while (true)
             {
-                this.DisplayInvalidChoice();
-                return false;
-            }
+                string value = Console.ReadLine() ?? string.Empty;
+                if (TypeValidator.IsValidInt(value, out int choice))
+                {
+                    this.DisplayInvalidChoice();
+                }
 
-            return true;
+                return choice;
+            }
         }
 
         /// <summary>
@@ -87,6 +88,7 @@
             string? value = Console.ReadLine();
             if (!TypeValidator.IsValidDecimal(value, out price))
             {
+                this.DisplayMessage("Invalid Input! Price must be a positive value.");
                 return false;
             }
 
@@ -105,6 +107,7 @@
             string? value = Console.ReadLine();
             if (!TypeValidator.IsValidDecimal(value, out stock))
             {
+                this.DisplayMessage("Invalid Input! Stock must be an non negative value.");
                 return false;
             }
 
@@ -123,6 +126,8 @@
                 this.DisplayEmpty();
                 return;
             }
+
+            this.DisplayMessage("Current inventory:");
 
             var table = new ConsoleTable("ID", "NAME", "PRICE", "STOCK QUANTITY");
             foreach (Product product in products)
@@ -172,6 +177,15 @@
         }
 
         /// <summary>
+        /// Displays messages to skip editing values.
+        /// </summary>
+        public void DisplaySkipMessage()
+        {
+            SetColor(ConsoleColor.Yellow);
+            Console.WriteLine($"Click enter to skip editing values");
+        }
+
+        /// <summary>
         /// Displays invalid input message to the console.
         /// </summary>
         /// <param name="message">Message to be displayed.</param>
@@ -210,18 +224,15 @@
         }
 
         /// <summary>
-        /// Clears console.
+        /// Pauses the console by prompting user to enter key.
         /// </summary>
-        public void ClearConsole()
+        public void PauseAndClear()
         {
-            Thread.Sleep(1000);
+            this.Display("\nPress any key to continue...");
+            Console.ReadKey(intercept: true);
             Console.Clear();
         }
 
-        /// <summary>
-        /// Sets color to the console.
-        /// </summary
-        /// <param name="color">Color to be set.</param>
         private static void SetColor(ConsoleColor color)
         {
             Console.ForegroundColor = color;

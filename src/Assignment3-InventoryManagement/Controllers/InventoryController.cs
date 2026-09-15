@@ -14,22 +14,15 @@
         private readonly ConsoleView _view;
         private readonly InventoryService _service;
 
-        private int _choice;
-        private string _name;
-        private decimal _price;
-        private decimal _stockQuantity = 0;
-
-        private List<Product> _products;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryController"/> class.
         /// </summary>
-        /// <param name="view">Object for calling console operations.</param>
         /// <param name="service">Object for calling services.</param>
+        /// <param name="view">Object for calling console operations.</param>
         public InventoryController(InventoryService service, ConsoleView view)
         {
-            this._view = view;
             this._service = service;
+            this._view = view;
         }
 
         /// <summary>
@@ -37,88 +30,59 @@
         /// </summary>
         public void Run()
         {
-            try
+            int choice;
+
+            while (true)
             {
-                do
+                try
                 {
                     this._view.DisplayMenu();
-                    this._view.GetUserChoice(out this._choice);
-                    switch ((MenuOptions)this._choice)
+                    choice = this._view.GetUserChoice();
+
+                    switch ((MenuOptions)choice)
                     {
                         case MenuOptions.Add:
                             this.AddProduct();
-                            this._view.ClearConsole();
                             break;
 
                         case MenuOptions.Edit:
                             this.EditProduct();
-                            this._view.ClearConsole();
                             break;
 
                         case MenuOptions.Delete:
                             this.DeleteProduct();
-                            this._view.ClearConsole();
                             break;
 
                         case MenuOptions.View:
-                            // View
                             this.ViewProducts();
-                            this._view.ClearConsole();
                             break;
 
                         case MenuOptions.Search:
-                            // Search By Name
                             this.GetProductByName();
-                            this._view.ClearConsole();
+                            break;
+
+                        case MenuOptions.Sort:
+                            this.SortProduct();
                             break;
 
                         case MenuOptions.Exit:
                             this._view.DiplayExitMessage();
-                            this._view.ClearConsole();
-                            break;
+                            return;
 
                         default:
                             this._view.DisplayDefault();
-                            this._view.ClearConsole();
                             break;
                     }
-                }
-                while (this._choice != 6);
-            }
-            catch (NameNotFoundException exception)
-            {
-                this._view.DisplayMessage(exception.Message);
-            }
-            catch (EmptyInventoryException exception)
-            {
-                this._view.DisplayMessage(exception.Message);
-            }
-            catch (Exception exception)
-            {
-                this._view.DisplayMessage(exception.Message);
-            }
-        }
 
-        /// <summary>
-        /// Adds new products to the products list.
-        /// </summary>
-        private void AddProduct()
-        {
-            this._view.GetProductName(out this._name);
-            if (!this._view.GetProductPrice(out this._price))
-            {
-                this._view.DisplayInvalidInput("Invalid Input! Price must be a positive value.");
-            }
-            else if (!this._view.GetProductStock(out this._stockQuantity))
-            {
-                this._view.DisplayInvalidInput("Invalid Input! Stock must be an non negative value.");
-            }
-            else
-            {
-                try
+                    this._view.PauseAndClear();
+                }
+                catch (NameNotFoundException exception)
                 {
-                    this._service.AddProduct(this._name, this._price, this._stockQuantity);
-                    this._view.DisplaySuccess("Insertion");
+                    this._view.DisplayMessage(exception.Message);
+                }
+                catch (EmptyInventoryException exception)
+                {
+                    this._view.DisplayMessage(exception.Message);
                 }
                 catch (ArgumentException e)
                 {
@@ -127,148 +91,117 @@
             }
         }
 
-        /// <summary>
-        /// Edits existing products fields.
-        /// </summary>
+        private void AddProduct()
+        {
+            string name;
+            decimal price;
+            decimal stockQuantity = 0;
+
+            this._view.GetProductName(out name);
+            this._view.GetProductPrice(out price);
+            this._view.GetProductStock(out stockQuantity);
+            {
+                this._service.AddProduct(name, price, stockQuantity);
+                this._view.DisplaySuccess("Insertion");
+            }
+        }
+
         private void EditProduct()
         {
+            string name;
+            decimal price;
+            decimal stockQuantity = 0;
+
             if (this._service.IsEmpty())
             {
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
 
-            this._view.DisplayMessage("Current inventory:");
-            try
+            this.ViewProducts();
+            this._view.DisplaySkipMessage();
+            this._view.GetProductName(out name);
+            Guid pId = this._service.GetId(name);
+            if (!this._view.GetProductPrice(out price) && (price == 0))
             {
-                this.ViewProducts();
-                this._view.DisplayMessage("Click enter to skip editing values");
-                this._view.GetProductName(out this._name);
-                Guid pId;
-                try
-                {
-                    pId = this._service.GetId(this._name);
-                    if (!this._view.GetProductPrice(out this._price) && (this._price == 0))
-                    {
-                        this._price = this._service.GetProductPrice(pId);
-                    }
-
-                    if (!this._view.GetProductStock(out this._stockQuantity))
-                    {
-                        this._stockQuantity = this._service.GetProductStock(pId);
-                    }
-
-                    this._service.EditProduct(pId, this._name, this._price, this._stockQuantity);
-                    this._view.DisplaySuccess("Updation");
-                }
-                catch (NameNotFoundException e)
-                {
-                    this._view.DisplayMessage(e.Message);
-                }
+                price = this._service.GetProductPrice(pId);
             }
-            catch (EmptyInventoryException e)
+
+            if (!this._view.GetProductStock(out stockQuantity))
             {
-                this._view.DisplayMessage(e.Message);
+                stockQuantity = this._service.GetProductStock(pId);
             }
+
+            this._service.EditProduct(pId, name, price, stockQuantity);
+            this._view.DisplaySuccess("Updation");
         }
 
-        /// <summary>
-        /// Deletes existing products from the products list.
-        /// </summary>
         private void DeleteProduct()
         {
+            string name;
+
             if (this._service.IsEmpty())
             {
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
 
-            this._view.GetProductName(out this._name);
-            try
-            {
-                this._service.RemoveProduct(this._name);
-                this._view.DisplaySuccess("Deletion");
-            }
-            catch (NameNotFoundException e)
-            {
-                this._view.DisplayMessage(e.Message);
-            }
+            this._view.GetProductName(out name);
+            this._service.RemoveProduct(name);
+            this._view.DisplaySuccess("Deletion");
         }
 
-        /// <summary>
-        /// Sends products list to the view.
-        /// </summary>
         private void ViewProducts()
-        {
-            try
-            {
-                if (this._service.IsEmpty())
-                {
-                    throw new EmptyInventoryException("Inventory is currently empty!");
-                }
-
-                this._products = this._service.ListProducts();
-                this._view.DisplayProducts(this._products);
-            }
-            catch (EmptyInventoryException e)
-            {
-                this._view.DisplayMessage(e.Message);
-            }
-        }
-
-        /// <summary>
-        /// Gets products by name.
-        /// </summary>
-        private void GetProductByName()
         {
             if (this._service.IsEmpty())
             {
-                this._view.DisplayEmpty();
-                return;
+                throw new EmptyInventoryException("Inventory is currently empty!");
             }
 
-            this._view.GetProductName(out this._name);
-            this._products = this._service.FindProduct(this._name);
-            this._view.DisplayProducts(this._products);
+            List<Product> products = this._service.ListProducts();
+            this._view.DisplayProducts(products);
         }
 
-        /// <summary>
-        /// Sorts products list by user's choice.
-        /// </summary>
+        private void GetProductByName()
+        {
+            string name;
+
+            if (this._service.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+
+            this._view.GetProductName(out name);
+            List<Product> products = this._service.FindProduct(name);
+            this._view.DisplayProducts(products);
+        }
+
         private void SortProduct()
         {
-            int sortChoice;
+            List<Product> products;
             this._view.DisplaySortMenu();
-            this._view.GetUserChoice(out sortChoice);
-            try
+            int sortChoice = this._view.GetUserChoice();
+            switch ((SortMenuOptions)sortChoice)
             {
-                switch ((SortMenuOptions)sortChoice)
-                {
-                    case SortMenuOptions.ByName:
-                        this._products = this._service.SortByName();
-                        this._view.DisplayProducts(this._products);
-                        break;
+                case SortMenuOptions.ByName:
+                    products = this._service.SortByName();
+                    this._view.DisplayProducts(products);
+                    break;
 
-                    case SortMenuOptions.ByPrice:
-                        this._products = this._service.SortByPrice();
-                        this._view.DisplayProducts(this._products);
-                        break;
+                case SortMenuOptions.ByPrice:
+                    products = this._service.SortByPrice();
+                    this._view.DisplayProducts(products);
+                    break;
 
-                    case SortMenuOptions.ByStockQuantity:
-                        this._products = this._service.SortByStockQuantity();
-                        this._view.DisplayProducts(this._products);
-                        break;
+                case SortMenuOptions.ByStockQuantity:
+                    products = this._service.SortByStockQuantity();
+                    this._view.DisplayProducts(products);
+                    break;
 
-                    case SortMenuOptions.Exit:
-                        break;
+                case SortMenuOptions.Exit:
+                    return;
 
-                    default:
-                        this._view.DisplayDefault();
-                        this.SortProduct();
-                        break;
-                }
-            }
-            catch (NameNotFoundException e)
-            {
-                this._view.DisplayMessage(e.Message);
+                default:
+                    this._view.DisplayDefault();
+                    break;
             }
         }
     }

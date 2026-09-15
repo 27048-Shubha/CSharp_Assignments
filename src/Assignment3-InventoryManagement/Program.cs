@@ -17,10 +17,17 @@
         {
             ConsoleView view = new ConsoleView();
             IProductRepository repository = new ProductRepository();
-            InventoryService service = new InventoryService(repository, view);
+            InventoryService service = new InventoryService(repository);
             InventoryController controller = new InventoryController(service, view);
 
-            controller.Run();
+            try
+            {
+                controller.Run();
+            }
+            catch (Exception exception)
+            {
+                view.DisplayMessage($"Unexpected error! {exception.Message}");
+            }
         }
     }
 }
