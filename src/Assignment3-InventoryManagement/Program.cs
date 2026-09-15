@@ -8,7 +8,7 @@
     /// <summary>
     /// Application entry point and composition root.
     /// </summary>
-    public class Program
+    public static class Program
     {
         /// <summary>
         /// Serves as start of execution, calls controller.
@@ -16,9 +16,10 @@
         public static void Main()
         {
             ConsoleView view = new ConsoleView();
-            ProductRepository repository = new ProductRepository();
+            IProductRepository repository = new ProductRepository();
             InventoryService service = new InventoryService(repository, view);
             InventoryController controller = new InventoryController(service, view);
+
             controller.Run();
         }
     }

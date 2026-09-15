@@ -7,7 +7,7 @@
     using Assignment3_InventoryManagement.Views;
 
     /// <summary>
-    /// Manages initializaiton and menu for inventory system.
+    /// Coordinates user interaction flow between the console view and the inventory service.
     /// </summary>
     public class InventoryController
     {

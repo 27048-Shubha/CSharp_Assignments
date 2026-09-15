@@ -52,5 +52,25 @@
         /// <param name="name">Name of the products whose Guid to be found.</param>
         /// <returns>Guid of the products.</returns>
         public Guid GetId(string name);
+
+        /// <summary>
+        /// Gets count of products inside products list.
+        /// </summary>
+        /// <returns>The total number of products in the products list. </returns>
+        public int GetProductCount();
+
+        /// <summary>
+        /// Gets products price.
+        /// </summary>
+        /// <param name="pId">The id of the products.</param>
+        /// <returns>The price of the products.</returns>
+        public decimal GetProductPrice(Guid pId);
+
+        /// <summary>
+        /// Gets stock quantity of the products.
+        /// </summary>
+        /// <param name="pId">The Id of the products.</param>
+        /// <returns>The stock quantity of the products.</returns>
+        public decimal GetProductStock(Guid pId);
     }
 }
