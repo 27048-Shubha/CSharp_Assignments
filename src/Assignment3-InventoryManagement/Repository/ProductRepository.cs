@@ -25,7 +25,12 @@
         /// <param name="price">New Price to be updated.</param>
         public void UpdatePrice(Guid pId, decimal price)
         {
-            Product? product = this._products.FirstOrDefault(p => p.Id == pId);
+            Product? product = this._products.FirstOrDefault(p => p.Id == pId) ?? throw new ArgumentException("Product not found.", nameof(pId));
+            if (product == null)
+            {
+                throw new ArgumentException("Product not found.", nameof(pId));
+            }
+
             product.Price = price;
         }
 
@@ -37,6 +42,11 @@
         public void UpdateStock(Guid pId, decimal stock)
         {
             Product? product = this._products.FirstOrDefault(p => p.Id == pId);
+            if (product == null)
+            {
+                throw new ArgumentException("Product not found.", nameof(pId));
+            }
+
             product.StockQuantity = stock;
         }
 
