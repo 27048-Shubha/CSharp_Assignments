@@ -30,7 +30,9 @@
                 "2. Edit a product\n" +
                 "3. Delete a product\n" +
                 "4. View all products\n" +
-                "5. Search product by name\n");
+                "5. Search product by name\n" +
+                "6. Sort products\n" +
+                "7. Exit application");
             this.DisplayDash();
         }
 
@@ -42,7 +44,7 @@
             this.DisplayDash();
             SetColor(ConsoleColor.Cyan);
             Console.WriteLine("Enter: ");
-            Console.WriteLine("1.Sort By Name\n2. Sort By Price\n3. Sort By Stock Quanitty\n4. View All Products\n5. Search Product By Name\n6. Exit");
+            Console.WriteLine("1. Sort By Name\n2. Sort By Price\n3. Sort By Stock Quanitty\n4. Exit");
             this.DisplayDash();
         }
 
@@ -56,7 +58,7 @@
             while (true)
             {
                 string value = Console.ReadLine() ?? string.Empty;
-                if (TypeValidator.IsValidInt(value, out int choice))
+                if (!TypeValidator.IsValidInt(value, out int choice))
                 {
                     this.DisplayInvalidChoice();
                 }
@@ -79,16 +81,21 @@
         /// <summary>
         /// Get value of price of the products.
         /// </summary>
+        /// <param name="editMode">True if is in edit mode, else false.</param>
         /// <param name="price">Reference to price of the products.</param>
         /// <returns>True if price value entered is valid else false.</returns>
-        public bool GetProductPrice(out decimal price)
+        public bool GetProductPrice(bool editMode, out decimal price)
         {
             SetColor(ConsoleColor.DarkCyan);
             this.Display("price");
             string? value = Console.ReadLine();
             if (!TypeValidator.IsValidDecimal(value, out price))
             {
-                this.DisplayMessage("Invalid Input! Price must be a positive value.");
+                if (!editMode)
+                {
+                    this.DisplayMessage("Invalid Input! Price must be a positive value.");
+                }
+
                 return false;
             }
 
@@ -98,16 +105,21 @@
         /// <summary>
         /// Get value of stock of the products.
         /// </summary>
+        /// <param name="editMode">True if is in edit mode, else false.</param>
         /// <param name="stock">Reference to stock of the products.</param>
         /// <returns>True if stock value is valid else False.</returns>
-        public bool GetProductStock(out decimal stock)
+        public bool GetProductStock(bool editMode, out decimal stock)
         {
             SetColor(ConsoleColor.DarkCyan);
             this.Display("stock");
             string? value = Console.ReadLine();
             if (!TypeValidator.IsValidDecimal(value, out stock))
             {
-                this.DisplayMessage("Invalid Input! Stock must be an non negative value.");
+                if (!editMode)
+                {
+                    this.DisplayMessage("Invalid Input! Stock must be an non negative value.");
+                }
+
                 return false;
             }
 
@@ -221,6 +233,7 @@
         {
             SetColor(ConsoleColor.DarkCyan);
             Console.WriteLine("Thank you for using Inventory Management System!");
+            SetColor(ConsoleColor.White);
         }
 
         /// <summary>

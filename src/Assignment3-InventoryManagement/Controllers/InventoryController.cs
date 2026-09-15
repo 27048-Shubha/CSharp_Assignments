@@ -98,8 +98,8 @@
             decimal stockQuantity = 0;
 
             this._view.GetProductName(out name);
-            this._view.GetProductPrice(out price);
-            this._view.GetProductStock(out stockQuantity);
+            this._view.GetProductPrice(false, out price);
+            this._view.GetProductStock(false, out stockQuantity);
             {
                 this._service.AddProduct(name, price, stockQuantity);
                 this._view.DisplaySuccess("Insertion");
@@ -121,12 +121,12 @@
             this._view.DisplaySkipMessage();
             this._view.GetProductName(out name);
             Guid pId = this._service.GetId(name);
-            if (!this._view.GetProductPrice(out price) && (price == 0))
+            if (!this._view.GetProductPrice(true, out price) && (price == 0))
             {
                 price = this._service.GetProductPrice(pId);
             }
 
-            if (!this._view.GetProductStock(out stockQuantity))
+            if (!this._view.GetProductStock(true, out stockQuantity))
             {
                 stockQuantity = this._service.GetProductStock(pId);
             }
@@ -177,7 +177,13 @@
         private void SortProduct()
         {
             List<Product> products;
+            if (this._service.IsEmpty())
+            {
+                throw new EmptyInventoryException("Inventory is currently empty!");
+            }
+
             this._view.DisplaySortMenu();
+
             int sortChoice = this._view.GetUserChoice();
             switch ((SortMenuOptions)sortChoice)
             {
