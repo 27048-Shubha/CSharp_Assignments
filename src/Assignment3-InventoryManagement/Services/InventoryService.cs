@@ -3,7 +3,6 @@
     using Assignment3_InventoryManagement.Exceptions;
     using Assignment3_InventoryManagement.Models;
     using Assignment3_InventoryManagement.Repository;
-    using Assignment3_InventoryManagement.Views;
 
     /// <summary>
     /// Manages CRUD calls to Repository.
@@ -33,7 +32,8 @@
             {
                 throw new ArgumentException("Invalid Input! Price must be a positive value.");
             }
-            else if (stock < 0)
+
+            if (stock < 0)
             {
                 throw new ArgumentException("Invalid Input! Stock must be an non negative value.");
             }
@@ -76,26 +76,6 @@
         }
 
         /// <summary>
-        /// Edits price of the products.
-        /// </summary>
-        /// <param name="pId">Product Id whose price to be edited.</param>
-        /// <param name="price">New price value. </param>
-        public void EditProductPrice(Guid pId, decimal price)
-        {
-            this._repository.UpdatePrice(pId, price);
-        }
-
-        /// <summary>
-        /// Edits stock of the products.
-        /// </summary>
-        /// <param name="pId">Product Id whose price to be edited.</param>
-        /// <param name="stock">New stock value. </param>
-        public void EditStockQuantity(Guid pId, decimal stock)
-        {
-            this._repository.UpdateStock(pId, stock);
-        }
-
-        /// <summary>
         /// Gets Guid of the products and calls repo for deletion.
         /// </summary>
         /// <param name="name">Name of the products to be deleted.</param>
@@ -106,51 +86,32 @@
             {
                 throw new NameNotFoundException("Product Name doesn't Exists");
             }
-            else
-            {
-                this._repository.Delete(productId);
-            }
+
+            this._repository.Delete(productId);
         }
 
         /// <summary>
         /// Returns list of products in product list.
         /// </summary>
         /// <returns>List of products.</returns>
-        public List<Product> ListProducts()
+        public IList<Product> ListProducts()
         {
             if (this.IsEmpty())
             {
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
-            else
-            {
-                return this._repository.ViewAll();
-            }
+
+            return this._repository.ViewAll();
         }
 
         /// <summary>
-        /// Calls repo to search for the products.
+        /// Search for the products by name.
         /// </summary>
         /// <param name="name">Name of the products.</param>
-        /// <returns>Product object holding details on _roducts to be searched.</returns>
-        public List<Product> FindProduct(string name)
+        /// <returns>Product object holding details on products to be searched.</returns>
+        public List<Product> FindProducts(string name)
         {
             return this._repository.SearchByName(name);
-        }
-
-        /// <summary>
-        /// Checks if the products exists in the inventory already.
-        /// </summary>
-        /// <param name="name">Name to be checked for existence.</param>
-        /// <returns>True if exists else False.</returns>
-        public bool IsExists(string name)
-        {
-            if (this._repository.GetId(name) == Guid.Empty)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         /// <summary>
@@ -180,12 +141,11 @@
             {
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
-            else
-            {
-                List<Product> products = this.ListProducts();
-                products.Sort((a, b) => a.Name.CompareTo(b.Name));
-                return products;
-            }
+
+            List<Product> products = (List<Product>)this.ListProducts();
+            products.Sort((a, b) => a.Name.CompareTo(b.Name));
+
+            return products;
         }
 
         /// <summary>
@@ -199,12 +159,11 @@
             {
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
-            else
-            {
-                List<Product> products = this.ListProducts();
-                products.Sort((a, b) => a.Price.CompareTo(b.Price));
-                return products;
-            }
+
+            List<Product> products = (List<Product>)this.ListProducts();
+            products.Sort((a, b) => a.Price.CompareTo(b.Price));
+
+            return products;
         }
 
         /// <summary>
@@ -218,12 +177,11 @@
             {
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
-            else
-            {
-                List<Product> products = this.ListProducts();
-                products.Sort((a, b) => a.StockQuantity.CompareTo(b.StockQuantity));
-                return products;
-            }
+
+            List<Product> products = (List<Product>)this.ListProducts();
+            products.Sort((a, b) => a.StockQuantity.CompareTo(b.StockQuantity));
+
+            return products;
         }
 
         /// <summary>
@@ -233,6 +191,26 @@
         public bool IsEmpty()
         {
             return this._repository.GetProductCount() == 0;
+        }
+
+        private void EditProductPrice(Guid pId, decimal price)
+        {
+            this._repository.UpdatePrice(pId, price);
+        }
+
+        private void EditStockQuantity(Guid pId, decimal stock)
+        {
+            this._repository.UpdateStock(pId, stock);
+        }
+
+        private bool IsExists(string name)
+        {
+            if (this._repository.GetId(name) == Guid.Empty)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

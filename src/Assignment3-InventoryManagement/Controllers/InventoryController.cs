@@ -100,10 +100,8 @@
             this._view.GetProductName(out name);
             this._view.GetProductPrice(false, out price);
             this._view.GetProductStock(false, out stockQuantity);
-            {
-                this._service.AddProduct(name, price, stockQuantity);
-                this._view.DisplaySuccess("Insertion");
-            }
+            this._service.AddProduct(name, price, stockQuantity);
+            this._view.DisplaySuccess("Insertion");
         }
 
         private void EditProduct()
@@ -121,7 +119,8 @@
             this._view.DisplaySkipMessage();
             this._view.GetProductName(out name);
             Guid pId = this._service.GetId(name);
-            if (!this._view.GetProductPrice(true, out price) && (price == 0))
+
+            if (!this._view.GetProductPrice(true, out price) || (price == 0))
             {
                 price = this._service.GetProductPrice(pId);
             }
@@ -144,6 +143,7 @@
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
 
+            this.ViewProducts();
             this._view.GetProductName(out name);
             this._service.RemoveProduct(name);
             this._view.DisplaySuccess("Deletion");
@@ -156,7 +156,7 @@
                 throw new EmptyInventoryException("Inventory is currently empty!");
             }
 
-            List<Product> products = this._service.ListProducts();
+            IList<Product> products = this._service.ListProducts();
             this._view.DisplayProducts(products);
         }
 
@@ -170,7 +170,7 @@
             }
 
             this._view.GetProductName(out name);
-            List<Product> products = this._service.FindProduct(name);
+            List<Product> products = this._service.FindProducts(name);
             this._view.DisplayProducts(products);
         }
 
@@ -187,22 +187,22 @@
             int sortChoice = this._view.GetUserChoice();
             switch ((SortMenuOptions)sortChoice)
             {
-                case SortMenuOptions.ByName:
+                case SortMenuOptions.Name:
                     products = this._service.SortByName();
                     this._view.DisplayProducts(products);
                     break;
 
-                case SortMenuOptions.ByPrice:
+                case SortMenuOptions.Price:
                     products = this._service.SortByPrice();
                     this._view.DisplayProducts(products);
                     break;
 
-                case SortMenuOptions.ByStockQuantity:
+                case SortMenuOptions.StockQuantity:
                     products = this._service.SortByStockQuantity();
                     this._view.DisplayProducts(products);
                     break;
 
-                case SortMenuOptions.Exit:
+                case SortMenuOptions.Back:
                     return;
 
                 default:

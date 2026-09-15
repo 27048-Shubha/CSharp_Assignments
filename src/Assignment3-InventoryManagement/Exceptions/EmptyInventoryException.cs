@@ -14,7 +14,6 @@
         public EmptyInventoryException(string? message)
             : base(message)
         {
-            // User Defined Exception.
         }
     }
 }

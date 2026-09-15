@@ -7,7 +7,7 @@
     /// </summary>
     public class ProductRepository : IProductRepository
     {
-        private List<Product> _products = new List<Product>();
+        private List<Product> _products = new ();
 
         /// <summary>
         /// Inserts new products.
@@ -25,13 +25,12 @@
         /// <param name="price">New Price to be updated.</param>
         public void UpdatePrice(Guid pId, decimal price)
         {
-            Product? product = this._products.FirstOrDefault(p => p.Id == pId) ?? throw new ArgumentException("Product not found.", nameof(pId));
-            if (product == null)
-            {
-                throw new ArgumentException("Product not found.", nameof(pId));
-            }
+            Product? product = this._products.FirstOrDefault(p => p.Id == pId);
 
-            product.Price = price;
+            if (product != null)
+            {
+                product.Price = price;
+            }
         }
 
         /// <summary>
@@ -42,12 +41,10 @@
         public void UpdateStock(Guid pId, decimal stock)
         {
             Product? product = this._products.FirstOrDefault(p => p.Id == pId);
-            if (product == null)
+            if (product != null)
             {
-                throw new ArgumentException("Product not found.", nameof(pId));
+                product.StockQuantity = stock;
             }
-
-            product.StockQuantity = stock;
         }
 
         /// <summary>
@@ -82,18 +79,18 @@
         }
 
         /// <summary>
-        /// Lists list of all products.
+        /// Lists all products.
         /// </summary>
-        /// <returns>Returns clone copy of products.</returns>
-        public List<Product> ViewAll()
+        /// <returns> Returns clone copy of products.</returns>
+        public IList<Product> ViewAll()
         {
-            List<Product> clone = new List<Product>();
+            IList<Product> clone = new List<Product>();
             foreach (Product item in this._products)
             {
                 clone.Add(new Product(item.Id, item.Name, item.Price, item.StockQuantity));
             }
 
-            return clone;
+            return (IList<Product>)clone;
         }
 
         /// <summary>
@@ -116,7 +113,7 @@
         }
 
         /// <summary>
-        /// Finds prodcut id based on the name.
+        /// Finds product id based on the name.
         /// </summary>
         /// <param name="name">Name of the products whose Guid to be found.</param>
         /// <returns>Guid of the products.</returns>

@@ -37,7 +37,7 @@
         /// Lists list of all products.
         /// </summary>
         /// <returns>Returns clone copy of products.</returns>
-        public List<Product> ViewAll();
+        public IList<Product> ViewAll();
 
         /// <summary>
         /// Search for the products based on the name.

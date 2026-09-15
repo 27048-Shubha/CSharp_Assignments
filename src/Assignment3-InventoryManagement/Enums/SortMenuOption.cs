@@ -8,21 +8,21 @@
         /// <summary>
         /// Represents sort option by name.
         /// </summary>
-        ByName = 1,
+        Name = 1,
 
         /// <summary>
         /// Represents sort option by price.
         /// </summary>
-        ByPrice,
+        Price,
 
         /// <summary>
         /// Represents sort option by stock quantity.
         /// </summary>
-        ByStockQuantity,
+        StockQuantity,
 
         /// <summary>
         /// Represents exit operation from the application.
         /// </summary>
-        Exit,
+        Back,
     }
 }

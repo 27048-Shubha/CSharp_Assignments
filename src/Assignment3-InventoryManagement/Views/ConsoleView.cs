@@ -10,22 +10,14 @@
     public class ConsoleView
     {
         /// <summary>
-        /// Displays dashed line.
-        /// </summary>
-        public void DisplayDash()
-        {
-            SetColor(ConsoleColor.Yellow);
-            Console.WriteLine("------------------------------------");
-        }
-
-        /// <summary>
         /// Displays menu for inventory system.
         /// </summary>
         public void DisplayMenu()
         {
-            this.DisplayDash();
+            this.DisplaySeparator();
             SetColor(ConsoleColor.Cyan);
-            Console.WriteLine("Welcome To Inventory Management System!\n");
+            Console.WriteLine("Welcome To Inventory Management System\n");
+            Console.WriteLine("Enter:\n");
             Console.WriteLine("1. Add new product\n" +
                 "2. Edit a product\n" +
                 "3. Delete a product\n" +
@@ -33,7 +25,7 @@
                 "5. Search product by name\n" +
                 "6. Sort products\n" +
                 "7. Exit application");
-            this.DisplayDash();
+            this.DisplaySeparator();
         }
 
         /// <summary>
@@ -41,11 +33,14 @@
         /// </summary>
         public void DisplaySortMenu()
         {
-            this.DisplayDash();
+            this.DisplaySeparator();
             SetColor(ConsoleColor.Cyan);
             Console.WriteLine("Enter: ");
-            Console.WriteLine("1. Sort By Name\n2. Sort By Price\n3. Sort By Stock Quanitty\n4. Exit");
-            this.DisplayDash();
+            Console.WriteLine("1. Sort by name\n" +
+                "2. Sort by price\n" +
+                "3. Sort by stock quantity\n" +
+                "4. Back to main menu");
+            this.DisplaySeparator();
         }
 
         /// <summary>
@@ -62,8 +57,10 @@
                 {
                     this.DisplayInvalidChoice();
                 }
-
-                return choice;
+                else
+                {
+                    return choice;
+                }
             }
         }
 
@@ -74,7 +71,7 @@
         public void GetProductName(out string name)
         {
             SetColor(ConsoleColor.DarkCyan);
-            this.Display("name");
+            this.DisplayInputPrompt("name");
             name = Console.ReadLine() ?? "Unnamed Product";
         }
 
@@ -87,7 +84,7 @@
         public bool GetProductPrice(bool editMode, out decimal price)
         {
             SetColor(ConsoleColor.DarkCyan);
-            this.Display("price");
+            this.DisplayInputPrompt("price");
             string? value = Console.ReadLine();
             if (!TypeValidator.IsValidDecimal(value, out price))
             {
@@ -111,7 +108,7 @@
         public bool GetProductStock(bool editMode, out decimal stock)
         {
             SetColor(ConsoleColor.DarkCyan);
-            this.Display("stock");
+            this.DisplayInputPrompt("stock");
             string? value = Console.ReadLine();
             if (!TypeValidator.IsValidDecimal(value, out stock))
             {
@@ -130,7 +127,7 @@
         /// Displays information about products.
         /// </summary>
         /// <param name="products">Product list tot be displayed.</param>
-        public void DisplayProducts(List<Product> products)
+        public void DisplayProducts(IList<Product> products)
         {
             SetColor(ConsoleColor.Yellow);
             if (products.Count == 0)
@@ -172,7 +169,7 @@
         /// Displays choice invalid message.
         /// </summary>
         /// <param name="message">Input variable name to be entered.</param>
-        public void Display(string message)
+        public void DisplayInputPrompt(string message)
         {
             SetColor(ConsoleColor.Cyan);
             Console.WriteLine($"Enter {message}: ");
@@ -232,7 +229,7 @@
         public void DiplayExitMessage()
         {
             SetColor(ConsoleColor.DarkCyan);
-            Console.WriteLine("Thank you for using Inventory Management System!");
+            Console.WriteLine("Thank you for using Inventory Management System");
             SetColor(ConsoleColor.White);
         }
 
@@ -241,7 +238,7 @@
         /// </summary>
         public void PauseAndClear()
         {
-            this.Display("\nPress any key to continue...");
+            this.DisplayInputPrompt("\nPress any key to continue...");
             Console.ReadKey(intercept: true);
             Console.Clear();
         }
@@ -249,6 +246,12 @@
         private static void SetColor(ConsoleColor color)
         {
             Console.ForegroundColor = color;
+        }
+
+        private void DisplaySeparator()
+        {
+            SetColor(ConsoleColor.Yellow);
+            Console.WriteLine("------------------------------------");
         }
     }
 }
