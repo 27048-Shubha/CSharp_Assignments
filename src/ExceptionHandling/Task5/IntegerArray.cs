@@ -1,8 +1,7 @@
-﻿using ExceptionHandling.Task5;
-
-namespace ExceptionHandling.Task5
+﻿namespace ExceptionHandling.Task5
 {
     using System;
+    using ExceptionHandling.Task5;
 
     /// <summary>
     /// Manages array operations.
@@ -75,8 +74,6 @@ namespace ExceptionHandling.Task5
         /// </summary>
         public void Run()
         {
-            Console.WriteLine("Enter size of the array: ");
-            int size = int.Parse(Console.ReadLine());
             try
             {
                 this.InsertElements();
