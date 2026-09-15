@@ -3,17 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{06861454-9561-492A-9F93-A33B6F7AE3AB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{C778E127-C02C-4A37-8E85-3D86DCC063DC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "acceptance", "acceptance", "{93EBAE55-A8BA-40FF-93AA-7D9E4359B6B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignment2\Assignment2.csproj", "{914015B6-9642-4441-96F9-8CDB53DC102E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment3_InventoryManagement", "src\Assignment3-InventoryManagement\Assignment3_InventoryManagement.csproj", "{83D2D1F8-7CE8-40AB-8FC2-87E75BC87697}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,16 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{914015B6-9642-4441-96F9-8CDB53DC102E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{914015B6-9642-4441-96F9-8CDB53DC102E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{914015B6-9642-4441-96F9-8CDB53DC102E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{914015B6-9642-4441-96F9-8CDB53DC102E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D2D1F8-7CE8-40AB-8FC2-87E75BC87697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D2D1F8-7CE8-40AB-8FC2-87E75BC87697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D2D1F8-7CE8-40AB-8FC2-87E75BC87697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D2D1F8-7CE8-40AB-8FC2-87E75BC87697}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4CECB66-8E11-49D9-AA1E-464EE0231450}
 	EndGlobalSection
 EndGlobal
