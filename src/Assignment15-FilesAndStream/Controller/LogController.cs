@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment15_FilesAndStream.Controller
+{
+    using Assignment15_FilesAndStream.Tasks;
+    internal class LogController
+    {
+        public static void Run()
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Enter choice to simulate Logger");
+                    int choice = int.Parse(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            // Simulate multiple user loggin concurrency issue
+                            SimulateLogError();
+                            break;
+
+                        case 2:
+                            // Simulate multiple user loggin concurrency issue
+                            SimulateEfficientLogger();
+                            break;
+
+                        case 3:
+                            // Simulate multiple user loggin concurrency issue
+                            SimulateLockLogger();
+                            break;
+
+                        case 4:
+                            // Simulate multiple user loggin concurrency issue
+                            SimulateIndividualLogFile();
+                            break;
+
+                        case 5:
+                            // Simulate multiple user loggin concurrency issue
+                            return;
+
+                        default:
+                            break;
+                    }
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        public static void SimulateLogError()
+        {
+            Parallel.For(0, 5, i =>
+            {
+                Logger.LogError($"Accessing by: i = {i}\nThread: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            });
+        }
+
+        public static void SimulateEfficientLogger()
+        {
+            Parallel.For(0, 5, i =>
+            {
+                Logger.LogErrorFree($"Accessing by: i = {i}\nThread: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            });
+        }
+
+        public static void SimulateLockLogger()
+        {
+            Parallel.For(0, 5, i =>
+            {
+                Logger.LockLogger($"Accessing by: i = {i}\nThread: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            });
+        }
+
+        public static void SimulateIndividualLogFile()
+        {
+            Parallel.For(0, 5, i =>
+            {
+                Logger.IndividualLogger($"Accessing by: i = {i}\nThread: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            });
+        }
+    }
+}
