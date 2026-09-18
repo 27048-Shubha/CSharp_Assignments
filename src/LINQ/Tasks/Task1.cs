@@ -1,8 +1,8 @@
 ﻿namespace LINQ.Tasks
 {
+    using LINQ.Enums;
     using LINQ.Models;
     using LINQ.Models.DTOs;
-    using LINQ.Enums;
 
     /// <summary>
     /// Performs filtering, sorting, and aggregation operations on products.

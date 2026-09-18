@@ -40,18 +40,20 @@
         public void RunTasks()
         {
             this.LoadProducts();
-            this._console.Display("Loaded products list successfully");
+            this._console.Display("Product list loaded successfully");
             this._console.Display(this._products);
             this._console.Continue();
 
             this.LoadSuppliers();
-            this._console.Display("Loaded suppliers list successfully");
+            this._console.Display("Supplier list loaded successfully");
             this._console.Display(this._suppliers);
             this._console.Continue();
 
             this.LoadOrders();
-            this._console.Display("Loaded orders list successfully");
+            this._console.Display("Order list loaded successfully");
+
             this._console.Display(this._orders);
+            this._console.Continue();
 
             while (true)
             {
@@ -77,6 +79,14 @@
 
                     case Enums.TaskMenu.Task5:
                         this.RunTask5();
+                        break;
+
+                    case Enums.TaskMenu.Quit:
+                        this._console.Display("Exiting application...");
+                        return;
+
+                    default:
+                        this._console.Display("Kindly enter valid inputs only");
                         break;
                 }
             }
@@ -142,6 +152,9 @@
             this._console.Display("\n=== Source array ===");
             this._console.Display(array);
 
+            this._console.Display($"\n==Target: {task3.Target}");
+
+
             int secondHighestNumber = task3.FindSecondHighestNumber();
             this._console.Display("\n=== Second highest number in array ===");
             this._console.Display(secondHighestNumber);
@@ -156,7 +169,7 @@
         /// </summary>
         public void RunTask4()
         {
-            Task4 task4 = new Task4(_console);
+            Task4 task4 = new Task4(this._console);
 
             List<Product> sortedProducts = task4.FilterFirstApproach(this._products);
             task4.NoLINQApproach(this._products);
@@ -176,12 +189,12 @@
             this._console.Display("\n=== Demonstration of filtering, sorting, joining using custom query builder ===");
 
             this._console.Display("\n=== Filter products of price greater than 500 & Sort by price then perform join based on supplier id ===");
-            List<ProductSupplierInfoDTO> result = queryBuilder.Filter(p => p.Price > 500).SortBy(p => p.Price).Join((p, s) => p.Id == s.SupplierId).Execute();
+            List<ProductSupplierInfoDTO> result = queryBuilder.Filter(product => product.Price > 500).SortBy(product => product.Price).Join((product, supplier) => product.Id == supplier.SupplierId).Execute();
             this._console.Display($"");
             this._console.Display(result);
 
             this._console.Display("\n=== Filter products that starts with \"C\" & Sort by price then perform join based on supplier id ===");
-            result = queryBuilder.Filter(p => p.Name.StartsWith("C")).SortBy(p => p.Price).Join((p, s) => p.Id == s.SupplierId).Execute();
+            result = queryBuilder.Filter(product => product.Name.StartsWith("C")).SortBy(product => product.Price).Join((product, supplier) => product.Id == supplier.SupplierId).Execute();
             this._console.Display($"");
             this._console.Display(result);
         }

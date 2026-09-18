@@ -28,12 +28,15 @@ namespace LINQ.Views
         {
             while (true)
             {
-                Console.WriteLine("Enter\n" +
-                    "1. View task 1\n" +
-                    "2. View task 2\n" +
-                    "3. View task 3\n" +
-                    "4. View task 4\n" +
-                    "5. View task 5\n");
+                Console.WriteLine(
+                    "\n---------------- LINQ Task Menu ---------------\n" +
+                    "1. Filter Products & Calculate Average Price\n" +
+                    "2. Category Summary & Product-Supplier Join\n" +
+                    "3. Array Operations (Second Highest & Pair Sum)\n" +
+                    "4. LINQ Performance Comparison\n" +
+                    "5. Custom Query Builder Demo\n" +
+                    "6. Exit\n\n" +
+                    "Please select an option:");
 
                 if (Enum.TryParse<TaskMenu>(Console.ReadLine(), out TaskMenu userChoice))
                 {
@@ -66,7 +69,7 @@ namespace LINQ.Views
         /// <param name="list">The list of products to display.</param>
         public void Display(List<Product> list)
         {
-            var table = new ConsoleTable("Product Id", "Product Name", "Product Price", "Product Category");
+            ConsoleTable table = new ConsoleTable("Product Id", "Product Name", "Product Price", "Product Category");
 
             foreach (var item in list)
             {
@@ -82,7 +85,7 @@ namespace LINQ.Views
         /// <param name="list">The read-only list of products to display</param>
         public void Display(IReadOnlyList<Product> list)
         {
-            var table = new ConsoleTable("Product Id", "Product Name", "Product Price", "Product Category");
+            ConsoleTable table = new ConsoleTable("Product Id", "Product Name", "Product Price", "Product Category");
 
             foreach (var item in list)
             {
@@ -98,7 +101,7 @@ namespace LINQ.Views
         /// <param name="list">The read-only list of suppliers to display.</param>
         public void Display(IReadOnlyList<Supplier> list)
         {
-            var table = new ConsoleTable("Supplier Id", "Supplier Name", "Product Id");
+            ConsoleTable table = new ConsoleTable("Supplier Id", "Supplier Name", "Product Id");
 
             foreach (var item in list)
             {
@@ -114,7 +117,7 @@ namespace LINQ.Views
         /// <param name="list">The read-only list of orders to display.</param>
         public void Display(IReadOnlyList<Order> list)
         {
-            var table = new ConsoleTable("Order Id", "Order Date", "Order Status");
+            ConsoleTable table = new ConsoleTable("Order Id", "Order Date", "Order Status");
 
             foreach (var item in list)
             {
@@ -130,7 +133,7 @@ namespace LINQ.Views
         /// <param name="list">The filtered product details to display.</param>
         public void Display(List<FilterProductsDTO> list)
         {
-            var table = new ConsoleTable("Product Name", "Product Price");
+            ConsoleTable table = new ConsoleTable("Product Name", "Product Price");
 
             foreach (var item in list)
             {
@@ -146,7 +149,7 @@ namespace LINQ.Views
         /// <param name="list">The category summary details to display.</param>
         public void Display(List<CategorySummaryDTO> list)
         {
-            var table = new ConsoleTable(
+            ConsoleTable table = new ConsoleTable(
                 "Category",
                 "Count",
                 "Most Expensive Product",
@@ -170,7 +173,7 @@ namespace LINQ.Views
         /// <param name="list">The product supplier information to display.</param>
         public void Display(List<ProductSupplierInfoDTO> list)
         {
-            var table = new ConsoleTable(
+            ConsoleTable table = new ConsoleTable(
                 "Product Id",
                 "Product Name",
                 "Price",
@@ -198,7 +201,7 @@ namespace LINQ.Views
         /// <param name="list">The collection of pairs to display.</param>
         public void Display(List<PairDTO> list)
         {
-            var table = new ConsoleTable(
+            ConsoleTable table = new ConsoleTable(
                 "Value 1",
                 "Value 2");
 
@@ -218,7 +221,7 @@ namespace LINQ.Views
         /// <param name="list">The suppliers to display.</param>
         public void Display(List<Supplier> list)
         {
-            var table = new ConsoleTable(
+            ConsoleTable table = new ConsoleTable(
                 "Supplier Id",
                 "Supplier Name",
                 "Product Id");
@@ -240,7 +243,7 @@ namespace LINQ.Views
         /// <param name="list">The orders to display.</param>
         public void Display(List<Order> list)
         {
-            var table = new ConsoleTable(
+            ConsoleTable table = new ConsoleTable(
                 "Id",
                 "Order Date",
                 "Status");

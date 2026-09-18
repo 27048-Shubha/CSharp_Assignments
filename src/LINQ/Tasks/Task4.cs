@@ -30,9 +30,9 @@
         {
             Stopwatch stopwatch = Timer.StartTimer();
             List<Product> result = products
-                .Where(p => p.Category == Enums.ProductCategory.Books)
+                .Where(product => product.Category == Enums.ProductCategory.Books)
                 .Distinct()
-                .OrderByDescending(p => p.Price)
+                .OrderByDescending(product => product.Price)
                 .ToList();
 
             this._console.Display("Filter first LINQ based approach: ");
@@ -59,7 +59,7 @@
                 }
             }
 
-            books.Sort((x, y) => y.Price.CompareTo(x.Price));
+            books.Sort((book1, book2) => book2.Price.CompareTo(book1.Price));
 
             this._console.Display("No LINQ Approach: ");
             Timer.PrintExecutionTime(stopwatch);
@@ -88,7 +88,7 @@
             }
 
             books = books.Distinct()
-                .OrderByDescending(p => p.Price)
+                .OrderByDescending(product => product.Price)
                 .ToList();
 
             this._console.Display("Manual filter then query approach (LINQ + No LINQ): ");
@@ -107,11 +107,11 @@
         {
             Stopwatch stopwatch = Timer.StartTimer();
 
-            var lookup = products.ToLookup(p => p.Category);
+            var lookup = products.ToLookup(product => product.Category);
 
             List<Product> result = lookup[Enums.ProductCategory.Books]
                 .Distinct()
-                .OrderByDescending(p => p.Price)
+                .OrderByDescending(product => product.Price)
                 .ToList();
 
             this._console.Display("Lookup based approach: ");

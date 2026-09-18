@@ -8,7 +8,19 @@
     public class Task3
     {
         private readonly int[] _numbers = new int[] { 10, 9, 12, 9, 22, 9, 11, 3, 19, 3 };
-        private int _target = 22;
+
+        /// <summary>
+        /// Gets or Sets target value.
+        /// </summary>
+        /// <value>Integer value of 22.</value>
+        public int Target
+        {
+            get;
+            set
+            {
+                value = 22;
+            }
+        }
 
         /// <summary>
         /// Returns array of integers.

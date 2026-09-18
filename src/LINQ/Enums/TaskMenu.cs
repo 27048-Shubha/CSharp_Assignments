@@ -29,5 +29,10 @@
         /// Executes Task 5.
         /// </summary>
         Task5,
+
+        /// <summary>
+        /// Exit from application
+        /// </summary>
+        Quit,
     }
 }
