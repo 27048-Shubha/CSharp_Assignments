@@ -62,7 +62,7 @@
             // Func<Product, Supplier, bool> joinCondition = predicate.Compile();
             this._productSupplierQuery = this._productQuery.SelectMany(
                     product => this._suppliers
-                    .Where(supplier => predicate(product, supplier)),
+                    .Where(supplier => predicate(product, supplier)), 
                     (product, supplier) => new ProductSupplierInfoDTO
                     {
                          ProductId = product.Id,

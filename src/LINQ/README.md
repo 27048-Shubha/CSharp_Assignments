@@ -53,7 +53,9 @@ Example:
 
 ```
 queryBuilder
-    .Filter(product => product.Price > 500)
+    .Filter(product 
+    
+    product.Price > 500)
     .SortBy(product => product.Price)
     .Join((product, supplier) => product.Id == supplier.SupplierId)
     .Execute();

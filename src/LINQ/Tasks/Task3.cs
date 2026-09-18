@@ -10,17 +10,10 @@
         private readonly int[] _numbers = new int[] { 10, 9, 12, 9, 22, 9, 11, 3, 19, 3 };
 
         /// <summary>
-        /// Gets or Sets target value.
+        /// Gets target value.
         /// </summary>
         /// <value>Integer value of 22.</value>
-        public int Target
-        {
-            get;
-            set
-            {
-                value = 22;
-            }
-        }
+        public int Target => 22;
 
         /// <summary>
         /// Returns array of integers.
@@ -49,7 +42,7 @@
             List<PairDTO> pairs = this._numbers.SelectMany(
                             (value1, i) => this._numbers
                             .Skip(i + 1)
-                            .Where(value2 => value1 + value2 == this._target)
+                            .Where(value2 => value1 + value2 == this.Target)
                             .Select(value2 => new PairDTO()
                             {
                                 Value1 = value1,

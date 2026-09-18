@@ -152,8 +152,7 @@
             this._console.Display("\n=== Source array ===");
             this._console.Display(array);
 
-            this._console.Display($"\n==Target: {task3.Target}");
-
+            this._console.Display($"\nTarget: {task3.Target}");
 
             int secondHighestNumber = task3.FindSecondHighestNumber();
             this._console.Display("\n=== Second highest number in array ===");
@@ -189,7 +188,8 @@
             this._console.Display("\n=== Demonstration of filtering, sorting, joining using custom query builder ===");
 
             this._console.Display("\n=== Filter products of price greater than 500 & Sort by price then perform join based on supplier id ===");
-            List<ProductSupplierInfoDTO> result = queryBuilder.Filter(product => product.Price > 500).SortBy(product => product.Price).Join((product, supplier) => product.Id == supplier.SupplierId).Execute();
+            List<ProductSupplierInfoDTO> result = queryBuilder.Filter(product => 
+                product.Price > 500).SortBy(product => product.Price).Join((product, supplier) => product.Id == supplier.SupplierId).Execute();
             this._console.Display($"");
             this._console.Display(result);
 

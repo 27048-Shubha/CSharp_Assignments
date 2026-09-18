@@ -16,7 +16,8 @@
         /// <returns>A list of filtered product information.</returns>
         public List<FilterProductsDTO> FilterProducts(IReadOnlyList<Product> products)
         {
-            List<Product> filteredProducts = products.Where(product => (product.Category == ProductCategory.Electronics) && (product.Price > 500)).ToList();
+            List<Product> filteredProducts = products.Where(product =>
+                (product.Category == ProductCategory.Electronics) && (product.Price > 500)).ToList();
             return filteredProducts.Select(product => new FilterProductsDTO()
             {
                 ProductName = product.Name,

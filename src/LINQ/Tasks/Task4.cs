@@ -77,15 +77,7 @@
         {
             // Manual Filter + LINQ
             Stopwatch stopwatch = Timer.StartTimer();
-            List<Product> books = new ();
-
-            foreach (Product product in products)
-            {
-                if (product.Category == Enums.ProductCategory.Books)
-                {
-                    books.Add(product);
-                }
-            }
+            List<Product> books = this.AddProducts(products);
 
             books = books.Distinct()
                 .OrderByDescending(product => product.Price)
@@ -118,6 +110,21 @@
             Timer.PrintExecutionTime(stopwatch);
 
             return result;
+        }
+
+        private List<Product> AddProducts(IReadOnlyList<Product> products)
+        {
+            List<Product> matchedProducts = new();
+
+            foreach (Product product in products)
+            {
+                if (product.Category == Enums.ProductCategory.Books)
+                {
+                    matchedProducts.Add(product);
+                }
+            }
+
+            return matchedProducts;
         }
     }
 }
