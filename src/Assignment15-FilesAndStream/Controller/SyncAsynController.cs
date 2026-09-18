@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment15_FilesAndStream.Controller
+﻿namespace Assignment15_FilesAndStream.Controller
 {
-    internal class SyncAsynController
+    using Assignment15_FilesAndStream.Helper;
+    using Assignment15_FilesAndStream.Service;
+
+    public class SyncAsynController
     {
-        private async Task RunTask2()
+        private readonly SynchronousFileProcessor _syncFileProcessor;
+        private readonly AsynchronousFileProcessor _asyncFileProcessor;
+
+        internal SyncAsynController(SynchronousFileProcessor syncFileProcessor, AsynchronousFileProcessor asyncFileProcessor)
+        {
+            this._syncFileProcessor = syncFileProcessor;
+            this._asyncFileProcessor = asyncFileProcessor;
+        }
+
+        public async Task ExecuteFileProcessingComparison()
         {
             Timer timer = new();
             timer.StartTimer();
 
-            this.RunSyncFile("source1.txt", "destination1.txt");
-            this.RunSyncFile("source2.txt", "destination2.txt");
-            this.RunSyncFile("source3.txt", "destination3.txt");
+            this.ExecuteSynchornousProcessing("source1.txt", "destination1.txt");
+            this.ExecuteSynchornousProcessing("source2.txt", "destination2.txt");
+            this.ExecuteSynchornousProcessing("source3.txt", "destination3.txt");
 
             timer.StopTimer();
 
@@ -25,7 +31,7 @@ namespace Assignment15_FilesAndStream.Controller
             timer = new();
             timer.StartTimer();
 
-            await this.RunAsyncFile();
+            await this.ExecuteAsynchornousProcessing();
 
             timer.StopTimer();
 
@@ -42,22 +48,22 @@ namespace Assignment15_FilesAndStream.Controller
             }
         }
 
-        private void RunSyncFile(string sourcePath, string destinationPath)
+        private void ExecuteSynchornousProcessing(string sourcePath, string destinationPath)
         {
-            this._syncHandler.SourcePath = Path.Combine(AppContext.BaseDirectory, sourcePath);
-            this._syncHandler.DestinationPath = Path.Combine(AppContext.BaseDirectory, destinationPath);
+            this._syncFileProcessor.SourcePath = Path.Combine(AppContext.BaseDirectory, sourcePath);
+            this._syncFileProcessor.DestinationPath = Path.Combine(AppContext.BaseDirectory, destinationPath);
 
-            this._syncHandler.ReadUsingFileStream();
-            this._syncHandler.ProcessAndWriteData();
+            this._syncFileProcessor.ReadUsingFileStream();
+            this._syncFileProcessor.ProcessAndWriteData();
 
             Console.WriteLine($"[Sync] Completed: {sourcePath} to {destinationPath}");
         }
 
-        private async Task RunAsyncFile()
+        private async Task ExecuteAsynchornousProcessing()
         {
-            Task task1 = this._asyncHandler.CallAsync("source1.txt", "destination1.txt", "Task1");
-            Task task2 = this._asyncHandler.CallAsync("source2.txt", "destination2.txt", "Task2");
-            Task task3 = this._asyncHandler.CallAsync("source3.txt", "destination3.txt", "Task3");
+            Task task1 = this._asyncFileProcessor.CallAsync("source1.txt", "destination1.txt", "Task1");
+            Task task2 = this._asyncFileProcessor.CallAsync("source2.txt", "destination2.txt", "Task2");
+            Task task3 = this._asyncFileProcessor.CallAsync("source3.txt", "destination3.txt", "Task3");
 
             await Task.WhenAll(task1, task2, task3);
         }

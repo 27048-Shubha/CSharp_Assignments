@@ -1,41 +1,39 @@
-﻿using Assignment15_FilesAndStream.Helper;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment15_FilesAndStream.Controller
+﻿namespace Assignment15_FilesAndStream.Controller
 {
-    using Assignment15_FilesAndStream.Tasks;
+    using Assignment15_FilesAndStream.Helper;
+    using Assignment15_FilesAndStream.Service;
+
     internal class FileProcessorController
     {
-        private readonly FileDataProcessorSync _fileHandler;
-        internal FileProcessorController(FileDataProcessorSync fileHandler)
+        private const long OneGb = 1024L * 1024 * 1024;
+
+        private readonly SynchronousFileProcessor _fileProcessor;
+
+        internal FileProcessorController(SynchronousFileProcessor fileProcessor)
         {
-            this._fileHandler = fileHandler;
+            this._fileProcessor = fileProcessor;
         }
 
-        public void RunTask1()
+        public void ExecuteBufferComparison()
         {
             string filePath = Path.Combine(AppContext.BaseDirectory, "source.txt");
             if (!File.Exists(filePath))
             {
-                FileGenerator.GenerateFile(filePath, 1024 * 1024 * 1024);
+                FileGenerator.GenerateFile(filePath, OneGb);
             }
 
-            Stopwatch stopwatch1 = Stopwatch.StartNew();
-            new FileDataProcessorSync().ReadUsingFileStream();
-            stopwatch1.Stop();
-            Console.WriteLine($"Time taken to read using file stream: {stopwatch1.ElapsedMilliseconds} milliseconds");
+            Timer timer = new();
+            timer.StartTimer();
+            this._fileProcessor.ReadUsingFileStream();
+            timer.StopTimer();
+            Console.WriteLine($"Time taken to read using file stream: {timer.GetTimeTaken()} milliseconds");
 
-            Stopwatch stopwatch2 = Stopwatch.StartNew();
-            new FileDataProcessorSync().ReadUsingBufferedStream();
-            stopwatch2.Stop();
-            Console.WriteLine($"Time taken to read using buffered stream: {stopwatch2.ElapsedMilliseconds} milliseconds");
+            timer.StartTimer();
+            this._fileProcessor.ReadUsingBufferedStream();
+            timer.StopTimer();
+            Console.WriteLine($"Time taken to read using buffered stream: {timer.GetTimeTaken()} milliseconds");
 
-            new FileDataProcessorSync().ProcessAndWriteData();
+            this._fileProcessor.ProcessAndWriteData();
         }
     }
 }

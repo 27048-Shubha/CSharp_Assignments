@@ -1,12 +1,13 @@
-﻿using System.Text;
-
-namespace Assignment15_FilesAndStream.Tasks
+﻿namespace Assignment15_FilesAndStream.Service
 {
+    using System.Text;
+
     public class Logger
     {
         private static string _folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Task4");
         private static string _logFilePath = "log.txt";
         private static object _fileAccessLock = new object();
+
         public static void LogError(string errorMessage)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -48,17 +49,14 @@ namespace Assignment15_FilesAndStream.Tasks
         public static void IndividualLogger(string errorMessage)
         {
             Directory.CreateDirectory(_folderPath);
-            lock (Logger._fileAccessLock)
+            _logFilePath = Path.Combine(_folderPath, $"Log{System.Threading.Thread.CurrentThread.ManagedThreadId}.txt");
+            using (FileStream fileStream = new FileStream(_logFilePath, FileMode.Append))
             {
-                _logFilePath = Path.Combine(_folderPath, $"Log{System.Threading.Thread.CurrentThread.ManagedThreadId}.txt");
-                using (FileStream fileStream = new FileStream(_logFilePath, FileMode.Append))
-                {
-                    byte[] errorBytes = Encoding.UTF8.GetBytes(errorMessage);
-                    fileStream.Write(errorBytes, 0, errorBytes.Length);
-                }
-
-                Console.WriteLine(errorMessage);
+                byte[] errorBytes = Encoding.UTF8.GetBytes(errorMessage);
+                fileStream.Write(errorBytes, 0, errorBytes.Length);
             }
+
+            Console.WriteLine(errorMessage);
         }
     }
 }

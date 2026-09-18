@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace Assignment15_FilesAndStream.Tasks
+namespace Assignment15_FilesAndStream.Service
 {
     /// <summary>
     /// Manages file data processing operations
     /// </summary>
-    internal class FileDataProcessorSync
+    internal class SynchronousFileProcessor
     {
         private const int _bufferSize = 4096;
 
@@ -15,24 +15,6 @@ namespace Assignment15_FilesAndStream.Tasks
         public string SourcePath { get; set; }
 
         public string DestinationPath { get; set; }
-
-        /// <summary>
-        /// Entry point of task 1
-        /// </summary>
-        public void GenerateFile()
-        {
-            using StreamWriter writer = new StreamWriter(this.SourcePath);
-            const int targetSize = 1024 * 1024 * 1024;
-            Random random = new Random();
-            int size = 0;
-
-            while (size < targetSize)
-            {
-                char randomCharacter = (char)random.Next('a', 'z' + 1);
-                writer.Write(randomCharacter);
-                size++;
-            }
-        }
 
         public void ReadUsingFileStream()
         {

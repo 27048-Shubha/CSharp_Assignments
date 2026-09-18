@@ -2,12 +2,12 @@
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment15_FilesAndStream.Tasks
+namespace Assignment15_FilesAndStream.Service
 {
     /// <summary>
     /// Manages file data processing operations
     /// </summary>
-    internal class FileDataProcessorAsync
+    internal class AsynchronousFileProcessor
     {
         private const int _bufferSize = 4096;
 

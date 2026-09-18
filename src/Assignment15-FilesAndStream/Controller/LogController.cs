@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment15_FilesAndStream.Controller
 {
-    using Assignment15_FilesAndStream.Tasks;
+    using Assignment15_FilesAndStream.Service;
     internal class LogController
     {
         public static void Run()
@@ -15,7 +15,14 @@ namespace Assignment15_FilesAndStream.Controller
             {
                 try
                 {
-                    Console.WriteLine("Enter choice to simulate Logger");
+                    Console.WriteLine("\n===== Logger Simulation Menu =====");
+                    Console.WriteLine("1. Simulate Logger Error (No Synchronization)");
+                    Console.WriteLine("2. Simulate Efficient Logger");
+                    Console.WriteLine("3. Simulate Logger Using Lock");
+                    Console.WriteLine("4. Simulate Individual Log Files Per Thread");
+                    Console.WriteLine("5. Back / Exit");
+                    Console.Write("Enter your choice: ");
+
                     int choice = int.Parse(Console.ReadLine());
                     switch (choice)
                     {
@@ -41,9 +48,11 @@ namespace Assignment15_FilesAndStream.Controller
 
                         case 5:
                             // Simulate multiple user loggin concurrency issue
+                            Console.WriteLine("Returning to Main Menu...");
                             return;
 
                         default:
+                            Console.WriteLine("Invalid choice. Please enter a value between 1 and 5.");
                             break;
                     }
                 }
