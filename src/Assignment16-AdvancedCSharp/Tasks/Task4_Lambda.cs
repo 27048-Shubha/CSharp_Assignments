@@ -12,7 +12,7 @@
 
             IEnumerable<int> squaredNumbers = filteredNumbers.Select(n => { return n * n; });
             Console.WriteLine("\nSquared Numbers: ");
-            this.Display(filteredNumbers);
+            this.Display(squaredNumbers);
         }
 
         public void Display(IEnumerable<int> numbers)

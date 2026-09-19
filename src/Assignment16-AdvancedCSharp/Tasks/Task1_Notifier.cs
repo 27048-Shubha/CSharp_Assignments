@@ -1,15 +1,19 @@
-﻿namespace Assignment16_AdvancedCSharp.Tasks
+﻿using Models;
+
+namespace Assignment16_AdvancedCSharp.Tasks
 {
     internal class Task1_Notifier
     {
-        public delegate void Notify();
-
-        public event Notify OnAction;
-
-        public void InvokeEvent()
+        public void Run()
         {
-            Console.WriteLine("Invoking subscribers...");
-            this.OnAction.Invoke();
+            Notifier notifer = new ();
+            notifer.OnAction += this.PrintToConsole;
+            notifer.InvokeEvent();
+        }
+
+        public void PrintToConsole()
+        {
+            Console.WriteLine("Message from PrintToConsole!");
         }
     }
 }
