@@ -11,6 +11,13 @@ namespace Assignment15_FilesAndStream.Service
     {
         private const int _bufferSize = 4096;
 
+        /// <summary>
+        /// Manages asynchronous call operations to demonstrate file process.
+        /// </summary>
+        /// <param name="sourcePath">Path of the source file.</param>
+        /// <param name="destinationPath">Path of the destination file.</param>
+        /// <param name="taskName">Name of the task.</param>
+        /// <returns>A asynchronous task.</returns>
         public async Task CallAsync(string sourcePath, string destinationPath, string taskName)
         {
             byte[] buffer = new byte[_bufferSize];
@@ -21,8 +28,6 @@ namespace Assignment15_FilesAndStream.Service
 
                 using (FileStream fileStream = new FileStream(sourcePath, FileMode.Open, FileAccess.Read))
                 {
-                    // Console.WriteLine($"{taskName}: Processing data from file and writing to new destination file using memory stream...");
-
                     int bytesRead;
                     while ((bytesRead = await fileStream.ReadAsync(buffer, 0, _bufferSize)) > 0)
                     {
@@ -31,11 +36,9 @@ namespace Assignment15_FilesAndStream.Service
                     }
 
                     Console.WriteLine($"[Async] Completed: {sourcePath} to {destinationPath}");
-
-                    // Console.WriteLine($"{taskName}: Data has been written successfully from file using memory stream\n");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

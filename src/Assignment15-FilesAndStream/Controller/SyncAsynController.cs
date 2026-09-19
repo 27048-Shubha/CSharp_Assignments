@@ -3,17 +3,29 @@
     using Assignment15_FilesAndStream.Helper;
     using Assignment15_FilesAndStream.Service;
 
+    /// <summary>
+    /// Demonstrates synchronous and aynychronous file operation comparison.
+    /// </summary>
     public class SyncAsynController
     {
         private readonly SynchronousFileProcessor _syncFileProcessor;
         private readonly AsynchronousFileProcessor _asyncFileProcessor;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SyncAsynController"/> class.
+        /// </summary>
+        /// <param name="syncFileProcessor">Object to handle synchronous file process.</param>
+        /// <param name="asyncFileProcessor">Object to handle asynchronous file process.</param>
         internal SyncAsynController(SynchronousFileProcessor syncFileProcessor, AsynchronousFileProcessor asyncFileProcessor)
         {
             this._syncFileProcessor = syncFileProcessor;
             this._asyncFileProcessor = asyncFileProcessor;
         }
 
+        /// <summary>
+        /// Executes and processes files for comparison.
+        /// </summary>
+        /// <returns>An asynchronous task</returns>
         public async Task ExecuteFileProcessingComparison()
         {
             Timer timer = new();
@@ -28,7 +40,7 @@
             long timeTakenSync = timer.GetTimeTaken();
             Console.WriteLine($"Time take to read, process, write 3 files synchronously: {timeTakenSync} milliseconds\n");
 
-            timer = new();
+            timer = new ();
             timer.StartTimer();
 
             await this.ExecuteAsynchornousProcessing();

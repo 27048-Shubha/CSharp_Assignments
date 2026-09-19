@@ -2,12 +2,19 @@
 {
     using System.Text;
 
+    /// <summary>
+    /// Demonstrates log operations.
+    /// </summary>
     public class Logger
     {
         private static string _folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Task4");
         private static string _logFilePath = "log.txt";
         private static object _fileAccessLock = new object();
 
+        /// <summary>
+        /// Demonstrates error-ful code for log file demonstration.
+        /// </summary>
+        /// <param name="errorMessage">Error message.</param>
         public static void LogError(string errorMessage)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -23,6 +30,10 @@
             Console.WriteLine(errorMessage);
         }
 
+        /// <summary>
+        /// Demonstrates error-less optimized code for log file demonstration.
+        /// </summary>
+        /// <param name="errorMessage">Error message to be displayed.</param>
         public static void LogErrorFree(string errorMessage)
         {
             using (FileStream fileStream = new FileStream(_logFilePath, FileMode.Append))
@@ -33,6 +44,10 @@
             Console.WriteLine(errorMessage);
         }
 
+        /// <summary>
+        /// Demonstrates log file demonstration with lock.
+        /// </summary>
+        /// <param name="errorMessage">Error message to be displayed.</param>
         public static void LockLogger(string errorMessage)
         {
             lock (Logger._fileAccessLock)
@@ -46,6 +61,10 @@
             }
         }
 
+        /// <summary>
+        /// Demonstrates individual log file generation.
+        /// </summary>
+        /// <param name="errorMessage">Error message to be displayed.</param>
         public static void IndividualLogger(string errorMessage)
         {
             Directory.CreateDirectory(_folderPath);

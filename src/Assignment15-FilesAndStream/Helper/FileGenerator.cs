@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment15_FilesAndStream.Helper
+﻿namespace Assignment15_FilesAndStream.Helper
 {
+    /// <summary>
+    /// Manages file creation operation.
+    /// </summary>
     public static class FileGenerator
     {
+        /// <summary>
+        /// Generates file in specified source path with specified target size.
+        /// </summary>
+        /// <param name="sourcePath">Path where file to be created in.</param>
+        /// <param name="targetSize">Target size of the file.</param>
         public static void GenerateFile(string sourcePath, long targetSize)
         {
             if (!File.Exists(sourcePath))

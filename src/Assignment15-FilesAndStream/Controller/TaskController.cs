@@ -3,10 +3,16 @@ namespace Assignment15_FilesAndStream.Service
     using Assignment15_FilesAndStream.Controller;
     using Assignment15_FilesAndStream.Helper;
 
+    /// <summary>
+    /// Controls overall task main menu for the application.
+    /// </summary>
     public class TaskController
     {
         private const int OneMb = 1024 * 1024;
 
+        /// <summary>
+        /// Runs tasks based on user choice.
+        /// </summary>
         public void Run()
         {
             while (true)

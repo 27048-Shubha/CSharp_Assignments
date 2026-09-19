@@ -10,6 +10,7 @@ namespace Assignments
         /// <summary>
         /// Entry point of the application.
         /// </summary>
+        /// <returns>Task representing asynchronous operation.</returns>
         public static async Task Main()
         {
             TaskController taskController = new TaskController();

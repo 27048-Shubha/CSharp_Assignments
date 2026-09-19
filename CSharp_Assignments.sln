@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment15", "Assignment15\Assignment15.csproj", "{AFECDA4C-A12F-41D3-8FCD-0D3F3A0FF93A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment15-FilesAndStream", "src\Assignment15-FilesAndStream\Assignment15-FilesAndStream.csproj", "{6F7E5BCD-CDAC-4301-BF0E-C60329C8FD69}"
 EndProject
 Global

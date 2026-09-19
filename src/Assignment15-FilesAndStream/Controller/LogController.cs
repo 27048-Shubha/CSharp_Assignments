@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment15_FilesAndStream.Controller
+﻿namespace Assignment15_FilesAndStream.Controller
 {
     using Assignment15_FilesAndStream.Service;
+
+    /// <summary>
+    /// Manages log simulation.
+    /// </summary>
     internal class LogController
     {
+        /// <summary>
+        /// Runs log tasks based on user choice.
+        /// </summary>
         public static void Run()
         {
             while (true)
@@ -63,7 +64,7 @@ namespace Assignment15_FilesAndStream.Controller
             }
         }
 
-        public static void SimulateLogError()
+        private static void SimulateLogError()
         {
             Parallel.For(0, 5, i =>
             {
@@ -71,7 +72,7 @@ namespace Assignment15_FilesAndStream.Controller
             });
         }
 
-        public static void SimulateEfficientLogger()
+        private static void SimulateEfficientLogger()
         {
             Parallel.For(0, 5, i =>
             {
@@ -79,7 +80,7 @@ namespace Assignment15_FilesAndStream.Controller
             });
         }
 
-        public static void SimulateLockLogger()
+        private static void SimulateLockLogger()
         {
             Parallel.For(0, 5, i =>
             {
@@ -87,7 +88,7 @@ namespace Assignment15_FilesAndStream.Controller
             });
         }
 
-        public static void SimulateIndividualLogFile()
+        private static void SimulateIndividualLogFile()
         {
             Parallel.For(0, 5, i =>
             {

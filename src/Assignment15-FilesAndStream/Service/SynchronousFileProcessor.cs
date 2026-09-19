@@ -12,69 +12,74 @@ namespace Assignment15_FilesAndStream.Service
 
         private byte[] _buffer = new byte[_bufferSize];
 
+        /// <summary>
+        /// Gets or sets path of the source file.
+        /// </summary>
+        /// <value>Path of the source file.</value>
         public string SourcePath { get; set; }
 
+        /// <summary>
+        /// Gets or sets path of the destination file.
+        /// </summary>
+        /// <value>Path of the destination file.</value>
         public string DestinationPath { get; set; }
 
+        /// <summary>
+        /// Reads the file using file stream.
+        /// </summary>
         public void ReadUsingFileStream()
         {
             using (FileStream fileStream = new FileStream(this.SourcePath, FileMode.Open, FileAccess.Read))
             {
-                // Console.WriteLine("Reading data from file using file stream...");
-
                 int bytesRead;
                 while ((bytesRead = fileStream.Read(this._buffer, 0, _bufferSize)) > 0)
                 {
                 }
-
-                // Console.WriteLine("Data read successfully from file using file stream\n");
             }
         }
 
+        /// <summary>
+        /// Reads the file using buffered stream.
+        /// </summary>
         public void ReadUsingBufferedStream()
         {
             using (FileStream fileStream = new FileStream(this.SourcePath, FileMode.Open, FileAccess.Read))
 
             using (BufferedStream bufferedStream = new BufferedStream(fileStream))
             {
-                // Console.WriteLine("Reading data from file using buffered stream...");
-
                 int bytesRead;
                 while ((bytesRead = bufferedStream.Read(this._buffer, 0, _bufferSize)) > 0)
                 {
                 }
-
-                // Console.WriteLine("Data read successfully from file using buffered stream\n");
             }
         }
 
+        /// <summary>
+        /// Processes and writes data to the destination path.
+        /// </summary>
         public void ProcessAndWriteData()
         {
             File.WriteAllText(this.DestinationPath, string.Empty);
 
             using (FileStream fileStream = new FileStream(this.SourcePath, FileMode.Open, FileAccess.Read))
             {
-                // Console.WriteLine("Processing data from file and writing to new destination file using memory stream...");
-
                 int bytesRead;
                 while ((bytesRead = fileStream.Read(this._buffer, 0, _bufferSize)) > 0)
                 {
                     byte[] processedData = this.ProcessData(bytesRead);
                     this.WriteUsingMemoryStream(processedData);
                 }
-
-                // Console.WriteLine("Data has been written successfully from file using memory stream\n");
             }
         }
 
-        public byte[] ProcessData(int bytesRead)
+        private byte[] ProcessData(int bytesRead)
         {
             string content = Encoding.UTF8.GetString(this._buffer, 0, bytesRead);
             content = content.ToUpperInvariant();
             return Encoding.UTF8.GetBytes(content);
         }
 
-        public void WriteUsingMemoryStream(byte[] processedData)
+        private void WriteUsingMemoryStream(byte[] processedData)
         {
             using (MemoryStream memoryStream = new MemoryStream(processedData))
             {

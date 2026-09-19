@@ -2,8 +2,14 @@
 
 namespace Assignment15_FilesAndStream.Service
 {
+    /// <summary>
+    /// Demonstrates basic file usage.
+    /// </summary>
     public class BasicFileUsage
     {
+        /// <summary>
+        /// Runs optimized code for file operations using stream.
+        /// </summary>
         public static void Run()
         {
             string path = Path.Combine(AppContext.BaseDirectory, "task3.txt");
@@ -28,7 +34,6 @@ namespace Assignment15_FilesAndStream.Service
                     Console.WriteLine(text);
                 }
             }
-
         }
     }
 }
