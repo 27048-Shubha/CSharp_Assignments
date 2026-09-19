@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Observations\Task2_SyncVsAsync.md" />
+   <Compile Remove="**\*.md" />
   </ItemGroup>
 
   <ItemGroup Label="CSharpAnalyser">
