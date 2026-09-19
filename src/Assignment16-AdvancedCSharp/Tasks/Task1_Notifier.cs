@@ -11,7 +11,7 @@ namespace Assignment16_AdvancedCSharp.Tasks
             notifer.InvokeEvent();
         }
 
-        public void PrintToConsole()
+        private void PrintToConsole()
         {
             Console.WriteLine("Message from PrintToConsole!");
         }

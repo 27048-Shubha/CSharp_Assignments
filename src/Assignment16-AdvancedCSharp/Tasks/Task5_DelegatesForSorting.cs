@@ -9,7 +9,7 @@ namespace Assignment16_AdvancedCSharp.Tasks
 {
     internal class Task5_DelegatesForSorting
     {
-        public delegate int SortDelegate(Product product1, Product product2);
+        private delegate int SortDelegate(Product product1, Product product2);
 
         public void Run()
         {
@@ -28,22 +28,22 @@ namespace Assignment16_AdvancedCSharp.Tasks
             this.SortAndDisplay(this.SortByPrice, products);
         }
 
-        public int SortByName(Product product1, Product product2)
+        private int SortByName(Product product1, Product product2)
         {
             return product1.Name.CompareTo(product2.Name);
         }
 
-        public int SortByCategory(Product product1, Product product2)
+        private int SortByCategory(Product product1, Product product2)
         {
             return product1.Category.CompareTo(product2.Category);
         }
 
-        public int SortByPrice(Product product1, Product product2)
+        private int SortByPrice(Product product1, Product product2)
         {
             return product1.Price.CompareTo(product2.Price);
         }
 
-        public List<Product> SortAndDisplay(SortDelegate sortDelegate, List<Product> productList)
+        private List<Product> SortAndDisplay(SortDelegate sortDelegate, List<Product> productList)
         {
             for (int i = 0; i < productList.Count; i++)
             {

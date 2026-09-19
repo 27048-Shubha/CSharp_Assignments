@@ -2,9 +2,15 @@
 {
     using Assignment16_AdvancedCSharp.Tasks;
 
+    /// <summary>
+    /// Manages entry point of exectuion of the application.
+    /// </summary>
     public class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// Entry point of the execution.
+        /// </summary>
+        public static void Main()
         {
             while (true)
             {
@@ -67,22 +73,22 @@
             }
         }
 
-        public static void RunTask1()
+        private static void RunTask1()
         {
             Task1_Notifier task1 = new();
             task1.Run();
         }
 
-        public static void RunTask2()
+        private static void RunTask2()
         {
-            Task3_TypeSimulation simulator = new Task3_TypeSimulation();
+            Task2_TypeSimulation simulator = new Task2_TypeSimulation();
             simulator.SimulateVarUsage();
             simulator.SimulateDynamicUsage();
         }
 
-        public static void RunTask3()
+        private static void RunTask3()
         {
-            Task2_AnonymousMethods anonymousMethods = new Task2_AnonymousMethods();
+            Task3_AnonymousMethods anonymousMethods = new Task3_AnonymousMethods();
             Console.WriteLine("Before sorting:");
             anonymousMethods.DisplayArray();
 
@@ -97,25 +103,25 @@
             anonymousMethods.DisplayArray();
         }
 
-        public static void RunTask4()
+        private static void RunTask4()
         {
             Task4_Lambda task4 = new Task4_Lambda();
             task4.Run();
         }
 
-        public static void RunTask5()
+        private static void RunTask5()
         {
             Task5_DelegatesForSorting task5 = new ();
             task5.Run();
         }
 
-        public static void RunTask6()
+        private static void RunTask6()
         {
             Task6_Records task6 = new Task6_Records();
             task6.Run();
         }
 
-        public static void RunTask7()
+        private static void RunTask7()
         {
             Task7_AdvancedPatternMatching task7 = new Task7_AdvancedPatternMatching();
             task7.Run();

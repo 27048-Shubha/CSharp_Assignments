@@ -1,12 +1,7 @@
-﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment16_AdvancedCSharp.Tasks
+﻿namespace Assignment16_AdvancedCSharp.Tasks
 {
+    using Models;
+
     internal class Task6_Records
     {
         public void Run()
@@ -28,7 +23,7 @@ namespace Assignment16_AdvancedCSharp.Tasks
             Console.WriteLine($"Result comparison of books created using with keyword: {book2 == book5}");
         }
 
-        public static void Display(Book book)
+        private static void Display(Book book)
         {
             var (title, author, isbn) = book;
             Console.WriteLine($"Title: {title}\nAuthor: {author}\nISBN: {isbn}\n");

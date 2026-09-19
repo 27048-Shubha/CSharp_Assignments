@@ -15,7 +15,7 @@
             this.Display(squaredNumbers);
         }
 
-        public void Display(IEnumerable<int> numbers)
+        private void Display(IEnumerable<int> numbers)
         {
             foreach (int number in numbers)
             {

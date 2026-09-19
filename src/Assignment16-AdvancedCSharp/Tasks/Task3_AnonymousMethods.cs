@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment16_AdvancedCSharp.Tasks
+﻿namespace Assignment16_AdvancedCSharp.Tasks
 {
-    internal class Task2_AnonymousMethods
+    /// <summary>
+    /// Demonstrates usage of anonymous methods.
+    /// </summary>
+    internal class Task3_AnonymousMethods
     {
         private int[] _integerArray = new int[] { 1, 9, 2, 11, 3, 4, 12, 5, 6, 7 };
 
+        /// <summary>
+        /// A delegate to sort array.
+        /// </summary>
         public delegate void SortArray();
 
+        /// <summary>
+        /// Sorts array using anonymous method.
+        /// </summary>
         public void SortUsingAnonymousMethod()
         {
             SortArray sortedArray = delegate()
@@ -33,16 +36,25 @@ namespace Assignment16_AdvancedCSharp.Tasks
             sortedArray();
         }
 
+        /// <summary>
+        /// Sorts array using built in method.
+        /// </summary>
         public void SortUsingBuiltInMethod()
         {
             Array.Sort(this._integerArray);
         }
 
+        /// <summary>
+        /// Resets array to default values.
+        /// </summary>
         public void ResetArray()
         {
             this._integerArray = new int[] { 1, 9, 2, 11, 3, 4, 12, 5, 6, 7 };
         }
 
+        /// <summary>
+        /// Displays array to the console.
+        /// </summary>
         public void DisplayArray()
         {
             foreach (int element in this._integerArray)

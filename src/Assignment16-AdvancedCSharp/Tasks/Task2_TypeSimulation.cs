@@ -1,7 +1,13 @@
 ﻿namespace Assignment16_AdvancedCSharp.Tasks
 {
-    internal class Task3_TypeSimulation
+    /// <summary>
+    /// Manages type simulation of var and dynamic
+    /// </summary>
+    internal class Task2_TypeSimulation
     {
+        /// <summary>
+        /// Simulates usage of var keyword.
+        /// </summary>
         public void SimulateVarUsage()
         {
             var variable = 10;
@@ -10,6 +16,9 @@
             Console.WriteLine($"Since variable is of type var, Its type is determined at compile time.\nTherefore value of another type cannot be assigned to variable.\n");
         }
 
+        /// <summary>
+        /// Simulates usage of dynamic keyword.
+        /// </summary>
         public void SimulateDynamicUsage()
         {
             dynamic variable = 10;

@@ -20,7 +20,7 @@
             }
         }
 
-        public void DisplayShapeDetails(Shape shape)
+        private void DisplayShapeDetails(Shape shape)
         {
             switch (shape)
             {
