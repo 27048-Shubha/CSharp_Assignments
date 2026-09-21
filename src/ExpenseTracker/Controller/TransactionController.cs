@@ -127,6 +127,7 @@ namespace ExpenseTracker.Controller
                         return;
 
                     default:
+                        this._console.DisplayInvalidInput("Invalid option");
                         break;
                 }
             }
@@ -163,7 +164,6 @@ namespace ExpenseTracker.Controller
                     };
 
                     this._incomeService.Add(dto);
-                    this._service = this._incomeService;
                 }
                 else
                 {
@@ -175,7 +175,6 @@ namespace ExpenseTracker.Controller
                     };
 
                     this._expenseService.Add(dto);
-                    this._service = this._expenseService;
                 }
 
                 this._console.DisplaySuccess("Addition", "transaction");
@@ -193,7 +192,13 @@ namespace ExpenseTracker.Controller
         {
             this._currentType = this._console.ChooseCategory();
 
-            if (this._currentType == Enums.TransactionType.Income)
+            if (this._currentType == TransactionType.Invalid)
+            {
+                this._console.DisplayInvalidInput("Invalid option");
+                return;
+            }
+
+            if (this._currentType == TransactionType.Income)
             {
                 this._service = this._incomeService;
             }
@@ -282,6 +287,7 @@ namespace ExpenseTracker.Controller
             if (transactionId == null || transactionId == string.Empty)
             {
                 this._console.DisplayMessage("Invalid transaction id!");
+                return;
             }
 
             TransactionDto? transaction = this._service.Get(transactionId);

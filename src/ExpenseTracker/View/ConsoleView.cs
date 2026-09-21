@@ -15,11 +15,15 @@
         /// </summary>
         public void DisplayMainMenu()
         {
-            Console.WriteLine("Welcome to Expense Tracker\n" +
-                "Enter\n" +
-                "1. Add Transaction\n" +
-                "2. Manage Transaction\n" +
-                "3. Exit");
+            Console.WriteLine("========================================");
+            Console.WriteLine(" EXPENSE TRACKER ");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Console.WriteLine(" 1. Add Transaction");
+            Console.WriteLine(" 2. Manage Transactions");
+            Console.WriteLine(" 3. Exit");
+            Console.WriteLine();
+            Console.WriteLine("========================================");
         }
 
         /// <summary>
@@ -28,11 +32,17 @@
         /// <returns>Value indicating user's choice.</returns>
         public ManageTransaction ManageTransactionMenu()
         {
-            Console.WriteLine("Enter\n" +
-                "1. View\n" +
-                "2. Update\n" +
-                "3. Delete\n" +
-                "4. Back\n");
+            Console.WriteLine("========================================");
+            Console.WriteLine("         MANAGE TRANSACTIONS            ");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Console.WriteLine("  1. View");
+            Console.WriteLine("  2. Update");
+            Console.WriteLine("  3. Delete");
+            Console.WriteLine("  4. Back");
+            Console.WriteLine();
+            Console.WriteLine("----------------------------------------");
+            Console.Write("Enter your choice: ");
 
             for (int attempt = 1; attempt <= 3; attempt++)
             {
@@ -55,10 +65,15 @@
         /// <returns>The selected transaction type, or <see cref="TransactionType.Invalid"/> when the input is invalid.</returns>
         public Enums.TransactionType ChooseCategory()
         {
-            Console.WriteLine("Choose Category\n" +
-                "1. Income\n" +
-                "2. Expense");
-            if (Enum.TryParse<TransactionType>(Console.ReadLine(), true, out var category))
+            Console.WriteLine();
+            Console.WriteLine("TRANSACTION TYPE");
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("1. Income");
+            Console.WriteLine("2. Expense");
+            Console.WriteLine("----------------------------------------");
+            Console.Write("Enter your choice: ");
+
+            if (Enum.TryParse<TransactionType>(Console.ReadLine(), true, out var category) && Enum.IsDefined(typeof(TransactionType), category))
             {
                 return category;
             }
@@ -194,7 +209,7 @@
         /// <returns>The entered date, else null<returns>
         public DateOnly? GetDate(bool isEditMode)
         {
-            this.DisplayMessage("Enter date: ");
+            this.DisplayMessage("Enter date (dd/MM/yyyy): ");
             string? input;
             DateOnly date;
 
@@ -224,14 +239,21 @@
         /// <returns>The selected expense category</returns>
         public ExpenseCategory GetExpenseCategory()
         {
-            Console.WriteLine("Enter Expense Category: ");
+            Console.WriteLine();
+            Console.WriteLine("AVAILABLE EXPENSE CATEGORIES");
+            Console.WriteLine("----------------------------------------");
+
             this.ListExpenseCategory();
+
+            Console.WriteLine("----------------------------------------");
+            Console.Write("Category: ");
+
             if (Enum.TryParse<ExpenseCategory>(Console.ReadLine(), true, out var category))
             {
                 return category;
             }
 
-            return Enums.ExpenseCategory.Others;
+            return ExpenseCategory.Others;
         }
 
         /// <summary>
@@ -240,14 +262,21 @@
         /// <returns>The selected income parsedSource, or <see cref="IncomeSource.Others"/> when the input is invalid.</returns>
         public IncomeSource GetIncomeSource()
         {
-            Console.WriteLine("Enter Income Source: ");
+            Console.WriteLine();
+            Console.WriteLine("AVAILABLE INCOME SOURCES");
+            Console.WriteLine("----------------------------------------");
+
             this.ListIncomeSource();
-            if (Enum.TryParse<IncomeSource>(Console.ReadLine(), true, out var category))
+
+            Console.WriteLine("----------------------------------------");
+            Console.Write("Source: ");
+
+            if (Enum.TryParse<IncomeSource>(Console.ReadLine(), true, out var source))
             {
-                return category;
+                return source;
             }
 
-            return Enums.IncomeSource.Others;
+            return IncomeSource.Others;
         }
 
         /// <summary>
@@ -278,13 +307,28 @@
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList(
-            IReadOnlyList<TransactionDto> transactions)
+        public void DisplayTransactionList( IReadOnlyList<TransactionDto> transactions)
         {
-            foreach (TransactionDto transaction in transactions)
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "----------------------------------------------------------------------------");
+            Console.WriteLine(
+                $"{"ID",-12} {"DATE",-15} {"AMOUNT",-15} {"CATEGORY / SOURCE",-20}");
+            Console.WriteLine(
+                "----------------------------------------------------------------------------");
+
+            foreach (var transaction in transactions)
             {
-                this.DisplayTransaction(transaction);
+                Console.WriteLine(
+                    $"{transaction.TransactionId,-12} " +
+                    $"{transaction.Date,-15} " +
+                    $"{transaction.Amount,-15} " +
+                    $"{transaction.CategoryOrSource,-20}");
             }
+
+            Console.WriteLine(
+                "----------------------------------------------------------------------------");
         }
 
         /// <summary>
@@ -306,7 +350,11 @@
         /// </summary>
         public void DisplayExit()
         {
-            Console.WriteLine("Thank you for using Expense Tracker!");
+            Console.Clear();
+
+            Console.WriteLine("========================================");
+            Console.WriteLine("      THANK YOU FOR USING EXPENSE TRACKER");
+            Console.WriteLine("========================================");
         }
 
         /// <summary>
