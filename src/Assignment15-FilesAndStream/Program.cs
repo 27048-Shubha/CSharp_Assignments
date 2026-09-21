@@ -2,6 +2,7 @@
 
 namespace Assignments
 {
+    using Assignment15_FilesAndStream.Controller;
     /// <summary>
     /// Manages entry point of the application
     /// </summary>
@@ -13,8 +14,15 @@ namespace Assignments
         /// <returns>Task representing asynchronous operation.</returns>
         public static async Task Main()
         {
-            TaskController taskController = new TaskController();
-            taskController.Run();
+            try
+            {
+                TaskController taskController = new TaskController();
+                taskController.Run();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
-namespace Assignment15_FilesAndStream.Service
+namespace Assignment15_FilesAndStream.Controller
 {
-    using Assignment15_FilesAndStream.Controller;
     using Assignment15_FilesAndStream.Helper;
+    using Assignment15_FilesAndStream.Service;
 
     /// <summary>
     /// Controls overall task main menu for the application.

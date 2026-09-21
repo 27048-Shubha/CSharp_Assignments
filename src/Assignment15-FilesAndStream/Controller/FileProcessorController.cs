@@ -15,7 +15,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="FileProcessorController"/> class.
         /// </summary>
-        /// <param name="fileProcessor">Obejct to handle synchronous file tasks.</param>
+        /// <param name="fileProcessor">Object to handle synchronous file tasks.</param>
         internal FileProcessorController(SynchronousFileProcessor fileProcessor)
         {
             this._fileProcessor = fileProcessor;

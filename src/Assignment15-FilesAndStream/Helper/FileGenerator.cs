@@ -16,7 +16,7 @@
             {
                 using StreamWriter writer = new StreamWriter(sourcePath);
                 Random random = new Random();
-                int size = 0;
+                long size = 0;
 
                 while (size < targetSize)
                 {
