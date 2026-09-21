@@ -21,7 +21,7 @@ namespace Assignment15_FilesAndStream.Service
                 Console.WriteLine("1. File Data Processor");
                 Console.WriteLine("2. Sync vs Async File Processing");
                 Console.WriteLine("3. Basic File Usage");
-                Console.WriteLine("4. Logging with Multiple Threads");
+                Console.WriteLine("4. loggingg with Multiple Threads");
                 Console.WriteLine("5. Exit");
 
                 Console.Write("Enter your choice: ");

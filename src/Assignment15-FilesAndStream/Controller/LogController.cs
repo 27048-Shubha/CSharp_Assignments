@@ -28,27 +28,27 @@
                     switch (choice)
                     {
                         case 1:
-                            // Simulate multiple user loggin concurrency issue
+                            // Simulate multiple user logging concurrency issue
                             SimulateLogError();
                             break;
 
                         case 2:
-                            // Simulate multiple user loggin concurrency issue
+                            // Simulate multiple user logging concurrency issue
                             SimulateEfficientLogger();
                             break;
 
                         case 3:
-                            // Simulate multiple user loggin concurrency issue
+                            // Simulate multiple user logging concurrency issue
                             SimulateLockLogger();
                             break;
 
                         case 4:
-                            // Simulate multiple user loggin concurrency issue
+                            // Simulate multiple user logging concurrency issue
                             SimulateIndividualLogFile();
                             break;
 
                         case 5:
-                            // Simulate multiple user loggin concurrency issue
+                            // Simulate multiple user logging concurrency issue
                             Console.WriteLine("Returning to Main Menu...");
                             return;
 

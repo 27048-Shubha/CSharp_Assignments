@@ -4,7 +4,7 @@
     using Assignment15_FilesAndStream.Service;
 
     /// <summary>
-    /// Demonstrates synchronous and aynychronous file operation comparison.
+    /// Demonstrates synchronous and asynchronous file operation comparison.
     /// </summary>
     public class SyncAsynController
     {
