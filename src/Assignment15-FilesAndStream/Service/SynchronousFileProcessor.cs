@@ -16,13 +16,13 @@ namespace Assignment15_FilesAndStream.Service
         /// Gets or sets path of the source file.
         /// </summary>
         /// <value>Path of the source file.</value>
-        public string SourcePath { get; set; }
+        public string SourcePath { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets path of the destination file.
         /// </summary>
         /// <value>Path of the destination file.</value>
-        public string DestinationPath { get; set; }
+        public string DestinationPath { get; set; } = string.Empty;
 
         /// <summary>
         /// Reads the file using file stream.

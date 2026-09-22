@@ -13,7 +13,7 @@ namespace Assignment15_FilesAndStream.Controller
         /// <summary>
         /// Runs tasks based on user choice.
         /// </summary>
-        public void Run()
+        public async void Run()
         {
             while (true)
             {
@@ -25,7 +25,12 @@ namespace Assignment15_FilesAndStream.Controller
                 Console.WriteLine("5. Exit");
 
                 Console.Write("Enter your choice: ");
-                int choice = int.Parse(Console.ReadLine());
+
+                if (!int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    Console.WriteLine("Invalid input.");
+                    continue;
+                }
 
                 switch (choice)
                 {
@@ -38,7 +43,7 @@ namespace Assignment15_FilesAndStream.Controller
                         FileGenerator.GenerateFile("source2.txt", OneMb);
                         FileGenerator.GenerateFile("source3.txt", OneMb);
 
-                        new SyncAsynController(new SynchronousFileProcessor(), new AsynchronousFileProcessor()).ExecuteFileProcessingComparison().GetAwaiter().GetResult();
+                        await new SyncAsynController(new SynchronousFileProcessor(), new AsynchronousFileProcessor()).ExecuteFileProcessingComparison();
                         break;
 
                     case 3:

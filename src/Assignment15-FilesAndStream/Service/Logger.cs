@@ -27,6 +27,7 @@
                     memoryStream.WriteTo(fileStream);
                 }
             }
+
             Console.WriteLine(errorMessage);
         }
 
@@ -41,6 +42,7 @@
                 byte[] errorBytes = Encoding.UTF8.GetBytes(errorMessage);
                 fileStream.Write(errorBytes, 0, errorBytes.Length);
             }
+
             Console.WriteLine(errorMessage);
         }
 
@@ -57,6 +59,7 @@
                     byte[] errorBytes = Encoding.UTF8.GetBytes(errorMessage);
                     fileStream.Write(errorBytes, 0, errorBytes.Length);
                 }
+
                 Console.WriteLine(errorMessage);
             }
         }

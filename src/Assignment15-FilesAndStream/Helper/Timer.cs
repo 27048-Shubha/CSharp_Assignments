@@ -7,7 +7,7 @@ namespace Assignment15_FilesAndStream.Helper
     /// </summary>
     public class Timer
     {
-        private Stopwatch _stopWatch;
+        private Stopwatch _stopWatch = new ();
 
         /// <summary>
         /// Starts stopwatch timer.

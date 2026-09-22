@@ -3,6 +3,7 @@
 namespace Assignments
 {
     using Assignment15_FilesAndStream.Controller;
+
     /// <summary>
     /// Manages entry point of the application
     /// </summary>
@@ -11,8 +12,7 @@ namespace Assignments
         /// <summary>
         /// Entry point of the application.
         /// </summary>
-        /// <returns>Task representing asynchronous operation.</returns>
-        public static async Task Main()
+        public static void Main()
         {
             try
             {

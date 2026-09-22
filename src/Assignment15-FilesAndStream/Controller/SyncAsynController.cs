@@ -28,7 +28,7 @@
         /// <returns>An asynchronous task</returns>
         public async Task ExecuteFileProcessingComparison()
         {
-            Timer timer = new();
+            Timer timer = new ();
             timer.StartTimer();
 
             this.ExecuteSynchronousProcessing("source1.txt", "destination1.txt");

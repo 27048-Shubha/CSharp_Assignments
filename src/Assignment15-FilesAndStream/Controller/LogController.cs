@@ -33,10 +33,13 @@
                     switch (choice)
                     {
                         case 1:
+                            Console.WriteLine("1. Simulate Logger Error (No Synchronization) - May throw IOException when multiple threads access the same file concurrently.");
+                            Thread.Sleep(2000);
                             SimulateLogError();
                             break;
 
                         case 2:
+                            Console.WriteLine("2. Simulate Efficient Logger - Handles concurrent file access safely without exceptions.");
                             SimulateEfficientLogger();
                             break;
 
@@ -57,9 +60,10 @@
                             break;
                     }
                 }
-                catch (IOException e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(ex.GetType().FullName);
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
@@ -76,7 +80,16 @@
         {
             Parallel.For(0, 5, i =>
             {
-                Logger.LogErrorFree($"Accessing by: i = {i}\nThread: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+                try
+                {
+                    Logger.LogErrorFree(
+                        $"Accessing by: i = {i}\nThread: {Thread.CurrentThread.ManagedThreadId}");
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(
+                        $"Expected file access exception: {ex.Message}");
+                }
             });
         }
 

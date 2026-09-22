@@ -32,7 +32,7 @@
                 FileGenerator.GenerateFile(filePath, OneGb);
             }
 
-            Timer timer = new();
+            Timer timer = new ();
             timer.StartTimer();
             this._fileProcessor.ReadUsingFileStream();
             timer.StopTimer();
