@@ -24,7 +24,12 @@
                     Console.WriteLine("5. Back / Exit");
                     Console.Write("Enter your choice: ");
 
-                    int choice = int.Parse(Console.ReadLine());
+                    if (!int.TryParse(Console.ReadLine(), out int choice))
+                    {
+                        Console.WriteLine("Invalid input.");
+                        continue;
+                    }
+
                     switch (choice)
                     {
                         case 1:

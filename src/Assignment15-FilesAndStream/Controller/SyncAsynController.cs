@@ -31,9 +31,9 @@
             Timer timer = new();
             timer.StartTimer();
 
-            this.ExecuteSynchornousProcessing("source1.txt", "destination1.txt");
-            this.ExecuteSynchornousProcessing("source2.txt", "destination2.txt");
-            this.ExecuteSynchornousProcessing("source3.txt", "destination3.txt");
+            this.ExecuteSynchronousProcessing("source1.txt", "destination1.txt");
+            this.ExecuteSynchronousProcessing("source2.txt", "destination2.txt");
+            this.ExecuteSynchronousProcessing("source3.txt", "destination3.txt");
 
             timer.StopTimer();
 
@@ -60,7 +60,7 @@
             }
         }
 
-        private void ExecuteSynchornousProcessing(string sourcePath, string destinationPath)
+        private void ExecuteSynchronousProcessing(string sourcePath, string destinationPath)
         {
             this._syncFileProcessor.SourcePath = Path.Combine(AppContext.BaseDirectory, sourcePath);
             this._syncFileProcessor.DestinationPath = Path.Combine(AppContext.BaseDirectory, destinationPath);
