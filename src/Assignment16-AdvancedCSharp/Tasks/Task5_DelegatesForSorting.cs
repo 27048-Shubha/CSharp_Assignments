@@ -1,16 +1,17 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignment16_AdvancedCSharp.Tasks
 {
+    /// <summary>
+    /// Demonstrates task5 with delegates
+    /// </summary>
     internal class Task5_DelegatesForSorting
     {
         private delegate int SortDelegate(Product product1, Product product2);
 
+        /// <summary>
+        /// Entry point of task 5 demonstration.
+        /// </summary>
         public void Run()
         {
             List<Product> products = new List<Product>();

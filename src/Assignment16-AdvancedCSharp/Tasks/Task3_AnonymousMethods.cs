@@ -17,23 +17,12 @@
         /// </summary>
         public void SortUsingAnonymousMethod()
         {
-            SortArray sortedArray = delegate()
-            {
-                for (int i = 0; i < 10; i++)
+            Array.Sort(
+                this._integerArray,
+                delegate(int x, int y)
                 {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (this._integerArray[i] < this._integerArray[j])
-                        {
-                            int temp = this._integerArray[i];
-                            this._integerArray[i] = this._integerArray[j];
-                            this._integerArray[j] = temp;
-                        }
-                    }
-                }
-            };
-
-            sortedArray();
+                    return x.CompareTo(y);
+                });
         }
 
         /// <summary>

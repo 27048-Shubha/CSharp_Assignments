@@ -2,8 +2,14 @@
 {
     using Models;
 
+    /// <summary>
+    /// Demonstrates task 7 with advanced pattern matching
+    /// </summary>
     internal class Task7_AdvancedPatternMatching
     {
+        /// <summary>
+        /// Entry point of Task7 demonstration.
+        /// </summary>
         public void Run()
         {
             List<Shape> shapes = new List<Shape>()
@@ -11,7 +17,7 @@
                 new Circle("Red", 5),
                 new Rectangle("Yellow", 2, 3),
                 new Triangle("Green", 4, 7),
-                null
+                null,
             };
 
             foreach (Shape shape in shapes)
@@ -22,40 +28,31 @@
 
         private void DisplayShapeDetails(Shape shape)
         {
-            switch (shape)
+            string message = shape switch
             {
-                case Circle circle:
-                    Console.WriteLine(
-                        $"\nShape: Circle\n"+
-                        $"Color: {circle.Color}\n" +
-                        $"Area: {circle.CalculateArea()}"
-                    );
-                    break;
+                Circle circle =>
+                    $"Shape: Circle\n" +
+                    $"Color: {circle.Color}\n" +
+                    $"Area: {circle.CalculateArea()}",
 
-                case Rectangle rectangle:
-                    Console.WriteLine(
-                        $"\nShape: Rectangle\n" +
-                        $"Color: {rectangle.Color}\n" +
-                        $"Area: {rectangle.CalculateArea()}"
-                    );
-                    break;
+                Rectangle rectangle =>
+                    $"Shape: Rectangle\n" +
+                    $"Color: {rectangle.Color}\n" +
+                    $"Area: {rectangle.CalculateArea()}",
 
-                case Triangle triangle:
-                    Console.WriteLine(
-                        $"\nShape: Triangle\n" +
-                        $"Color: {triangle.Color}\n" +
-                        $"Area: {triangle.CalculateArea()}"
-                    );
-                    break;
+                Triangle triangle =>
+                    $"Shape: Triangle\n" +
+                    $"Color: {triangle.Color}\n" +
+                    $"Area: {triangle.CalculateArea()}",
 
-                case null:
-                    Console.WriteLine("\nThe object is null and doesnt match any of the types");
-                    break;
+                null =>
+                    "The object is null and doesn't match any of the types",
 
-                default:
-                    Console.WriteLine("The object doesn't match any of the types");
-                    break;
-            }
+                _ =>
+                    "The object doesn't match any of the types",
+            };
+
+            Console.WriteLine(message);
         }
     }
 }

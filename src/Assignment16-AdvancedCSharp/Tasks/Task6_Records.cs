@@ -2,8 +2,14 @@
 {
     using Models;
 
+    /// <summary>
+    /// Demonstrates record of books.
+    /// </summary>
     internal class Task6_Records
     {
+        /// <summary>
+        /// Entry point of execution for task6.
+        /// </summary>
         public void Run()
         {
             Book book1 = new Book("The order of pheonix", "JKRowling", "B1234");

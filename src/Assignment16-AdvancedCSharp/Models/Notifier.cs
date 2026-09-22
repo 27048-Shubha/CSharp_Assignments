@@ -13,7 +13,7 @@
         /// <summary>
         /// Event representing notification call.
         /// </summary>
-        public event Notify OnAction;
+        public event Notify? OnAction;
 
         /// <summary>
         /// Invokes event notify.
@@ -21,7 +21,10 @@
         public void InvokeEvent()
         {
             Console.WriteLine("Invoking subscribers...");
-            this.OnAction.Invoke();
+            if (this.OnAction is not null)
+            {
+                this.OnAction.Invoke();
+            }
         }
     }
 }

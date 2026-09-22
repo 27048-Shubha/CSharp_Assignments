@@ -1,9 +1,15 @@
 ﻿namespace Assignment16_AdvancedCSharp.Tasks
 {
+    /// <summary>
+    /// Demonstrates task 4 with lambda expression and statement.
+    /// </summary>
     internal class Task4_Lambda
     {
         private readonly List<int> _integerList = new List<int> { 1, 2, 3, 5, 6, 7, 8, 9, 10 };
-        
+
+        /// <summary>
+        /// Entry point of task 4 demonstration.
+        /// </summary>
         public void Run()
         {
             IEnumerable<int> filteredNumbers = this._integerList.Where(n => n % 2 != 0);
