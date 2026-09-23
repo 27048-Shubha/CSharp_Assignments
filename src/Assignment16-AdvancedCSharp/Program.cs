@@ -75,7 +75,7 @@
 
         private static void RunTask1()
         {
-            Task1_Notifier task1 = new();
+            Task1_Notifier task1 = new ();
             task1.Run();
         }
 
