@@ -20,6 +20,7 @@
         {
             this._console = console;
         }
+
         /// <summary>
         /// Filters book products first, removes duplicates, and then sorts them
         /// by price in descending order using LINQ.
@@ -75,13 +76,13 @@
         /// <returns> A list of unique book products sorted by price in descending order. </returns>
         public List<Product> ManualFilterThenQueryApproach(IReadOnlyList<Product> products)
         {
-            // Manual Filter + LINQ
             Stopwatch stopwatch = Timer.StartTimer();
-            List<Product> books = this.AddProducts(products);
+
+            List<Product> books = this.FindBooks(products);
 
             books = books.Distinct()
-                .OrderByDescending(product => product.Price)
-                .ToList();
+                         .OrderByDescending(product => product.Price)
+                         .ToList();
 
             this._console.Display("Manual filter then query approach (LINQ + No LINQ): ");
             Timer.PrintExecutionTime(stopwatch);
@@ -114,7 +115,7 @@
 
         private List<Product> AddProducts(IReadOnlyList<Product> products)
         {
-            List<Product> matchedProducts = new();
+            List<Product> matchedProducts = new ();
 
             foreach (Product product in products)
             {
@@ -125,6 +126,11 @@
             }
 
             return matchedProducts;
+        }
+
+        private List<Product> FindBooks(IReadOnlyList<Product> products)
+        {
+            return this.AddProducts(products);
         }
     }
 }
