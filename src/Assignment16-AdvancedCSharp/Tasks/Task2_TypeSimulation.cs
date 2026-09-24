@@ -10,6 +10,7 @@
         /// </summary>
         public void SimulateVarUsage()
         {
+            Console.WriteLine($"---------Usage of var keyword demonstration-----------");
             var variable = 10;
             Console.WriteLine($"Value of variable: {variable}\nType of variable: {variable.GetType()}");
 
@@ -21,11 +22,13 @@
         /// </summary>
         public void SimulateDynamicUsage()
         {
+            Console.WriteLine($"---------Usage of dynamic keyword demonstration-----------");
+
             dynamic variable = 10;
             Console.WriteLine($"Value of variable: {variable}\nType of variable: {variable.GetType()}");
 
             variable = "Hello";
-            Console.WriteLine($"Value of variable: \nType of variable: {variable.GetType()}");
+            Console.WriteLine($"Value of variable: {variable}\nType of variable: {variable.GetType()}");
             Console.WriteLine($"Since variable is of type dynamic, Its type is determined at run time.\nTherefore value of another type can be assigned to variable.");
         }
     }
