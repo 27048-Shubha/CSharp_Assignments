@@ -185,7 +185,7 @@
             decimal amount;
             for (int attempt = 1; attempt <= 3; attempt++)
             {
-                input = Console.ReadLine().Trim() ?? string.Empty;
+                input = (Console.ReadLine() ?? string.Empty).Trim();
                 if (isEditMode && string.IsNullOrEmpty(input))
                 {
                     return null;
@@ -308,7 +308,7 @@
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList( IReadOnlyList<TransactionResponse> transactions)
+        public void DisplayTransactionList(IReadOnlyList<TransactionResponse> transactions)
         {
             Console.WriteLine();
 

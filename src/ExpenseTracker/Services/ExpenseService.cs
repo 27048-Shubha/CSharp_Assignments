@@ -159,7 +159,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// </returns>
     public TransactionResponse? Get(string transactionId)
     {
-        if (!this.TryGetExpense(transactionId, out Expense? expense))
+        if (!this.TryGetExpense(transactionId, out Expense? expense) || (expense is null))
         {
             return null;
         }
@@ -188,7 +188,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     {
         Validate(dto);
 
-        if (!this.TryGetExpense(transactionId, out Expense expense))
+        if (!this.TryGetExpense(transactionId, out Expense? expense) || (expense is null))
         {
             throw new InvalidOperationException(
                 "Expense transaction was not found.");

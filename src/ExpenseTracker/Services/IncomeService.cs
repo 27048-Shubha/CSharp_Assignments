@@ -140,7 +140,7 @@
         public void Edit(string transactionId, UpdateIncomeRequest dto)
         {
             Validate(dto);
-            if (!this.TryGetIncome(transactionId, out Income? income))
+            if (!this.TryGetIncome(transactionId, out Income? income) || (income is null))
             {
                 throw new InvalidOperationException("Income transaction was not found.");
             }
@@ -160,7 +160,7 @@
         /// <returns>The matching income transaction if found; otherwise, null.</returns>
         public TransactionResponse? Get(string transactionId)
         {
-            if (!this.TryGetIncome(transactionId, out Income? income))
+            if (!this.TryGetIncome(transactionId, out Income? income) || (income is null))
             {
                 return null;
             }
