@@ -1,11 +1,11 @@
-﻿using ExpenseTracker.Enums;
+﻿using ExpenseTracker.Models.Enums;
 
 namespace ExpenseTracker.Models.DTOs;
 
 /// <summary>
 /// Represents the data required to add a new income transaction.
 /// </summary>
-internal class AddIncomeDto
+internal class AddIncomeRequest
 {
     /// <summary>
     /// Gets or sets the amount received in the income transaction.

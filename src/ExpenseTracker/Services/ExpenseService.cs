@@ -1,5 +1,7 @@
 ﻿using ExpenseTracker.Models;
 using ExpenseTracker.Models.DTOs;
+using ExpenseTracker.Models.Enums;
+using ExpenseTracker.Models.Response;
 using ExpenseTracker.Repository;
 
 namespace ExpenseTracker.Services;
@@ -7,7 +9,7 @@ namespace ExpenseTracker.Services;
 /// <summary>
 /// Provides business operations for managing expense transactions.
 /// </summary>
-internal sealed class ExpenseService : ITransactionService, ITransactionUpdateService<UpdateExpenseDto>
+internal sealed class ExpenseService : ITransactionService, ITransactionUpdateService<UpdateExpenseRequest>
 {
     /// <summary>
     /// The repository used to store, retrieve, update, and delete expense transactions.
@@ -27,7 +29,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
 
     /// <summary>
     /// Converts an <see cref="Expense"/> model into a
-    /// <see cref="TransactionDto"/> for display.
+    /// <see cref="TransactionResponse"/> for display.
     /// </summary>
     /// <param name="expense">
     /// The expense transaction to convert.
@@ -35,13 +37,14 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <returns>
     /// A DTO containing the expense identifier, amount, date, and category.
     /// </returns>
-    public static TransactionDto MapToDto(Expense expense)
+    public static TransactionResponse MapToDto(Expense expense)
     {
-        return new TransactionDto
+        return new TransactionResponse
         {
             TransactionId = expense.TransactionId,
             Amount = expense.Amount,
             Date = expense.Date,
+            Type = TransactionType.Expense,
             CategoryOrSource = expense.Category.ToString(),
         };
     }
@@ -63,7 +66,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <param name="dto">
     /// The new expense data to validate.
     /// </param>
-    public static void Validate(AddExpenseDto dto)
+    public static void Validate(AddExpenseRequest dto)
     {
         ValidateAmountAndDate(dto.Amount, dto.Date);
     }
@@ -74,7 +77,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <param name="dto">
     /// The updated expense data to validate.
     /// </param>
-    public static void Validate(UpdateExpenseDto dto)
+    public static void Validate(UpdateExpenseRequest dto)
     {
         ValidateAmountAndDate(dto.Amount, dto.Date);
     }
@@ -115,7 +118,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <param name="dto">
     /// The data required to create the expense.
     /// </param>
-    public void Add(AddExpenseDto dto)
+    public void Add(AddExpenseRequest dto)
     {
         Validate(dto);
 
@@ -136,7 +139,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <returns>
     /// A read-only list containing the details of all expense transactions.
     /// </returns>
-    public IReadOnlyList<TransactionDto> GetAll()
+    public IReadOnlyList<TransactionResponse> GetAll()
     {
         return this._repository
             .GetAll()
@@ -151,10 +154,10 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// The display identifier of the expense transaction.
     /// </param>
     /// <returns>
-    /// A <see cref="TransactionDto"/> representing the expense when found;
+    /// A <see cref="TransactionResponse"/> representing the expense when found;
     /// otherwise, <see langword="null"/>.
     /// </returns>
-    public TransactionDto? Get(string transactionId)
+    public TransactionResponse? Get(string transactionId)
     {
         if (!this.TryGetExpense(transactionId, out Expense? expense))
         {
@@ -181,7 +184,7 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// </exception>
     public void Edit(
         string transactionId,
-        UpdateExpenseDto dto)
+        UpdateExpenseRequest dto)
     {
         Validate(dto);
 

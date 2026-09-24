@@ -5,9 +5,15 @@ using ExpenseTracker.View;
 
 namespace Assignments
 {
+    /// <summary>
+    /// Manages entry point of the application.
+    /// </summary>
     internal class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// Entry point of the execution.
+        /// </summary>
+        public static void Main()
         {
             ConsoleView console = new ConsoleView();
 

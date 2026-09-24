@@ -1,4 +1,4 @@
-﻿namespace ExpenseTracker.Enums
+﻿namespace ExpenseTracker.Models.Enums
 {
     /// <summary>
     /// Represents the operations available for managing transactions.

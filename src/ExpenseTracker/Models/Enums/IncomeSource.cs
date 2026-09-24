@@ -1,4 +1,4 @@
-﻿namespace ExpenseTracker.Enums
+﻿namespace ExpenseTracker.Models.Enums
 {
     /// <summary>
     /// Represents the possible sources of income for a transaction.

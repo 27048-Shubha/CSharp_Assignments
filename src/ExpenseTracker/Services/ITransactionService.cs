@@ -1,8 +1,7 @@
 ﻿namespace ExpenseTracker.Services
 {
-    using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
-    using ExpenseTracker.Models.DTOs;
+    using ExpenseTracker.Models.Response;
 
     /// <summary>
     /// Manages common transaction operations for Transaction.
@@ -13,14 +12,14 @@
         /// Retrieves all transactions handled by the service.
         /// </summary>
         /// <returns>A read-only list containing the available transactions.</returns>
-        public IReadOnlyList<TransactionDto> GetAll();
+        public IReadOnlyList<TransactionResponse> GetAll();
 
         /// <summary>
         /// Retrieves a transaction using its display identifier.
         /// </summary>
         /// <param name="transactionId">The display identifier of the transaction.</param>
         /// <returns>The matching transaction if found; otherwise, null.</returns>
-        public TransactionDto? Get(string transactionId);
+        public TransactionResponse? Get(string transactionId);
 
         /// <summary>
         /// Deletes a transaction using its display identifier.

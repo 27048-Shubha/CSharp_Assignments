@@ -1,11 +1,11 @@
-﻿using ExpenseTracker.Enums;
+﻿using ExpenseTracker.Models.Enums;
 
 namespace ExpenseTracker.Models.DTOs
 {
     /// <summary>
     /// Represents the values that can be updated for an existing expense.
     /// </summary>
-    internal class UpdateExpenseDto
+    internal class UpdateExpenseRequest
     {
         /// <summary>
         /// Gets or sets the identifier of the expense transaction.

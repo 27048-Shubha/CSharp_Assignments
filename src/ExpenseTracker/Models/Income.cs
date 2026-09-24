@@ -1,4 +1,4 @@
-﻿using ExpenseTracker.Enums;
+﻿using ExpenseTracker.Models.Enums;
 
 namespace ExpenseTracker.Models
 {
@@ -17,6 +17,7 @@ namespace ExpenseTracker.Models
         public Income(string transactionId, decimal amount, DateOnly date, IncomeSource source)
             : base(transactionId, amount, date)
         {
+            this.Source = source;
         }
 
         /// <summary>

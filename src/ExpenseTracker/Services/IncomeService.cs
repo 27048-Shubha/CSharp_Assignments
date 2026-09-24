@@ -2,12 +2,14 @@
 {
     using ExpenseTracker.Models;
     using ExpenseTracker.Models.DTOs;
+    using ExpenseTracker.Models.Enums;
+    using ExpenseTracker.Models.Response;
     using ExpenseTracker.Repository;
 
     /// <summary>
     /// rovides business operations for income transactions.
     /// </summary>
-    internal class IncomeService : ITransactionService, ITransactionUpdateService<UpdateIncomeDto>
+    internal class IncomeService : ITransactionService, ITransactionUpdateService<UpdateIncomeRequest>
     {
         private IncomeRepository _repository;
 
@@ -22,7 +24,7 @@
 
         /// <summary>
         /// Converts an <see cref="Income"/> model into a
-        /// <see cref="TransactionDto"/> for display.
+        /// <see cref="TransactionResponse"/> for display.
         /// </summary>
         /// <param name="income">
         /// The expense transaction to convert.
@@ -30,13 +32,14 @@
         /// <returns>
         /// A DTO containing the expense identifier, amount, date, and category.
         /// </returns>
-        public static TransactionDto MapToDto(Income income)
+        public static TransactionResponse MapToDto(Income income)
         {
-            return new TransactionDto
+            return new TransactionResponse
             {
                 TransactionId = income.TransactionId,
                 Amount = income.Amount,
                 Date = income.Date,
+                Type = TransactionType.Income,
                 CategoryOrSource = income.Source.ToString(),
             };
         }
@@ -51,7 +54,7 @@
         /// Thrown when the amount is zero or negative, or when the date is in
         /// the future.
         /// </exception>
-        public static void Validate(AddIncomeDto dto)
+        public static void Validate(AddIncomeRequest dto)
         {
             ValidateAmountAndDate(dto.Amount, dto.Date);
         }
@@ -66,7 +69,7 @@
         /// Thrown when the amount is zero or negative, or when the date is in
         /// the future.
         /// </exception>
-        public static void Validate(UpdateIncomeDto dto)
+        public static void Validate(UpdateIncomeRequest dto)
         {
             ValidateAmountAndDate(dto.Amount, dto.Date);
         }
@@ -110,7 +113,7 @@
         /// Adds a new income to the transaction
         /// </summary>
         /// <param name="dto">DTO of the transaction</param>
-        public void Add(AddIncomeDto dto)
+        public void Add(AddIncomeRequest dto)
         {
             // negative amount validation
             // future date validation
@@ -123,7 +126,7 @@
         ///  Retrieves all income transactions.
         /// </summary>
         /// <returns> A read-only list containing the income transactions.</returns>
-        public IReadOnlyList<TransactionDto> GetAll()
+        public IReadOnlyList<TransactionResponse> GetAll()
         {
             return this._repository.GetAll().Select(MapToDto).ToList();
         }
@@ -134,7 +137,7 @@
         /// <param name="transactionId">Transaction Id of the transaction to be edited.</param>
         /// <param name="dto">Dto for Updation of Income</param>
         /// <exception cref="InvalidOperationException">Raises when income transaction is not found.</exception>
-        public void Edit(string transactionId, UpdateIncomeDto dto)
+        public void Edit(string transactionId, UpdateIncomeRequest dto)
         {
             Validate(dto);
             if (!this.TryGetIncome(transactionId, out Income? income))
@@ -155,7 +158,7 @@
         /// </summary>
         /// <param name="transactionId">The display identifier of the transaction.</param>
         /// <returns>The matching income transaction if found; otherwise, null.</returns>
-        public TransactionDto? Get(string transactionId)
+        public TransactionResponse? Get(string transactionId)
         {
             if (!this.TryGetIncome(transactionId, out Income? income))
             {

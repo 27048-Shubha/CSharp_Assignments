@@ -1,11 +1,11 @@
-﻿using ExpenseTracker.Enums;
+﻿using ExpenseTracker.Models.Enums;
 
-namespace ExpenseTracker.Models.DTOs
+namespace ExpenseTracker.Models.Response
 {
     /// <summary>
     /// Represents transaction information for display purposes.
     /// </summary>
-    internal class TransactionDto
+    internal class TransactionResponse
     {
         /// <summary>
         /// Gets or sets the display identifier of the transaction.

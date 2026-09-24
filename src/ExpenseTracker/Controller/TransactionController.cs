@@ -2,9 +2,10 @@
 
 namespace ExpenseTracker.Controller
 {
-    using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
     using ExpenseTracker.Models.DTOs;
+    using ExpenseTracker.Models.Enums;
+    using ExpenseTracker.Models.Response;
     using ExpenseTracker.Services;
     using ExpenseTracker.View;
 
@@ -41,8 +42,6 @@ namespace ExpenseTracker.Controller
             bool isRunning = true;
             while (isRunning)
             {
-                Thread.Sleep(1000); // 1 min delay to show the error message to the users.
-                Console.Clear();
                 this._console.DisplayMainMenu();
                 this._choice = this._console.GetChoice();
 
@@ -51,17 +50,17 @@ namespace ExpenseTracker.Controller
                     continue;
                 }
 
-                switch ((Enums.MainMenu)this._choice)
+                switch ((MainMenu)this._choice)
                 {
-                    case Enums.MainMenu.Add:
+                    case MainMenu.Add:
                         this.AddTransaction();
                         break;
 
-                    case Enums.MainMenu.Manage:
+                    case MainMenu.Manage:
                         this.ManageTransaction();
                         break;
 
-                    case Enums.MainMenu.Exit:
+                    case MainMenu.Exit:
                         this._console.DisplayExit();
                         isRunning = false;
                         break;
@@ -83,9 +82,9 @@ namespace ExpenseTracker.Controller
             while (isManageMode)
             {
                 operation = this._console.ManageTransactionMenu();
-                switch ((Enums.ManageTransaction)operation)
+                switch ((ManageTransaction)operation)
                 {
-                    case Enums.ManageTransaction.View:
+                    case Models.Enums.ManageTransaction.View:
                         if (this.IsEmpty())
                         {
                             this._console.DisplayEmpty();
@@ -97,7 +96,7 @@ namespace ExpenseTracker.Controller
 
                         break;
 
-                    case Enums.ManageTransaction.Update:
+                    case Models.Enums.ManageTransaction.Update:
                         if (this.IsEmpty())
                         {
                             this._console.DisplayEmpty();
@@ -109,7 +108,7 @@ namespace ExpenseTracker.Controller
 
                         break;
 
-                    case Enums.ManageTransaction.Delete:
+                    case Models.Enums.ManageTransaction.Delete:
                         if (this.IsEmpty())
                         {
                             this._console.DisplayEmpty();
@@ -121,7 +120,7 @@ namespace ExpenseTracker.Controller
 
                         break;
 
-                    case Enums.ManageTransaction.Back:
+                    case Models.Enums.ManageTransaction.Back:
                         this._console.DisplayMessage("Back to Main Menu");
                         isManageMode = false;
                         return;
@@ -154,9 +153,9 @@ namespace ExpenseTracker.Controller
 
             try
             {
-                if (this._currentType == Enums.TransactionType.Income)
+                if (this._currentType == TransactionType.Income)
                 {
-                    AddIncomeDto dto = new AddIncomeDto()
+                    AddIncomeRequest dto = new AddIncomeRequest()
                     {
                         Amount = amount.Value,
                         Date = date.Value,
@@ -167,7 +166,7 @@ namespace ExpenseTracker.Controller
                 }
                 else
                 {
-                    AddExpenseDto dto = new AddExpenseDto()
+                    AddExpenseRequest dto = new AddExpenseRequest()
                     {
                         Amount = amount.Value,
                         Date = date.Value,
@@ -227,7 +226,7 @@ namespace ExpenseTracker.Controller
                 return;
             }
 
-            IReadOnlyList<TransactionDto> transactions = this._service.GetAll();
+            IReadOnlyList<TransactionResponse> transactions = this._service.GetAll();
             this._console.DisplayTransactionList(transactions);
         }
 
@@ -251,7 +250,7 @@ namespace ExpenseTracker.Controller
                 return;
             }
 
-            TransactionDto? transaction = this._service.Get(transactionId);
+            TransactionResponse? transaction = this._service.Get(transactionId);
 
             if (transaction is null)
             {
@@ -263,13 +262,13 @@ namespace ExpenseTracker.Controller
 
             if (this._currentType == TransactionType.Income)
             {
-                UpdateIncomeDto dto = this._console.EditIncome(transaction);
+                UpdateIncomeRequest dto = this._console.EditIncome(transaction);
 
                 this._incomeService.Edit(transactionId, dto);
             }
             else
             {
-                UpdateExpenseDto dto = this._console.EditExpense(transaction);
+                UpdateExpenseRequest dto = this._console.EditExpense(transaction);
 
                 this._expenseService.Edit(transactionId, dto);
             }
@@ -290,7 +289,7 @@ namespace ExpenseTracker.Controller
                 return;
             }
 
-            TransactionDto? transaction = this._service.Get(transactionId);
+            TransactionResponse? transaction = this._service.Get(transactionId);
 
             if (transaction == null)
             {
@@ -309,7 +308,7 @@ namespace ExpenseTracker.Controller
         /// <returns>True, transactions are empty else false</returns>
         public bool IsEmpty()
         {
-            IReadOnlyList<TransactionDto> transactions = this._service.GetAll();
+            IReadOnlyList<TransactionResponse> transactions = this._service.GetAll();
             return transactions.Count == 0;
         }
     }

@@ -1,8 +1,9 @@
 ﻿namespace ExpenseTracker.View
 {
-    using ExpenseTracker.Enums;
     using ExpenseTracker.Models;
     using ExpenseTracker.Models.DTOs;
+    using ExpenseTracker.Models.Enums;
+    using ExpenseTracker.Models.Response;
     using ExpenseTracker.Validator;
 
     /// <summary>
@@ -56,14 +57,14 @@
 
             this.DisplayInvalidInput("Kindly enter valid choice as input!");
 
-            return Enums.ManageTransaction.Invalid;
+            return ManageTransaction.Invalid;
         }
 
         /// <summary>
         /// Displays transaction types and retrieves the user's selected transaction type.
         /// </summary>
         /// <returns>The selected transaction type, or <see cref="TransactionType.Invalid"/> when the input is invalid.</returns>
-        public Enums.TransactionType ChooseCategory()
+        public TransactionType ChooseCategory()
         {
             Console.WriteLine();
             Console.WriteLine("TRANSACTION TYPE");
@@ -78,7 +79,7 @@
                 return category;
             }
 
-            return Enums.TransactionType.Invalid;
+            return TransactionType.Invalid;
         }
 
         /// <summary>
@@ -86,7 +87,7 @@
         /// </summary>
         /// <param name="transaction">The transaction containing the current values to display and update.</param>
         /// <returns>The transaction containing the updated values.</returns>
-        public TransactionDto EditTransaction(TransactionDto transaction)
+        public TransactionResponse EditTransaction(TransactionResponse transaction)
         {
             Console.WriteLine("Please Enter to keep the current value.");
             transaction.Amount = this.GetAmount(true) ?? transaction.Amount;
@@ -103,7 +104,7 @@
                 }
                 else
                 {
-                    source = Enums.IncomeSource.Others;
+                    source = IncomeSource.Others;
                 }
             }
             else if (transaction.Type == TransactionType.Expense)
@@ -118,7 +119,7 @@
                 }
                 else
                 {
-                    category = Enums.ExpenseCategory.Others;
+                    category = ExpenseCategory.Others;
                 }
             }
 
@@ -307,24 +308,20 @@
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList( IReadOnlyList<TransactionDto> transactions)
+        public void DisplayTransactionList( IReadOnlyList<TransactionResponse> transactions)
         {
             Console.WriteLine();
 
             Console.WriteLine(
                 "----------------------------------------------------------------------------");
             Console.WriteLine(
-                $"{"ID",-12} {"DATE",-15} {"AMOUNT",-15} {"CATEGORY / SOURCE",-20}");
+                $"{"ID",-12} {"TYPE",-10} {"DATE",-15} {"AMOUNT",-15} {"CATEGORY / SOURCE",-20}");
             Console.WriteLine(
                 "----------------------------------------------------------------------------");
 
             foreach (var transaction in transactions)
             {
-                Console.WriteLine(
-                    $"{transaction.TransactionId,-12} " +
-                    $"{transaction.Date,-15} " +
-                    $"{transaction.Amount,-15} " +
-                    $"{transaction.CategoryOrSource,-20}");
+                this.DisplayTransaction(transaction);
             }
 
             Console.WriteLine(
@@ -336,13 +333,14 @@
         /// </summary>
         /// <param name="transaction">The transactions to display.</param>
         /// <summary>
-        public void DisplayTransaction(TransactionDto transaction)
+        public void DisplayTransaction(TransactionResponse transaction)
         {
             Console.WriteLine(
-                $"{transaction.TransactionId} - " +
-                $"{transaction.Date} - " +
-                $"{transaction.Amount} - " +
-                $"{transaction.CategoryOrSource}");
+                $"{transaction.TransactionId,-12}" +
+                $"{transaction.Type,-10}" +
+                $"{transaction.Date,-15}" +
+                $"{transaction.Amount,-15}" +
+                $"{transaction.CategoryOrSource,-20}");
         }
 
         /// <summary>
@@ -364,7 +362,7 @@
         /// <param name="transactionId">The identifier of the affected transaction.</param>
         public void DisplaySuccess(string operation, string transactionId)
         {
-            Console.WriteLine($"{operation} of {transactionId} is Successful!");
+            Console.WriteLine($"{operation} of {transactionId} is successful!");
         }
 
         /// <summary>
@@ -400,12 +398,12 @@
         /// The current transaction values displayed as a DTO.
         /// </param>
         /// <returns>
-        /// An <see cref="UpdateIncomeDto"/> containing the updated amount,
+        /// An <see cref="UpdateIncomeRequest"/> containing the updated amount,
         /// date, and income source.
         /// </returns>
-        public UpdateIncomeDto EditIncome(TransactionDto transaction)
+        public UpdateIncomeRequest EditIncome(TransactionResponse transaction)
         {
-            return new UpdateIncomeDto
+            return new UpdateIncomeRequest
             {
                 Amount = this.GetAmount(true) ?? transaction.Amount,
                 Date = this.GetDate(true) ?? transaction.Date,
@@ -420,17 +418,26 @@
         /// The current transaction values displayed as a DTO.
         /// </param>
         /// <returns>
-        /// An <see cref="UpdateExpenseDto"/> containing the updated amount,
+        /// An <see cref="UpdateExpenseRequest"/> containing the updated amount,
         /// date, and expense category.
         /// </returns>
-        public UpdateExpenseDto EditExpense(TransactionDto transaction)
+        public UpdateExpenseRequest EditExpense(TransactionResponse transaction)
         {
-            return new UpdateExpenseDto
+            return new UpdateExpenseRequest
             {
                 Amount = this.GetAmount(true) ?? transaction.Amount,
                 Date = this.GetDate(true) ?? transaction.Date,
                 Category = this.GetExpenseCategory(),
             };
+        }
+
+        /// <summary>
+        /// Pauses console and waits for user to press any key to continue
+        /// </summary>
+        public void PauseAndContinue()
+        {
+            Console.WriteLine("Enter any key to continue...");
+            Console.ReadKey();
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Enums;
-using ExpenseTracker.Models;
+﻿using ExpenseTracker.Models;
 
 namespace ExpenseTracker.Repository
 {
