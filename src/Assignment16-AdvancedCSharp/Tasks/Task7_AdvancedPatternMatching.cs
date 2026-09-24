@@ -12,7 +12,7 @@
         /// </summary>
         public void Run()
         {
-            List<Shape> shapes = new List<Shape>()
+            List<Shape?> shapes = new List<Shape?>()
             {
                 new Circle("Red", 5),
                 new Rectangle("Yellow", 2, 3),
@@ -20,13 +20,13 @@
                 null,
             };
 
-            foreach (Shape shape in shapes)
+            foreach (Shape? shape in shapes)
             {
                 this.DisplayShapeDetails(shape);
             }
         }
 
-        private void DisplayShapeDetails(Shape shape)
+        private void DisplayShapeDetails(Shape? shape)
         {
             string message = shape switch
             {
