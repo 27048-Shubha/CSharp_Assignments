@@ -1,6 +1,6 @@
 ﻿namespace Assignment2.Repository
 {
-    using Assignment2.Models.Task1;
+    using Assignment2.Models;
 
     /// <summary>
     /// Handles repository operations of the shape hierarchy application.
@@ -16,11 +16,7 @@
         /// <returns>The details of rectangle created. </returns>
         public string AddRectangle(string color, double length, double breadth)
         {
-            Rectangle rectangle = new Rectangle();
-            rectangle.Color = color;
-            rectangle.Length = length;
-            rectangle.Breadth = breadth;
-            rectangle.Area = rectangle.CalculateArea();
+            Rectangle rectangle = new Rectangle(color, length, breadth);
             return rectangle.PrintDetails();
         }
 
@@ -32,10 +28,7 @@
         /// <returns>The details of circle created. </returns>
         public string AddCircle(string color, double radius)
         {
-            Circle circle = new Circle();
-            circle.Color = color;
-            circle.Radius = radius;
-            circle.Area = circle.CalculateArea();
+            Circle circle = new Circle(color, radius);
             return circle.PrintDetails();
         }
     }
