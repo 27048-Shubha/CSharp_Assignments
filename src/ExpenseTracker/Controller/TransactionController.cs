@@ -235,6 +235,7 @@ namespace ExpenseTracker.Controller
         /// </summary>
         public void Edit()
         {
+            this._console.DisplayMessage("Kindly press enter to keep current value");
             this.View();
 
             if (this._service is null)

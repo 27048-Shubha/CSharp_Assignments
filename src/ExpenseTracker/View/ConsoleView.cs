@@ -79,51 +79,8 @@
                 return category;
             }
 
+            Console.WriteLine("Incorrect input: Transaction Type is set to Expense");
             return TransactionType.Invalid;
-        }
-
-        /// <summary>
-        /// Displays the current transaction values and allows the user to modify selected values.
-        /// </summary>
-        /// <param name="transaction">The transaction containing the current values to display and update.</param>
-        /// <returns>The transaction containing the updated values.</returns>
-        public TransactionResponse EditTransaction(TransactionResponse transaction)
-        {
-            Console.WriteLine("Please Enter to keep the current value.");
-            transaction.Amount = this.GetAmount(true) ?? transaction.Amount;
-            transaction.Date = this.GetDate(true) ?? transaction.Date;
-            if (transaction.Type == TransactionType.Income)
-            {
-                IncomeSource source = GetCurrentIncomeSource(transaction.CategoryOrSource);
-                Console.Write($"Source ({source}): ");
-                string? input = Console.ReadLine()?.Trim();
-
-                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, true, out IncomeSource parsedSource))
-                {
-                    source = parsedSource;
-                }
-                else
-                {
-                    source = IncomeSource.Others;
-                }
-            }
-            else if (transaction.Type == TransactionType.Expense)
-            {
-                ExpenseCategory category = GetCurrentExpenseCategory(transaction.CategoryOrSource);
-                Console.WriteLine($"Category ({category}): ");
-                string? input = Console.ReadLine()?.Trim();
-
-                if (!string.IsNullOrEmpty(input) && Enum.TryParse(input, out ExpenseCategory parsedCategory))
-                {
-                    category = parsedCategory;
-                }
-                else
-                {
-                    category = ExpenseCategory.Others;
-                }
-            }
-
-            return transaction;
         }
 
         /// <summary>
@@ -249,11 +206,12 @@
             Console.WriteLine("----------------------------------------");
             Console.Write("Category: ");
 
-            if (Enum.TryParse<ExpenseCategory>(Console.ReadLine(), true, out var category))
+            if (Enum.TryParse<ExpenseCategory>(Console.ReadLine(), true, out var category) && Enum.IsDefined<ExpenseCategory>(category))
             {
                 return category;
             }
 
+            Console.WriteLine("Incorrect input: Expense Category is set to Others");
             return ExpenseCategory.Others;
         }
 
@@ -272,11 +230,12 @@
             Console.WriteLine("----------------------------------------");
             Console.Write("Source: ");
 
-            if (Enum.TryParse<IncomeSource>(Console.ReadLine(), true, out var source))
+            if (Enum.TryParse<IncomeSource>(Console.ReadLine(), true, out var source) && Enum.IsDefined<IncomeSource>(source))
             {
                 return source;
             }
 
+            Console.WriteLine("Incorrect input: Income Source is set to Others");
             return IncomeSource.Others;
         }
 
