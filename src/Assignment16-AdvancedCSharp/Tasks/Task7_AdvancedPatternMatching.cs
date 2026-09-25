@@ -33,17 +33,17 @@
                 Circle circle =>
                     $"Shape: Circle\n" +
                     $"Color: {circle.Color}\n" +
-                    $"Area: {circle.CalculateArea()}",
+                    $"Area: {circle.CalculateArea():f2}",
 
                 Rectangle rectangle =>
                     $"Shape: Rectangle\n" +
                     $"Color: {rectangle.Color}\n" +
-                    $"Area: {rectangle.CalculateArea()}",
+                    $"Area: {rectangle.CalculateArea():f2}",
 
                 Triangle triangle =>
                     $"Shape: Triangle\n" +
                     $"Color: {triangle.Color}\n" +
-                    $"Area: {triangle.CalculateArea()}",
+                    $"Area: {triangle.CalculateArea():f2}",
 
                 null =>
                     "The object is null and doesn't match any of the types",
@@ -52,7 +52,7 @@
                     "The object doesn't match any of the types",
             };
 
-            Console.WriteLine(message);
+            Console.WriteLine($"{message}\n");
         }
     }
 }

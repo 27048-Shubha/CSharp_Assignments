@@ -12,12 +12,15 @@
         /// </summary>
         public void Run()
         {
+            Console.WriteLine("\nOriginal list: ");
+            this.Display(this._integerList);
+
             IEnumerable<int> filteredNumbers = this._integerList.Where(n => n % 2 != 0);
-            Console.WriteLine("\nOdd Numbers: ");
+            Console.WriteLine("\n[Using Lambda expression] Odd Numbers: ");
             this.Display(filteredNumbers);
 
             IEnumerable<int> squaredNumbers = filteredNumbers.Select(n => { return n * n; });
-            Console.WriteLine("\nSquared Numbers: ");
+            Console.WriteLine("\n[Using Lambda statement] Squared Numbers: ");
             this.Display(squaredNumbers);
         }
 
