@@ -18,25 +18,42 @@
         /// </summary>
         public static void Run()
         {
-            MathUtils utilHandler = new MathUtils();
+            MathUtils mathUtils = new MathUtils();
 
             try
             {
-                Console.WriteLine("Enter operand 1: ");
-                int number1 = int.Parse(Console.ReadLine());
+                int number1, number2;
+                while (true)
+                {
+                    Console.WriteLine("Enter operand1: ");
+                    if (int.TryParse(Console.ReadLine(), out number1))
+                    {
+                        break;
+                    }
 
-                Console.WriteLine("Enter operand 2: ");
-                int number2 = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Invalid input! Enter only integers");
+                }
 
-                Console.WriteLine($"Addition of {number1} and {number2} results {utilHandler.Add(number1, number2)}");
+                while (true)
+                {
+                    Console.WriteLine("Enter operand2: ");
+                    if (int.TryParse(Console.ReadLine(), out number2))
+                    {
+                        break;
+                    }
 
-                Console.WriteLine($"Subtraction of {number1} and {number2} results {utilHandler.Subtract(number1, number2)}");
+                    Console.WriteLine("Invalid input! Enter only integers");
+                }
 
-                Console.WriteLine($"Multiplication of {number1} and {number2} results {utilHandler.Multiply(number1, number2)}");
+                Console.WriteLine($"Addition of {number1} and {number2} results {mathUtils.Add(number1, number2)}");
 
-                Console.WriteLine($"Division of {number1} and {number2} results {utilHandler.Divide(number1, number2)}");
+                Console.WriteLine($"Subtraction of {number1} and {number2} results {mathUtils.Subtract(number1, number2)}");
+
+                Console.WriteLine($"Multiplication of {number1} and {number2} results {mathUtils.Multiply(number1, number2)}");
+
+                Console.WriteLine($"Division of {number1} and {number2} results {mathUtils.Divide(number1, number2)}");
             }
-            catch (ArgumentException exception)
+            catch (DivideByZeroException exception)
             {
                 Console.WriteLine(exception.Message);
             }

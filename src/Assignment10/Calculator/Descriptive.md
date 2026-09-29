@@ -1,4 +1,4 @@
-1. Explain what the .NET platform is and its primary purpose. 
+﻿1. Explain what the .NET platform is and its primary purpose. 
 	- .NET platform is a software development platform developed and maintained by Microsoft
 	- It provides runtime, libraries, compiler support, memory management, application frameworks needed to run applications.
 	- Primary purpose of .NET platform: To provide runtime & common set of libraries so that developers can focus on building application without worrying about low-level memory management and platform specific complexities
@@ -73,7 +73,10 @@
 7. What is the purpose of the Globalization and Localization features in .NET? 
 	- Globalization
 		- The process of designing an application so it can work with multiple cultures and regions.
-		- Example: Currency and date formatting (dd/MM/yyyy) 
+		- Example: Culture-aware date, time, number, and currency formatting.		
+		- India: ₹1,234.56 and 25/09/2026 
+		- US: $1,234.56 and 9/25/2026
+
 		- Key application/feature: Culture-aware date formatting, Culture-aware currency formatting, Number formatting, Time formatting, Calendar support
 		- (Here the culture means a set of regional and language-specific rules that determine how users expect information to be displayed and interpreted)
 	- Localization

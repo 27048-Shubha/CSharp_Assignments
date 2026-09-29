@@ -39,7 +39,7 @@
         {
             if (number2 == 0)
             {
-                throw new ArgumentException("Division cannot be performed! Divisor (Operand 2) should be non-zero.");
+                throw new DivideByZeroException("Division cannot be performed! Divisor (Operand 2) should be non-zero.");
             }
 
             return (double)number1 / number2;
