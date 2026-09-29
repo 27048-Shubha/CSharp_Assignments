@@ -1,10 +1,6 @@
 ﻿namespace Assignments
 {
     using ExceptionHandling.Task1;
-    using ExceptionHandling.Task2;
-    using ExceptionHandling.Task3;
-    using ExceptionHandling.Task4;
-    using ExceptionHandling.Task5;
 
     /// <summary>
     /// Manages Exception handling application tasks.
@@ -16,6 +12,8 @@
         /// </summary>
         public static void Main()
         {
+            AppDomain.CurrentDomain.UnhandledException += ExceptionHandling.Task5.ApplicationRunner.ExceptionHandler;
+
             string? choice;
             do
             {
@@ -60,7 +58,7 @@
                 }
 
                 Console.WriteLine("Reloading MainMenu...");
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
             }
             while (choice != "6");
         }

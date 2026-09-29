@@ -35,11 +35,28 @@
         /// </summary>
         public void Run()
         {
-            Console.WriteLine("Enter number1: ");
-            int number1 = int.Parse(Console.ReadLine());
+            int number1, number2;
+
+            while (true)
+            {
+                Console.WriteLine("Enter number1: ");
+                if (int.TryParse(Console.ReadLine(), out number1))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input! Enter only integers");
+            }
 
             Console.WriteLine("Enter number2: ");
-            int number2 = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.WriteLine("Enter number2: ");
+                if (int.TryParse(Console.ReadLine(), out number2))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input! Enter only integers");
+            }
 
             this.Divide(number1, number2);
         }

@@ -1,6 +1,4 @@
-﻿using ExceptionHandling.Task4;
-
-namespace ExceptionHandling.Task4
+﻿namespace ExceptionHandling.Task4
 {
     using System;
 

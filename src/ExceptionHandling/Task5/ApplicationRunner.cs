@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ExceptionHandling.Task5;
-
-namespace ExceptionHandling.Task5
+﻿namespace ExceptionHandling.Task5
 {
     /// <summary>
     /// Manages and handles global exception via AppDomain events.
@@ -19,7 +12,6 @@ namespace ExceptionHandling.Task5
         {
             try
             {
-                AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
                 IntegerArray integerArray = new IntegerArray();
                 integerArray.Run();
             }

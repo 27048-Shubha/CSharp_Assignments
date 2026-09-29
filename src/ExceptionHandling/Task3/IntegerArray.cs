@@ -8,7 +8,6 @@
     public class IntegerArray
     {
         private int[] _array;
-        private int _size;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegerArray"/> class.
@@ -16,7 +15,6 @@
         internal IntegerArray()
         {
             this._array = new int[5];
-            this._size = 5;
         }
 
         /// <summary>
@@ -26,7 +24,6 @@
         internal IntegerArray(int size)
         {
             this._array = new int[size];
-            this._size = size;
         }
 
         /// <summary>
@@ -34,7 +31,7 @@
         /// </summary>
         public void InsertElements()
         {
-            for (int i = 0; i < this._size; i++)
+            for (int i = 0; i < this._array.Length; i++)
             {
                 Console.WriteLine($"Enter array element {i}: ");
                 if (int.TryParse(Console.ReadLine(), out int element))
@@ -61,9 +58,13 @@
             {
                 return this._array[index];
             }
-            catch
+            catch (IndexOutOfRangeException)
             {
-                throw new IndexOutOfRangeException($"Valid index range: {0} to {this._size-1}");
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

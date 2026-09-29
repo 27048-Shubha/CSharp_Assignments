@@ -1,7 +1,6 @@
 ﻿namespace ExceptionHandling.Task5
 {
     using System;
-    using ExceptionHandling.Task5;
 
     /// <summary>
     /// Manages array operations.
@@ -65,7 +64,7 @@
             }
             catch
             {
-                throw new IndexOutOfRangeException("Valid index range: {0} to {size}}");
+                throw new IndexOutOfRangeException($"Valid index range: {0} to {this._array.Length}");
             }
         }
 
