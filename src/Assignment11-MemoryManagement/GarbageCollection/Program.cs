@@ -7,21 +7,18 @@
     /// </summary>
     public class Program
     {
-        private static List<Student>? _students = new List<Student>();
-        private static string name = "Shubha";
-        private static int age = 20;
+        private const int ObjectCount = 1_000_000;
 
         /// <summary>
         /// Creates objects of students class.
         /// </summary>
         public static void CreateObjects()
         {
-            for (int i = 0; i < 10_000_000; i++)
+            List<Student>? students = new List<Student>();
+
+            for (int i = 0; i < ObjectCount; i++)
             {
-                if (_students != null)
-                {
-                    _students.Add(new Student(Program.name, Program.age));
-                }
+                students.Add(new Student("Shubha", 20));
             }
 
             Console.WriteLine("Objects created.");
@@ -32,8 +29,6 @@
         /// </summary>
         public static void TriggerGC()
         {
-            _students = null;
-
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
@@ -47,8 +42,16 @@
         /// </summary>
         public static void Main()
         {
+            long memoryBeforeCreation = GC.GetTotalMemory(forceFullCollection: true);
+            Console.WriteLine($"Memory size before creation: {memoryBeforeCreation}");
             Program.CreateObjects();
+
+            long memoryAfterCreation = GC.GetTotalMemory(forceFullCollection: false);
+            Console.WriteLine($"Memory size after creation: {memoryAfterCreation}");
             Program.TriggerGC();
+
+            long memoryAfterGC = GC.GetTotalMemory(forceFullCollection: true);
+            Console.WriteLine($"Memory size after garbage collection: {memoryAfterGC}");
         }
     }
 }
