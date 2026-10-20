@@ -1,4 +1,4 @@
-﻿namespace Assignments
+﻿namespace Assignment14_B
 {
     using Assignment3_InventoryManagement.Controllers;
     using Assignment3_InventoryManagement.Repository;
