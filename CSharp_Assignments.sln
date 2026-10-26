@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "src\Assignment2\Assignment2.csproj", "{BB39B65C-3C62-811E-AF4F-5E84EF55A0E5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1-ContactManager", "src\ContactManager\Assignment1-ContactManager.csproj", "{2D280F58-67B0-41B2-7657-CFE1FB5C3640}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGreetingsApp", "src\Assignment14-ProjectSolutionAndBuildOrders\AGreetingsApp\AGreetingsApp.csproj", "{0C366AB1-65E5-46EC-AF9D-ECA81607C053}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMathApp", "src\Assignment14-ProjectSolutionAndBuildOrders\BMathApp\BMathApp.csproj", "{C8D80DDD-29B4-4E68-8008-6FD85195CC83}"
@@ -23,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB39B65C-3C62-811E-AF4F-5E84EF55A0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB39B65C-3C62-811E-AF4F-5E84EF55A0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB39B65C-3C62-811E-AF4F-5E84EF55A0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB39B65C-3C62-811E-AF4F-5E84EF55A0E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D280F58-67B0-41B2-7657-CFE1FB5C3640}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C366AB1-65E5-46EC-AF9D-ECA81607C053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C366AB1-65E5-46EC-AF9D-ECA81607C053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C366AB1-65E5-46EC-AF9D-ECA81607C053}.Release|Any CPU.ActiveCfg = Release|Any CPU
