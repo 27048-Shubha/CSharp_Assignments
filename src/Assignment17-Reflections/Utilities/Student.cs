@@ -2,7 +2,7 @@
 {
     public class Student
     {
-        internal Student(string name, int age)
+        public Student(string name, int age)
         {
             this.Name = name;
             this.Age = age;

@@ -1,8 +1,8 @@
-﻿using Assignment17_Reflections.Utilities;
-using System.Reflection;
-
-namespace Assignment17_Reflections.Task3
+﻿namespace Assignment17_Reflections.Task3
 {
+    using System.Reflection;
+    using Assignment17_Reflections.Utilities;
+
     public class Task3
     {
         public void InvokeMethod(object obj, string methodName)

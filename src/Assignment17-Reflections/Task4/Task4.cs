@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using System.Reflection.Emit;
-
-namespace Assignment17_Reflections.Task4
+﻿namespace Assignment17_Reflections.Task4
 {
+    using System.Reflection;
+    using System.Reflection.Emit;
+
     public class Task4
     {
         public void RunTask()
