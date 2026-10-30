@@ -6,11 +6,18 @@
     using System.Reflection.Emit;
     using System.Text.Json;
 
+    /// <summary>
+    /// Uses IL Emit (DynamicMethod) to generate optimized code.
+    /// </summary>
     public static class EmitSerializer
     {
-        private static readonly Dictionary<Type, Func<object, object?[]>>
-            Cache = new();
+        private static readonly Dictionary<Type, Func<object, object?[]>> Cache = new ();
 
+        /// <summary>
+        /// Serializes the provided object.
+        /// </summary>
+        /// <param name="obj">The object to be serialized.</param>
+        /// <returns>The serialized data.</returns>
         public static string Serialize(object obj)
         {
             Type type = obj.GetType();

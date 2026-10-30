@@ -3,16 +3,22 @@
     using System.Diagnostics;
     using Assignment17_Reflections.Utilities;
 
-    internal class Task7
+    /// <summary>
+    /// Manages serialization tests (task 7)
+    /// </summary>
+    public class Task7
     {
+        /// <summary>
+        /// Executes the workflow of the task 7.
+        /// </summary>
         public void RunTask()
         {
             object[] objects =
-            {
-            new Student("Shubha", 21),
-            new Product { Name = "Notebook", Price = 45.5 },
-            new Course { Title = "C#", Student = new Student("Shubha", 20) },
-            };
+                {
+                    new Student("Shubha", 21),
+                    new Product { Name = "Notebook", Price = 45.5 },
+                    new Course { Title = "C#", Student = new Student("Shubha", 20) },
+                };
 
             Console.WriteLine("SERIALIZATION TESTS");
 
@@ -22,7 +28,7 @@
                 string emitted = EmitSerializer.Serialize(obj);
 
                 Console.WriteLine($"\nType: {obj.GetType().Name}");
-                Console.WriteLine($"Reflection: original}");
+                Console.WriteLine($"Reflection: {original}");
                 Console.WriteLine($"Emit: {emitted}");
                 Console.WriteLine($"Correct (Is orginal and emitted strings are True) : {original == emitted}");
             }
@@ -62,6 +68,8 @@
             Console.WriteLine($"Iterations: {iterations}");
             Console.WriteLine($"Reflection: {reflectionTime} ms");
             Console.WriteLine($"Emit: {emitTime} ms");
+
+            Console.WriteLine(new string('=', 50));
         }
     }
 }

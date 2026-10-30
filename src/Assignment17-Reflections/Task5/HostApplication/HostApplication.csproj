@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,6 +12,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AsciiShiftPlugin\AsciiShiftPlugin.csproj" />
+    <ProjectReference Include="..\CaseSwapPlugin\CaseSwapPlugin.csproj" />
+    <ProjectReference Include="..\IPlugin\IPlugin.csproj" />
   </ItemGroup>
 
 </Project>

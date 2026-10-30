@@ -3,10 +3,20 @@
     using System.Reflection;
     using System.Reflection.Emit;
 
+    /// <summary>
+    /// Manages dynamic type builder (task 4)
+    /// </summary>
     public class Task4
     {
+        /// <summary>
+        /// Executes the workflow of the task 4.
+        /// </summary>
         public void RunTask()
         {
+            Console.WriteLine(new string('=', 50));
+            Console.WriteLine("DYNAMIC TYPE BUILDER");
+            Console.WriteLine(new string('=', 50));
+
             AssemblyName assemblyName = new AssemblyName("BookAssembly");
             AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
                 assemblyName, AssemblyBuilderAccess.Run);
@@ -54,23 +64,27 @@
 
             displayIL.Emit(
                 OpCodes.Call,
-                typeof(string).GetMethod("Concat", new Type[] {typeof(string), typeof(string) }) !);
+                typeof(string).GetMethod("Concat", new Type[] { typeof(string), typeof(string) }) !);
 
             displayIL.Emit(
                 OpCodes.Call,
-                typeof(Console).GetMethod( "WriteLine", new Type[] { typeof(string) }) !);
+                typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) }) !);
 
             displayIL.Emit(OpCodes.Ret);
 
             Type bookType = typeBuilder.CreateType();
-
-            Console.WriteLine("Dynamic Book type created!");
+            Console.WriteLine("[SUCCESS] Dynamic Book type created!");
+            Console.WriteLine($"Type Name : {bookType.Name}");
+            Console.WriteLine($"Namespace : {bookType.Namespace ?? "None"}");
 
             object book = Activator.CreateInstance(bookType);
+            Console.WriteLine("[SUCCESS] Book object created!");
 
-            bookType.GetProperty("Name")!.SetValue(book, "Harry Potter and the Chamber of Secrets");
+            bookType.GetProperty("Name") !.SetValue(book, "Harry Potter and the Chamber of Secrets");
+            Console.WriteLine("[SUCCESS] Property assigned.");
 
-            bookType.GetMethod("DisplayDetails")!.Invoke(book, null);
+            bookType.GetMethod("DisplayDetails") !.Invoke(book, null);
+            Console.WriteLine(new string('=', 50));
         }
     }
 }

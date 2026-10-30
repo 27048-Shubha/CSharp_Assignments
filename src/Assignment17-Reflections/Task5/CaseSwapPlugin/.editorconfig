@@ -19,15 +19,15 @@ dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
 # Symbol specifications
 
 dotnet_naming_symbols.interface.applicable_kinds = interface
-dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.interface.applicable_accessibilities = public, public, private, protected, protected_public, private_protected
 dotnet_naming_symbols.interface.required_modifiers = 
 
 dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
-dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.types.applicable_accessibilities = public, public, private, protected, protected_public, private_protected
 dotnet_naming_symbols.types.required_modifiers = 
 
 dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
-dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, public, private, protected, protected_public, private_protected
 dotnet_naming_symbols.non_field_members.required_modifiers = 
 
 # Naming styles
@@ -107,14 +107,14 @@ dotnet_diagnostic.SA1507.severity = error
 dotnet_diagnostic.SA1508.severity = error
 dotnet_diagnostic.SA1509.severity = error
 dotnet_diagnostic.SA1517.severity = error
-dotnet_diagnostic.SA1600.severity = error
-dotnet_diagnostic.SA1601.severity = error
-dotnet_diagnostic.SA1602.severity = error
-dotnet_diagnostic.SA1604.severity = error
-dotnet_diagnostic.SA1605.severity = error
-dotnet_diagnostic.SA1606.severity = error
-dotnet_diagnostic.SA1608.severity = error
-dotnet_diagnostic.SA1609.severity = error
+dotnet_diagnostic.SA1500.severity = error
+dotnet_diagnostic.SA1501.severity = error
+dotnet_diagnostic.SA1502.severity = error
+dotnet_diagnostic.SA1504.severity = error
+dotnet_diagnostic.SA1505.severity = error
+dotnet_diagnostic.SA1506.severity = error
+dotnet_diagnostic.SA1508.severity = error
+dotnet_diagnostic.SA1509.severity = error
 dotnet_diagnostic.SA1610.severity = error
 dotnet_diagnostic.SA1613.severity = error
 dotnet_diagnostic.SA1651.severity = error

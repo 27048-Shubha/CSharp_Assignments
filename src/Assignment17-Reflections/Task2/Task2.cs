@@ -3,9 +3,38 @@
     using System.Reflection;
     using Assignment17_Reflections.Utilities;
 
+    /// <summary>
+    /// Manages dynamic object inspection (task 2)
+    /// </summary>
     public class Task2
     {
-        public void DisplayProperties(object obj)
+        /// <summary>
+        /// Executes the workflow of the task 2.
+        /// </summary>
+        public void RunTask()
+        {
+            Student student = new Student("Shubha", 20);
+
+            Console.WriteLine(new string('=', 50));
+            Console.WriteLine("DYNAMIC OBJECT INSPECTOR");
+            Console.WriteLine(new string('=', 50));
+
+            Console.WriteLine("\n[BEFORE MODIFICATION]");
+            this.DisplayProperties(student);
+
+            Console.Write("\n[UPDATING NAME PROPERTY] ");
+            this.SetProperty(student, "Name", "Shree");
+
+            Console.Write("\n[UPDATING AGE PROPERTY] ");
+            this.SetProperty(student, "Age", 22);
+
+            Console.WriteLine("\n[AFTER MODIFICATION]");
+            this.DisplayProperties(student);
+
+            Console.WriteLine(new string('=', 50));
+        }
+
+        private void DisplayProperties(object obj)
         {
             Type type = obj.GetType();
 
@@ -22,7 +51,7 @@
             }
         }
 
-        public void SetProperty(object obj, string propertyName, object? newValue)
+        private void SetProperty(object obj, string propertyName, object? newValue)
         {
             Type type = obj.GetType();
 
@@ -55,23 +84,6 @@
             {
                 Console.WriteLine($"Error updating property: {ex.Message}");
             }
-        }
-
-        public void RunTask()
-        {
-            Student student = new Student("Shubha", 20);
-
-            Console.WriteLine("Before modification: ");
-            this.DisplayProperties(student);
-
-            Console.WriteLine("Updating name: ");
-            this.SetProperty(student, "Name", "Shree");
-
-            Console.WriteLine("Updating age: ");
-            this.SetProperty(student, "Age", 22);
-
-            Console.WriteLine("After modification: ");
-            this.DisplayProperties(student);
         }
     }
 }
