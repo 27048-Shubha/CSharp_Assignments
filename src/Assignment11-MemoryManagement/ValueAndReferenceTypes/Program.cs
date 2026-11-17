@@ -17,23 +17,23 @@
         }
 
         /// <summary>
-        /// Displays stucture and class contents to the file.
+        /// Displays structure and class contents to the file.
         /// </summary>
         /// <param name="person1">A structure representing person</param>
-        /// <param name="person2">A class representingperson</param>
+        /// <param name="person2">A class representing a person</param>
         public static void Display(PersonStruct person1, PersonClass person2)
         {
-            Program.DisplayDash();
+            DisplayDash();
             Console.WriteLine("Contents instide PersonStruct:");
             Console.WriteLine($"Name: {person1.Name}\nAge:{person1.Age}");
 
-            Program.DisplayDash();
+            DisplayDash();
             Console.WriteLine("Contents instide PersonClass:");
             Console.WriteLine($"Name: {person2.Name}\nAge:{person2.Age}");
         }
 
         /// <summary>
-        /// Modifies stucture and class contents.
+        /// Modifies structure and class contents.
         /// </summary>
         /// <param name="person1">A structure representing person</param>
         /// <param name="person2">A class representingperson</param>
@@ -51,17 +51,17 @@
         /// </summary>
         public static void Main()
         {
-            PersonStruct person1 = new PersonStruct(Program._name, Program._age);
-            PersonClass person2 = new PersonClass(Program._name, Program._age);
+            PersonStruct person1 = new PersonStruct(_name, _age);
+            PersonClass person2 = new PersonClass(_name, _age);
 
             Console.WriteLine("\nContents before modifying:");
-            Program.Display(person1, person2);
+            Display(person1, person2);
 
-            Program.Modify(person1, person2);
+            Modify(person1, person2);
 
-            Program.DisplayDash();
+            DisplayDash();
             Console.WriteLine("\nContents after modifying:");
-            Program.Display(person1, person2);
+            Display(person1, person2);
         }
     }
 }

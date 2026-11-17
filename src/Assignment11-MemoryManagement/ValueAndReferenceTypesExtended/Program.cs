@@ -51,8 +51,8 @@
         /// </summary>
         public static void Main()
         {
-            Program.CreateArray();
-            Program.Calculate();
+            CreateArray();
+            Calculate();
         }
     }
 }

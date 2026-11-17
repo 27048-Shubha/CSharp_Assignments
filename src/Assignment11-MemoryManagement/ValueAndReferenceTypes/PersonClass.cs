@@ -4,7 +4,7 @@
 public class PersonClass
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="PersonClass"/> struct.
+    /// Initializes a new instance of the <see cref="PersonClass"/> class.
     /// </summary>
     /// <param name="name">Name of the person.</param>
     /// <param name="age">Age of the person.</param>

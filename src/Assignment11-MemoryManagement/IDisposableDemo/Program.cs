@@ -14,11 +14,11 @@
         /// </summary>
         public static void Main()
         {
-            Console.WriteLine($"Content to be written to the file: {Program._content}");
+            Console.WriteLine($"Content to be written to the file: {_content}");
 
-            using (FileHandler handler1 = new FileHandler())
+            using (FileHandler handler = new FileHandler())
             {
-                handler1.WriteFile("Hello world!");
+                handler.WriteFile("Hello world!");
             }
 
             using StreamReader reader = new StreamReader("./TextFile.txt");
