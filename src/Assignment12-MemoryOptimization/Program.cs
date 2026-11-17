@@ -10,8 +10,8 @@
         /// </summary>
         public static void Main()
         {
-            MemoryEater me = new MemoryEater();
-            me.Allocate();
+            MemoryEater memoryEater = new ();
+            memoryEater.Allocate();
             Console.WriteLine("Program ended");
         }
     }
