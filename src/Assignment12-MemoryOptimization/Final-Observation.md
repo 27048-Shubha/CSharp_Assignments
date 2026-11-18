@@ -65,6 +65,39 @@ Here,
 - Heap usage stabilizes instead of growing indefinitely.
 
 ---
+## [Used] Solution 3: Clear allocated memory on reaching a threshold.
+
+```
+while(true)
+{
+    this._memAlloc.Add(new int[1000]);
+
+    if (this._memAlloc.Count > 100)
+    {
+        this._memAlloc.Clear();
+    }
+
+    // Assume memAlloc variable is used only within this loop
+    Thread.Sleep(10);
+}
+```
+Here,
+
+- The allocated memory is freed once exceeds threshold.
+
+### Observed actual output:
+```
+Time taken by unoptimized code: 16195 milliseconds
+Memory used by unoptimized code: 4072072 bytes
+======================================================
+Time taken by unoptimized code: 16179 milliseconds
+Memory used by unoptimized code: 363952 bytes
+======================================================
+Time consumption difference: 16 milliseconds
+Memory usage difference: 3708120 bytes
+```
+---
+
 Common Assumption: 
 
 - The infinite loop itself is not the root cause of the issue as it doesn't continuously consume memory because no objects are being accumulated.
