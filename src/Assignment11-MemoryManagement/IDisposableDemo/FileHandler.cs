@@ -9,10 +9,20 @@ namespace IDisposableDemo.FileHandler
     /// <summary>
     /// Manages file operations.
     /// </summary>
-    public class FileHandler : IDisposable
+    public sealed class FileHandler : IDisposable
     {
-        private readonly string _filePath = "./TextFile.txt";
-        private StreamWriter? _writer = null;
+        private readonly string _filePath = Path.Combine(AppContext.BaseDirectory, "TextFile.txt");
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Reads text inside the file.
+        /// </summary>
+        /// <returns>Content read from the file.</returns>
+        public string ReadFile()
+        {
+            using StreamReader reader = new StreamReader(this._filePath);
+            return reader.ReadToEnd();
+        }
 
         /// <summary>
         /// Writes text inside the file.
@@ -20,8 +30,15 @@ namespace IDisposableDemo.FileHandler
         /// <param name="text">Text to be written into the file.</param>
         public void WriteFile(string text)
         {
-            this._writer = new StreamWriter(this._filePath);
-            this._writer.WriteLine(text);
+            if (this._disposed)
+            {
+                return;
+            }
+
+            using (StreamWriter writer = new StreamWriter(this._filePath))
+            {
+                writer.WriteLine(text);
+            }
         }
 
         /// <summary>
@@ -29,7 +46,12 @@ namespace IDisposableDemo.FileHandler
         /// </summary>
         public void Dispose()
         {
-            this._writer.Dispose();
+            if (this._disposed)
+            {
+                return;
+            }
+
+            this._disposed = true;
         }
     }
 }

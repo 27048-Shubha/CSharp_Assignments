@@ -19,10 +19,8 @@
             using (FileHandler handler = new FileHandler())
             {
                 handler.WriteFile("Hello world!");
+                Console.WriteLine($"Content read from the file: {handler.ReadFile()}");
             }
-
-            using StreamReader reader = new StreamReader("./TextFile.txt");
-            Console.WriteLine($"Content read from the file: {reader.ReadLine()}");
         }
     }
 }

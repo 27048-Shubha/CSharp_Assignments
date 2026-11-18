@@ -29,20 +29,21 @@
         {
             Console.WriteLine("Running Calculate()...");
 
-            int number1 = 10;
-            int number2 = 10;
-            int number3 = 10;
-            int number4 = 10;
-            int number5 = 10;
-            int number6 = 10;
-            int number7 = 10;
-            int number8 = 10;
-            int number9 = 10;
-            int number10 = 10;
+            Span<int> numbers = stackalloc int[1024];
 
-            int result = number1 + number2 + number3 + number4 + number5 + number6 + number7 + number8 + number9 + number10;
+            int result = 0;
 
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                numbers[i] = 10;
+                result += numbers[i];
+            }
+
+            Console.WriteLine("-----------------------------------------");
             Console.WriteLine($"Result: {result}");
+
+            Console.WriteLine("=========================================");
+            Console.WriteLine("PRESS ANY KEY TO CONTINUE.");
             Console.ReadLine();
         }
 

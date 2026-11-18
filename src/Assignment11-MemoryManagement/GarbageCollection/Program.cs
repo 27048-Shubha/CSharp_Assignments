@@ -34,6 +34,9 @@
             GC.Collect();
 
             Console.WriteLine("Garbage collection completed.");
+
+            Console.WriteLine("=========================================");
+            Console.WriteLine("PRESS ANY KEY TO CONTINUE.");
             Console.ReadLine();
         }
 
