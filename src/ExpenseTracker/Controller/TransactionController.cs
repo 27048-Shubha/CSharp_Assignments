@@ -46,6 +46,11 @@ namespace ExpenseTracker.Controller
                 this._console.DisplayMainMenu();
                 this._choice = this._console.GetChoice();
 
+                if (!this._choice.HasValue)
+                {
+                    continue;
+                }
+
                 switch ((Enums.MainMenu)this._choice)
                 {
                     case Enums.MainMenu.Add:
@@ -134,6 +139,8 @@ namespace ExpenseTracker.Controller
                         return;
 
                     default:
+                        this._console.DisplayMessage(
+                            "Invalid operation selected.");
                         break;
                 }
             }
@@ -157,6 +164,14 @@ namespace ExpenseTracker.Controller
             }
 
             this._currentType = this._console.ChooseCategory();
+
+            if (this._currentType == TransactionType.Invalid)
+            {
+                this._console.DisplayMessage(
+                    "Invalid transaction type selected.");
+
+                return;
+            }
 
             try
             {
@@ -205,11 +220,14 @@ namespace ExpenseTracker.Controller
             {
                 case Enums.SearchBy.TransactionId:
                     string? transactionId = this._console.GetTransactionId();
-                    TransactionDto? transactionDto = this._incomeService.Get(transactionId);
+
+                    TransactionDto? transactionDto =
+                        this._incomeService.Get(transactionId) ??
+                        this._expenseService.Get(transactionId);
+
                     if (transactionDto is null)
                     {
                         this._console.DisplayMessage("Transaction doesn't exist!");
-                        return;
                     }
                     else
                     {
@@ -257,7 +275,28 @@ namespace ExpenseTracker.Controller
         /// </summary>
         public void SortTransaction()
         {
-            this._service = this._incomeService;
+            this._currentType = this._console.ChooseCategory();
+            if (this._currentType == TransactionType.Invalid)
+            {
+                this._console.DisplayMessage("Invalid transaction type selected.");
+
+                return;
+            }
+
+            if (this._currentType == TransactionType.Income)
+            {
+                this._service = this._incomeService;
+            }
+            else
+            {
+                this._service = this._expenseService;
+            }
+
+            if (this.IsEmpty())
+            {
+                this._console.DisplayEmpty();
+                return;
+            }
 
             Enums.SortBy option = this._console.ChooseSortBy();
             Enums.Order order = this._console.ChooseOrderBy();
@@ -265,22 +304,24 @@ namespace ExpenseTracker.Controller
             switch (option)
             {
                 case Enums.SortBy.Amount:
-                    IReadOnlyList<TransactionDto> sortedByAmount = this._service.SortByAmount(order);
-                    this._console.DisplayTransactionList(sortedByAmount);
+                    this._console.DisplayTransactionList(
+                        this._service.SortByAmount(order));
                     break;
 
                 case Enums.SortBy.Date:
-                    IReadOnlyList<TransactionDto> sortedByDate = this._service.SortByDate(order);
-                    this._console.DisplayTransactionList(sortedByDate);
+                    this._console.DisplayTransactionList(
+                        this._service.SortByDate(order));
                     break;
 
                 case Enums.SortBy.TransactionId:
-                    IReadOnlyList<TransactionDto> sortedById = this._service.SortByTransactionId(order);
-                    this._console.DisplayTransactionList(sortedById);
+                    this._console.DisplayTransactionList(
+                        this._service.SortByTransactionId(order));
+                    break;
+
+                default:
+                    this._console.DisplayMessage("Invalid sort option.");
                     break;
             }
-
-            this.View();
         }
 
         /// <summary>
@@ -289,6 +330,13 @@ namespace ExpenseTracker.Controller
         public void ManageTransaction()
         {
             this._currentType = this._console.ChooseCategory();
+
+            if (this._currentType == Enums.TransactionType.Invalid)
+            {
+                this._console.DisplayMessage("Invalid transaction type selected.");
+
+                return;
+            }
 
             if (this._currentType == Enums.TransactionType.Income)
             {
@@ -353,20 +401,33 @@ namespace ExpenseTracker.Controller
 
             this._console.DisplayTransaction(transaction);
 
-            if (this._currentType == TransactionType.Income)
+            try
             {
-                IncomeDto dto = this._console.EditIncome(transaction);
+                if (this._currentType ==
+                    TransactionType.Income)
+                {
+                    IncomeDto dto = this._console.EditIncome(transaction);
 
-                this._incomeService.Edit(transactionId, dto);
+                    this._incomeService.Edit(transactionId, dto);
+                }
+                else
+                {
+                    ExpenseDto dto = this._console.EditExpense(transaction);
+
+                    this._expenseService.Edit(transactionId, dto);
+                }
             }
-            else
+            catch (ArgumentException ex)
             {
-                ExpenseDto dto = this._console.EditExpense(transaction);
+                this._console.DisplayMessage(ex.Message);
 
-                this._expenseService.Edit(transactionId, dto);
+                return;
             }
-
-            this._console.DisplaySuccess("Update", transactionId);
+            catch (InvalidOperationException ex)
+            {
+                this._console.DisplayMessage(ex.Message);
+                return;
+            }
         }
 
         /// <summary>

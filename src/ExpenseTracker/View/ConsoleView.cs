@@ -16,9 +16,15 @@
         /// </summary>
         public void DisplayStorageOptions()
         {
-            Console.WriteLine("Choose\n" +
-                "1. In memory storage\n" +
-                "2. Json storage");
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("           STORAGE SELECTION");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Console.WriteLine("1. InMemory");
+            Console.WriteLine("2. JsonFile");
+            Console.WriteLine();
+            Console.Write("Enter storage type: ");
         }
 
         /// <summary>
@@ -26,14 +32,18 @@
         /// </summary>
         public void DisplayMainMenu()
         {
-            Console.WriteLine("Welcome to Expense Tracker\n" +
-                "Enter\n" +
-                "1. Add Transaction\n" +
-                "2. Manage Transaction\n" +
-                "3. Search Transaction\n" +
-                "4. Sort\n" +
-                "5. Summary\n" +
-                "6. Exit");
+            Console.WriteLine("========================================");
+            Console.WriteLine("            EXPENSE TRACKER");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Console.WriteLine("1. Add Transaction");
+            Console.WriteLine("2. Manage Transaction");
+            Console.WriteLine("3. Search Transaction");
+            Console.WriteLine("4. Sort Transaction");
+            Console.WriteLine("5. Summary");
+            Console.WriteLine("6. Exit");
+            Console.WriteLine();
+            Console.WriteLine("========================================");
         }
 
         /// <summary>
@@ -42,17 +52,29 @@
         /// <returns>Value indicating user's choice.</returns>
         public Enums.Storage ChooseStorageChoice()
         {
-            for (int attempt = 1; attempt <= 3; attempt++)
+            const int maxAttempts = 3;
+
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
             {
-                if (Enum.TryParse<Storage>(Console.ReadLine(), true, out var storageType))
+                string input = Console.ReadLine()?.Trim() ?? string.Empty;
+
+                if (Enum.TryParse<Enums.Storage>(input, true, out var storageType))
                 {
                     return storageType;
                 }
 
-                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+                int attemptsLeft = maxAttempts - attempt;
+
+                if (attemptsLeft > 0)
+                {
+                    this.DisplayInvalidInput(
+                        $"Invalid storage type. Valid options are " +
+                        $"'InMemory' or 'JsonFile'. " +
+                        $"Attempts remaining: {attemptsLeft}");
+                }
             }
 
-            this.DisplayInvalidInput("Kindly enter valid choice as input!");
+            this.DisplayInvalidInput("Maximum retry limit reached. Defaulting to InMemory storage.");
 
             return Enums.Storage.InMemory;
         }
@@ -63,23 +85,31 @@
         /// <returns>Value indicating user's choice.</returns>
         public ManageTransaction ManageTransactionMenu()
         {
-            Console.WriteLine("Enter\n" +
-                "1. View\n" +
-                "2. Update\n" +
-                "3. Delete\n" +
-                "4. Back\n");
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("       MANAGE TRANSACTIONS");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Console.WriteLine("1. View");
+            Console.WriteLine("2. Update");
+            Console.WriteLine("3. Delete");
+            Console.WriteLine("4. Back");
+            Console.WriteLine();
 
             for (int attempt = 1; attempt <= 3; attempt++)
             {
-                if (Enum.TryParse<ManageTransaction>(Console.ReadLine(), true, out var category))
+                if (Enum.TryParse<ManageTransaction>(
+                    Console.ReadLine(),
+                    true,
+                    out var category))
                 {
                     return category;
                 }
 
-                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
-            }
+                int attemptsLeft = 3 - attempt;
 
-            this.DisplayInvalidInput("Kindly enter valid choice as input!");
+                this.DisplayInvalidInput($"Invalid choice. Attempts remaining: {attemptsLeft}");
+            }
 
             return Enums.ManageTransaction.Invalid;
         }
@@ -94,6 +124,7 @@
                 "1. Amount\n" +
                 "2. Transaction Id\n" +
                 "3. Date");
+
             if (Enum.TryParse<SortBy>(Console.ReadLine(), true, out var category))
             {
                 return category;
@@ -192,12 +223,14 @@
             for (int attempt = 1; attempt <= 3; attempt++)
             {
                 input = Console.ReadLine() ?? string.Empty;
-                if (InputValidator.IsValidInt(input, out choice))
+                if (InputValidator.IsValidInt(input, out choice) && Enum.IsDefined(typeof(MainMenu), choice))
                 {
                     return choice;
                 }
 
-                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+                int attemptsLeft = 3 - attempt;
+
+                this.DisplayInvalidInput($"You have {attemptsLeft} attempt(s) left!");
             }
 
             this.DisplayInvalidInput("Kindly enter valid choice as input!");
@@ -215,12 +248,14 @@
             for (int attempt = 1; attempt <= 3; attempt++)
             {
                 input = Console.ReadLine() ?? string.Empty;
-                if (!string.IsNullOrEmpty(input))
+                if (!string.IsNullOrWhiteSpace(input))
                 {
-                    return input;
+                    return input.Trim();
                 }
 
-                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+                int attemptsLeft = 3 - attempt;
+
+                this.DisplayInvalidInput($"You have {attemptsLeft} attempt(s) left!");
             }
 
             this.DisplayInvalidInput("Kindly enter valid choice as input!");
@@ -239,7 +274,7 @@
             decimal amount;
             for (int attempt = 1; attempt <= 3; attempt++)
             {
-                input = Console.ReadLine().Trim() ?? string.Empty;
+                input = Console.ReadLine()?.Trim() ?? string.Empty;
                 if (isEditMode && string.IsNullOrEmpty(input))
                 {
                     return null;
@@ -250,7 +285,9 @@
                     return amount;
                 }
 
-                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+                int attemptsLeft = 3 - attempt;
+
+                this.DisplayInvalidInput($"You have {attemptsLeft} attempt(s) left!");
             }
 
             this.DisplayInvalidInput("Amount should be a positive value!");
@@ -281,7 +318,9 @@
                     return date;
                 }
 
-                this.DisplayInvalidInput($"You have {attempt}/3 attempts left!");
+                int attemptsLeft = 3 - attempt;
+
+                this.DisplayInvalidInput($"You have {attemptsLeft} attempt(s) left!");
             }
 
             this.DisplayInvalidInput("Date should be in the format: DD/MM/YYYY !");
@@ -350,41 +389,65 @@
         /// <param name="totalIncome">Total income amount.</param>
         /// <param name="totalExpense">Total expense amount.</param>
         /// <param name="balance">The balance amount.</param>
-        public void DisplaySummary(decimal totalIncome, decimal totalExpense, decimal balance)
+        public void DisplaySummary(
+    decimal totalIncome,
+    decimal totalExpense,
+    decimal balance)
         {
-            Console.WriteLine("=== Summary ===");
-            Console.WriteLine($"Total Income: {totalIncome}");
-            Console.WriteLine($"Total Expense: {totalExpense}");
-            Console.WriteLine($"Balance: {balance}");
+            Console.WriteLine();
+            Console.WriteLine(
+                "========================================");
+            Console.WriteLine(
+                "               SUMMARY");
+            Console.WriteLine(
+                "========================================");
+            Console.WriteLine();
+
+            Console.WriteLine(
+                $"Total Income  : {totalIncome}");
+
+            Console.WriteLine(
+                $"Total Expense : {totalExpense}");
+
+            Console.WriteLine(
+                $"Balance       : {balance}");
+
+            Console.WriteLine();
         }
 
         /// <summary>
-        /// Displays chart to the console.
+        /// Displays transaction summary in chart format.
         /// </summary>
-        /// <param name="totalIncome">Total income generated.</param>
-        /// <param name="totalExpense">Total expense generated.</param>
+        /// <param name="totalIncome">Total income</param>
+        /// <param name="totalExpense">Total expense</param>
         public void DisplayChart(decimal totalIncome, decimal totalExpense)
         {
-            var chart = new BreakdownChart().Width(60).AddItem("Income", (double)totalIncome, ChartColor.Green).AddItem("Expense", (double)totalExpense, ChartColor.Red);
+            if (totalIncome == 0 && totalExpense == 0)
+            {
+                Console.WriteLine(
+                    "No transactions available to display chart.");
+
+                return;
+            }
+
+            var chart = new BreakdownChart()
+                .Width(60)
+                .AddItem("Income", (double)totalIncome, ChartColor.Green)
+                .AddItem("Expense", (double)totalExpense, ChartColor.Red);
 
             AnsiConsole.Write(chart);
 
-            AnsiConsole.MarkupLine(
-                    $"Balance:[/] {totalIncome - totalExpense:C}");
+            decimal balance = totalIncome - totalExpense;
 
-            Thread.Sleep(1000); // 1 min delay to show the chart to the users.
-        }
-
-        /// <summary>
-        /// Displays a list of transactions with their identifier, date, amount, and category or source.
-        /// </summary>
-        /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList(
-            IReadOnlyList<TransactionDto> transactions)
-        {
-            foreach (TransactionDto transaction in transactions)
+            if (balance >= 0)
             {
-                this.DisplayTransaction(transaction);
+                AnsiConsole.MarkupLine(
+                    $"[green]Balance:[/] {balance}");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine(
+                    $"[red]Balance:[/] {balance}");
             }
         }
 
@@ -392,8 +455,32 @@
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList(
-            IReadOnlyList<IncomeDto> transactions)
+        public void DisplayTransactionList(IReadOnlyList<TransactionDto> transactions)
+        {
+            var table = new Table();
+
+            table.AddColumn("Transaction Id");
+            table.AddColumn("Date");
+            table.AddColumn("Amount");
+            table.AddColumn("Category / Source");
+
+            foreach (TransactionDto transaction in transactions)
+            {
+                table.AddRow(
+                    transaction.TransactionId,
+                    transaction.Date.ToString(),
+                    transaction.Amount.ToString(),
+                    transaction.CategoryOrSource);
+            }
+
+            AnsiConsole.Write(table);
+        }
+
+        /// <summary>
+        /// Displays a list of transactions with their identifier, date, amount, and category or source.
+        /// </summary>
+        /// <param name="transactions">The transactions to display.</param>
+        public void DisplayTransactionList(IReadOnlyList<IncomeDto> transactions)
         {
             foreach (IncomeDto transaction in transactions)
             {
@@ -405,8 +492,7 @@
         /// Displays a list of transactions with their identifier, date, amount, and category or source.
         /// </summary>
         /// <param name="transactions">The transactions to display.</param>
-        public void DisplayTransactionList(
-            IReadOnlyList<ExpenseDto> transactions)
+        public void DisplayTransactionList(IReadOnlyList<ExpenseDto> transactions)
         {
             foreach (ExpenseDto transaction in transactions)
             {
@@ -457,11 +543,14 @@
         }
 
         /// <summary>
-        /// Displays a goodbye message when the application exits.
+        /// Displays a exit message when the application exits.
         /// </summary>
         public void DisplayExit()
         {
-            Console.WriteLine("Thank you for using Expense Tracker!");
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine(" Thank You For Using Expense Tracker");
+            Console.WriteLine("========================================");
         }
 
         /// <summary>
@@ -471,7 +560,9 @@
         /// <param name="transactionId">The identifier of the affected transaction.</param>
         public void DisplaySuccess(string operation, string transactionId)
         {
-            Console.WriteLine($"{operation} of {transactionId} is Successful!");
+            Console.WriteLine();
+            Console.WriteLine(
+                $"{operation} successful : {transactionId}");
         }
 
         /// <summary>
@@ -488,7 +579,9 @@
         /// </summary>
         public void DisplayEmpty()
         {
-            Console.WriteLine("No Transactions made!");
+            Console.WriteLine();
+            Console.WriteLine("No transactions available.");
+            Console.WriteLine("Add a transaction to get started.");
         }
 
         /// <summary>
@@ -512,11 +605,40 @@
         /// </returns>
         public IncomeDto EditIncome(TransactionDto transaction)
         {
+            IncomeSource currentSource =
+                GetCurrentIncomeSource(transaction.CategoryOrSource);
+
+            Console.WriteLine("\nPress Enter to keep existing values.");
+
+            Console.WriteLine($"Current Amount : {transaction.Amount}");
+            Console.WriteLine($"Current Date   : {transaction.Date}");
+            Console.WriteLine($"Current Source : {currentSource}");
+            Console.WriteLine();
+
+            decimal amount =
+                this.GetAmount(true) ?? transaction.Amount;
+
+            DateOnly date =
+                this.GetDate(true) ?? transaction.Date;
+
+            this.ListIncomeSource();
+
+            Console.Write($"\nSource ({currentSource}) : ");
+
+            string? input = Console.ReadLine()?.Trim();
+
+            IncomeSource source = currentSource;
+
+            if (!string.IsNullOrWhiteSpace(input) && Enum.TryParse(input, true, out IncomeSource parsedSource))
+            {
+                source = parsedSource;
+            }
+
             return new IncomeDto
             {
-                Amount = this.GetAmount(true) ?? transaction.Amount,
-                Date = this.GetDate(true) ?? transaction.Date,
-                Source = this.GetIncomeSource(),
+                Amount = amount,
+                Date = date,
+                Source = source,
             };
         }
 
@@ -532,11 +654,37 @@
         /// </returns>
         public ExpenseDto EditExpense(TransactionDto transaction)
         {
+            ExpenseCategory currentCategory = GetCurrentExpenseCategory(transaction.CategoryOrSource);
+
+            Console.WriteLine("\nPress Enter to keep existing values.");
+
+            Console.WriteLine($"Current Amount   : {transaction.Amount}");
+            Console.WriteLine($"Current Date     : {transaction.Date}");
+            Console.WriteLine($"Current Category : {currentCategory}");
+            Console.WriteLine();
+
+            decimal amount = this.GetAmount(true) ?? transaction.Amount;
+
+            DateOnly date = this.GetDate(true) ?? transaction.Date;
+
+            this.ListExpenseCategory();
+
+            Console.Write($"\nCategory ({currentCategory}) : ");
+
+            string? input = Console.ReadLine()?.Trim();
+
+            ExpenseCategory category = currentCategory;
+
+            if (!string.IsNullOrWhiteSpace(input) && Enum.TryParse(input, true, out ExpenseCategory parsedCategory))
+            {
+                category = parsedCategory;
+            }
+
             return new ExpenseDto
             {
-                Amount = this.GetAmount(true) ?? transaction.Amount,
-                Date = this.GetDate(true) ?? transaction.Date,
-                Category = this.GetExpenseCategory(),
+                Amount = amount,
+                Date = date,
+                Category = category,
             };
         }
 
@@ -568,8 +716,7 @@
         /// The parsed expense category if successful; otherwise,
         /// <see cref="ExpenseCategory.Others"/>.
         /// </returns>
-        private static ExpenseCategory GetCurrentExpenseCategory(
-            string value)
+        private static ExpenseCategory GetCurrentExpenseCategory(string value)
         {
             return Enum.TryParse(
                 value,
@@ -589,8 +736,7 @@
         /// The parsed income source if successful; otherwise,
         /// <see cref="IncomeSource.Others"/>.
         /// </returns>
-        private static IncomeSource GetCurrentIncomeSource(
-    string value)
+        private static IncomeSource GetCurrentIncomeSource(string value)
         {
             return Enum.TryParse(
                 value,

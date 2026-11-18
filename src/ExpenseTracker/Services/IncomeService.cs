@@ -334,10 +334,19 @@
         /// </returns>
         private bool TryGetIncome(string transactionId, out Income? income)
         {
-            Guid id = this._repository.GetId(transactionId);
-            income = this._repository.Get(id);
+            income = null;
 
-            return income is not null;
+            try
+            {
+                Guid id = this._repository.GetId(transactionId);
+
+                income = this._repository.Get(id);
+                return income is not null;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

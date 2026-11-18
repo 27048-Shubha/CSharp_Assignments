@@ -26,12 +26,9 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     }
 
     /// <summary>
-    /// Converts an <see cref="Expense"/> model into a
-    /// <see cref="TransactionDto"/> for display.
+    /// Converts an <see cref="Expense"/> model into a <see cref="TransactionDto"/> for display.
     /// </summary>
-    /// <param name="expense">
-    /// The expense transaction to convert.
-    /// </param>
+    /// <param name="expense">The expense transaction to convert.</param>
     /// <returns>
     /// A DTO containing the expense identifier, amount, date, and category.
     /// </returns>
@@ -47,12 +44,9 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     }
 
     /// <summary>
-    /// Converts an <see cref="Expense"/> model into a
-    /// <see cref="TransactionDto"/> for display.
+    /// Converts an <see cref="Expense"/> model into a <see cref="TransactionDto"/> for display.
     /// </summary>
-    /// <param name="expense">
-    /// The expense transaction to convert.
-    /// </param>
+    /// <param name="expense">The expense transaction to convert.</param>
     /// <returns>
     /// A DTO containing the expense identifier, amount, date, and category.
     /// </returns>
@@ -113,20 +107,16 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// Thrown when the amount is zero or negative, or when the date is in
     /// the future.
     /// </exception>
-    public static void ValidateAmountAndDate(
-        decimal amount,
-        DateOnly date)
+    public static void ValidateAmountAndDate(decimal amount, DateOnly date)
     {
         if (amount <= 0)
         {
-            throw new ArgumentException(
-                "Amount must be greater than zero.");
+            throw new ArgumentException("Amount must be greater than zero.");
         }
 
         if (date > DateOnly.FromDateTime(DateTime.Today))
         {
-            throw new ArgumentException(
-                "Future dates are not allowed.");
+            throw new ArgumentException("Future dates are not allowed.");
         }
     }
 
@@ -226,21 +216,11 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <summary>
     /// Updates an existing expense transaction.
     /// </summary>
-    /// <param name="transactionId">
-    /// The display identifier of the expense transaction to update.
-    /// </param>
-    /// <param name="dto">
-    /// The updated expense values.
-    /// </param>
-    /// <exception cref="InvalidOperationException">
-    /// Thrown when an expense with the specified identifier is not found.
-    /// </exception>
-    /// <exception cref="ArgumentException">
-    /// Thrown when the updated expense values are invalid.
-    /// </exception>
-    public void Edit(
-        string transactionId,
-        ExpenseDto dto)
+    /// <param name="transactionId"> The display identifier of the expense transaction to update.</param>
+    /// <param name="dto"> The updated expense values.</param>
+    /// <exception cref="InvalidOperationException">Thrown when an expense with the specified identifier is not found.</exception>
+    /// <exception cref="ArgumentException"> Thrown when the updated expense values are invalid.</exception>
+    public void Edit(string transactionId, ExpenseDto dto)
     {
         Validate(dto);
 
@@ -352,24 +332,26 @@ internal sealed class ExpenseService : ITransactionService, ITransactionUpdateSe
     /// <summary>
     /// Attempts to retrieve an expense transaction using its display identifier.
     /// </summary>
-    /// <param name="transactionId">
-    /// The display identifier of the expense transaction.
-    /// </param>
-    /// <param name="expense">
-    /// When this method returns, contains the matching expense transaction if found;
-    /// otherwise, <see langword="null"/>.
-    /// </param>
+    /// <param name="transactionId"> The display identifier of the expense transaction.</param>
+    /// <param name="expense">When this method returns, contains the matching expense transaction if found, otherwise, <see langword="null"/>.</param>
     /// <returns>
     /// <see langword="true"/> if the expense transaction exists;
     /// otherwise, <see langword="false"/>.
     /// </returns>
-    private bool TryGetExpense(
-        string transactionId,
-        out Expense? expense)
+    private bool TryGetExpense(string transactionId, out Expense? expense)
     {
-        Guid id = this._repository.GetId(transactionId);
-        expense = this._repository.Get(id);
+        expense = null;
 
-        return expense != null;
+        try
+        {
+            Guid id = this._repository.GetId(transactionId);
+            expense = this._repository.Get(id);
+
+            return expense is not null;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
