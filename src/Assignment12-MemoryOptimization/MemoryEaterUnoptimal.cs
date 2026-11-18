@@ -9,7 +9,7 @@
     /// <summary>
     /// Class representing a memory eater to demonstrate memory optimization.
     /// </summary>
-    public class MemoryEaterUnoptimized
+    public class MemoryEaterUnoptimal
     {
         /// <summary>
         /// List to demonstrate memory optimization.

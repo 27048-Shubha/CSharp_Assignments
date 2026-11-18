@@ -18,7 +18,7 @@
             long before = GC.GetTotalMemory(true);
             Console.WriteLine("Running unoptimized code...");
             stopwatch.Start();
-            MemoryEaterUnoptimized unOptimizedMemoryHandler = new ();
+            MemoryEaterUnoptimal unOptimizedMemoryHandler = new ();
             unOptimizedMemoryHandler.Allocate();
             stopwatch.Stop();
             long after = GC.GetTotalMemory(true);
