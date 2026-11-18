@@ -7,7 +7,16 @@
     /// </summary>
     internal class MultiLayeredAsyncAwaitDemonstrator
     {
-        private readonly HttpClient _client = new ();
+        private readonly HttpClient _httpClient;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MultiLayeredAsyncAwaitDemonstrator"/> class.
+        /// </summary>
+        /// <param name="httpClient">An object containing instance of <see cref="HttpClient"/> class</param>
+        internal MultiLayeredAsyncAwaitDemonstrator(HttpClient httpClient)
+        {
+            this._httpClient = httpClient;
+        }
 
         /// <summary>
         /// Runs task 4 operations.
@@ -56,7 +65,7 @@
 
             Console.WriteLine($"Method B: Calling web service");
 
-            string response = await this._client.GetStringAsync(url);
+            string response = await this._httpClient.GetStringAsync(url);
 
             Console.WriteLine($"Method B: Web service response received.");
 

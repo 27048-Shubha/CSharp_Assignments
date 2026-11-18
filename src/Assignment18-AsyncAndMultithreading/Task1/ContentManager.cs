@@ -5,7 +5,16 @@
     /// </summary>
     public class ContentManager
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContentManager"/> class.
+        /// </summary>
+        /// <param name="httpClient">An object containing instance of <see cref="HttpClient"/> class</param>
+        internal ContentManager(HttpClient httpClient)
+        {
+            this._httpClient = httpClient;
+        }
 
         /// <summary>
         /// Manages exectuion of task 1 demonstration.

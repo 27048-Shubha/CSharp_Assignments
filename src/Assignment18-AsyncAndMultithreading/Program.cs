@@ -43,7 +43,7 @@
                 switch (choice)
                 {
                     case "1":
-                        await new ContentManager()
+                        await new ContentManager(new HttpClient())
                             .Run();
                         break;
 
@@ -58,7 +58,7 @@
                         break;
 
                     case "4":
-                        await new MultiLayeredAsyncAwaitDemonstrator()
+                        await new MultiLayeredAsyncAwaitDemonstrator(new HttpClient())
                             .Run();
                         break;
 
