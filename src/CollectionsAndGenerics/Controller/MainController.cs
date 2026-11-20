@@ -90,37 +90,5 @@
             }
             while (true);
         }
-
-        /// <summary>
-        /// Initializes list operation.
-        /// </summary>
-        public void InitializeList()
-        {
-            new ListController(this._listService).Run();
-        }
-
-        /// <summary>
-        /// Initializes stack operation.
-        /// </summary>
-        public void InitializeStack()
-        {
-            new StackController(this._stackService).Run();
-        }
-
-        /// <summary>
-        /// Initializes queue operation.
-        /// </summary>
-        public void InitializeQueue()
-        {
-            new QueueController(this._queueService).Run();
-        }
-
-        /// <summary>
-        /// Initializes dictionary operation.
-        /// </summary>
-        public void InitializeDict()
-        {
-            new DictController(this._dictService).Run();
-        }
     }
 }

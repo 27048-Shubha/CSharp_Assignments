@@ -46,7 +46,7 @@ namespace CollectionsAndGenerics.Controller
 
         private void AddStudentDetails()
         {
-            string[] studentNames = { "Shubha", "Bob", "Ferb", "Finneas", "Patrick"};
+            string[] studentNames = { "Shubha", "Bob", "Ferb", "Finneas", "Patrick" };
             int[] studentGrades = { 9, 10, 7, 8, 9 };
 
             for (int i = 0; i < studentNames.Length; i++)
@@ -59,7 +59,7 @@ namespace CollectionsAndGenerics.Controller
         {
             IReadOnlyDictionary<string, int> students = this._service.GetAll();
             ConsoleView.DisplayMessage("Students and Grades:");
-            ConsoleView.DisplayMessage( "--------------------------------------------------------");
+            ConsoleView.DisplayMessage("--------------------------------------------------------");
 
             ConsoleView.DisplayDictionary(students);
             ConsoleView.DisplayMessage("\n");

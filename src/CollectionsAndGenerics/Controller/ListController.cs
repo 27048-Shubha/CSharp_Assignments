@@ -28,7 +28,7 @@
             this.DisplayHeader();
             this.DisplayList();
 
-            ConsoleView.DisplayMessage("\n---------Adding five book titles to the list---------");
+            ConsoleView.DisplayMessage("\n---------Adding five book items to the list---------");
 
             this.AddSampleBooks();
             this.DisplayList();
@@ -77,15 +77,15 @@
             }
         }
 
-        private void CheckBook(string title)
+        private void CheckBook(string item)
         {
-            if (this._service.IsExists(title))
+            if (this._service.IsExists(item))
             {
-                ConsoleView.DisplayMessage($"{title} exists in the list");
+                ConsoleView.DisplayMessage($"{item} exists in the list");
             }
             else
             {
-                ConsoleView.DisplayMessage($"{title} does not exist in the list");
+                ConsoleView.DisplayMessage($"{item} does not exist in the list");
             }
         }
     }

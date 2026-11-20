@@ -5,18 +5,18 @@
     /// </summary>
     /// <typeparam name="TKey">Datatype of key elements of dictionary.</typeparam>
     /// <typeparam name="TValue">Datatype of value elements of dictionary.</typeparam>
-    public class DictionaryOperationsService <TKey, TValue>
+    public class DictionaryOperationsService<TKey, TValue>
     {
-        private readonly Dictionary<TKey, TValue> _students = new Dictionary<TKey, TValue>();
+        private readonly Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
 
         /// <summary>
         /// Checks whether the key exists in the dictionary
         /// </summary>
-        /// <param name="title">Key to be searched</param>
+        /// <param name="item">Key to be searched</param>
         /// <returns>True, if key exists else false.</returns>
-        public bool IsExists(TKey title)
+        public bool IsExists(TKey item)
         {
-            return this._students.ContainsKey(title);
+            return this._dictionary.ContainsKey(item);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@
         /// <param name="grade">Grade of the student.</param>
         public void Add(TKey name, TValue grade)
         {
-            this._students.Add(name, grade);
+            this._dictionary.Add(name, grade);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@
         {
             if (this.IsExists(name))
             {
-                this._students.Remove(name);
+                this._dictionary.Remove(name);
             }
         }
 
@@ -47,7 +47,7 @@
         /// <returns>Readonly dictionary of student-grade pair.</returns>
         public IReadOnlyDictionary<TKey, TValue> GetAll()
         {
-            return this._students;
+            return this._dictionary;
         }
     }
 }

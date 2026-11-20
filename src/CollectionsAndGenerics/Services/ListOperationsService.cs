@@ -6,36 +6,36 @@
     /// <typeparam name="T">Datatype of list elements.</typeparam>
     public class ListOperationsService<T>
     {
-        private List<T> _books = new List<T>();
+        private List<T> _items = new List<T>();
 
         /// <summary>
-        /// CHecks whether the title exists in the list.
+        /// CHecks whether the item exists in the list.
         /// </summary>
-        /// <param name="title">Title to be searched.</param>
+        /// <param name="item">Title to be searched.</param>
         /// <returns>True, if exists else False.</returns>
-        public bool IsExists(T title)
+        public bool IsExists(T item)
         {
-            return this._books.Exists(bookTitle => bookTitle.Equals(title));
+            return this._items.Contains(item);
         }
 
         /// <summary>
-        /// Adds title to the list.
+        /// Adds item to the list.
         /// </summary>
-        /// <param name="title">Title of the book to be added.</param>
-        public void Add(T title)
+        /// <param name="item">Title of the book to be added.</param>
+        public void Add(T item)
         {
-            this._books.Add(title);
+            this._items.Add(item);
         }
 
         /// <summary>
-        /// Removes a title from the list.
+        /// Removes a item from the list.
         /// </summary>
-        /// <param name="title">Title of the book to be removed.</param>
-        public void Remove(T title)
+        /// <param name="item">Title of the book to be removed.</param>
+        public void Remove(T item)
         {
-            if (this.IsExists(title))
+            if (this.IsExists(item))
             {
-                this._books.Remove(title);
+                this._items.Remove(item);
             }
         }
 
@@ -45,7 +45,7 @@
         /// <returns>Read only list of all books in the list.</returns>
         public IReadOnlyList<T> GetAll()
         {
-            return this._books;
+            return this._items;
         }
     }
 }
