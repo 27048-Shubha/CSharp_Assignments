@@ -6,17 +6,17 @@
     /// <summary>
     /// Demonstrates synchronous and asynchronous file operation comparison.
     /// </summary>
-    public class SyncAsynController
+    public class SyncAsyncController
     {
         private readonly SynchronousFileProcessor _syncFileProcessor;
         private readonly AsynchronousFileProcessor _asyncFileProcessor;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SyncAsynController"/> class.
+        /// Initializes a new instance of the <see cref="SyncAsyncController"/> class.
         /// </summary>
         /// <param name="syncFileProcessor">Object to handle synchronous file process.</param>
         /// <param name="asyncFileProcessor">Object to handle asynchronous file process.</param>
-        internal SyncAsynController(SynchronousFileProcessor syncFileProcessor, AsynchronousFileProcessor asyncFileProcessor)
+        internal SyncAsyncController(SynchronousFileProcessor syncFileProcessor, AsynchronousFileProcessor asyncFileProcessor)
         {
             this._syncFileProcessor = syncFileProcessor;
             this._asyncFileProcessor = asyncFileProcessor;

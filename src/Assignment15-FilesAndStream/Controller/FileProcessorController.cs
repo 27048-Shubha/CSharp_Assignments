@@ -12,6 +12,9 @@
 
         private readonly SynchronousFileProcessor _fileProcessor;
 
+        private readonly string _sourcePath = Path.Combine(AppContext.BaseDirectory, "source.txt");
+        private readonly string _destinationPath = Path.Combine(AppContext.BaseDirectory, "processed.txt");
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FileProcessorController"/> class.
         /// </summary>
@@ -24,26 +27,36 @@
         /// <summary>
         /// Runs comparison of file stream and buffer stream.
         /// </summary>
-        public void ExecuteBufferComparison()
+        public void ExecuteStreamComparison()
         {
-            string filePath = Path.Combine(AppContext.BaseDirectory, "source.txt");
-            if (!File.Exists(filePath))
+            this.ConfigureProcessor();
+
+            if (!File.Exists(this._sourcePath))
             {
-                FileGenerator.GenerateFile(filePath, OneGb);
+                FileGenerator.GenerateFile(this._sourcePath, OneGb);
             }
 
+            this.MeasureAndDisplay("Read using file stream", () => this._fileProcessor.ReadUsingFileStream());
+            this.MeasureAndDisplay("Process data", () => this._fileProcessor.ReadUsingFileStream());
+
+            this.MeasureAndDisplay("Read using buffered stream", () => this._fileProcessor.ReadUsingFileStream());
+            this.MeasureAndDisplay("Process data", () => this._fileProcessor.ReadUsingFileStream());
+        }
+
+        private void ConfigureProcessor()
+        {
+            this._fileProcessor.SourcePath = this._sourcePath;
+            this._fileProcessor.DestinationPath = this._destinationPath;
+        }
+
+        private void MeasureAndDisplay(string operationName, Action action)
+        {
             Timer timer = new ();
             timer.StartTimer();
-            this._fileProcessor.ReadUsingFileStream();
+            action();
             timer.StopTimer();
-            Console.WriteLine($"Time taken to read using file stream: {timer.GetTimeTaken()} milliseconds");
 
-            timer.StartTimer();
-            this._fileProcessor.ReadUsingBufferedStream();
-            timer.StopTimer();
-            Console.WriteLine($"Time taken to read using buffered stream: {timer.GetTimeTaken()} milliseconds");
-
-            this._fileProcessor.ProcessAndWriteData();
+            Console.WriteLine($"{operationName}: {timer.GetTimeTaken()} milliseconds");
         }
     }
 }

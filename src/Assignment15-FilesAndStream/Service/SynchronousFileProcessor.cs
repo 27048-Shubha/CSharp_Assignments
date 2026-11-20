@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace Assignment15_FilesAndStream.Service
@@ -31,10 +32,7 @@ namespace Assignment15_FilesAndStream.Service
         {
             using (FileStream fileStream = new FileStream(this.SourcePath, FileMode.Open, FileAccess.Read))
             {
-                int bytesRead;
-                while ((bytesRead = fileStream.Read(this._buffer, 0, _bufferSize)) > 0)
-                {
-                }
+                this.ReadToEnd(fileStream);
             }
         }
 
@@ -47,10 +45,7 @@ namespace Assignment15_FilesAndStream.Service
 
             using (BufferedStream bufferedStream = new BufferedStream(fileStream))
             {
-                int bytesRead;
-                while ((bytesRead = bufferedStream.Read(this._buffer, 0, _bufferSize)) > 0)
-                {
-                }
+                this.ReadToEnd(bufferedStream);
             }
         }
 
@@ -87,6 +82,14 @@ namespace Assignment15_FilesAndStream.Service
                 {
                     memoryStream.CopyTo(fileStream);
                 }
+            }
+        }
+
+        private void ReadToEnd(Stream stream)
+        {
+            int bytesRead;
+            while ((bytesRead = stream.Read(this._buffer, 0, _bufferSize)) > 0)
+            {
             }
         }
     }
