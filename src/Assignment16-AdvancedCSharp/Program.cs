@@ -1,11 +1,12 @@
-﻿namespace Assignments
+﻿namespace Assignment16_AdvancedCSharp
 {
+    using Assignment16_AdvancedCSharp.Models.Enums;
     using Assignment16_AdvancedCSharp.Tasks;
 
     /// <summary>
     /// Manages entry point of exectuion of the application.
     /// </summary>
-    public class Program
+    internal static class Program
     {
         /// <summary>
         /// Entry point of the execution.
@@ -29,37 +30,36 @@
 
                 Console.WriteLine("Enter task number:");
 
-                if (int.TryParse(Console.ReadLine(), out int choice))
+                if (Enum.TryParse<Menu>(Console.ReadLine(), out Menu choice))
                 {
                     switch (choice)
                     {
-                        case 1:
+                        case Menu.Task1:
                             RunTask1();
                             break;
-                        case 2:
+                        case Menu.Task2:
                             RunTask2();
                             break;
-                        case 3:
+                        case Menu.Task3:
                             RunTask3();
                             break;
-                        case 4:
+                        case Menu.Task4:
                             RunTask4();
                             break;
-                        case 5:
+                        case Menu.Task5:
                             RunTask5();
                             break;
-                        case 6:
+                        case Menu.Task6:
                             RunTask6();
                             break;
-                        case 7:
+                        case Menu.Task7:
                             RunTask7();
                             break;
-                        case 8:
-                            Console.WriteLine("Press any key to quit application");
-                            Console.ReadKey();
+                        case Menu.Task8:
+                            Console.WriteLine("Quitting application...");
                             return;
                         default:
-                            Console.WriteLine("Kindly enter valid inputs (1 to 7)");
+                            Console.WriteLine("Kindly enter valid inputs (1 to 8)");
                             break;
                     }
                 }
@@ -76,55 +76,48 @@
 
         private static void RunTask1()
         {
-            Task1_Notifier task1 = new ();
+            Task1Notifier task1 = new ();
             task1.Run();
         }
 
         private static void RunTask2()
         {
-            Task2_TypeSimulation simulator = new Task2_TypeSimulation();
-            simulator.SimulateVarUsage();
-            simulator.SimulateDynamicUsage();
+            Task2TypeSimulation simulator = new Task2TypeSimulation();
+            simulator.Run();
         }
 
         private static void RunTask3()
         {
-            Task3_AnonymousMethods anonymousMethods = new Task3_AnonymousMethods();
-            Console.WriteLine("Before sorting:");
-            anonymousMethods.DisplayArray();
+            Task3AnonymousMethods anonymousMethods = new Task3AnonymousMethods();
 
+            Console.WriteLine("Sorting using anonymous method:");
             anonymousMethods.SortUsingAnonymousMethod();
-            Console.WriteLine("\nAfter sorting (Using anonymous method):");
-            anonymousMethods.DisplayArray();
 
-            anonymousMethods.ResetArray();
-
+            Console.WriteLine("\nSorting using built-in method:");
             anonymousMethods.SortUsingBuiltInMethod();
-            Console.WriteLine("\nAfter sorting (Using Built-in method):");
-            anonymousMethods.DisplayArray();
         }
 
         private static void RunTask4()
         {
-            Task4_Lambda task4 = new Task4_Lambda();
+            Task4Lambda task4 = new Task4Lambda();
             task4.Run();
         }
 
         private static void RunTask5()
         {
-            Task5_DelegatesForSorting task5 = new ();
+            Task5DelegatesForSorting task5 = new ();
             task5.Run();
         }
 
         private static void RunTask6()
         {
-            Task6_Records task6 = new Task6_Records();
+            Task6Records task6 = new Task6Records();
             task6.Run();
         }
 
         private static void RunTask7()
         {
-            Task7_AdvancedPatternMatching task7 = new Task7_AdvancedPatternMatching();
+            Task7AdvancedPatternMatching task7 = new Task7AdvancedPatternMatching();
             task7.Run();
         }
     }

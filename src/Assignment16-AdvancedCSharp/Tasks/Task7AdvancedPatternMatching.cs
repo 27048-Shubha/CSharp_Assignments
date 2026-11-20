@@ -1,11 +1,11 @@
 ﻿namespace Assignment16_AdvancedCSharp.Tasks
 {
-    using Models;
+    using Assignment16_AdvancedCSharp.Models;
 
     /// <summary>
     /// Demonstrates task 7 with advanced pattern matching
     /// </summary>
-    internal class Task7_AdvancedPatternMatching
+    public class Task7AdvancedPatternMatching
     {
         /// <summary>
         /// Entry point of Task7 demonstration.
@@ -22,28 +22,26 @@
 
             foreach (Shape? shape in shapes)
             {
-                this.DisplayShapeDetails(shape);
+                DisplayShapeDetails(shape);
             }
         }
 
-        private void DisplayShapeDetails(Shape? shape)
+        private static void DisplayShapeDetails(Shape? shape)
         {
             string message = shape switch
             {
                 Circle circle =>
-                    $"Shape: Circle\n" +
-                    $"Color: {circle.Color}\n" +
-                    $"Area: {circle.CalculateArea():f2}",
+                    FormatDetails(circle, "Circle"),
+
+                Rectangle { Length: var length, Breadth: var breadth }
+                    when length == breadth =>
+                    FormatDetails(shape, "Square"),
 
                 Rectangle rectangle =>
-                    $"Shape: Rectangle\n" +
-                    $"Color: {rectangle.Color}\n" +
-                    $"Area: {rectangle.CalculateArea():f2}",
+                    FormatDetails(rectangle, "Rectangle"),
 
                 Triangle triangle =>
-                    $"Shape: Triangle\n" +
-                    $"Color: {triangle.Color}\n" +
-                    $"Area: {triangle.CalculateArea():f2}",
+                    FormatDetails(triangle, "Triangle"),
 
                 null =>
                     "The object is null and doesn't match any of the types",
@@ -53,6 +51,14 @@
             };
 
             Console.WriteLine($"{message}\n");
+        }
+
+        private static string FormatDetails(Shape shape, string description)
+        {
+            return
+                $"Shape: {description}\n" +
+                $"Color: {shape.Color}\n" +
+                $"Area: {shape.CalculateArea():F2}";
         }
     }
 }

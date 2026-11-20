@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models
+﻿namespace Assignment16_AdvancedCSharp.Models
 {
     /// <summary>
     /// Represents product information.
     /// </summary>
-    public class Product
+    internal sealed class Product
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
@@ -17,7 +11,7 @@ namespace Models
         /// <param name="name">Name of the product.</param>
         /// <param name="category">Category of the product.</param>
         /// <param name="price">Price of the product.</param>
-        internal Product(string name, string category, double price)
+        public Product(string name, string category, decimal price)
         {
             this.Name = name;
             this.Category = category;
@@ -25,21 +19,21 @@ namespace Models
         }
 
         /// <summary>
-        /// Gets or sets the name of the product.
+        /// Gets the name of the product.
         /// </summary>
         /// <value>Name of the product.</value>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
-        /// Gets or sets the category of the product.
+        /// Gets the category of the product.
         /// </summary>
         /// <value>Category of the product.</value>
-        public string Category { get; set; }
+        public string Category { get; }
 
         /// <summary>
-        /// Gets or sets the price of the product.
+        /// Gets the price of the product.
         /// </summary>
         /// <value>Price of the product.</value>
-        public double Price { get; set; }
+        public decimal Price { get; }
     }
 }

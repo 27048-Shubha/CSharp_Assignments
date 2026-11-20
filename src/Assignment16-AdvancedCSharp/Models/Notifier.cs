@@ -1,14 +1,15 @@
-﻿namespace Models
+﻿namespace Assignment16_AdvancedCSharp.Models
 {
     /// <summary>
     /// Manages notification process.
     /// </summary>
-    internal class Notifier
+    internal sealed class Notifier
     {
         /// <summary>
         /// Delegate representing notification call.
         /// </summary>
-        public delegate void Notify();
+        /// <param name="message">Notification message</param>
+        public delegate void Notify(string message);
 
         /// <summary>
         /// Event representing notification call.
@@ -18,13 +19,10 @@
         /// <summary>
         /// Invokes event notify.
         /// </summary>
-        public void InvokeEvent()
+        /// <param name="message">Message for the event.</param>
+        public void RaiseAction(string message)
         {
-            Console.WriteLine("Invoking subscribers...");
-            if (this.OnAction is not null)
-            {
-                this.OnAction.Invoke();
-            }
+            this.OnAction?.Invoke(message);
         }
     }
 }

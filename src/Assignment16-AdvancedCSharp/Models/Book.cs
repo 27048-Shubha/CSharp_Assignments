@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models
+﻿namespace Assignment16_AdvancedCSharp.Models
 {
-    public record Book
+    /// <summary>
+    /// Represents information of a book.
+    /// </summary>
+    internal sealed record Book
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Book"/> class.
@@ -28,7 +25,7 @@ namespace Models
         public string Title { get; init; }
 
         /// <summary>
-        /// Gets or initializes the  of the book.
+        /// Gets or initializes author of the book.
         /// </summary>
         /// <value>Author of the book.</value>
         public string Author { get; init; }

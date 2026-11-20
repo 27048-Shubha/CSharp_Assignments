@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace Assignment16_AdvancedCSharp.Models
 {
     /// <summary>
     /// Represents information about triangle shape.
@@ -11,24 +11,24 @@
         /// <param name="color">Color of the triangle</param>
         /// <param name="baseLength">Base length of the triangle.</param>
         /// <param name="height">Height of the triangle.</param>
-        public Triangle(string color, double baseLength, double height)
+        internal Triangle(string color, double baseLength, double height)
             : base(color)
         {
-            this.Base = baseLength;
+            this.BaseLength = baseLength;
             this.Height = height;
         }
 
-        private double Base { get; set; }
+        private double BaseLength { get; set; }
 
         private double Height { get; set; }
 
         /// <summary>
-        /// Calculates area of the rectangle.
+        /// Calculates area of the triangle.
         /// </summary>
-        /// <returns>Calculated area of the rectangle.</returns>
-        public double CalculateArea()
+        /// <returns>Calculated area of the triangle.</returns>
+        public override double CalculateArea()
         {
-            return 0.5 * this.Base * this.Height;
+            return 0.5 * this.BaseLength * this.Height;
         }
     }
 }

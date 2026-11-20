@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace Assignment16_AdvancedCSharp.Models
 {
     /// <summary>
     /// Represents information about circle shape.
@@ -17,16 +17,16 @@
         }
 
         /// <summary>
-        /// Gets or sets radius of the shape.
+        /// Gets radius of the shape.
         /// </summary>
         /// <value>Radius of the shape.</value>
-        public double Radius { get; set; }
+        public double Radius { get; }
 
         /// <summary>
         /// Calculates area of the circle.
         /// </summary>
         /// <returns>Calculated area of the circle.</returns>
-        public double CalculateArea()
+        public override double CalculateArea()
         {
             return Math.PI * this.Radius * this.Radius;
         }
