@@ -30,7 +30,7 @@ namespace CollectionsAndGenerics.Controller
 
             ConsoleView.DisplayMessage("\n\n--------- Adding People to the Queue ---------");
 
-            this.AddSamplePeople();
+            this.AddPeople();
 
             this.DisplayQueue();
 
@@ -51,7 +51,7 @@ namespace CollectionsAndGenerics.Controller
             ConsoleView.DisplayMessage("======================================================");
         }
 
-        private void AddSamplePeople()
+        private void AddPeople()
         {
             string[] people =
             {

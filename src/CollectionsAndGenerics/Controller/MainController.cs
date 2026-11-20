@@ -86,8 +86,6 @@
                         break;
                 }
 
-                ConsoleView.DisplayMessage("\nConsole will be refreshed within 5 seconds... Kindly wait");
-
                 ConsoleView.PauseAndClear();
             }
             while (true);
